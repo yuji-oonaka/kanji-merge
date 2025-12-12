@@ -1,0 +1,2395 @@
+[
+  {
+    "id": "69209a87",
+    "kanji": "明暗",
+    "reading": "めいあん",
+    "meaning": "明るさと暗さ",
+    "difficulty": 2,
+    "components": [
+      "明",
+      "暗"
+    ]
+  },
+  {
+    "id": "5aeab64d",
+    "kanji": "森林",
+    "reading": "しんりん",
+    "meaning": "木がたくさん茂っている場所",
+    "difficulty": 2,
+    "components": [
+      "森",
+      "林"
+    ]
+  },
+  {
+    "id": "dba40588",
+    "kanji": "岩石",
+    "reading": "がんせき",
+    "meaning": "岩と石",
+    "difficulty": 1,
+    "components": [
+      "岩",
+      "石"
+    ]
+  },
+  {
+    "id": "ff66fe69",
+    "kanji": "火山",
+    "reading": "かざん",
+    "meaning": "マグマを噴き出す山",
+    "difficulty": 1,
+    "components": [
+      "火",
+      "山"
+    ]
+  },
+  {
+    "id": "f6a4f961",
+    "kanji": "休火山",
+    "reading": "きゅうかざん",
+    "meaning": "現在は活動していない火山",
+    "difficulty": 2,
+    "components": [
+      "休",
+      "火",
+      "山"
+    ]
+  },
+  {
+    "id": "e802a588",
+    "kanji": "活火山",
+    "reading": "かつかざん",
+    "meaning": "現在も活動している火山",
+    "difficulty": 2,
+    "components": [
+      "活",
+      "火",
+      "山"
+    ]
+  },
+  {
+    "id": "01a0e7ff",
+    "kanji": "日本",
+    "reading": "にほん",
+    "meaning": "東アジアにある島国",
+    "difficulty": 1,
+    "components": [
+      "日",
+      "本"
+    ]
+  },
+  {
+    "id": "6e0131e1",
+    "kanji": "休日",
+    "reading": "きゅうじつ",
+    "meaning": "仕事や学校が休みの日",
+    "difficulty": 1,
+    "components": [
+      "休",
+      "日"
+    ]
+  },
+  {
+    "id": "cd477524",
+    "kanji": "大金",
+    "reading": "たいきん",
+    "meaning": "たくさんのお金",
+    "difficulty": 1,
+    "components": [
+      "大",
+      "金"
+    ]
+  },
+  {
+    "id": "38a57d74",
+    "kanji": "金魚",
+    "reading": "きんぎょ",
+    "meaning": "観賞用の美しい魚",
+    "difficulty": 1,
+    "components": [
+      "金",
+      "魚"
+    ]
+  },
+  {
+    "id": "47c9f135",
+    "kanji": "人魚",
+    "reading": "にんぎょ",
+    "meaning": "伝説上の生き物",
+    "difficulty": 1,
+    "components": [
+      "人",
+      "魚"
+    ]
+  },
+  {
+    "id": "10b9f256",
+    "kanji": "雷雨",
+    "reading": "らいう",
+    "meaning": "雷をともなって激しく降る雨",
+    "difficulty": 1,
+    "components": [
+      "雷",
+      "雨"
+    ]
+  },
+  {
+    "id": "24e43d87",
+    "kanji": "青空",
+    "reading": "あおぞら",
+    "meaning": "雲が少なく晴れ渡った空",
+    "difficulty": 2,
+    "components": [
+      "青",
+      "空"
+    ]
+  },
+  {
+    "id": "5cfe270d",
+    "kanji": "空気",
+    "reading": "くうき",
+    "meaning": "地球を包んでいる気体",
+    "difficulty": 2,
+    "components": [
+      "空",
+      "気"
+    ]
+  },
+  {
+    "id": "aa2fb2fc",
+    "kanji": "電気",
+    "reading": "でんき",
+    "meaning": "光や熱を発生させるエネルギー",
+    "difficulty": 1,
+    "components": [
+      "電",
+      "気"
+    ]
+  },
+  {
+    "id": "b220782f",
+    "kanji": "電車",
+    "reading": "でんしゃ",
+    "meaning": "電気で走る鉄道車両",
+    "difficulty": 1,
+    "components": [
+      "電",
+      "車"
+    ]
+  },
+  {
+    "id": "c9cc3024",
+    "kanji": "電話",
+    "reading": "でんわ",
+    "meaning": "遠くの人と話せる機械",
+    "difficulty": 1,
+    "components": [
+      "電",
+      "話"
+    ]
+  },
+  {
+    "id": "fd16fd74",
+    "kanji": "会話",
+    "reading": "かいわ",
+    "meaning": "向かい合って話をすること",
+    "difficulty": 2,
+    "components": [
+      "会",
+      "話"
+    ]
+  },
+  {
+    "id": "c3d49f95",
+    "kanji": "読書",
+    "reading": "どくしょ",
+    "meaning": "本を読むこと",
+    "difficulty": 2,
+    "components": [
+      "読",
+      "書"
+    ]
+  },
+  {
+    "id": "13852d06",
+    "kanji": "書店",
+    "reading": "しょてん",
+    "meaning": "本を売っている店",
+    "difficulty": 2,
+    "components": [
+      "書",
+      "店"
+    ]
+  },
+  {
+    "id": "818607e3",
+    "kanji": "売店",
+    "reading": "ばいてん",
+    "meaning": "商品を売っている小さな店",
+    "difficulty": 2,
+    "components": [
+      "売",
+      "店"
+    ]
+  },
+  {
+    "id": "8b7c597a",
+    "kanji": "花火",
+    "reading": "はなび",
+    "meaning": "空に光を咲かせる火薬",
+    "difficulty": 1,
+    "components": [
+      "花",
+      "火"
+    ]
+  },
+  {
+    "id": "d9b57ddb",
+    "kanji": "花見",
+    "reading": "はなみ",
+    "meaning": "桜を見て楽しむこと",
+    "difficulty": 2,
+    "components": [
+      "花",
+      "見"
+    ]
+  },
+  {
+    "id": "2fb6ba1d",
+    "kanji": "見学",
+    "reading": "けんがく",
+    "meaning": "現地に行って学ぶこと",
+    "difficulty": 1,
+    "components": [
+      "見",
+      "学"
+    ]
+  },
+  {
+    "id": "e6aa4e84",
+    "kanji": "学校",
+    "reading": "がっこう",
+    "meaning": "勉強を教わるところ",
+    "difficulty": 2,
+    "components": [
+      "学",
+      "校"
+    ]
+  },
+  {
+    "id": "b3b163e5",
+    "kanji": "校歌",
+    "reading": "こうか",
+    "meaning": "その学校の歌",
+    "difficulty": 2,
+    "components": [
+      "校",
+      "歌"
+    ]
+  },
+  {
+    "id": "e1d5b18a",
+    "kanji": "歌手",
+    "reading": "かしゅ",
+    "meaning": "歌を歌う人",
+    "difficulty": 1,
+    "components": [
+      "歌",
+      "手"
+    ]
+  },
+  {
+    "id": "3e66e15b",
+    "kanji": "手足",
+    "reading": "てあし",
+    "meaning": "手と足",
+    "difficulty": 1,
+    "components": [
+      "手",
+      "足"
+    ]
+  },
+  {
+    "id": "d6eaaaa9",
+    "kanji": "不足",
+    "reading": "ふそく",
+    "meaning": "足りないこと",
+    "difficulty": 2,
+    "components": [
+      "不",
+      "足"
+    ]
+  },
+  {
+    "id": "28be9b4b",
+    "kanji": "遠足",
+    "reading": "えんそく",
+    "meaning": "遠くへ出かける行事",
+    "difficulty": 2,
+    "components": [
+      "遠",
+      "足"
+    ]
+  },
+  {
+    "id": "bdc265a5",
+    "kanji": "男気",
+    "reading": "おとこぎ",
+    "meaning": "弱い者を助ける気性",
+    "difficulty": 2,
+    "components": [
+      "男",
+      "気"
+    ]
+  },
+  {
+    "id": "44c8701f",
+    "kanji": "町内",
+    "reading": "ちょうない",
+    "meaning": "町の中",
+    "difficulty": 2,
+    "components": [
+      "町",
+      "内"
+    ]
+  },
+  {
+    "id": "fbe14c9e",
+    "kanji": "地図",
+    "reading": "ちず",
+    "meaning": "地形を描いた図",
+    "difficulty": 1,
+    "components": [
+      "地",
+      "図"
+    ]
+  },
+  {
+    "id": "5ee1cabb",
+    "kanji": "池",
+    "reading": "いけ",
+    "meaning": "水がたまっている所",
+    "difficulty": 1,
+    "components": [
+      "池"
+    ]
+  },
+  {
+    "id": "9e6428bb",
+    "kanji": "海外",
+    "reading": "かいがい",
+    "meaning": "外国",
+    "difficulty": 2,
+    "components": [
+      "海",
+      "外"
+    ]
+  },
+  {
+    "id": "187f221d",
+    "kanji": "特急",
+    "reading": "とっきゅう",
+    "meaning": "特別急行列車",
+    "difficulty": 2,
+    "components": [
+      "特",
+      "急"
+    ]
+  },
+  {
+    "id": "d4e43874",
+    "kanji": "招待",
+    "reading": "しょうたい",
+    "meaning": "客として招くこと",
+    "difficulty": 2,
+    "components": [
+      "招",
+      "待"
+    ]
+  },
+  {
+    "id": "4ba51034",
+    "kanji": "持参",
+    "reading": "じさん",
+    "meaning": "持って行くこと",
+    "difficulty": 1,
+    "components": [
+      "持",
+      "参"
+    ]
+  },
+  {
+    "id": "bfb10fac",
+    "kanji": "草原",
+    "reading": "そうげん",
+    "meaning": "草が生えている原",
+    "difficulty": 2,
+    "components": [
+      "草",
+      "原"
+    ]
+  },
+  {
+    "id": "0d23b299",
+    "kanji": "親子",
+    "reading": "おやこ",
+    "meaning": "親と子",
+    "difficulty": 2,
+    "components": [
+      "親",
+      "子"
+    ]
+  },
+  {
+    "id": "6ba07424",
+    "kanji": "売買",
+    "reading": "ばいばい",
+    "meaning": "売ることと買うこと",
+    "difficulty": 2,
+    "components": [
+      "売",
+      "買"
+    ]
+  },
+  {
+    "id": "a5d9539f",
+    "kanji": "算数",
+    "reading": "さんすう",
+    "meaning": "数の計算などを学ぶ教科",
+    "difficulty": 2,
+    "components": [
+      "算",
+      "数"
+    ]
+  },
+  {
+    "id": "af1552da",
+    "kanji": "理科",
+    "reading": "りか",
+    "meaning": "自然現象を学ぶ教科",
+    "difficulty": 2,
+    "components": [
+      "理",
+      "科"
+    ]
+  },
+  {
+    "id": "b068aea6",
+    "kanji": "早朝",
+    "reading": "そうちょう",
+    "meaning": "朝早い時間",
+    "difficulty": 2,
+    "components": [
+      "早",
+      "朝"
+    ]
+  },
+  {
+    "id": "93c4702d",
+    "kanji": "鉄道",
+    "reading": "てつどう",
+    "meaning": "レールを走る交通機関",
+    "difficulty": 2,
+    "components": [
+      "鉄",
+      "道"
+    ]
+  },
+  {
+    "id": "63bd9e67",
+    "kanji": "銀行",
+    "reading": "ぎんこう",
+    "meaning": "お金を扱う機関",
+    "difficulty": 2,
+    "components": [
+      "銀",
+      "行"
+    ]
+  },
+  {
+    "id": "92e0ac9a",
+    "kanji": "飲食",
+    "reading": "いんしょく",
+    "meaning": "飲んだり食べたりすること",
+    "difficulty": 1,
+    "components": [
+      "飲",
+      "食"
+    ]
+  },
+  {
+    "id": "991fe08a",
+    "kanji": "鮮魚",
+    "reading": "せんぎょ",
+    "meaning": "新鮮な魚",
+    "difficulty": 1,
+    "components": [
+      "鮮",
+      "魚"
+    ]
+  },
+  {
+    "id": "c9eb6900",
+    "kanji": "動物",
+    "reading": "どうぶつ",
+    "meaning": "人間以外の生き物",
+    "difficulty": 1,
+    "components": [
+      "動",
+      "物"
+    ]
+  },
+  {
+    "id": "ea7a0988",
+    "kanji": "回転",
+    "reading": "かいてん",
+    "meaning": "回ること",
+    "difficulty": 2,
+    "components": [
+      "回",
+      "転"
+    ]
+  },
+  {
+    "id": "9fd554f7",
+    "kanji": "公園",
+    "reading": "こうえん",
+    "meaning": "憩いの場所",
+    "difficulty": 2,
+    "components": [
+      "公",
+      "園"
+    ]
+  },
+  {
+    "id": "5efcebec",
+    "kanji": "暗室",
+    "reading": "あんしつ",
+    "meaning": "光が入らない部屋",
+    "difficulty": 2,
+    "components": [
+      "暗",
+      "室"
+    ]
+  },
+  {
+    "id": "39bd2438",
+    "kanji": "鳴き声",
+    "reading": "なきごえ",
+    "meaning": "動物の声",
+    "difficulty": 2,
+    "components": [
+      "鳴",
+      "き",
+      "声"
+    ]
+  },
+  {
+    "id": "dc36165f",
+    "kanji": "黒板",
+    "reading": "こくばん",
+    "meaning": "チョークで書く板",
+    "difficulty": 2,
+    "components": [
+      "黒",
+      "板"
+    ]
+  },
+  {
+    "id": "e77b51fb",
+    "kanji": "電線",
+    "reading": "でんせん",
+    "meaning": "電気を通す線",
+    "difficulty": 1,
+    "components": [
+      "電",
+      "線"
+    ]
+  },
+  {
+    "id": "a580b8cb",
+    "kanji": "最強",
+    "reading": "さいきょう",
+    "meaning": "最も強いこと",
+    "difficulty": 1,
+    "components": [
+      "最",
+      "強"
+    ]
+  },
+  {
+    "id": "9d5304b0",
+    "kanji": "平和",
+    "reading": "へいわ",
+    "meaning": "穏やかな状態",
+    "difficulty": 1,
+    "components": [
+      "平",
+      "和"
+    ]
+  },
+  {
+    "id": "122105fe",
+    "kanji": "未来",
+    "reading": "みらい",
+    "meaning": "これから来る時",
+    "difficulty": 1,
+    "components": [
+      "未",
+      "来"
+    ]
+  },
+  {
+    "id": "c536451b",
+    "kanji": "希望",
+    "reading": "きぼう",
+    "meaning": "将来への願い",
+    "difficulty": 2,
+    "components": [
+      "希",
+      "望"
+    ]
+  },
+  {
+    "id": "6be0f3bc",
+    "kanji": "勇気",
+    "reading": "ゆうき",
+    "meaning": "立ち向かう心",
+    "difficulty": 1,
+    "components": [
+      "勇",
+      "気"
+    ]
+  },
+  {
+    "id": "27c41a8b",
+    "kanji": "冒険",
+    "reading": "ぼうけん",
+    "meaning": "危険を承知で行うこと",
+    "difficulty": 1,
+    "components": [
+      "冒",
+      "険"
+    ]
+  },
+  {
+    "id": "795f5040",
+    "kanji": "宇宙",
+    "reading": "うちゅう",
+    "meaning": "地球の外に広がる空間",
+    "difficulty": 2,
+    "components": [
+      "宇",
+      "宙"
+    ]
+  },
+  {
+    "id": "69f7e8b0",
+    "kanji": "銀河",
+    "reading": "ぎんが",
+    "meaning": "星の集まり",
+    "difficulty": 2,
+    "components": [
+      "銀",
+      "河"
+    ]
+  },
+  {
+    "id": "1c61a567",
+    "kanji": "惑星",
+    "reading": "わくせい",
+    "meaning": "恒星の周りを回る星",
+    "difficulty": 1,
+    "components": [
+      "惑",
+      "星"
+    ]
+  },
+  {
+    "id": "61045842",
+    "kanji": "地球",
+    "reading": "ちきゅう",
+    "meaning": "私たちが住む星",
+    "difficulty": 2,
+    "components": [
+      "地",
+      "球"
+    ]
+  },
+  {
+    "id": "ec0b3a37",
+    "kanji": "太陽",
+    "reading": "たいよう",
+    "meaning": "光と熱を与える星",
+    "difficulty": 2,
+    "components": [
+      "太",
+      "陽"
+    ]
+  },
+  {
+    "id": "bf08184b",
+    "kanji": "月光",
+    "reading": "げっこう",
+    "meaning": "月の光",
+    "difficulty": 1,
+    "components": [
+      "月",
+      "光"
+    ]
+  },
+  {
+    "id": "6b41177f",
+    "kanji": "星空",
+    "reading": "ほしぞら",
+    "meaning": "星が出ている空",
+    "difficulty": 2,
+    "components": [
+      "星",
+      "空"
+    ]
+  },
+  {
+    "id": "20998c04",
+    "kanji": "流星",
+    "reading": "りゅうせい",
+    "meaning": "流れ星",
+    "difficulty": 1,
+    "components": [
+      "流",
+      "星"
+    ]
+  },
+  {
+    "id": "b543d81b",
+    "kanji": "彗星",
+    "reading": "すいせい",
+    "meaning": "尾を引く星",
+    "difficulty": 1,
+    "components": [
+      "彗",
+      "星"
+    ]
+  },
+  {
+    "id": "2661f38e",
+    "kanji": "天体",
+    "reading": "てんたい",
+    "meaning": "宇宙にある星など",
+    "difficulty": 2,
+    "components": [
+      "天",
+      "体"
+    ]
+  },
+  {
+    "id": "6918129f",
+    "kanji": "科学",
+    "reading": "かがく",
+    "meaning": "自然法則の研究",
+    "difficulty": 1,
+    "components": [
+      "科",
+      "学"
+    ]
+  },
+  {
+    "id": "98127e42",
+    "kanji": "技術",
+    "reading": "ぎじゅつ",
+    "meaning": "物事を行う技",
+    "difficulty": 1,
+    "components": [
+      "技",
+      "術"
+    ]
+  },
+  {
+    "id": "768f6117",
+    "kanji": "発明",
+    "reading": "はつめい",
+    "meaning": "新しいものを生み出すこと",
+    "difficulty": 1,
+    "components": [
+      "発",
+      "明"
+    ]
+  },
+  {
+    "id": "ca5d0e87",
+    "kanji": "発見",
+    "reading": "はっけん",
+    "meaning": "未知のものを見つけること",
+    "difficulty": 1,
+    "components": [
+      "発",
+      "見"
+    ]
+  },
+  {
+    "id": "72e71fcb",
+    "kanji": "進化",
+    "reading": "しんか",
+    "meaning": "生物の変化",
+    "difficulty": 1,
+    "components": [
+      "進",
+      "化"
+    ]
+  },
+  {
+    "id": "8c733596",
+    "kanji": "歴史",
+    "reading": "れきし",
+    "meaning": "社会の移り変わり",
+    "difficulty": 1,
+    "components": [
+      "歴",
+      "史"
+    ]
+  },
+  {
+    "id": "da9f2c5f",
+    "kanji": "文化",
+    "reading": "ぶんか",
+    "meaning": "生活様式や芸術",
+    "difficulty": 1,
+    "components": [
+      "文",
+      "化"
+    ]
+  },
+  {
+    "id": "6069dd24",
+    "kanji": "芸術",
+    "reading": "げいじゅつ",
+    "meaning": "美しい表現",
+    "difficulty": 1,
+    "components": [
+      "芸",
+      "術"
+    ]
+  },
+  {
+    "id": "4993c0ba",
+    "kanji": "音楽",
+    "reading": "おんがく",
+    "meaning": "音による芸術",
+    "difficulty": 1,
+    "components": [
+      "音",
+      "楽"
+    ]
+  },
+  {
+    "id": "a25caef6",
+    "kanji": "絵画",
+    "reading": "かいが",
+    "meaning": "絵のこと",
+    "difficulty": 1,
+    "components": [
+      "絵",
+      "画"
+    ]
+  },
+  {
+    "id": "aa9078ba",
+    "kanji": "小説",
+    "reading": "しょうせつ",
+    "meaning": "物語文学",
+    "difficulty": 1,
+    "components": [
+      "小",
+      "説"
+    ]
+  },
+  {
+    "id": "4983cc5e",
+    "kanji": "映画",
+    "reading": "えいが",
+    "meaning": "映像作品",
+    "difficulty": 1,
+    "components": [
+      "映",
+      "画"
+    ]
+  },
+  {
+    "id": "0caa5c3f",
+    "kanji": "写真",
+    "reading": "しゃしん",
+    "meaning": "カメラで写した像",
+    "difficulty": 2,
+    "components": [
+      "写",
+      "真"
+    ]
+  },
+  {
+    "id": "f24ef4e7",
+    "kanji": "放送",
+    "reading": "ほうそう",
+    "meaning": "電波で情報を送ること",
+    "difficulty": 2,
+    "components": [
+      "放",
+      "送"
+    ]
+  },
+  {
+    "id": "ac89ea15",
+    "kanji": "通信",
+    "reading": "つうしん",
+    "meaning": "情報のやり取り",
+    "difficulty": 2,
+    "components": [
+      "通",
+      "信"
+    ]
+  },
+  {
+    "id": "bea6280d",
+    "kanji": "情報",
+    "reading": "じょうほう",
+    "meaning": "知らせ",
+    "difficulty": 2,
+    "components": [
+      "情",
+      "報"
+    ]
+  },
+  {
+    "id": "7811699c",
+    "kanji": "知識",
+    "reading": "ちしき",
+    "meaning": "知っていること",
+    "difficulty": 2,
+    "components": [
+      "知",
+      "識"
+    ]
+  },
+  {
+    "id": "bb2c8cbf",
+    "kanji": "学習",
+    "reading": "がくしゅう",
+    "meaning": "学ぶこと",
+    "difficulty": 1,
+    "components": [
+      "学",
+      "習"
+    ]
+  },
+  {
+    "id": "4c9432b5",
+    "kanji": "教育",
+    "reading": "きょういく",
+    "meaning": "教え育てること",
+    "difficulty": 1,
+    "components": [
+      "教",
+      "育"
+    ]
+  },
+  {
+    "id": "a989c753",
+    "kanji": "先生",
+    "reading": "せんせい",
+    "meaning": "教える人",
+    "difficulty": 1,
+    "components": [
+      "先",
+      "生"
+    ]
+  },
+  {
+    "id": "8d8ec9c9",
+    "kanji": "生徒",
+    "reading": "せいと",
+    "meaning": "教わる人",
+    "difficulty": 2,
+    "components": [
+      "生",
+      "徒"
+    ]
+  },
+  {
+    "id": "a314b8b4",
+    "kanji": "教室",
+    "reading": "きょうしつ",
+    "meaning": "授業をする部屋",
+    "difficulty": 1,
+    "components": [
+      "教",
+      "室"
+    ]
+  },
+  {
+    "id": "dbb16bcb",
+    "kanji": "白墨",
+    "reading": "はくぼく",
+    "meaning": "チョーク",
+    "difficulty": 1,
+    "components": [
+      "白",
+      "墨"
+    ]
+  },
+  {
+    "id": "b102a5fd",
+    "kanji": "文房具",
+    "reading": "ぶんぼうぐ",
+    "meaning": "筆記用具など",
+    "difficulty": 2,
+    "components": [
+      "文",
+      "房",
+      "具"
+    ]
+  },
+  {
+    "id": "2d018f8d",
+    "kanji": "鉛筆",
+    "reading": "えんぴつ",
+    "meaning": "筆記具",
+    "difficulty": 1,
+    "components": [
+      "鉛",
+      "筆"
+    ]
+  },
+  {
+    "id": "d172143f",
+    "kanji": "消しゴム",
+    "reading": "けしごむ",
+    "meaning": "字を消す道具",
+    "difficulty": 2,
+    "components": [
+      "消",
+      "し",
+      "ゴ",
+      "ム"
+    ]
+  },
+  {
+    "id": "8979069f",
+    "kanji": "定規",
+    "reading": "じょうぎ",
+    "meaning": "直線を引く道具",
+    "difficulty": 3,
+    "components": [
+      "定",
+      "規"
+    ]
+  },
+  {
+    "id": "e6441be8",
+    "kanji": "美化",
+    "reading": "びか",
+    "meaning": "美しくすること",
+    "difficulty": 2,
+    "components": [
+      "美",
+      "化"
+    ]
+  },
+  {
+    "id": "9d8d0dee",
+    "kanji": "美学",
+    "reading": "びがく",
+    "meaning": "美についての学問",
+    "difficulty": 2,
+    "components": [
+      "美",
+      "学"
+    ]
+  },
+  {
+    "id": "ab70c3d5",
+    "kanji": "美人",
+    "reading": "びじん",
+    "meaning": "美しい人",
+    "difficulty": 2,
+    "components": [
+      "美",
+      "人"
+    ]
+  },
+  {
+    "id": "e8ffb884",
+    "kanji": "美術",
+    "reading": "びじゅつ",
+    "meaning": "造形芸術",
+    "difficulty": 2,
+    "components": [
+      "美",
+      "術"
+    ]
+  },
+  {
+    "id": "4a050238",
+    "kanji": "美食",
+    "reading": "びしょく",
+    "meaning": "美味しい食事",
+    "difficulty": 2,
+    "components": [
+      "美",
+      "食"
+    ]
+  },
+  {
+    "id": "fbdd33b5",
+    "kanji": "美味",
+    "reading": "びみ",
+    "meaning": "美味しい味",
+    "difficulty": 2,
+    "components": [
+      "美",
+      "味"
+    ]
+  },
+  {
+    "id": "e8e6acf4",
+    "kanji": "備考",
+    "reading": "びこう",
+    "meaning": "参考のメモ",
+    "difficulty": 1,
+    "components": [
+      "備",
+      "考"
+    ]
+  },
+  {
+    "id": "5caa6155",
+    "kanji": "微風",
+    "reading": "びふう",
+    "meaning": "そよ風",
+    "difficulty": 1,
+    "components": [
+      "微",
+      "風"
+    ]
+  },
+  {
+    "id": "053ed605",
+    "kanji": "微生物",
+    "reading": "びせいぶつ",
+    "meaning": "小さな生物",
+    "difficulty": 1,
+    "components": [
+      "微",
+      "生",
+      "物"
+    ]
+  },
+  {
+    "id": "c6e22a13",
+    "kanji": "微妙",
+    "reading": "びみょう",
+    "meaning": "何とも言えないこと",
+    "difficulty": 2,
+    "components": [
+      "微",
+      "妙"
+    ]
+  },
+  {
+    "id": "cd1491de",
+    "kanji": "微笑",
+    "reading": "びしょう",
+    "meaning": "ほほえみ",
+    "difficulty": 1,
+    "components": [
+      "微",
+      "笑"
+    ]
+  },
+  {
+    "id": "4d26f783",
+    "kanji": "微動",
+    "reading": "びどう",
+    "meaning": "かすかに動くこと",
+    "difficulty": 1,
+    "components": [
+      "微",
+      "動"
+    ]
+  },
+  {
+    "id": "b455201e",
+    "kanji": "微量",
+    "reading": "びりょう",
+    "meaning": "わずかな量",
+    "difficulty": 1,
+    "components": [
+      "微",
+      "量"
+    ]
+  },
+  {
+    "id": "7ced2aac",
+    "kanji": "微細",
+    "reading": "びさい",
+    "meaning": "きわめて細かいこと",
+    "difficulty": 1,
+    "components": [
+      "微",
+      "細"
+    ]
+  },
+  {
+    "id": "dbce30ee",
+    "kanji": "春夏秋冬",
+    "reading": "しゅんかしゅうとう",
+    "meaning": "四季のこと",
+    "difficulty": 3,
+    "components": [
+      "春",
+      "夏",
+      "秋",
+      "冬"
+    ]
+  },
+  {
+    "id": "358dd890",
+    "kanji": "一石二鳥",
+    "reading": "いっせきにちょう",
+    "meaning": "一つのことで二つの利益を得ること",
+    "difficulty": 2,
+    "components": [
+      "一",
+      "石",
+      "二",
+      "鳥"
+    ]
+  },
+  {
+    "id": "9babbbf9",
+    "kanji": "三寒四温",
+    "reading": "さんかんしおん",
+    "meaning": "寒い日と暖かい日が繰り返されること",
+    "difficulty": 3,
+    "components": [
+      "三",
+      "寒",
+      "四",
+      "温"
+    ]
+  },
+  {
+    "id": "8afc974a",
+    "kanji": "五里霧中",
+    "reading": "ごりむちゅう",
+    "meaning": "どうすればよいか迷うこと",
+    "difficulty": 3,
+    "components": [
+      "五",
+      "里",
+      "霧",
+      "中"
+    ]
+  },
+  {
+    "id": "cb400edc",
+    "kanji": "七転八起",
+    "reading": "ななころびやおき",
+    "meaning": "何度失敗しても立ち上がること",
+    "difficulty": 3,
+    "components": [
+      "七",
+      "転",
+      "八",
+      "起"
+    ]
+  },
+  {
+    "id": "29095be6",
+    "kanji": "十人十色",
+    "reading": "じゅうにんといろ",
+    "meaning": "好みや考えは人それぞれであること",
+    "difficulty": 2,
+    "components": [
+      "十",
+      "人",
+      "十",
+      "色"
+    ]
+  },
+  {
+    "id": "3e71763b",
+    "kanji": "百発百中",
+    "reading": "ひゃっぱつひゃくちゅう",
+    "meaning": "予想や計画がすべて当たること",
+    "difficulty": 3,
+    "components": [
+      "百",
+      "発",
+      "百",
+      "中"
+    ]
+  },
+  {
+    "id": "a737fd4e",
+    "kanji": "千載一遇",
+    "reading": "せんざいいちぐう",
+    "meaning": "めったにない良い機会",
+    "difficulty": 3,
+    "components": [
+      "千",
+      "載",
+      "一",
+      "遇"
+    ]
+  },
+  {
+    "id": "f160910a",
+    "kanji": "万全",
+    "reading": "ばんぜん",
+    "meaning": "手落ちがないこと",
+    "difficulty": 1,
+    "components": [
+      "万",
+      "全"
+    ]
+  },
+  {
+    "id": "0cc5a92c",
+    "kanji": "一期一会",
+    "reading": "いちごいちえ",
+    "meaning": "一生に一度だけの出会い",
+    "difficulty": 3,
+    "components": [
+      "一",
+      "期",
+      "一",
+      "会"
+    ]
+  },
+  {
+    "id": "825f3587",
+    "kanji": "以心伝心",
+    "reading": "いしんでんしん",
+    "meaning": "言葉にしなくても心が通じ合うこと",
+    "difficulty": 2,
+    "components": [
+      "以",
+      "心",
+      "伝",
+      "心"
+    ]
+  },
+  {
+    "id": "75798407",
+    "kanji": "温故知新",
+    "reading": "おんこちしん",
+    "meaning": "昔のことを調べて新しい知識を得ること",
+    "difficulty": 5,
+    "components": [
+      "温",
+      "故",
+      "知",
+      "新"
+    ]
+  },
+  {
+    "id": "e81d70d1",
+    "kanji": "花鳥風月",
+    "reading": "かちょうふうげつ",
+    "meaning": "自然の美しい景色",
+    "difficulty": 3,
+    "components": [
+      "花",
+      "鳥",
+      "風",
+      "月"
+    ]
+  },
+  {
+    "id": "3a70f430",
+    "kanji": "我田引水",
+    "reading": "がでんいんすい",
+    "meaning": "自分の都合の良いようにすること",
+    "difficulty": 2,
+    "components": [
+      "我",
+      "田",
+      "引",
+      "水"
+    ]
+  },
+  {
+    "id": "4bea91ef",
+    "kanji": "完全無欠",
+    "reading": "かんぜんむけつ",
+    "meaning": "欠点が全くないこと",
+    "difficulty": 3,
+    "components": [
+      "完",
+      "全",
+      "無",
+      "欠"
+    ]
+  },
+  {
+    "id": "628c1107",
+    "kanji": "起死回生",
+    "reading": "きしかいせい",
+    "meaning": "絶望的な状態から立ち直ること",
+    "difficulty": 2,
+    "components": [
+      "起",
+      "死",
+      "回",
+      "生"
+    ]
+  },
+  {
+    "id": "1e0be4e1",
+    "kanji": "急転直下",
+    "reading": "きゅうてんちょっか",
+    "meaning": "事態が急に変わること",
+    "difficulty": 3,
+    "components": [
+      "急",
+      "転",
+      "直",
+      "下"
+    ]
+  },
+  {
+    "id": "c1bd4b04",
+    "kanji": "空前絶後",
+    "reading": "くうぜんぜつご",
+    "meaning": "今までにもこれからもないようなこと",
+    "difficulty": 3,
+    "components": [
+      "空",
+      "前",
+      "絶",
+      "後"
+    ]
+  },
+  {
+    "id": "e0b50a2d",
+    "kanji": "言語道断",
+    "reading": "ごんごどうだん",
+    "meaning": "もってのほかであること",
+    "difficulty": 3,
+    "components": [
+      "言",
+      "語",
+      "道",
+      "断"
+    ]
+  },
+  {
+    "id": "67868fe7",
+    "kanji": "自画自賛",
+    "reading": "じがじさん",
+    "meaning": "自分のことを自分で褒めること",
+    "difficulty": 2,
+    "components": [
+      "自",
+      "画",
+      "自",
+      "賛"
+    ]
+  },
+  {
+    "id": "8248a713",
+    "kanji": "四面楚歌",
+    "reading": "しめんそか",
+    "meaning": "周りが敵ばかりで助けがないこと",
+    "difficulty": 3,
+    "components": [
+      "四",
+      "面",
+      "楚",
+      "歌"
+    ]
+  },
+  {
+    "id": "2009ec41",
+    "kanji": "自由自在",
+    "reading": "じゆうじざい",
+    "meaning": "思いのままであること",
+    "difficulty": 2,
+    "components": [
+      "自",
+      "由",
+      "自",
+      "在"
+    ]
+  },
+  {
+    "id": "03b37eec",
+    "kanji": "主客転倒",
+    "reading": "しゅかくてんとう",
+    "meaning": "立場が逆になること",
+    "difficulty": 5,
+    "components": [
+      "主",
+      "客",
+      "転",
+      "倒"
+    ]
+  },
+  {
+    "id": "93704da1",
+    "kanji": "心機一転",
+    "reading": "しんきいってん",
+    "meaning": "気持ちを入れ替えること",
+    "difficulty": 3,
+    "components": [
+      "心",
+      "機",
+      "一",
+      "転"
+    ]
+  },
+  {
+    "id": "5abcdfc5",
+    "kanji": "誠心誠意",
+    "reading": "せいしんせいい",
+    "meaning": "まごころを込めること",
+    "difficulty": 5,
+    "components": [
+      "誠",
+      "心",
+      "誠",
+      "意"
+    ]
+  },
+  {
+    "id": "3913d1a0",
+    "kanji": "絶体絶命",
+    "reading": "ぜったいぜつめい",
+    "meaning": "どうにもならない危険な状態",
+    "difficulty": 3,
+    "components": [
+      "絶",
+      "体",
+      "絶",
+      "命"
+    ]
+  },
+  {
+    "id": "f094f3d7",
+    "kanji": "千差万別",
+    "reading": "せんさばんべつ",
+    "meaning": "さまざまに違っていること",
+    "difficulty": 2,
+    "components": [
+      "千",
+      "差",
+      "万",
+      "別"
+    ]
+  },
+  {
+    "id": "1204d66d",
+    "kanji": "大器晩成",
+    "reading": "たいきばんせい",
+    "meaning": "偉大な人は大成するのが遅いこと",
+    "difficulty": 3,
+    "components": [
+      "大",
+      "器",
+      "晩",
+      "成"
+    ]
+  },
+  {
+    "id": "d5659608",
+    "kanji": "単刀直入",
+    "reading": "たんとうちょくにゅう",
+    "meaning": "前置きなしに本題に入ること",
+    "difficulty": 2,
+    "components": [
+      "単",
+      "刀",
+      "直",
+      "入"
+    ]
+  },
+  {
+    "id": "51694f15",
+    "kanji": "朝三暮四",
+    "reading": "ちょうさんぼし",
+    "meaning": "目先の違いにごまかされること",
+    "difficulty": 4,
+    "components": [
+      "朝",
+      "三",
+      "暮",
+      "四"
+    ]
+  },
+  {
+    "id": "1b31d896",
+    "kanji": "電光石火",
+    "reading": "でんこうせっか",
+    "meaning": "動作が非常に素早いこと",
+    "difficulty": 2,
+    "components": [
+      "電",
+      "光",
+      "石",
+      "火"
+    ]
+  },
+  {
+    "id": "0add59b0",
+    "kanji": "日進月歩",
+    "reading": "にっしんげっぽ",
+    "meaning": "絶え間なく進歩すること",
+    "difficulty": 2,
+    "components": [
+      "日",
+      "進",
+      "月",
+      "歩"
+    ]
+  },
+  {
+    "id": "8092ef46",
+    "kanji": "半信半疑",
+    "reading": "はんしんはんぎ",
+    "meaning": "本当かどうか迷うこと",
+    "difficulty": 2,
+    "components": [
+      "半",
+      "信",
+      "半",
+      "疑"
+    ]
+  },
+  {
+    "id": "62d1643c",
+    "kanji": "不言実行",
+    "reading": "ふげんじっこう",
+    "meaning": "文句を言わずに実行すること",
+    "difficulty": 3,
+    "components": [
+      "不",
+      "言",
+      "実",
+      "行"
+    ]
+  },
+  {
+    "id": "bd46029b",
+    "kanji": "粉骨砕身",
+    "reading": "ふんこつさいしん",
+    "meaning": "力の限り努力すること",
+    "difficulty": 3,
+    "components": [
+      "粉",
+      "骨",
+      "砕",
+      "身"
+    ]
+  },
+  {
+    "id": "ad5e19c6",
+    "kanji": "傍若無人",
+    "reading": "ぼうじゃくぶじん",
+    "meaning": "勝手気ままに振る舞うこと",
+    "difficulty": 3,
+    "components": [
+      "傍",
+      "若",
+      "無",
+      "人"
+    ]
+  },
+  {
+    "id": "c89a9ba9",
+    "kanji": "本末転倒",
+    "reading": "ほんまつてんとう",
+    "meaning": "大事なこととつまらないことを取り違えること",
+    "difficulty": 3,
+    "components": [
+      "本",
+      "末",
+      "転",
+      "倒"
+    ]
+  },
+  {
+    "id": "2583a596",
+    "kanji": "無我夢中",
+    "reading": "むがむちゅう",
+    "meaning": "我を忘れて熱中すること",
+    "difficulty": 2,
+    "components": [
+      "無",
+      "我",
+      "夢",
+      "中"
+    ]
+  },
+  {
+    "id": "9433dc50",
+    "kanji": "油断大敵",
+    "reading": "ゆだんたいてき",
+    "meaning": "油断は失敗のもとであること",
+    "difficulty": 3,
+    "components": [
+      "油",
+      "断",
+      "大",
+      "敵"
+    ]
+  },
+  {
+    "id": "09e05cad",
+    "kanji": "臨機応変",
+    "reading": "りんきおうへん",
+    "meaning": "状況に合わせて適切に行動すること",
+    "difficulty": 3,
+    "components": [
+      "臨",
+      "機",
+      "応",
+      "変"
+    ]
+  },
+  {
+    "id": "834e7c76",
+    "kanji": "老若男女",
+    "reading": "ろうにゃくなんにょ",
+    "meaning": "あらゆる年齢の男女",
+    "difficulty": 4,
+    "components": [
+      "老",
+      "若",
+      "男",
+      "女"
+    ]
+  },
+  {
+    "id": "8198c185",
+    "kanji": "和洋折衷",
+    "reading": "わようせっちゅう",
+    "meaning": "日本風と西洋風を合わせること",
+    "difficulty": 4,
+    "components": [
+      "和",
+      "洋",
+      "折",
+      "衷"
+    ]
+  },
+  {
+    "id": "61f8fe4b",
+    "kanji": "異口同音",
+    "reading": "いくどうおん",
+    "meaning": "多くの人が同じことを言うこと",
+    "difficulty": 4,
+    "components": [
+      "異",
+      "口",
+      "同",
+      "音"
+    ]
+  },
+  {
+    "id": "97eafabd",
+    "kanji": "一心同体",
+    "reading": "いっしんどうたい",
+    "meaning": "二人以上の心が一つになること",
+    "difficulty": 3,
+    "components": [
+      "一",
+      "心",
+      "同",
+      "体"
+    ]
+  },
+  {
+    "id": "35907ff7",
+    "kanji": "意味深長",
+    "reading": "いみしんちょう",
+    "meaning": "言葉の奥に深い意味があること",
+    "difficulty": 4,
+    "components": [
+      "意",
+      "味",
+      "深",
+      "長"
+    ]
+  },
+  {
+    "id": "0f09737b",
+    "kanji": "因果応報",
+    "reading": "いんがおうほう",
+    "meaning": "行いの報いは自分に来ること",
+    "difficulty": 5,
+    "components": [
+      "因",
+      "果",
+      "応",
+      "報"
+    ]
+  },
+  {
+    "id": "4fa7b630",
+    "kanji": "右往左往",
+    "reading": "うおうさおう",
+    "meaning": "混乱してあちこち動き回ること",
+    "difficulty": 5,
+    "components": [
+      "右",
+      "往",
+      "左",
+      "往"
+    ]
+  },
+  {
+    "id": "2debc2a4",
+    "kanji": "雲散霧消",
+    "reading": "うんさんむしょう",
+    "meaning": "跡形もなく消えること",
+    "difficulty": 3,
+    "components": [
+      "雲",
+      "散",
+      "霧",
+      "消"
+    ]
+  },
+  {
+    "id": "496672d7",
+    "kanji": "栄枯盛衰",
+    "reading": "えいこせいすい",
+    "meaning": "栄えたり衰えたりすること",
+    "difficulty": 4,
+    "components": [
+      "栄",
+      "枯",
+      "盛",
+      "衰"
+    ]
+  },
+  {
+    "id": "16dbf0e0",
+    "kanji": "温厚篤実",
+    "reading": "おんこうとくじつ",
+    "meaning": "穏やかで誠実なこと",
+    "difficulty": 4,
+    "components": [
+      "温",
+      "厚",
+      "篤",
+      "実"
+    ]
+  },
+  {
+    "id": "895aa40f",
+    "kanji": "快刀乱麻",
+    "reading": "かいとうらんま",
+    "meaning": "複雑な問題を鮮やかに解決すること",
+    "difficulty": 3,
+    "components": [
+      "快",
+      "刀",
+      "乱",
+      "麻"
+    ]
+  },
+  {
+    "id": "e96c9df8",
+    "kanji": "危機一髪",
+    "reading": "ききいっぱつ",
+    "meaning": "非常に危険な状態",
+    "difficulty": 4,
+    "components": [
+      "危",
+      "機",
+      "一",
+      "髪"
+    ]
+  },
+  {
+    "id": "8fa53222",
+    "kanji": "疑心暗鬼",
+    "reading": "ぎしんあんき",
+    "meaning": "疑うあまり何でも怖くなること",
+    "difficulty": 3,
+    "components": [
+      "疑",
+      "心",
+      "暗",
+      "鬼"
+    ]
+  },
+  {
+    "id": "c4147adf",
+    "kanji": "奇想天外",
+    "reading": "きそうてんがい",
+    "meaning": "思いもよらないこと",
+    "difficulty": 5,
+    "components": [
+      "奇",
+      "想",
+      "天",
+      "外"
+    ]
+  },
+  {
+    "id": "ff27efe6",
+    "kanji": "喜怒哀楽",
+    "reading": "きどあいらく",
+    "meaning": "人間の様々な感情",
+    "difficulty": 3,
+    "components": [
+      "喜",
+      "怒",
+      "哀",
+      "楽"
+    ]
+  },
+  {
+    "id": "828648cf",
+    "kanji": "興味津々",
+    "reading": "きょうみしんしん",
+    "meaning": "興味が尽きないこと",
+    "difficulty": 2,
+    "components": [
+      "興",
+      "味",
+      "津",
+      "々"
+    ]
+  },
+  {
+    "id": "7104fb5a",
+    "kanji": "公明正大",
+    "reading": "こうめいせいだい",
+    "meaning": "公平で隠し事がないこと",
+    "difficulty": 4,
+    "components": [
+      "公",
+      "明",
+      "正",
+      "大"
+    ]
+  },
+  {
+    "id": "ccb7484f",
+    "kanji": "孤立無援",
+    "reading": "こりつむえん",
+    "meaning": "助けがなく一人ぼっちなこと",
+    "difficulty": 3,
+    "components": [
+      "孤",
+      "立",
+      "無",
+      "援"
+    ]
+  },
+  {
+    "id": "9ea43066",
+    "kanji": "才色兼備",
+    "reading": "さいしょくけんび",
+    "meaning": "才能も容姿も優れていること",
+    "difficulty": 2,
+    "components": [
+      "才",
+      "色",
+      "兼",
+      "備"
+    ]
+  },
+  {
+    "id": "08cdbe97",
+    "kanji": "自業自得",
+    "reading": "じごうじとく",
+    "meaning": "自分の行いの報いを受けること",
+    "difficulty": 3,
+    "components": [
+      "自",
+      "業",
+      "自",
+      "得"
+    ]
+  },
+  {
+    "id": "4978afd7",
+    "kanji": "質実剛健",
+    "reading": "しつじつごうけん",
+    "meaning": "飾り気がなく真面目で強いこと",
+    "difficulty": 4,
+    "components": [
+      "質",
+      "実",
+      "剛",
+      "健"
+    ]
+  },
+  {
+    "id": "eb111d66",
+    "kanji": "弱肉強食",
+    "reading": "じゃくにくきょうしょく",
+    "meaning": "強い者が弱い者を犠牲にすること",
+    "difficulty": 2,
+    "components": [
+      "弱",
+      "肉",
+      "強",
+      "食"
+    ]
+  },
+  {
+    "id": "a3c62b56",
+    "kanji": "首尾一貫",
+    "reading": "しゅびいっかん",
+    "meaning": "最初から最後まで筋が通っていること",
+    "difficulty": 3,
+    "components": [
+      "首",
+      "尾",
+      "一",
+      "貫"
+    ]
+  },
+  {
+    "id": "b4225b0d",
+    "kanji": "支離滅裂",
+    "reading": "しりめつれつ",
+    "meaning": "めちゃくちゃで筋が通らないこと",
+    "difficulty": 4,
+    "components": [
+      "支",
+      "離",
+      "滅",
+      "裂"
+    ]
+  },
+  {
+    "id": "8d00b2c3",
+    "kanji": "神出鬼没",
+    "reading": "しんしゅつきぼつ",
+    "meaning": "自由自在に現れたり消えたりすること",
+    "difficulty": 3,
+    "components": [
+      "神",
+      "出",
+      "鬼",
+      "没"
+    ]
+  },
+  {
+    "id": "3365a483",
+    "kanji": "針小棒大",
+    "reading": "しんしょうぼうだい",
+    "meaning": "小さなことを大げさに言うこと",
+    "difficulty": 3,
+    "components": [
+      "針",
+      "小",
+      "棒",
+      "大"
+    ]
+  },
+  {
+    "id": "f0232f77",
+    "kanji": "晴耕雨読",
+    "reading": "せいこううどく",
+    "meaning": "自然の中で気ままに暮らすこと",
+    "difficulty": 3,
+    "components": [
+      "晴",
+      "耕",
+      "雨",
+      "読"
+    ]
+  },
+  {
+    "id": "4880a6fa",
+    "kanji": "清廉潔白",
+    "reading": "せいれんけっぱく",
+    "meaning": "心が清くて後ろ暗いところがないこと",
+    "difficulty": 4,
+    "components": [
+      "清",
+      "廉",
+      "潔",
+      "白"
+    ]
+  },
+  {
+    "id": "f6fab992",
+    "kanji": "切磋琢磨",
+    "reading": "せっさたくま",
+    "meaning": "互いに励まし合って向上すること",
+    "difficulty": 3,
+    "components": [
+      "切",
+      "磋",
+      "琢",
+      "磨"
+    ]
+  },
+  {
+    "id": "61fd2484",
+    "kanji": "前代未聞",
+    "reading": "ぜんだいみもん",
+    "meaning": "今までに聞いたこともないこと",
+    "difficulty": 3,
+    "components": [
+      "前",
+      "代",
+      "未",
+      "聞"
+    ]
+  },
+  {
+    "id": "ffbcd894",
+    "kanji": "大同小異",
+    "reading": "だいどうしょうい",
+    "meaning": "大体同じで細かい違いしかないこと",
+    "difficulty": 4,
+    "components": [
+      "大",
+      "同",
+      "小",
+      "異"
+    ]
+  },
+  {
+    "id": "d388e6db",
+    "kanji": "天真爛漫",
+    "reading": "てんしんらんまん",
+    "meaning": "飾らず無邪気なこと",
+    "difficulty": 4,
+    "components": [
+      "天",
+      "真",
+      "爛",
+      "漫"
+    ]
+  },
+  {
+    "id": "6921cb44",
+    "kanji": "東奔西走",
+    "reading": "とうほんせいそう",
+    "meaning": "あちこち忙しく走り回ること",
+    "difficulty": 4,
+    "components": [
+      "東",
+      "奔",
+      "西",
+      "走"
+    ]
+  },
+  {
+    "id": "cd92ed41",
+    "kanji": "独立独歩",
+    "reading": "どくりつどっぽ",
+    "meaning": "他人に頼らず自分の信じる道を行くこと",
+    "difficulty": 3,
+    "components": [
+      "独",
+      "立",
+      "独",
+      "歩"
+    ]
+  },
+  {
+    "id": "99e45195",
+    "kanji": "難攻不落",
+    "reading": "なんこうふらく",
+    "meaning": "攻めるのが難しくなかなか落ちないこと",
+    "difficulty": 3,
+    "components": [
+      "難",
+      "攻",
+      "不",
+      "落"
+    ]
+  },
+  {
+    "id": "f53b0cd6",
+    "kanji": "二束三文",
+    "reading": "にそくさんもん",
+    "meaning": "数が多くても値段が安いこと",
+    "difficulty": 4,
+    "components": [
+      "二",
+      "束",
+      "三",
+      "文"
+    ]
+  },
+  {
+    "id": "77ce2cfc",
+    "kanji": "馬耳東風",
+    "reading": "ばじとうふう",
+    "meaning": "人の意見を聞き流すこと",
+    "difficulty": 2,
+    "components": [
+      "馬",
+      "耳",
+      "東",
+      "風"
+    ]
+  },
+  {
+    "id": "9713433d",
+    "kanji": "半面教師",
+    "reading": "はんめんきょうし",
+    "meaning": "悪い見本として学ぶべき人",
+    "difficulty": 3,
+    "components": [
+      "半",
+      "面",
+      "教",
+      "師"
+    ]
+  },
+  {
+    "id": "e692364f",
+    "kanji": "風光明媚",
+    "reading": "ふうこうめいび",
+    "meaning": "自然の景色が美しいこと",
+    "difficulty": 3,
+    "components": [
+      "風",
+      "光",
+      "明",
+      "媚"
+    ]
+  },
+  {
+    "id": "5b518f7d",
+    "kanji": "不眠不休",
+    "reading": "ふみんふきゅう",
+    "meaning": "眠らず休まず働くこと",
+    "difficulty": 4,
+    "components": [
+      "不",
+      "眠",
+      "不",
+      "休"
+    ]
+  },
+  {
+    "id": "74da9ce2",
+    "kanji": "付和雷同",
+    "reading": "ふわらいどう",
+    "meaning": "自分を持たず他人の意見にすぐ賛成すること",
+    "difficulty": 4,
+    "components": [
+      "付",
+      "和",
+      "雷",
+      "同"
+    ]
+  },
+  {
+    "id": "a2737a93",
+    "kanji": "平穏無事",
+    "reading": "へいおんぶじ",
+    "meaning": "変わったこともなく穏やかなこと",
+    "difficulty": 2,
+    "components": [
+      "平",
+      "穏",
+      "無",
+      "事"
+    ]
+  },
+  {
+    "id": "f2af271b",
+    "kanji": "抱腹絶倒",
+    "reading": "ほうふくぜっとう",
+    "meaning": "腹を抱えて大笑いすること",
+    "difficulty": 3,
+    "components": [
+      "抱",
+      "腹",
+      "絶",
+      "倒"
+    ]
+  },
+  {
+    "id": "b3f3d337",
+    "kanji": "無味乾燥",
+    "reading": "むみかんそう",
+    "meaning": "面白みが全くないこと",
+    "difficulty": 4,
+    "components": [
+      "無",
+      "味",
+      "乾",
+      "燥"
+    ]
+  },
+  {
+    "id": "678f2eea",
+    "kanji": "明鏡止水",
+    "reading": "めいきょうしすい",
+    "meaning": "曇りのない鏡と静かな水のような心",
+    "difficulty": 3,
+    "components": [
+      "明",
+      "鏡",
+      "止",
+      "水"
+    ]
+  },
+  {
+    "id": "dc0bec32",
+    "kanji": "有名無実",
+    "reading": "ゆうめいむじつ",
+    "meaning": "名ばかりで実質が伴わないこと",
+    "difficulty": 4,
+    "components": [
+      "有",
+      "名",
+      "無",
+      "実"
+    ]
+  },
+  {
+    "id": "7a60af62",
+    "kanji": "用意周到",
+    "reading": "よういしゅうとう",
+    "meaning": "準備が十分に行き届いていること",
+    "difficulty": 3,
+    "components": [
+      "用",
+      "意",
+      "周",
+      "到"
+    ]
+  },
+  {
+    "id": "ac3452e2",
+    "kanji": "利害関係",
+    "reading": "りがいかんけい",
+    "meaning": "利益と損害が絡む関係",
+    "difficulty": 4,
+    "components": [
+      "利",
+      "害",
+      "関",
+      "係"
+    ]
+  },
+  {
+    "id": "adfee845",
+    "kanji": "竜頭蛇尾",
+    "reading": "りゅうとうだび",
+    "meaning": "初めは勢いがよいが終わりは振るわないこと",
+    "difficulty": 4,
+    "components": [
+      "竜",
+      "頭",
+      "蛇",
+      "尾"
+    ]
+  }
+]

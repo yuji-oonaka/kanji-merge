@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { JukugoDefinition } from "@/features/kanji-core/types";
-// ★修正: 正しいパスを指定
 import { useGameStore } from "../stores/store";
+import { THEMES } from "../constants/themes"; // 追加
 
 interface GoalSlotProps {
   target: JukugoDefinition | null;
@@ -11,16 +11,16 @@ interface GoalSlotProps {
 
 export function GoalSlot({ target }: GoalSlotProps) {
   const filledIndices = useGameStore((state) => state.filledIndices);
+  const currentTheme = useGameStore((state) => state.currentTheme); // 追加
+  const theme = THEMES[currentTheme]; // 追加
 
   if (!target) return null;
 
   const charCount = target.components.length;
-  // 文字数が多い場合はスロットサイズを小さくする
   const isLong = charCount >= 4;
   const isMedium = charCount === 3;
 
-  // サイズクラスの決定
-  let slotSizeClass = "w-20 h-20"; // デフォルト(2文字)
+  let slotSizeClass = "w-20 h-20";
   let textSizeClass = "text-4xl";
 
   if (isLong) {
@@ -32,8 +32,13 @@ export function GoalSlot({ target }: GoalSlotProps) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-2 p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-stone-200 transition-all duration-500 mx-4">
-      <div className="text-xs font-bold text-stone-400 tracking-widest">
+    <div
+      className={`
+      flex flex-col items-center gap-2 p-4 rounded-xl shadow-sm border transition-all duration-500 mx-4 backdrop-blur-sm
+      ${theme.colors.partBg} ${theme.colors.partBorder}
+    `}
+    >
+      <div className={`text-xs font-bold tracking-widest ${theme.colors.sub}`}>
         TARGET
       </div>
 
@@ -44,7 +49,11 @@ export function GoalSlot({ target }: GoalSlotProps) {
           return (
             <div
               key={`${target.id}-slot-${index}`}
-              className={`relative ${slotSizeClass} border-2 border-dashed border-stone-300 rounded-lg flex items-center justify-center bg-stone-50/50 overflow-hidden transition-all`}
+              // ▼ テーマ色を適用
+              className={`
+                relative ${slotSizeClass} border-2 border-dashed rounded-lg flex items-center justify-center overflow-hidden transition-all
+                ${theme.colors.slotBg} ${theme.colors.slotBorder}
+              `}
             >
               {/* 正解の漢字 */}
               {isFilled && (
@@ -52,7 +61,17 @@ export function GoalSlot({ target }: GoalSlotProps) {
                   initial={{ scale: 0, opacity: 0, rotate: -10 }}
                   animate={{ scale: 1, opacity: 1, rotate: 0 }}
                   transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                  className={`w-full h-full bg-amber-100 flex items-center justify-center ${textSizeClass} text-amber-900 font-bold font-serif`}
+                  // ▼ 正解時の色は強調色(accent)を使うか、視認性重視で固定にするか
+                  // ここでは視認性を重視して、和風:薄橙、その他:テーマ色に合わせて調整
+                  className={`
+                    w-full h-full flex items-center justify-center font-bold font-serif
+                    ${textSizeClass}
+                    ${
+                      currentTheme === "paper"
+                        ? "bg-amber-100 text-amber-900"
+                        : `${theme.colors.accent} bg-white/10`
+                    }
+                  `}
                 >
                   {char}
                 </motion.div>
@@ -61,7 +80,7 @@ export function GoalSlot({ target }: GoalSlotProps) {
               {/* 未正解時のヒント */}
               {!isFilled && (
                 <span
-                  className={`text-stone-200 font-serif opacity-20 ${textSizeClass}`}
+                  className={`font-serif opacity-20 ${textSizeClass} ${theme.colors.text}`}
                 >
                   ?
                 </span>
@@ -71,7 +90,7 @@ export function GoalSlot({ target }: GoalSlotProps) {
         })}
       </div>
 
-      <div className="text-sm font-medium text-stone-500 mt-1">
+      <div className={`text-sm font-medium ${theme.colors.sub}`}>
         読み: {target.reading}
       </div>
     </div>

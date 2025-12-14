@@ -1,14 +1,25 @@
 import type { Metadata } from "next";
-// ❌ 削除: import { Shippori_Mincho } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-// ❌ 削除: const shippori = Shippori_Mincho({ ... });
+// ベースのフォント (UI用)
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+// 数字・ゲーム画面用の等幅フォント
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
-  title: "漢字合体 (Kanji Merge)",
-  description: "漢字を触って発明する感覚的ロジックパズル",
+  title: "Between - Instant Reflex Game",
+  description: "声で遊ぶ、数字の「間」を答える瞬間反射ゲーム",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon.svg",
+    apple: "/icon.svg",
   },
 };
 
@@ -18,11 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" suppressHydrationWarning>
-      {/* ▼ 修正: shippori.variable を削除。
-        "font-serif" クラスをつけるだけで、globals.css で設定したフォントが適用されます。
-      */}
-      <body className="font-serif bg-[#f5f2eb] text-[#3d3330]">{children}</body>
+    <html lang="ja">
+      <body
+        // 2つのフォント変数をセットし、デフォルトは font-sans (Inter)
+        // ゲーム画面では font-mono (JetBrains Mono) が優先されるようにCSS変数を利用
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-gray-50 text-gray-900`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

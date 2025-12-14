@@ -99,67 +99,128 @@ export function TitleBackground() {
     </div>
   );
 }
---- src/app/page.tsx ---
-import { TitleBackground } from "../components/ui/TitleBackground";
+--- src/app/adventure/page.tsx ---
+import { WorldMap } from "@/features/adventure/components/WorldMap";
 
-// 修正: next/link がプレビュー環境でエラーになるため、標準の a タグを使用
-// import Link from "next/link";
+export default function AdventurePage() {
+  return <WorldMap />;
+}
+--- src/app/page.tsx ---
+"use client";
+
+import { TitleBackground } from "../components/ui/TitleBackground";
+import { useRouter } from "next/navigation";
+import { useGameStore } from "@/features/game-board/stores/store";
+import { DifficultyMode } from "@/features/game-board/stores/slices/stageSlice";
 
 export default function Home() {
+  const router = useRouter();
+  const setDifficultyMode = useGameStore((state) => state.setDifficultyMode);
+  const resetStage = useGameStore((state) => state.resetStage);
+
+  const handleStart = (mode: DifficultyMode) => {
+    setDifficultyMode(mode);
+    resetStage();
+    router.push("/play");
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-[#f5f2eb] text-[#3d3330]">
-      <div className="mb-12 text-center">
-        <div className="inline-block border-4 border-[#3d3330] p-6 mb-4 bg-white shadow-sm">
-          <h1 className="text-6xl md:text-7xl font-serif font-bold tracking-[0.2em] leading-tight text-center writing-vertical-rl text-upright mx-auto">
-            漢字
-            <br />
-            合体
-          </h1>
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-[#f5f2eb] text-[#3d3330] relative overflow-hidden">
+      <TitleBackground />
+
+      <div className="relative z-10 flex flex-col items-center w-full max-w-sm">
+        <div className="mb-10 text-center">
+          {/* ▼ 修正: デザインを少しシャープにし、コンセプトを強調 */}
+          <div className="inline-block border-4 border-[#3d3330] p-8 mb-6 bg-white shadow-xl transform -rotate-2 relative">
+            {/* 装飾用の赤いハンコ風マーク */}
+            <div className="absolute -top-3 -right-3 w-12 h-12 bg-[#d94a38] rounded-full flex items-center justify-center text-white font-bold text-xs shadow-md border-2 border-white transform rotate-12">
+              文脈
+            </div>
+
+            <h1 className="text-5xl md:text-6xl font-serif font-bold tracking-[0.2em] leading-tight text-center writing-vertical-rl text-upright mx-auto">
+              漢字
+              <br />
+              合体
+            </h1>
+          </div>
+
+          <p className="text-[#d94a38] font-bold tracking-widest text-sm mb-2">
+            ピースをつなぎ、言葉を紡ぐ
+          </p>
+          <p className="text-stone-400 tracking-[0.4em] text-xs font-bold uppercase">
+            Kanji Merge Puzzle
+          </p>
         </div>
-        <p className="text-stone-500 tracking-[0.5em] text-xs font-bold mt-6 uppercase">
-          Kanji Merge
-        </p>
-      </div>
 
-      <div className="flex flex-col gap-4 w-full max-w-xs z-10">
-        {/* 通常プレイ (Play) */}
-        <a
-          href="/play"
-          className="w-full py-4 bg-[#3d3330] text-white rounded-lg shadow-md hover:bg-[#2a2320] transition-all transform hover:scale-[1.02] active:scale-[0.98] text-center font-bold text-xl font-serif tracking-widest flex items-center justify-center gap-2 no-underline"
-        >
-          <span>いざ、開始</span>
-        </a>
+        <div className="flex flex-col gap-4 w-full">
+          {/* 1. 初級モード */}
+          <button
+            onClick={() => handleStart("EASY")}
+            className="group w-full py-4 bg-emerald-600 text-white rounded-xl shadow-md hover:bg-emerald-500 transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
+          >
+            <div className="relative z-10 flex items-center justify-center gap-3">
+              <span className="text-2xl">🌱</span>
+              <div className="text-left">
+                <div className="font-bold font-serif text-lg tracking-widest">
+                  初級
+                </div>
+                <div className="text-[10px] opacity-80 font-sans tracking-wider">
+                  EASY MODE
+                </div>
+              </div>
+            </div>
+            <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-white/10 rounded-full blur-xl group-hover:scale-150 transition-transform" />
+          </button>
 
-        {/* 冒険モード (Adventure) */}
-        <a
-          href="/adventure"
-          className="group w-full py-4 bg-[#d94a38] text-white rounded-lg shadow-md hover:bg-[#b93a28] transition-all transform hover:scale-[1.02] active:scale-[0.98] text-center relative overflow-hidden font-serif block no-underline"
-        >
-          <span className="relative z-10 font-bold text-xl tracking-widest flex items-center justify-center gap-2">
-            <span>冒険の旅へ</span>
-            <span className="text-sm opacity-80">New!</span>
-          </span>
-        </a>
+          {/* 2. 通常モード */}
+          <button
+            onClick={() => handleStart("NORMAL")}
+            className="group w-full py-4 bg-[#3d3330] text-white rounded-xl shadow-md hover:bg-[#2a2320] transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
+          >
+            <div className="relative z-10 flex items-center justify-center gap-3">
+              <span className="text-2xl">🔥</span>
+              <div className="text-left">
+                <div className="font-bold font-serif text-lg tracking-widest">
+                  標準
+                </div>
+                <div className="text-[10px] opacity-80 font-sans tracking-wider">
+                  NORMAL MODE
+                </div>
+              </div>
+            </div>
+          </button>
 
-        {/* 図鑑 (Collection) */}
-        <a
-          href="/collection"
-          className="w-full py-3 bg-[#fcfaf5] text-[#3d3330] border-2 border-[#3d3330]/20 rounded-lg shadow-sm hover:bg-white hover:border-[#3d3330]/40 transition-all text-center font-bold text-lg font-serif tracking-widest block no-underline"
-        >
-          収集図鑑
-        </a>
-      </div>
+          {/* 3. 冒険モード */}
+          <div className="w-full relative">
+            <button
+              // ★冒険モードへ遷移
+              onClick={() => router.push("/adventure")}
+              className="group w-full py-4 bg-[#d94a38] text-white rounded-xl shadow-inner hover:bg-[#b93a28] flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span className="text-2xl">🗺️</span>
+              <div className="text-left">
+                <div className="font-bold font-serif text-lg tracking-widest">
+                  冒険の旅
+                </div>
+                <div className="text-[10px] opacity-80 font-sans tracking-wider">
+                  ADVENTURE
+                </div>
+              </div>
+            </button>
+          </div>
 
-      {/* 背景装飾 */}
-      <div className="fixed inset-0 pointer-events-none opacity-5 z-0">
-        <div className="absolute top-10 left-10 text-9xl font-serif">漢</div>
-        <div className="absolute bottom-10 right-10 text-9xl font-serif">
-          字
+          {/* 4. 図鑑 */}
+          <button
+            onClick={() => router.push("/collection")}
+            className="w-full py-3 mt-2 bg-[#fcfaf5] text-[#3d3330] border-2 border-[#3d3330]/10 rounded-xl shadow-sm hover:bg-white hover:border-[#3d3330]/30 transition-all font-bold font-serif tracking-widest text-sm"
+          >
+            収集図鑑
+          </button>
         </div>
       </div>
 
-      <div className="mt-16 text-xs text-stone-400 font-serif tracking-wider z-10">
-        © 2025 Kanji Merge Project
+      <div className="absolute bottom-4 text-[10px] text-stone-400 font-serif tracking-wider z-10">
+        Ver 1.0.0
       </div>
     </main>
   );
@@ -188,16 +249,16 @@ export default function CollectionPage() {
 }
 --- src/app/layout.tsx ---
 import type { Metadata } from "next";
-import { Shippori_Mincho } from "next/font/google"; // 和風フォントのインポート
+// import { Shippori_Mincho } from "next/font/google"; // 和風フォントのインポート
 import "./globals.css";
 
 // フォントのロード設定
-const shippori = Shippori_Mincho({
-  weight: ["400", "500", "700", "800"],
-  subsets: ["latin"],
-  variable: "--font-shippori",
-  display: "swap",
-});
+// const shippori = Shippori_Mincho({
+//   weight: ["400", "500", "700", "800"],
+//   subsets: ["latin"],
+//   variable: "--font-shippori",
+//   display: "swap",
+// });
 
 export const metadata: Metadata = {
   title: "漢字合体 (Kanji Merge)",
@@ -214,7 +275,7 @@ export default function RootLayout({
     <html lang="ja" suppressHydrationWarning>
       {/* bodyにフォント変数を適用 */}
       <body
-        className={`${shippori.variable} font-serif bg-[#f5f2eb] text-[#3d3330]`}
+        className={`font-serif bg-[#f5f2eb] text-[#3d3330]`}
       >
         {children}
       </body>
@@ -248,23 +309,18 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
---- src/features/adventure/page.tsx ---
-import { WorldMap } from "../../features/adventure/components/WorldMap";
-
-export default function AdventurePage() {
-  return <WorldMap />;
-}
 --- src/features/adventure/components/WorldMap.tsx ---
 "use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-// 相対パスで指定
-import { useGameStore } from "../../game-board/stores/store";
-import { WORLD_AREAS } from "../data/worlds";
-import { soundEngine } from "../../../lib/sounds/SoundEngine";
 import { useEffect } from "react";
+
+// ▼ パスをエイリアス(@)推奨、もしくは相対パスの階層を確認
+import { useGameStore } from "@/features/game-board/stores/store";
+import { soundEngine } from "@/lib/sounds/SoundEngine";
+import { WORLD_AREAS } from "../data/worlds";
 
 export function WorldMap() {
   const router = useRouter();
@@ -474,72 +530,143 @@ export const WORLD_AREAS: WorldArea[] = [
     ambience: 'space'
   },
 ];--- src/features/kanji-core/logic/decomposer.ts ---
-import { GamePart, JukugoDefinition, IdsMap } from '../types';
-// ★修正: 自動生成された辞書を読み込む
+import { GamePart, JukugoDefinition, IdsMap, DifficultyMode } from '../types'; // ★修正: typesから読み込む
 import idsMapData from '../data/ids-map-auto.json';
 import { getDistractorParts } from './generator';
 
-// 型アサーションを追加して安全に読み込む
+// 安全に型アサーション
 const IDS_MAP: IdsMap = idsMapData as unknown as IdsMap;
 
 const generateId = () => Math.random().toString(36).substring(2, 9);
 
-// これ以上分解しない「原子パーツ（部首）」のリスト
-// ※Pythonスクリプト側でも制御していますが、フロントエンド側でも念のため保持します
 const ATOMIC_PARTS = new Set([
-  // 自然界・基本
   "雨", "木", "日", "月", "田", "力", "山", "石", "土", "火", "水", "金", 
   "王", "玉", "貝", "車", "馬", "魚", "鳥", "虫", "犬", "羊", "牛", 
-  // 人・体
   "人", "イ", "女", "子", "口", "目", "耳", "手", "足", "心", "身", "言", "食", 
-  // 道具・状態
   "刀", "弓", "矢", "糸", "巾", "衣", "門", "尸", "广", "厂", "辶", "亠", "宀", "艹", "竹"
 ]);
 
 function decomposeKanji(char: string): string[] {
-  // 1. 原子パーツなら、定義があっても分解せずに返す
-  if (ATOMIC_PARTS.has(char)) {
-    return [char];
-  }
-
-  // 2. 分解定義があれば分解する
+  if (ATOMIC_PARTS.has(char)) return [char];
   const parts = IDS_MAP[char];
-  // 配列が存在し、かつ空でないか確認
   if (parts && Array.isArray(parts) && parts.length > 0) {
     return parts.flatMap(p => decomposeKanji(p));
   }
-  
-  // 3. 定義がなければそのまま返す
   return [char];
 }
 
-export function generateStageParts(jukugo: JukugoDefinition, currentStageIndex: number = 0): GamePart[] {
+// 構成要素の取得（1段階だけ分解）
+export function getConstituents(char: string): [string, string] | null {
+  if (ATOMIC_PARTS.has(char)) return null;
+  const parts = IDS_MAP[char];
+  if (parts && Array.isArray(parts) && parts.length === 2) {
+    return [parts[0], parts[1]];
+  }
+  return null;
+}
+
+/**
+ * ステージ生成
+ * mode: 'NORMAL' なら完全分解
+ * mode: 'EASY' なら一部の漢字を分解せずにそのまま出す + ダミーなし
+ */
+export function generateStageParts(
+  jukugo: JukugoDefinition, 
+  currentStageIndex: number = 0,
+  mode: DifficultyMode = 'NORMAL' // 引数に追加
+): GamePart[] {
   const kanjis = jukugo.components;
-  const rawParts = kanjis.flatMap(k => decomposeKanji(k));
+  let rawParts: string[] = [];
+
+  if (mode === 'NORMAL') {
+    // ノーマル: 全てを容赦なく分解
+    rawParts = kanjis.flatMap(k => decomposeKanji(k));
+  } else {
+    // イージー: 最後の1文字だけは分解せずに残す（難易度緩和）
+    rawParts = kanjis.flatMap((k, index) => {
+      // 最後の1文字、かつ原子パーツでなければ、そのまま返す
+      if (index === kanjis.length - 1 && !ATOMIC_PARTS.has(k)) {
+        return [k];
+      }
+      return decomposeKanji(k);
+    });
+  }
   
+  // ★修正: ダミーパーツの計算ロジック
   let distractorCount = 0;
-  if (currentStageIndex >= 3) distractorCount = 1;
-  if (currentStageIndex >= 8) distractorCount = 2;
-  if (currentStageIndex >= 15) distractorCount = 3;
+
+  if (mode === 'EASY') {
+    // 初級モード: ダミーなし (0個固定)
+    distractorCount = 0;
+  } else {
+    // 標準モード: ステージ進行に合わせて増やす
+    if (currentStageIndex >= 3) distractorCount = 1;
+    if (currentStageIndex >= 8) distractorCount = 2;
+    if (currentStageIndex >= 15) distractorCount = 3;
+  }
 
   const distractors = getDistractorParts(distractorCount, rawParts);
   const allPartsChars = [...rawParts, ...distractors];
 
-  return allPartsChars.map((char) => {
-    // 画面全体に散らす
+  // ★注意: ここは元のコードが「x, y (浮動小数点)」を使っていたか「gridIndex」を使っていたかによります。
+  // ご提示いただいたコードは「gridIndex」を使っているので、そちらのロジックを採用して返します。
+  // (もし StageView 側が x,y を期待している場合は修正が必要です)
+
+  const gridSize = 16; // 固定または引数化
+  const indices = Array.from({ length: gridSize }, (_, i) => i);
+  // シャッフル
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+
+  return allPartsChars.map((char, i) => {
+    // グリッド位置、もしくはランダム配置
+    const gridIndex = indices[i] !== undefined ? indices[i] : -1;
+    
+    // 画面全体に散らす用の座標 (StageViewが x,y を使う場合への互換性)
     const relativeX = 0.1 + Math.random() * 0.8;
     const relativeY = 0.25 + Math.random() * 0.55;
+
+    const isAtom = ATOMIC_PARTS.has(char);
 
     return {
       id: generateId(),
       char: char,
-      type: 'RADICAL',
-      x: relativeX,
-      y: relativeY,
+      type: isAtom ? 'RADICAL' : 'KANJI',
+      x: relativeX, // 互換性のため追加
+      y: relativeY, // 互換性のため追加
+      gridIndex: gridIndex, // ご提示コードの仕様
     } as any;
   });
+}--- src/features/kanji-core/logic/sentenceHelper.ts ---
+import { JukugoDefinition } from "../types";
+
+/**
+ * 熟語データから表示用の文章パーツを生成する
+ */
+export function getSentenceParts(jukugo: JukugoDefinition) {
+  // 1. sentenceデータがある場合
+  let rawSentence = jukugo.sentence;
+
+  // 2. sentenceデータがない場合
+  // 無理に「〜を表す」などの文章を作らず、ターゲットのみとする
+  // (GoalSlot側で、sentenceがない場合は意味を別途表示するレイアウトに切り替えるため)
+  if (!rawSentence) {
+    rawSentence = `{{target}}`;
+  }
+
+  // 3. {{target}} で分割して、前後のテキストとターゲット位置を特定
+  const parts = rawSentence.split(/({{target}})/g);
+
+  return parts.map((part) => {
+    if (part === "{{target}}") {
+      return { type: "SLOT" as const, text: null };
+    }
+    return { type: "TEXT" as const, text: part };
+  });
 }--- src/features/kanji-core/logic/generator.ts ---
-import { JukugoDefinition } from '../types';
+import { JukugoDefinition, DifficultyMode } from '../types';
 import jukugoData from '../data/jukugo-db-auto.json';
 
 /**
@@ -547,53 +674,57 @@ import jukugoData from '../data/jukugo-db-auto.json';
  * @param levelIndex 現在のレベル
  * @param excludeIds 出題履歴にあるIDリスト (これらは候補から除外)
  */
-export function generateRandomStage(levelIndex: number, excludeIds: string[] = []): JukugoDefinition {
+export function generateRandomStage(
+  levelIndex: number, 
+  excludeIds: string[] = [], 
+  mode: DifficultyMode = 'NORMAL'
+): JukugoDefinition {
   
-  let minDiff = 1;
-  let maxDiff = 1;
+  const data = jukugoData as JukugoDefinition[];
+  let candidates: JukugoDefinition[] = [];
 
-  // レベルカーブ設定
-  if (levelIndex < 5) {
-    minDiff = 1; maxDiff = 2;
-  } else if (levelIndex < 15) {
-    minDiff = 2; maxDiff = 4;
-  } else if (levelIndex < 25) {
-    minDiff = 4; maxDiff = 7;
-  } else if (levelIndex < 40) {
-    minDiff = 6; maxDiff = 9;
+  if (mode === 'EASY') {
+    // 【初級モード】
+    // 1. 構成パーツが2つ以下（2文字熟語 or 1文字漢字）に限定
+    // 2. 難易度(difficulty)が低いものに限定 (例: 3以下)
+    candidates = data.filter(j => 
+      j.components.length <= 2 && j.difficulty <= 3
+    );
   } else {
-    minDiff = 8; maxDiff = 10;
+    // 【標準モード】(既存のロジック + レベル補正)
+    let minDiff = 1;
+    let maxDiff = 1;
+
+    // レベルカーブ設定
+    if (levelIndex < 5) { minDiff = 1; maxDiff = 2; } 
+    else if (levelIndex < 15) { minDiff = 2; maxDiff = 4; } 
+    else if (levelIndex < 25) { minDiff = 4; maxDiff = 7; } 
+    else if (levelIndex < 40) { minDiff = 6; maxDiff = 9; } 
+    else { minDiff = 8; maxDiff = 10; }
+    
+    candidates = data.filter(j => j.difficulty >= minDiff && j.difficulty <= maxDiff);
   }
 
-  const data = jukugoData as JukugoDefinition[];
-
-  // 1. まず難易度で絞り込む
-  let candidates = data.filter(j => j.difficulty >= minDiff && j.difficulty <= maxDiff);
-
-  // 2. さらに履歴にあるものを除外する
+  // --- 共通: 履歴フィルタリング ---
   const freshCandidates = candidates.filter(j => !excludeIds.includes(j.id));
-
-  // もし履歴除外後の候補が残っていれば、そこから選ぶ (優先)
   if (freshCandidates.length > 0) {
     candidates = freshCandidates;
-  } else {
-    // 候補が尽きてしまった場合 (履歴が多すぎる、またはデータ不足)
-    // 仕方ないので履歴フィルターを解除し、難易度フィルターのみで再挑戦
-    // (それでもなければ全データへフォールバック)
-    if (candidates.length === 0) {
-       candidates = data.filter(j => j.difficulty <= maxDiff);
-    }
+  } else if (candidates.length === 0) {
+    // 候補がない場合のフォールバック（全データから簡単なものを探す）
+    candidates = data.filter(j => j.components.length === 2);
   }
   
+  // 安全策
   if (candidates.length === 0) {
-    // 最終手段
     return {
-      id: "error",
-      kanji: "空気",
-      reading: "くうき",
+      id: "fallback",
+      kanji: "平和",
+      reading: "へいわ",
       difficulty: 1,
-      components: ["空", "気"],
-      meaning: "データがありません"
+      components: ["平", "和"],
+      meaning: "穏やかな状態",
+      // ▼ 追加: フォールバック用文章
+      sentence: "世界の{{target}}を祈る"
     };
   }
 
@@ -623,20 +754,17 @@ const DEFAULT_DISTRACTORS = ["日", "月", "木", "山", "石", "田", "力", "�
 
 export function getDistractorParts(count: number, correctParts: string[]): string[] {
   const candidates = new Set<string>();
-
   correctParts.forEach(char => {
     if (CONFUSING_PAIRS[char]) {
       CONFUSING_PAIRS[char].forEach(d => candidates.add(d));
     }
   });
-
   DEFAULT_DISTRACTORS.forEach(d => candidates.add(d));
 
   const candidateArray = Array.from(candidates);
   const validCandidates = candidateArray.filter(c => !correctParts.includes(c));
   
   const result: string[] = [];
-  
   while (result.length < count) {
     if (validCandidates.length === 0) break;
     const idx = Math.floor(Math.random() * validCandidates.length);
@@ -687,6 +815,10 @@ export interface GamePart {
   id: string;
   char: string;
   type: PartType;
+  // グリッド表示用
+  gridIndex?: number;
+  x?: number; // 互換性のため残存
+  y?: number; // 互換性のため残存
 }
 
 // マージ判定の結果
@@ -701,38 +833,67 @@ export interface JukugoDefinition {
   reading: string;
   difficulty: number;
   components: string[];
-  meaning?: string; // ★追加: 意味（オプション）
+  meaning?: string;
+  // ▼ 追加: 穴埋め用の例文
+  // ターゲットとなる熟語部分は "{{target}}" というプレースホルダーで表現
+  // 例: "夏の夜空に{{target}}が上がる"
+  sentence?: string;
 }
 
 // 分解辞書型
 export interface IdsMap {
   [key: string]: string[];
-}--- src/features/kanji-core/data/jukugo-db-auto.json ---
+}
+
+export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/jukugo-db-auto.json ---
 [
   {
-    "id": "69209a87",
+    "id": "6886a2f2",
     "kanji": "明暗",
     "reading": "めいあん",
     "meaning": "明るさと暗さ",
     "difficulty": 2,
-    "components": [
-      "明",
-      "暗"
-    ]
+    "components": ["明", "暗"],
+    "sentence": "勝負の{{target}}が分かれる瞬間"
   },
   {
-    "id": "5aeab64d",
+    "id": "f4b6431c",
     "kanji": "森林",
     "reading": "しんりん",
     "meaning": "木がたくさん茂っている場所",
     "difficulty": 2,
-    "components": [
-      "森",
-      "林"
-    ]
+    "components": ["森", "林"],
+    "sentence": "豊かな{{target}}を守ろう"
   },
   {
-    "id": "dba40588",
+    "id": "87cc076a",
+    "kanji": "日本",
+    "reading": "にほん",
+    "meaning": "東アジアにある島国",
+    "difficulty": 1,
+    "components": ["日", "本"],
+    "sentence": "ここは{{target}}です"
+  },
+  {
+    "id": "7007c72f",
+    "kanji": "花火",
+    "reading": "はなび",
+    "meaning": "空に光を咲かせる火薬",
+    "difficulty": 1,
+    "components": ["花", "火"],
+    "sentence": "夏の夜空に{{target}}が上がる"
+  },
+  {
+    "id": "47d0a698",
+    "kanji": "平和",
+    "reading": "へいわ",
+    "meaning": "穏やかな状態",
+    "difficulty": 1,
+    "components": ["平", "和"],
+    "sentence": "世界の{{target}}を祈る"
+  },
+  {
+    "id": "89f00fe5",
     "kanji": "岩石",
     "reading": "がんせき",
     "meaning": "岩と石",
@@ -743,7 +904,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "ff66fe69",
+    "id": "245b927e",
     "kanji": "火山",
     "reading": "かざん",
     "meaning": "マグマを噴き出す山",
@@ -754,7 +915,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "f6a4f961",
+    "id": "21be6d44",
     "kanji": "休火山",
     "reading": "きゅうかざん",
     "meaning": "現在は活動していない火山",
@@ -766,7 +927,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "e802a588",
+    "id": "2b968c6c",
     "kanji": "活火山",
     "reading": "かつかざん",
     "meaning": "現在も活動している火山",
@@ -778,7 +939,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "01a0e7ff",
+    "id": "87cc076a",
     "kanji": "日本",
     "reading": "にほん",
     "meaning": "東アジアにある島国",
@@ -789,7 +950,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "6e0131e1",
+    "id": "914a174a",
     "kanji": "休日",
     "reading": "きゅうじつ",
     "meaning": "仕事や学校が休みの日",
@@ -800,7 +961,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "cd477524",
+    "id": "ee3c738f",
     "kanji": "大金",
     "reading": "たいきん",
     "meaning": "たくさんのお金",
@@ -811,7 +972,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "38a57d74",
+    "id": "ddb62af9",
     "kanji": "金魚",
     "reading": "きんぎょ",
     "meaning": "観賞用の美しい魚",
@@ -822,7 +983,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "47c9f135",
+    "id": "9f1b6f22",
     "kanji": "人魚",
     "reading": "にんぎょ",
     "meaning": "伝説上の生き物",
@@ -833,7 +994,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "10b9f256",
+    "id": "745f4d96",
     "kanji": "雷雨",
     "reading": "らいう",
     "meaning": "雷をともなって激しく降る雨",
@@ -844,7 +1005,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "24e43d87",
+    "id": "8d82ffa5",
     "kanji": "青空",
     "reading": "あおぞら",
     "meaning": "雲が少なく晴れ渡った空",
@@ -855,7 +1016,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "5cfe270d",
+    "id": "25e18498",
     "kanji": "空気",
     "reading": "くうき",
     "meaning": "地球を包んでいる気体",
@@ -866,7 +1027,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "aa2fb2fc",
+    "id": "c7fddfaf",
     "kanji": "電気",
     "reading": "でんき",
     "meaning": "光や熱を発生させるエネルギー",
@@ -877,7 +1038,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "b220782f",
+    "id": "ced475a8",
     "kanji": "電車",
     "reading": "でんしゃ",
     "meaning": "電気で走る鉄道車両",
@@ -888,7 +1049,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "c9cc3024",
+    "id": "34ce45c5",
     "kanji": "電話",
     "reading": "でんわ",
     "meaning": "遠くの人と話せる機械",
@@ -899,7 +1060,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "fd16fd74",
+    "id": "9ba8e255",
     "kanji": "会話",
     "reading": "かいわ",
     "meaning": "向かい合って話をすること",
@@ -910,7 +1071,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "c3d49f95",
+    "id": "459a59dd",
     "kanji": "読書",
     "reading": "どくしょ",
     "meaning": "本を読むこと",
@@ -921,7 +1082,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "13852d06",
+    "id": "85bfff3b",
     "kanji": "書店",
     "reading": "しょてん",
     "meaning": "本を売っている店",
@@ -932,7 +1093,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "818607e3",
+    "id": "888c4bc6",
     "kanji": "売店",
     "reading": "ばいてん",
     "meaning": "商品を売っている小さな店",
@@ -943,7 +1104,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "8b7c597a",
+    "id": "7007c72f",
     "kanji": "花火",
     "reading": "はなび",
     "meaning": "空に光を咲かせる火薬",
@@ -954,7 +1115,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "d9b57ddb",
+    "id": "29148d5e",
     "kanji": "花見",
     "reading": "はなみ",
     "meaning": "桜を見て楽しむこと",
@@ -965,7 +1126,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "2fb6ba1d",
+    "id": "6e9f03dc",
     "kanji": "見学",
     "reading": "けんがく",
     "meaning": "現地に行って学ぶこと",
@@ -976,7 +1137,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "e6aa4e84",
+    "id": "e4e7c832",
     "kanji": "学校",
     "reading": "がっこう",
     "meaning": "勉強を教わるところ",
@@ -987,7 +1148,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "b3b163e5",
+    "id": "392455c4",
     "kanji": "校歌",
     "reading": "こうか",
     "meaning": "その学校の歌",
@@ -998,7 +1159,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "e1d5b18a",
+    "id": "f037d026",
     "kanji": "歌手",
     "reading": "かしゅ",
     "meaning": "歌を歌う人",
@@ -1009,7 +1170,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "3e66e15b",
+    "id": "70e83e57",
     "kanji": "手足",
     "reading": "てあし",
     "meaning": "手と足",
@@ -1020,7 +1181,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "d6eaaaa9",
+    "id": "e8300b36",
     "kanji": "不足",
     "reading": "ふそく",
     "meaning": "足りないこと",
@@ -1031,7 +1192,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "28be9b4b",
+    "id": "3b51fb77",
     "kanji": "遠足",
     "reading": "えんそく",
     "meaning": "遠くへ出かける行事",
@@ -1042,7 +1203,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "bdc265a5",
+    "id": "fc88b0be",
     "kanji": "男気",
     "reading": "おとこぎ",
     "meaning": "弱い者を助ける気性",
@@ -1053,7 +1214,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "44c8701f",
+    "id": "210786e5",
     "kanji": "町内",
     "reading": "ちょうない",
     "meaning": "町の中",
@@ -1064,7 +1225,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "fbe14c9e",
+    "id": "175a79b9",
     "kanji": "地図",
     "reading": "ちず",
     "meaning": "地形を描いた図",
@@ -1075,7 +1236,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "5ee1cabb",
+    "id": "6dcd3270",
     "kanji": "池",
     "reading": "いけ",
     "meaning": "水がたまっている所",
@@ -1085,7 +1246,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "9e6428bb",
+    "id": "995a4c37",
     "kanji": "海外",
     "reading": "かいがい",
     "meaning": "外国",
@@ -1096,7 +1257,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "187f221d",
+    "id": "8c76705c",
     "kanji": "特急",
     "reading": "とっきゅう",
     "meaning": "特別急行列車",
@@ -1107,7 +1268,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "d4e43874",
+    "id": "fd7c5144",
     "kanji": "招待",
     "reading": "しょうたい",
     "meaning": "客として招くこと",
@@ -1118,7 +1279,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "4ba51034",
+    "id": "3f6f5bfa",
     "kanji": "持参",
     "reading": "じさん",
     "meaning": "持って行くこと",
@@ -1129,7 +1290,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "bfb10fac",
+    "id": "0d2f4a4c",
     "kanji": "草原",
     "reading": "そうげん",
     "meaning": "草が生えている原",
@@ -1140,7 +1301,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "0d23b299",
+    "id": "49c8b4a4",
     "kanji": "親子",
     "reading": "おやこ",
     "meaning": "親と子",
@@ -1151,7 +1312,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "6ba07424",
+    "id": "fb1ff04b",
     "kanji": "売買",
     "reading": "ばいばい",
     "meaning": "売ることと買うこと",
@@ -1162,7 +1323,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "a5d9539f",
+    "id": "1d73c4ff",
     "kanji": "算数",
     "reading": "さんすう",
     "meaning": "数の計算などを学ぶ教科",
@@ -1173,7 +1334,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "af1552da",
+    "id": "1be634e8",
     "kanji": "理科",
     "reading": "りか",
     "meaning": "自然現象を学ぶ教科",
@@ -1184,7 +1345,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "b068aea6",
+    "id": "86e3fc9e",
     "kanji": "早朝",
     "reading": "そうちょう",
     "meaning": "朝早い時間",
@@ -1195,7 +1356,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "93c4702d",
+    "id": "6429bfc8",
     "kanji": "鉄道",
     "reading": "てつどう",
     "meaning": "レールを走る交通機関",
@@ -1206,7 +1367,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "63bd9e67",
+    "id": "c333fe78",
     "kanji": "銀行",
     "reading": "ぎんこう",
     "meaning": "お金を扱う機関",
@@ -1217,7 +1378,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "92e0ac9a",
+    "id": "aea125bc",
     "kanji": "飲食",
     "reading": "いんしょく",
     "meaning": "飲んだり食べたりすること",
@@ -1228,7 +1389,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "991fe08a",
+    "id": "e817591b",
     "kanji": "鮮魚",
     "reading": "せんぎょ",
     "meaning": "新鮮な魚",
@@ -1239,7 +1400,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "c9eb6900",
+    "id": "4ed0d2d6",
     "kanji": "動物",
     "reading": "どうぶつ",
     "meaning": "人間以外の生き物",
@@ -1250,7 +1411,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "ea7a0988",
+    "id": "13fe4b0c",
     "kanji": "回転",
     "reading": "かいてん",
     "meaning": "回ること",
@@ -1261,7 +1422,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "9fd554f7",
+    "id": "64e02ec9",
     "kanji": "公園",
     "reading": "こうえん",
     "meaning": "憩いの場所",
@@ -1272,7 +1433,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "5efcebec",
+    "id": "b5e53a84",
     "kanji": "暗室",
     "reading": "あんしつ",
     "meaning": "光が入らない部屋",
@@ -1283,7 +1444,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "39bd2438",
+    "id": "b83a8c32",
     "kanji": "鳴き声",
     "reading": "なきごえ",
     "meaning": "動物の声",
@@ -1295,7 +1456,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "dc36165f",
+    "id": "a466253c",
     "kanji": "黒板",
     "reading": "こくばん",
     "meaning": "チョークで書く板",
@@ -1306,7 +1467,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "e77b51fb",
+    "id": "1abd3e37",
     "kanji": "電線",
     "reading": "でんせん",
     "meaning": "電気を通す線",
@@ -1317,7 +1478,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "a580b8cb",
+    "id": "92249c5f",
     "kanji": "最強",
     "reading": "さいきょう",
     "meaning": "最も強いこと",
@@ -1328,7 +1489,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "9d5304b0",
+    "id": "47d0a698",
     "kanji": "平和",
     "reading": "へいわ",
     "meaning": "穏やかな状態",
@@ -1339,7 +1500,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "122105fe",
+    "id": "2dbf4b45",
     "kanji": "未来",
     "reading": "みらい",
     "meaning": "これから来る時",
@@ -1350,7 +1511,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "c536451b",
+    "id": "11e04ecb",
     "kanji": "希望",
     "reading": "きぼう",
     "meaning": "将来への願い",
@@ -1361,7 +1522,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "6be0f3bc",
+    "id": "31cf499f",
     "kanji": "勇気",
     "reading": "ゆうき",
     "meaning": "立ち向かう心",
@@ -1372,7 +1533,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "27c41a8b",
+    "id": "71307a2f",
     "kanji": "冒険",
     "reading": "ぼうけん",
     "meaning": "危険を承知で行うこと",
@@ -1383,7 +1544,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "795f5040",
+    "id": "ea895c16",
     "kanji": "宇宙",
     "reading": "うちゅう",
     "meaning": "地球の外に広がる空間",
@@ -1394,7 +1555,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "69f7e8b0",
+    "id": "ca2741d1",
     "kanji": "銀河",
     "reading": "ぎんが",
     "meaning": "星の集まり",
@@ -1405,7 +1566,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "1c61a567",
+    "id": "615945a9",
     "kanji": "惑星",
     "reading": "わくせい",
     "meaning": "恒星の周りを回る星",
@@ -1416,7 +1577,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "61045842",
+    "id": "7261f8e7",
     "kanji": "地球",
     "reading": "ちきゅう",
     "meaning": "私たちが住む星",
@@ -1427,7 +1588,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "ec0b3a37",
+    "id": "5cfdf619",
     "kanji": "太陽",
     "reading": "たいよう",
     "meaning": "光と熱を与える星",
@@ -1438,7 +1599,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "bf08184b",
+    "id": "83ac13cb",
     "kanji": "月光",
     "reading": "げっこう",
     "meaning": "月の光",
@@ -1449,7 +1610,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "6b41177f",
+    "id": "c73a9f1a",
     "kanji": "星空",
     "reading": "ほしぞら",
     "meaning": "星が出ている空",
@@ -1460,7 +1621,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "20998c04",
+    "id": "eaed8ea3",
     "kanji": "流星",
     "reading": "りゅうせい",
     "meaning": "流れ星",
@@ -1471,7 +1632,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "b543d81b",
+    "id": "856d9bdb",
     "kanji": "彗星",
     "reading": "すいせい",
     "meaning": "尾を引く星",
@@ -1482,7 +1643,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "2661f38e",
+    "id": "548cf6ca",
     "kanji": "天体",
     "reading": "てんたい",
     "meaning": "宇宙にある星など",
@@ -1493,7 +1654,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "6918129f",
+    "id": "beb2fc5b",
     "kanji": "科学",
     "reading": "かがく",
     "meaning": "自然法則の研究",
@@ -1504,7 +1665,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "98127e42",
+    "id": "5a25a163",
     "kanji": "技術",
     "reading": "ぎじゅつ",
     "meaning": "物事を行う技",
@@ -1515,7 +1676,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "768f6117",
+    "id": "c3145977",
     "kanji": "発明",
     "reading": "はつめい",
     "meaning": "新しいものを生み出すこと",
@@ -1526,7 +1687,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "ca5d0e87",
+    "id": "8c56113e",
     "kanji": "発見",
     "reading": "はっけん",
     "meaning": "未知のものを見つけること",
@@ -1537,7 +1698,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "72e71fcb",
+    "id": "ab6710f1",
     "kanji": "進化",
     "reading": "しんか",
     "meaning": "生物の変化",
@@ -1548,7 +1709,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "8c733596",
+    "id": "897baa7a",
     "kanji": "歴史",
     "reading": "れきし",
     "meaning": "社会の移り変わり",
@@ -1559,7 +1720,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "da9f2c5f",
+    "id": "4edd8c7f",
     "kanji": "文化",
     "reading": "ぶんか",
     "meaning": "生活様式や芸術",
@@ -1570,7 +1731,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "6069dd24",
+    "id": "89374112",
     "kanji": "芸術",
     "reading": "げいじゅつ",
     "meaning": "美しい表現",
@@ -1581,7 +1742,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "4993c0ba",
+    "id": "300ee8c1",
     "kanji": "音楽",
     "reading": "おんがく",
     "meaning": "音による芸術",
@@ -1592,7 +1753,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "a25caef6",
+    "id": "e90e6438",
     "kanji": "絵画",
     "reading": "かいが",
     "meaning": "絵のこと",
@@ -1603,7 +1764,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "aa9078ba",
+    "id": "77bd35bb",
     "kanji": "小説",
     "reading": "しょうせつ",
     "meaning": "物語文学",
@@ -1614,7 +1775,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "4983cc5e",
+    "id": "6d6eba35",
     "kanji": "映画",
     "reading": "えいが",
     "meaning": "映像作品",
@@ -1625,7 +1786,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "0caa5c3f",
+    "id": "61749b90",
     "kanji": "写真",
     "reading": "しゃしん",
     "meaning": "カメラで写した像",
@@ -1636,7 +1797,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "f24ef4e7",
+    "id": "2a520285",
     "kanji": "放送",
     "reading": "ほうそう",
     "meaning": "電波で情報を送ること",
@@ -1647,7 +1808,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "ac89ea15",
+    "id": "db62cadd",
     "kanji": "通信",
     "reading": "つうしん",
     "meaning": "情報のやり取り",
@@ -1658,7 +1819,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "bea6280d",
+    "id": "16cad622",
     "kanji": "情報",
     "reading": "じょうほう",
     "meaning": "知らせ",
@@ -1669,7 +1830,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "7811699c",
+    "id": "326302bc",
     "kanji": "知識",
     "reading": "ちしき",
     "meaning": "知っていること",
@@ -1680,7 +1841,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "bb2c8cbf",
+    "id": "e62fff84",
     "kanji": "学習",
     "reading": "がくしゅう",
     "meaning": "学ぶこと",
@@ -1691,7 +1852,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "4c9432b5",
+    "id": "14edc4f4",
     "kanji": "教育",
     "reading": "きょういく",
     "meaning": "教え育てること",
@@ -1702,7 +1863,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "a989c753",
+    "id": "2dd4577d",
     "kanji": "先生",
     "reading": "せんせい",
     "meaning": "教える人",
@@ -1713,7 +1874,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "8d8ec9c9",
+    "id": "3897405f",
     "kanji": "生徒",
     "reading": "せいと",
     "meaning": "教わる人",
@@ -1724,7 +1885,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "a314b8b4",
+    "id": "7c70d10e",
     "kanji": "教室",
     "reading": "きょうしつ",
     "meaning": "授業をする部屋",
@@ -1735,7 +1896,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "dbb16bcb",
+    "id": "d17797d4",
     "kanji": "白墨",
     "reading": "はくぼく",
     "meaning": "チョーク",
@@ -1746,7 +1907,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "b102a5fd",
+    "id": "720ff691",
     "kanji": "文房具",
     "reading": "ぶんぼうぐ",
     "meaning": "筆記用具など",
@@ -1758,7 +1919,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "2d018f8d",
+    "id": "9ec03c19",
     "kanji": "鉛筆",
     "reading": "えんぴつ",
     "meaning": "筆記具",
@@ -1769,7 +1930,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "d172143f",
+    "id": "42e4dd73",
     "kanji": "消しゴム",
     "reading": "けしごむ",
     "meaning": "字を消す道具",
@@ -1782,7 +1943,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "8979069f",
+    "id": "79ee0fc3",
     "kanji": "定規",
     "reading": "じょうぎ",
     "meaning": "直線を引く道具",
@@ -1793,7 +1954,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "e6441be8",
+    "id": "f7127e24",
     "kanji": "美化",
     "reading": "びか",
     "meaning": "美しくすること",
@@ -1804,7 +1965,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "9d8d0dee",
+    "id": "1d61622c",
     "kanji": "美学",
     "reading": "びがく",
     "meaning": "美についての学問",
@@ -1815,7 +1976,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "ab70c3d5",
+    "id": "677397c1",
     "kanji": "美人",
     "reading": "びじん",
     "meaning": "美しい人",
@@ -1826,7 +1987,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "e8ffb884",
+    "id": "d2332071",
     "kanji": "美術",
     "reading": "びじゅつ",
     "meaning": "造形芸術",
@@ -1837,7 +1998,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "4a050238",
+    "id": "3e9ee612",
     "kanji": "美食",
     "reading": "びしょく",
     "meaning": "美味しい食事",
@@ -1848,7 +2009,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "fbdd33b5",
+    "id": "a8e7ed72",
     "kanji": "美味",
     "reading": "びみ",
     "meaning": "美味しい味",
@@ -1859,7 +2020,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "e8e6acf4",
+    "id": "3fa73967",
     "kanji": "備考",
     "reading": "びこう",
     "meaning": "参考のメモ",
@@ -1870,7 +2031,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "5caa6155",
+    "id": "afa47364",
     "kanji": "微風",
     "reading": "びふう",
     "meaning": "そよ風",
@@ -1881,7 +2042,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "053ed605",
+    "id": "32070891",
     "kanji": "微生物",
     "reading": "びせいぶつ",
     "meaning": "小さな生物",
@@ -1893,7 +2054,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "c6e22a13",
+    "id": "6547c8f2",
     "kanji": "微妙",
     "reading": "びみょう",
     "meaning": "何とも言えないこと",
@@ -1904,7 +2065,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "cd1491de",
+    "id": "1e0acded",
     "kanji": "微笑",
     "reading": "びしょう",
     "meaning": "ほほえみ",
@@ -1915,7 +2076,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "4d26f783",
+    "id": "3c6f0755",
     "kanji": "微動",
     "reading": "びどう",
     "meaning": "かすかに動くこと",
@@ -1926,7 +2087,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "b455201e",
+    "id": "0acfbfaa",
     "kanji": "微量",
     "reading": "びりょう",
     "meaning": "わずかな量",
@@ -1937,7 +2098,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "7ced2aac",
+    "id": "f31f0644",
     "kanji": "微細",
     "reading": "びさい",
     "meaning": "きわめて細かいこと",
@@ -1948,7 +2109,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "dbce30ee",
+    "id": "7f36ce31",
     "kanji": "春夏秋冬",
     "reading": "しゅんかしゅうとう",
     "meaning": "四季のこと",
@@ -1961,7 +2122,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "358dd890",
+    "id": "227f6157",
     "kanji": "一石二鳥",
     "reading": "いっせきにちょう",
     "meaning": "一つのことで二つの利益を得ること",
@@ -1974,7 +2135,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "9babbbf9",
+    "id": "521a582e",
     "kanji": "三寒四温",
     "reading": "さんかんしおん",
     "meaning": "寒い日と暖かい日が繰り返されること",
@@ -1987,7 +2148,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "8afc974a",
+    "id": "ad600471",
     "kanji": "五里霧中",
     "reading": "ごりむちゅう",
     "meaning": "どうすればよいか迷うこと",
@@ -2000,7 +2161,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "cb400edc",
+    "id": "d75b3226",
     "kanji": "七転八起",
     "reading": "ななころびやおき",
     "meaning": "何度失敗しても立ち上がること",
@@ -2013,7 +2174,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "29095be6",
+    "id": "7532346e",
     "kanji": "十人十色",
     "reading": "じゅうにんといろ",
     "meaning": "好みや考えは人それぞれであること",
@@ -2026,7 +2187,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "3e71763b",
+    "id": "bbc70962",
     "kanji": "百発百中",
     "reading": "ひゃっぱつひゃくちゅう",
     "meaning": "予想や計画がすべて当たること",
@@ -2039,7 +2200,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "a737fd4e",
+    "id": "89e0d349",
     "kanji": "千載一遇",
     "reading": "せんざいいちぐう",
     "meaning": "めったにない良い機会",
@@ -2052,7 +2213,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "f160910a",
+    "id": "0af111a8",
     "kanji": "万全",
     "reading": "ばんぜん",
     "meaning": "手落ちがないこと",
@@ -2063,7 +2224,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "0cc5a92c",
+    "id": "29227e7f",
     "kanji": "一期一会",
     "reading": "いちごいちえ",
     "meaning": "一生に一度だけの出会い",
@@ -2076,7 +2237,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "825f3587",
+    "id": "d7e3db60",
     "kanji": "以心伝心",
     "reading": "いしんでんしん",
     "meaning": "言葉にしなくても心が通じ合うこと",
@@ -2089,7 +2250,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "75798407",
+    "id": "efe9b7e4",
     "kanji": "温故知新",
     "reading": "おんこちしん",
     "meaning": "昔のことを調べて新しい知識を得ること",
@@ -2102,7 +2263,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "e81d70d1",
+    "id": "8325878c",
     "kanji": "花鳥風月",
     "reading": "かちょうふうげつ",
     "meaning": "自然の美しい景色",
@@ -2115,7 +2276,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "3a70f430",
+    "id": "22bcbdeb",
     "kanji": "我田引水",
     "reading": "がでんいんすい",
     "meaning": "自分の都合の良いようにすること",
@@ -2128,7 +2289,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "4bea91ef",
+    "id": "c16197ca",
     "kanji": "完全無欠",
     "reading": "かんぜんむけつ",
     "meaning": "欠点が全くないこと",
@@ -2141,7 +2302,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "628c1107",
+    "id": "4b07f63d",
     "kanji": "起死回生",
     "reading": "きしかいせい",
     "meaning": "絶望的な状態から立ち直ること",
@@ -2154,7 +2315,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "1e0be4e1",
+    "id": "2bada5c8",
     "kanji": "急転直下",
     "reading": "きゅうてんちょっか",
     "meaning": "事態が急に変わること",
@@ -2167,7 +2328,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "c1bd4b04",
+    "id": "0de9543a",
     "kanji": "空前絶後",
     "reading": "くうぜんぜつご",
     "meaning": "今までにもこれからもないようなこと",
@@ -2180,7 +2341,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "e0b50a2d",
+    "id": "df43ddfb",
     "kanji": "言語道断",
     "reading": "ごんごどうだん",
     "meaning": "もってのほかであること",
@@ -2193,7 +2354,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "67868fe7",
+    "id": "d79d4025",
     "kanji": "自画自賛",
     "reading": "じがじさん",
     "meaning": "自分のことを自分で褒めること",
@@ -2206,7 +2367,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "8248a713",
+    "id": "ac43c4f4",
     "kanji": "四面楚歌",
     "reading": "しめんそか",
     "meaning": "周りが敵ばかりで助けがないこと",
@@ -2219,7 +2380,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "2009ec41",
+    "id": "cc44ccef",
     "kanji": "自由自在",
     "reading": "じゆうじざい",
     "meaning": "思いのままであること",
@@ -2232,7 +2393,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "03b37eec",
+    "id": "2b3f4dfa",
     "kanji": "主客転倒",
     "reading": "しゅかくてんとう",
     "meaning": "立場が逆になること",
@@ -2245,7 +2406,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "93704da1",
+    "id": "63797ba9",
     "kanji": "心機一転",
     "reading": "しんきいってん",
     "meaning": "気持ちを入れ替えること",
@@ -2258,7 +2419,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "5abcdfc5",
+    "id": "98ad37bd",
     "kanji": "誠心誠意",
     "reading": "せいしんせいい",
     "meaning": "まごころを込めること",
@@ -2271,7 +2432,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "3913d1a0",
+    "id": "deb4d868",
     "kanji": "絶体絶命",
     "reading": "ぜったいぜつめい",
     "meaning": "どうにもならない危険な状態",
@@ -2284,7 +2445,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "f094f3d7",
+    "id": "ccfeaf21",
     "kanji": "千差万別",
     "reading": "せんさばんべつ",
     "meaning": "さまざまに違っていること",
@@ -2297,7 +2458,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "1204d66d",
+    "id": "81f9fe34",
     "kanji": "大器晩成",
     "reading": "たいきばんせい",
     "meaning": "偉大な人は大成するのが遅いこと",
@@ -2310,7 +2471,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "d5659608",
+    "id": "bc57f40c",
     "kanji": "単刀直入",
     "reading": "たんとうちょくにゅう",
     "meaning": "前置きなしに本題に入ること",
@@ -2323,7 +2484,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "51694f15",
+    "id": "cc68b513",
     "kanji": "朝三暮四",
     "reading": "ちょうさんぼし",
     "meaning": "目先の違いにごまかされること",
@@ -2336,7 +2497,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "1b31d896",
+    "id": "6cf91e0e",
     "kanji": "電光石火",
     "reading": "でんこうせっか",
     "meaning": "動作が非常に素早いこと",
@@ -2349,7 +2510,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "0add59b0",
+    "id": "34c207c4",
     "kanji": "日進月歩",
     "reading": "にっしんげっぽ",
     "meaning": "絶え間なく進歩すること",
@@ -2362,7 +2523,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "8092ef46",
+    "id": "8fe95967",
     "kanji": "半信半疑",
     "reading": "はんしんはんぎ",
     "meaning": "本当かどうか迷うこと",
@@ -2375,7 +2536,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "62d1643c",
+    "id": "de6dc3ed",
     "kanji": "不言実行",
     "reading": "ふげんじっこう",
     "meaning": "文句を言わずに実行すること",
@@ -2388,7 +2549,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "bd46029b",
+    "id": "8ede1143",
     "kanji": "粉骨砕身",
     "reading": "ふんこつさいしん",
     "meaning": "力の限り努力すること",
@@ -2401,7 +2562,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "ad5e19c6",
+    "id": "96a6467b",
     "kanji": "傍若無人",
     "reading": "ぼうじゃくぶじん",
     "meaning": "勝手気ままに振る舞うこと",
@@ -2414,7 +2575,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "c89a9ba9",
+    "id": "674277f6",
     "kanji": "本末転倒",
     "reading": "ほんまつてんとう",
     "meaning": "大事なこととつまらないことを取り違えること",
@@ -2427,7 +2588,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "2583a596",
+    "id": "7d02a727",
     "kanji": "無我夢中",
     "reading": "むがむちゅう",
     "meaning": "我を忘れて熱中すること",
@@ -2440,7 +2601,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "9433dc50",
+    "id": "387a66ad",
     "kanji": "油断大敵",
     "reading": "ゆだんたいてき",
     "meaning": "油断は失敗のもとであること",
@@ -2453,7 +2614,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "09e05cad",
+    "id": "26a02b0a",
     "kanji": "臨機応変",
     "reading": "りんきおうへん",
     "meaning": "状況に合わせて適切に行動すること",
@@ -2466,7 +2627,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "834e7c76",
+    "id": "c9bfef84",
     "kanji": "老若男女",
     "reading": "ろうにゃくなんにょ",
     "meaning": "あらゆる年齢の男女",
@@ -2479,7 +2640,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "8198c185",
+    "id": "22640b78",
     "kanji": "和洋折衷",
     "reading": "わようせっちゅう",
     "meaning": "日本風と西洋風を合わせること",
@@ -2492,7 +2653,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "61f8fe4b",
+    "id": "47d648ec",
     "kanji": "異口同音",
     "reading": "いくどうおん",
     "meaning": "多くの人が同じことを言うこと",
@@ -2505,7 +2666,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "97eafabd",
+    "id": "5dfcf694",
     "kanji": "一心同体",
     "reading": "いっしんどうたい",
     "meaning": "二人以上の心が一つになること",
@@ -2518,7 +2679,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "35907ff7",
+    "id": "b1038cc8",
     "kanji": "意味深長",
     "reading": "いみしんちょう",
     "meaning": "言葉の奥に深い意味があること",
@@ -2531,7 +2692,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "0f09737b",
+    "id": "795d04db",
     "kanji": "因果応報",
     "reading": "いんがおうほう",
     "meaning": "行いの報いは自分に来ること",
@@ -2544,7 +2705,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "4fa7b630",
+    "id": "4b7a25bb",
     "kanji": "右往左往",
     "reading": "うおうさおう",
     "meaning": "混乱してあちこち動き回ること",
@@ -2557,7 +2718,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "2debc2a4",
+    "id": "32942354",
     "kanji": "雲散霧消",
     "reading": "うんさんむしょう",
     "meaning": "跡形もなく消えること",
@@ -2570,7 +2731,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "496672d7",
+    "id": "ff3e1700",
     "kanji": "栄枯盛衰",
     "reading": "えいこせいすい",
     "meaning": "栄えたり衰えたりすること",
@@ -2583,7 +2744,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "16dbf0e0",
+    "id": "ecd72738",
     "kanji": "温厚篤実",
     "reading": "おんこうとくじつ",
     "meaning": "穏やかで誠実なこと",
@@ -2596,7 +2757,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "895aa40f",
+    "id": "591af1a9",
     "kanji": "快刀乱麻",
     "reading": "かいとうらんま",
     "meaning": "複雑な問題を鮮やかに解決すること",
@@ -2609,7 +2770,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "e96c9df8",
+    "id": "ddd75296",
     "kanji": "危機一髪",
     "reading": "ききいっぱつ",
     "meaning": "非常に危険な状態",
@@ -2622,7 +2783,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "8fa53222",
+    "id": "a6555b13",
     "kanji": "疑心暗鬼",
     "reading": "ぎしんあんき",
     "meaning": "疑うあまり何でも怖くなること",
@@ -2635,7 +2796,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "c4147adf",
+    "id": "2e9c69f9",
     "kanji": "奇想天外",
     "reading": "きそうてんがい",
     "meaning": "思いもよらないこと",
@@ -2648,7 +2809,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "ff27efe6",
+    "id": "6271dffc",
     "kanji": "喜怒哀楽",
     "reading": "きどあいらく",
     "meaning": "人間の様々な感情",
@@ -2661,7 +2822,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "828648cf",
+    "id": "2a950a02",
     "kanji": "興味津々",
     "reading": "きょうみしんしん",
     "meaning": "興味が尽きないこと",
@@ -2674,7 +2835,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "7104fb5a",
+    "id": "825bc44b",
     "kanji": "公明正大",
     "reading": "こうめいせいだい",
     "meaning": "公平で隠し事がないこと",
@@ -2687,7 +2848,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "ccb7484f",
+    "id": "7845866a",
     "kanji": "孤立無援",
     "reading": "こりつむえん",
     "meaning": "助けがなく一人ぼっちなこと",
@@ -2700,7 +2861,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "9ea43066",
+    "id": "33188490",
     "kanji": "才色兼備",
     "reading": "さいしょくけんび",
     "meaning": "才能も容姿も優れていること",
@@ -2713,7 +2874,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "08cdbe97",
+    "id": "c23c9c12",
     "kanji": "自業自得",
     "reading": "じごうじとく",
     "meaning": "自分の行いの報いを受けること",
@@ -2726,7 +2887,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "4978afd7",
+    "id": "7adeb814",
     "kanji": "質実剛健",
     "reading": "しつじつごうけん",
     "meaning": "飾り気がなく真面目で強いこと",
@@ -2739,7 +2900,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "eb111d66",
+    "id": "1107d538",
     "kanji": "弱肉強食",
     "reading": "じゃくにくきょうしょく",
     "meaning": "強い者が弱い者を犠牲にすること",
@@ -2752,7 +2913,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "a3c62b56",
+    "id": "350bc19c",
     "kanji": "首尾一貫",
     "reading": "しゅびいっかん",
     "meaning": "最初から最後まで筋が通っていること",
@@ -2765,7 +2926,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "b4225b0d",
+    "id": "95ee7486",
     "kanji": "支離滅裂",
     "reading": "しりめつれつ",
     "meaning": "めちゃくちゃで筋が通らないこと",
@@ -2778,7 +2939,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "8d00b2c3",
+    "id": "03cf3d80",
     "kanji": "神出鬼没",
     "reading": "しんしゅつきぼつ",
     "meaning": "自由自在に現れたり消えたりすること",
@@ -2791,7 +2952,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "3365a483",
+    "id": "1e00ecc1",
     "kanji": "針小棒大",
     "reading": "しんしょうぼうだい",
     "meaning": "小さなことを大げさに言うこと",
@@ -2804,7 +2965,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "f0232f77",
+    "id": "77f543fa",
     "kanji": "晴耕雨読",
     "reading": "せいこううどく",
     "meaning": "自然の中で気ままに暮らすこと",
@@ -2817,7 +2978,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "4880a6fa",
+    "id": "dc51bf79",
     "kanji": "清廉潔白",
     "reading": "せいれんけっぱく",
     "meaning": "心が清くて後ろ暗いところがないこと",
@@ -2830,7 +2991,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "f6fab992",
+    "id": "2d7ec0bd",
     "kanji": "切磋琢磨",
     "reading": "せっさたくま",
     "meaning": "互いに励まし合って向上すること",
@@ -2843,7 +3004,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "61fd2484",
+    "id": "a44dea8a",
     "kanji": "前代未聞",
     "reading": "ぜんだいみもん",
     "meaning": "今までに聞いたこともないこと",
@@ -2856,7 +3017,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "ffbcd894",
+    "id": "59eb2d34",
     "kanji": "大同小異",
     "reading": "だいどうしょうい",
     "meaning": "大体同じで細かい違いしかないこと",
@@ -2869,7 +3030,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "d388e6db",
+    "id": "82de1e8f",
     "kanji": "天真爛漫",
     "reading": "てんしんらんまん",
     "meaning": "飾らず無邪気なこと",
@@ -2882,7 +3043,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "6921cb44",
+    "id": "39e20c86",
     "kanji": "東奔西走",
     "reading": "とうほんせいそう",
     "meaning": "あちこち忙しく走り回ること",
@@ -2895,7 +3056,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "cd92ed41",
+    "id": "4c747ef7",
     "kanji": "独立独歩",
     "reading": "どくりつどっぽ",
     "meaning": "他人に頼らず自分の信じる道を行くこと",
@@ -2908,7 +3069,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "99e45195",
+    "id": "4ff6aa63",
     "kanji": "難攻不落",
     "reading": "なんこうふらく",
     "meaning": "攻めるのが難しくなかなか落ちないこと",
@@ -2921,7 +3082,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "f53b0cd6",
+    "id": "bf224968",
     "kanji": "二束三文",
     "reading": "にそくさんもん",
     "meaning": "数が多くても値段が安いこと",
@@ -2934,7 +3095,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "77ce2cfc",
+    "id": "cf5c512c",
     "kanji": "馬耳東風",
     "reading": "ばじとうふう",
     "meaning": "人の意見を聞き流すこと",
@@ -2947,7 +3108,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "9713433d",
+    "id": "62926131",
     "kanji": "半面教師",
     "reading": "はんめんきょうし",
     "meaning": "悪い見本として学ぶべき人",
@@ -2960,7 +3121,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "e692364f",
+    "id": "dc8ca9ac",
     "kanji": "風光明媚",
     "reading": "ふうこうめいび",
     "meaning": "自然の景色が美しいこと",
@@ -2973,7 +3134,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "5b518f7d",
+    "id": "6798680e",
     "kanji": "不眠不休",
     "reading": "ふみんふきゅう",
     "meaning": "眠らず休まず働くこと",
@@ -2986,7 +3147,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "74da9ce2",
+    "id": "4c03a1bb",
     "kanji": "付和雷同",
     "reading": "ふわらいどう",
     "meaning": "自分を持たず他人の意見にすぐ賛成すること",
@@ -2999,7 +3160,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "a2737a93",
+    "id": "82a60f88",
     "kanji": "平穏無事",
     "reading": "へいおんぶじ",
     "meaning": "変わったこともなく穏やかなこと",
@@ -3012,7 +3173,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "f2af271b",
+    "id": "6e073c32",
     "kanji": "抱腹絶倒",
     "reading": "ほうふくぜっとう",
     "meaning": "腹を抱えて大笑いすること",
@@ -3025,7 +3186,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "b3f3d337",
+    "id": "94ed4a8a",
     "kanji": "無味乾燥",
     "reading": "むみかんそう",
     "meaning": "面白みが全くないこと",
@@ -3038,7 +3199,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "678f2eea",
+    "id": "28786d78",
     "kanji": "明鏡止水",
     "reading": "めいきょうしすい",
     "meaning": "曇りのない鏡と静かな水のような心",
@@ -3051,7 +3212,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "dc0bec32",
+    "id": "9f6abf6b",
     "kanji": "有名無実",
     "reading": "ゆうめいむじつ",
     "meaning": "名ばかりで実質が伴わないこと",
@@ -3064,7 +3225,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "7a60af62",
+    "id": "fb49e189",
     "kanji": "用意周到",
     "reading": "よういしゅうとう",
     "meaning": "準備が十分に行き届いていること",
@@ -3077,7 +3238,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "ac3452e2",
+    "id": "c2e9207a",
     "kanji": "利害関係",
     "reading": "りがいかんけい",
     "meaning": "利益と損害が絡む関係",
@@ -3090,7 +3251,7 @@ export interface IdsMap {
     ]
   },
   {
-    "id": "adfee845",
+    "id": "26460ad9",
     "kanji": "竜頭蛇尾",
     "reading": "りゅうとうだび",
     "meaning": "初めは勢いがよいが終わりは振るわないこと",
@@ -3101,50 +3262,1043 @@ export interface IdsMap {
       "蛇",
       "尾"
     ]
+  },
+  {
+    "id": "d534c81d",
+    "kanji": "魁",
+    "reading": "さきがけ",
+    "meaning": "先頭に立って進むこと",
+    "difficulty": 1,
+    "components": [
+      "魁"
+    ]
+  },
+  {
+    "id": "9ca1e2a3",
+    "kanji": "誉",
+    "reading": "ほまれ",
+    "meaning": "良い評判や誇り",
+    "difficulty": 1,
+    "components": [
+      "誉"
+    ]
+  },
+  {
+    "id": "9cd1faf1",
+    "kanji": "暁",
+    "reading": "あかつき",
+    "meaning": "夜明け",
+    "difficulty": 1,
+    "components": [
+      "暁"
+    ]
+  },
+  {
+    "id": "4d047ae5",
+    "kanji": "瞬",
+    "reading": "またたき",
+    "meaning": "まばたきするほどの短い時間",
+    "difficulty": 1,
+    "components": [
+      "瞬"
+    ]
+  },
+  {
+    "id": "ea33efc0",
+    "kanji": "響",
+    "reading": "ひびき",
+    "meaning": "あたりに伝わる音",
+    "difficulty": 1,
+    "components": [
+      "響"
+    ]
+  },
+  {
+    "id": "279df0f0",
+    "kanji": "匠",
+    "reading": "たくみ",
+    "meaning": "優れた技術を持つ人",
+    "difficulty": 1,
+    "components": [
+      "匠"
+    ]
+  },
+  {
+    "id": "c018874a",
+    "kanji": "盾",
+    "reading": "たて",
+    "meaning": "身を守る武具",
+    "difficulty": 1,
+    "components": [
+      "盾"
+    ]
+  },
+  {
+    "id": "b38f0eeb",
+    "kanji": "矛",
+    "reading": "ほこ",
+    "meaning": "突き刺す武器",
+    "difficulty": 1,
+    "components": [
+      "矛"
+    ]
+  },
+  {
+    "id": "f7d8f05b",
+    "kanji": "魂",
+    "reading": "たましい",
+    "meaning": "精神や心",
+    "difficulty": 1,
+    "components": [
+      "魂"
+    ]
+  },
+  {
+    "id": "28ca5869",
+    "kanji": "翼",
+    "reading": "つばさ",
+    "meaning": "空を飛ぶための器官",
+    "difficulty": 1,
+    "components": [
+      "翼"
+    ]
+  },
+  {
+    "id": "29110f5d",
+    "kanji": "闇",
+    "reading": "やみ",
+    "meaning": "光のない状態",
+    "difficulty": 1,
+    "components": [
+      "闇"
+    ]
+  },
+  {
+    "id": "e6daae9b",
+    "kanji": "雷",
+    "reading": "かみなり",
+    "meaning": "稲妻と音",
+    "difficulty": 1,
+    "components": [
+      "雷"
+    ]
+  },
+  {
+    "id": "8b18f1b8",
+    "kanji": "雫",
+    "reading": "しずく",
+    "meaning": "したたり落ちる液体",
+    "difficulty": 1,
+    "components": [
+      "雫"
+    ]
+  },
+  {
+    "id": "e7103ee3",
+    "kanji": "嵐",
+    "reading": "あらし",
+    "meaning": "激しい風雨",
+    "difficulty": 1,
+    "components": [
+      "嵐"
+    ]
+  },
+  {
+    "id": "5cdf273a",
+    "kanji": "砦",
+    "reading": "とりで",
+    "meaning": "敵を防ぐ小さな城",
+    "difficulty": 1,
+    "components": [
+      "砦"
+    ]
+  },
+  {
+    "id": "aebd41ee",
+    "kanji": "侍",
+    "reading": "さむらい",
+    "meaning": "昔の日本の戦士",
+    "difficulty": 1,
+    "components": [
+      "侍"
+    ]
+  },
+  {
+    "id": "6237fd4f",
+    "kanji": "忍",
+    "reading": "しのび",
+    "meaning": "隠密に行動する者",
+    "difficulty": 1,
+    "components": [
+      "忍"
+    ]
+  },
+  {
+    "id": "a4828606",
+    "kanji": "龍",
+    "reading": "りゅう",
+    "meaning": "伝説上の神獣",
+    "difficulty": 1,
+    "components": [
+      "龍"
+    ]
+  },
+  {
+    "id": "55d3aa4e",
+    "kanji": "鳳",
+    "reading": "おおとり",
+    "meaning": "伝説上の聖なる鳥",
+    "difficulty": 1,
+    "components": [
+      "鳳"
+    ]
+  },
+  {
+    "id": "fe1953f2",
+    "kanji": "凰",
+    "reading": "おおとり",
+    "meaning": "伝説上の聖なる鳥のメス",
+    "difficulty": 1,
+    "components": [
+      "凰"
+    ]
+  },
+  {
+    "id": "2718f0a3",
+    "kanji": "刹那",
+    "reading": "せつな",
+    "meaning": "極めて短い時間",
+    "difficulty": 1,
+    "components": [
+      "刹",
+      "那"
+    ]
+  },
+  {
+    "id": "21b51e92",
+    "kanji": "螺旋",
+    "reading": "らせん",
+    "meaning": "渦巻き状の形",
+    "difficulty": 2,
+    "components": [
+      "螺",
+      "旋"
+    ]
+  },
+  {
+    "id": "92ad78c1",
+    "kanji": "琥珀",
+    "reading": "こはく",
+    "meaning": "松脂が化石になった宝石",
+    "difficulty": 2,
+    "components": [
+      "琥",
+      "珀"
+    ]
+  },
+  {
+    "id": "c526df29",
+    "kanji": "翡翠",
+    "reading": "ひすい",
+    "meaning": "深緑色の美しい宝石",
+    "difficulty": 2,
+    "components": [
+      "翡",
+      "翠"
+    ]
+  },
+  {
+    "id": "aa920e73",
+    "kanji": "瑠璃",
+    "reading": "るり",
+    "meaning": "紫がかった青色の宝石",
+    "difficulty": 2,
+    "components": [
+      "瑠",
+      "璃"
+    ]
+  },
+  {
+    "id": "d1692e6b",
+    "kanji": "煉獄",
+    "reading": "れんごく",
+    "meaning": "激しい炎の苦しみ",
+    "difficulty": 1,
+    "components": [
+      "煉",
+      "獄"
+    ]
+  },
+  {
+    "id": "0c90482a",
+    "kanji": "冥界",
+    "reading": "めいかい",
+    "meaning": "死後の世界",
+    "difficulty": 2,
+    "components": [
+      "冥",
+      "界"
+    ]
+  },
+  {
+    "id": "889e5ae8",
+    "kanji": "深淵",
+    "reading": "しんえん",
+    "meaning": "底知れず深い場所",
+    "difficulty": 2,
+    "components": [
+      "深",
+      "淵"
+    ]
+  },
+  {
+    "id": "eaf4fd04",
+    "kanji": "鼓動",
+    "reading": "こどう",
+    "meaning": "心臓が打つ音",
+    "difficulty": 2,
+    "components": [
+      "鼓",
+      "動"
+    ]
+  },
+  {
+    "id": "daf1059d",
+    "kanji": "咆哮",
+    "reading": "ほうこう",
+    "meaning": "猛獣が吠えること",
+    "difficulty": 2,
+    "components": [
+      "咆",
+      "哮"
+    ]
+  },
+  {
+    "id": "8efa712f",
+    "kanji": "殲滅",
+    "reading": "せんめつ",
+    "meaning": "皆殺しにすること",
+    "difficulty": 2,
+    "components": [
+      "殲",
+      "滅"
+    ]
+  },
+  {
+    "id": "9b32eee4",
+    "kanji": "翻弄",
+    "reading": "ほんろう",
+    "meaning": "思うままにもてあそぶこと",
+    "difficulty": 2,
+    "components": [
+      "翻",
+      "弄"
+    ]
+  },
+  {
+    "id": "21d07a9e",
+    "kanji": "躊躇",
+    "reading": "ちゅうちょ",
+    "meaning": "ためらうこと",
+    "difficulty": 2,
+    "components": [
+      "躊",
+      "躇"
+    ]
+  },
+  {
+    "id": "bc27f4c8",
+    "kanji": "完璧",
+    "reading": "かんぺき",
+    "meaning": "欠点が全くないこと",
+    "difficulty": 3,
+    "components": [
+      "完",
+      "璧"
+    ]
+  },
+  {
+    "id": "fcde92e5",
+    "kanji": "薔薇",
+    "reading": "ばら",
+    "meaning": "棘のある美しい花",
+    "difficulty": 2,
+    "components": [
+      "薔",
+      "薇"
+    ]
+  },
+  {
+    "id": "9e426180",
+    "kanji": "麒麟",
+    "reading": "きりん",
+    "meaning": "伝説上の聖なる獣",
+    "difficulty": 2,
+    "components": [
+      "麒",
+      "麟"
+    ]
+  },
+  {
+    "id": "f39246d8",
+    "kanji": "五月雨",
+    "reading": "さみだれ",
+    "meaning": "梅雨の時期に降る雨",
+    "difficulty": 2,
+    "components": [
+      "五",
+      "月",
+      "雨"
+    ]
+  },
+  {
+    "id": "aa867d83",
+    "kanji": "不知火",
+    "reading": "しらぬい",
+    "meaning": "海上に現れる不思議な火",
+    "difficulty": 2,
+    "components": [
+      "不",
+      "知",
+      "火"
+    ]
+  },
+  {
+    "id": "fe7c02a1",
+    "kanji": "雪月花",
+    "reading": "せつげつか",
+    "meaning": "四季の美しい景色",
+    "difficulty": 2,
+    "components": [
+      "雪",
+      "月",
+      "花"
+    ]
+  },
+  {
+    "id": "332614c0",
+    "kanji": "朧月夜",
+    "reading": "おぼろづきよ",
+    "meaning": "霧などでかすんだ月の夜",
+    "difficulty": 2,
+    "components": [
+      "朧",
+      "月",
+      "夜"
+    ]
+  },
+  {
+    "id": "05749a54",
+    "kanji": "金字塔",
+    "reading": "きんじとう",
+    "meaning": "後世に残る偉大な業績",
+    "difficulty": 2,
+    "components": [
+      "金",
+      "字",
+      "塔"
+    ]
+  },
+  {
+    "id": "5585d728",
+    "kanji": "走馬灯",
+    "reading": "そうまとう",
+    "meaning": "死ぬ間際に過去が巡ること",
+    "difficulty": 3,
+    "components": [
+      "走",
+      "馬",
+      "灯"
+    ]
+  },
+  {
+    "id": "56517d62",
+    "kanji": "蜃気楼",
+    "reading": "しんきろう",
+    "meaning": "景色が浮いて見える現象",
+    "difficulty": 3,
+    "components": [
+      "蜃",
+      "気",
+      "楼"
+    ]
+  },
+  {
+    "id": "474df6e7",
+    "kanji": "曼珠沙華",
+    "reading": "まんじゅしゃげ",
+    "meaning": "彼岸花のこと",
+    "difficulty": 4,
+    "components": [
+      "曼",
+      "珠",
+      "沙",
+      "華"
+    ]
+  },
+  {
+    "id": "328090fc",
+    "kanji": "無造作",
+    "reading": "むぞうさ",
+    "meaning": "気取らず手軽なこと",
+    "difficulty": 2,
+    "components": [
+      "無",
+      "造",
+      "作"
+    ]
+  },
+  {
+    "id": "3ea3c1ee",
+    "kanji": "殺風景",
+    "reading": "さっぷうけい",
+    "meaning": "趣がなく寒々しいこと",
+    "difficulty": 2,
+    "components": [
+      "殺",
+      "風",
+      "景"
+    ]
+  },
+  {
+    "id": "e2295eee",
+    "kanji": "破廉恥",
+    "reading": "はれんち",
+    "meaning": "恥を恥とも思わないこと",
+    "difficulty": 3,
+    "components": [
+      "破",
+      "廉",
+      "恥"
+    ]
+  },
+  {
+    "id": "17079b70",
+    "kanji": "百花繚乱",
+    "reading": "ひゃっかりょうらん",
+    "meaning": "優れた人物が一時期にたくさん現れること",
+    "difficulty": 3,
+    "components": [
+      "百",
+      "花",
+      "繚",
+      "乱"
+    ]
+  },
+  {
+    "id": "bd109638",
+    "kanji": "天下無双",
+    "reading": "てんかむそう",
+    "meaning": "世に並ぶ者がいないこと",
+    "difficulty": 4,
+    "components": [
+      "天",
+      "下",
+      "無",
+      "双"
+    ]
+  },
+  {
+    "id": "3adcc920",
+    "kanji": "国士無双",
+    "reading": "こくしむそう",
+    "meaning": "国内で最も優れた人物",
+    "difficulty": 3,
+    "components": [
+      "国",
+      "士",
+      "無",
+      "双"
+    ]
+  },
+  {
+    "id": "a824b8f9",
+    "kanji": "魑魅魍魎",
+    "reading": "ちみもうりょう",
+    "meaning": "化け物や妖怪の総称",
+    "difficulty": 4,
+    "components": [
+      "魑",
+      "魅",
+      "魍",
+      "魎"
+    ]
+  },
+  {
+    "id": "5407d149",
+    "kanji": "跳梁跋扈",
+    "reading": "ちょうりょうばっこ",
+    "meaning": "悪人が好き勝手に振る舞うこと",
+    "difficulty": 2,
+    "components": [
+      "跳",
+      "梁",
+      "跋",
+      "扈"
+    ]
+  },
+  {
+    "id": "0711c5d8",
+    "kanji": "疾風迅雷",
+    "reading": "しっぷうじんらい",
+    "meaning": "行動が素早く激しいこと",
+    "difficulty": 4,
+    "components": [
+      "疾",
+      "風",
+      "迅",
+      "雷"
+    ]
+  },
+  {
+    "id": "58b6dd78",
+    "kanji": "明鏡止水",
+    "reading": "めいきょうしすい",
+    "meaning": "邪念がなく澄み切った心",
+    "difficulty": 3,
+    "components": [
+      "明",
+      "鏡",
+      "止",
+      "水"
+    ]
+  },
+  {
+    "id": "adb77975",
+    "kanji": "不撓不屈",
+    "reading": "ふとうふくつ",
+    "meaning": "どんな困難にもくじけないこと",
+    "difficulty": 4,
+    "components": [
+      "不",
+      "撓",
+      "不",
+      "屈"
+    ]
+  },
+  {
+    "id": "b7708cb5",
+    "kanji": "一騎当千",
+    "reading": "いっきとうせん",
+    "meaning": "一人で千人の敵に対抗できるほど強いこと",
+    "difficulty": 4,
+    "components": [
+      "一",
+      "騎",
+      "当",
+      "千"
+    ]
+  },
+  {
+    "id": "35d61e05",
+    "kanji": "画竜点睛",
+    "reading": "がりょうてんせい",
+    "meaning": "物事の最後の仕上げ",
+    "difficulty": 3,
+    "components": [
+      "画",
+      "竜",
+      "点",
+      "睛"
+    ]
+  },
+  {
+    "id": "ce62b1a5",
+    "kanji": "森羅万象",
+    "reading": "しんらばんしょう",
+    "meaning": "宇宙に存在するすべてのもの",
+    "difficulty": 3,
+    "components": [
+      "森",
+      "羅",
+      "万",
+      "象"
+    ]
+  },
+  {
+    "id": "3a801048",
+    "kanji": "因果応報",
+    "reading": "いんがおうほう",
+    "meaning": "行いの報いは必ず自分に返ってくること",
+    "difficulty": 5,
+    "components": [
+      "因",
+      "果",
+      "応",
+      "報"
+    ]
   }
 ]--- src/features/kanji-core/data/jukugo-db.json ---
 [
-  { "id": "t-01", "kanji": "明", "reading": "あかり", "meaning": "光り輝くこと。物事がはっきりしているさま。", "difficulty": 1, "components": ["明"] },
-  { "id": "l-01", "kanji": "岩石", "reading": "がんせき", "meaning": "岩と石。地殻を構成する固い物質。", "difficulty": 2, "components": ["岩", "石"] },
-  { "id": "l-02", "kanji": "森林", "reading": "しんりん", "meaning": "樹木が密集して生えている場所。", "difficulty": 2, "components": ["森", "林"] },
-  { "id": "l-03", "kanji": "休日", "reading": "きゅうじつ", "meaning": "業務や授業を休む日。", "difficulty": 2, "components": ["休", "日"] },
-  { "id": "l-04", "kanji": "雷雨", "reading": "らいう", "meaning": "雷鳴や稲妻を伴って降る雨。", "difficulty": 3, "components": ["雷", "雨"] },
-  { "id": "l-05", "kanji": "大雪", "reading": "おおゆき", "meaning": "雪が激しく大量に降ること。", "difficulty": 3, "components": ["大", "雪"] },
-  { "id": "l-06", "kanji": "青空", "reading": "あおぞら", "meaning": "雲がなく晴れ渡った青い空。", "difficulty": 3, "components": ["青", "空"] },
-  { "id": "l-07", "kanji": "時間", "reading": "じかん", "meaning": "時の流れの一点から一点まで。", "difficulty": 3, "components": ["時", "間"] },
-  { "id": "l-08", "kanji": "新聞", "reading": "しんぶん", "meaning": "新しい出来事を報道する紙面。", "difficulty": 4, "components": ["新", "聞"] },
-  { "id": "l-09", "kanji": "開閉", "reading": "かいへい", "meaning": "開けることと閉じること。", "difficulty": 3, "components": ["開", "閉"] },
-  { "id": "l-10", "kanji": "会話", "reading": "かいわ", "meaning": "向かい合って話をすること。", "difficulty": 3, "components": ["会", "話"] },
-  { "id": "l-11", "kanji": "言語", "reading": "げんご", "meaning": "考えや気持ちを伝えるための言葉。", "difficulty": 4, "components": ["言", "語"] },
-  { "id": "l-12", "kanji": "読書", "reading": "どくしょ", "meaning": "本を読むこと。", "difficulty": 3, "components": ["読", "書"] },
-  { "id": "l-13", "kanji": "男気", "reading": "おとこぎ", "meaning": "弱い者を助けようとする男らしい気質。", "difficulty": 2, "components": ["男", "気"] },
-  { "id": "l-14", "kanji": "町内", "reading": "ちょうない", "meaning": "町の中。その町の区域内。", "difficulty": 2, "components": ["町", "内"] },
-  { "id": "l-15", "kanji": "地図", "reading": "ちず", "meaning": "地形や様子を縮尺して平面に表した図。", "difficulty": 3, "components": ["地", "図"] },
-  { "id": "l-16", "kanji": "池", "reading": "いけ", "meaning": "地面がくぼんで水が溜まっている所。", "difficulty": 2, "components": ["池"] },
-  { "id": "l-17", "kanji": "海外", "reading": "かいがい", "meaning": "海の外。外国。", "difficulty": 3, "components": ["海", "外"] },
-  { "id": "l-18", "kanji": "特急", "reading": "とっきゅう", "meaning": "特別に急ぐこと。特別急行列車。", "difficulty": 3, "components": ["特", "急"] },
-  { "id": "l-19", "kanji": "招待", "reading": "しょうたい", "meaning": "客として招くこと。", "difficulty": 3, "components": ["招", "待"] },
-  { "id": "l-20", "kanji": "持参", "reading": "じさん", "meaning": "物を持ってくること。", "difficulty": 3, "components": ["持", "参"] },
-  { "id": "l-21", "kanji": "草原", "reading": "そうげん", "meaning": "草が一面に生えている広い土地。", "difficulty": 3, "components": ["草", "原"] },
-  { "id": "l-22", "kanji": "花見", "reading": "はなみ", "meaning": "桜などの花を見て楽しむこと。", "difficulty": 3, "components": ["花", "見"] },
-  { "id": "l-23", "kanji": "親子", "reading": "おやこ", "meaning": "親と子。", "difficulty": 3, "components": ["親", "子"] },
-  { "id": "l-24", "kanji": "売買", "reading": "ばいばい", "meaning": "売ることと買うこと。", "difficulty": 4, "components": ["売", "買"] },
-  { "id": "l-25", "kanji": "算数", "reading": "さんすう", "meaning": "数の計算などを学ぶ教科。", "difficulty": 4, "components": ["算", "数"] },
-  { "id": "l-26", "kanji": "理科", "reading": "りか", "meaning": "自然科学を学ぶ教科。", "difficulty": 3, "components": ["理", "科"] },
-  { "id": "l-27", "kanji": "早朝", "reading": "そうちょう", "meaning": "朝早い時間。", "difficulty": 3, "components": ["早", "朝"] },
-  { "id": "l-28", "kanji": "鉄道", "reading": "てつどう", "meaning": "線路を敷き、その上で車両を走らせる交通機関。", "difficulty": 4, "components": ["鉄", "道"] },
-  { "id": "l-29", "kanji": "銀行", "reading": "ぎんこう", "meaning": "預金の受け入れや貸付を行う金融機関。", "difficulty": 4, "components": ["銀", "行"] },
-  { "id": "l-30", "kanji": "飲食", "reading": "いんしょく", "meaning": "飲んだり食べたりすること。", "difficulty": 3, "components": ["飲", "食"] },
-  { "id": "l-31", "kanji": "鮮魚", "reading": "せんぎょ", "meaning": "新鮮な魚。", "difficulty": 5, "components": ["鮮", "魚"] },
-  { "id": "l-32", "kanji": "動物", "reading": "どうぶつ", "meaning": "運動・感覚機能を持つ生き物。", "difficulty": 3, "components": ["動", "物"] },
-  { "id": "l-33", "kanji": "回転", "reading": "かいてん", "meaning": "ぐるぐると回ること。", "difficulty": 3, "components": ["回", "転"] },
-  { "id": "l-34", "kanji": "公園", "reading": "こうえん", "meaning": "公衆のために設けられた庭園や遊戯場。", "difficulty": 3, "components": ["公", "園"] },
-  { "id": "l-35", "kanji": "暗室", "reading": "あんしつ", "meaning": "外からの光が入らないようにした部屋。", "difficulty": 4, "components": ["暗", "室"] },
-  { "id": "l-36", "kanji": "鳴き声", "reading": "なきごえ", "meaning": "鳥や虫、獣などが鳴く声。", "difficulty": 3, "components": ["鳴", "声"] },
-  { "id": "l-37", "kanji": "黒板", "reading": "こくばん", "meaning": "チョークで文字や絵を書くための黒い板。", "difficulty": 3, "components": ["黒", "板"] },
-  { "id": "l-38", "kanji": "電線", "reading": "でんせん", "meaning": "電気を通すための線。", "difficulty": 4, "components": ["電", "線"] },
-  { "id": "l-39", "kanji": "電話", "reading": "でんわ", "meaning": "離れた場所に声を伝える通信機。", "difficulty": 4, "components": ["電", "話"] },
-  { "id": "l-40", "kanji": "最強", "reading": "さいきょう", "meaning": "最も強いこと。", "difficulty": 5, "components": ["最", "強"] }
+  { 
+    "id": "t-01", 
+    "kanji": "明", 
+    "reading": "あかり", 
+    "meaning": "光り輝くこと。物事がはっきりしているさま。", 
+    "difficulty": 1, 
+    "components": ["明"],
+    "sentence": "部屋に{{target}}を灯す" 
+  },
+  { 
+    "id": "l-01", 
+    "kanji": "岩石", 
+    "reading": "がんせき", 
+    "meaning": "岩と石。地殻を構成する固い物質。", 
+    "difficulty": 2, 
+    "components": ["岩", "石"],
+    "sentence": "ゴツゴツした{{target}}が転がる" 
+  },
+  { 
+    "id": "l-02", 
+    "kanji": "森林", 
+    "reading": "しんりん", 
+    "meaning": "樹木が密集して生えている場所。", 
+    "difficulty": 2, 
+    "components": ["森", "林"],
+    "sentence": "静かな{{target}}を散策する" 
+  },
+  { 
+    "id": "l-03", 
+    "kanji": "休日", 
+    "reading": "きゅうじつ", 
+    "meaning": "業務や授業を休む日。", 
+    "difficulty": 2, 
+    "components": ["休", "日"],
+    "sentence": "今日は待ちに待った{{target}}だ" 
+  },
+  { 
+    "id": "l-04", 
+    "kanji": "雷雨", 
+    "reading": "らいう", 
+    "meaning": "雷鳴や稲妻を伴って降る雨。", 
+    "difficulty": 3, 
+    "components": ["雷", "雨"],
+    "sentence": "激しい{{target}}に見舞われる" 
+  },
+  { 
+    "id": "l-05", 
+    "kanji": "大雪", 
+    "reading": "おおゆき", 
+    "meaning": "雪が激しく大量に降ること。", 
+    "difficulty": 3, 
+    "components": ["大", "雪"],
+    "sentence": "記録的な{{target}}への備え" 
+  },
+  { 
+    "id": "l-06", 
+    "kanji": "青空", 
+    "reading": "あおぞら", 
+    "meaning": "雲がなく晴れ渡った青い空。", 
+    "difficulty": 3, 
+    "components": ["青", "空"],
+    "sentence": "見上げれば{{target}}が広がる" 
+  },
+  { 
+    "id": "l-07", 
+    "kanji": "時間", 
+    "reading": "じかん", 
+    "meaning": "時の流れの一点から一点まで。", 
+    "difficulty": 3, 
+    "components": ["時", "間"],
+    "sentence": "楽しい{{target}}はあっという間" 
+  },
+  { 
+    "id": "l-08", 
+    "kanji": "新聞", 
+    "reading": "しんぶん", 
+    "meaning": "新しい出来事を報道する紙面。", 
+    "difficulty": 4, 
+    "components": ["新", "聞"],
+    "sentence": "朝食を食べながら{{target}}を読む" 
+  },
+  { 
+    "id": "l-09", 
+    "kanji": "開閉", 
+    "reading": "かいへい", 
+    "meaning": "開けることと閉じること。", 
+    "difficulty": 3, 
+    "components": ["開", "閉"],
+    "sentence": "ドアの{{target}}にご注意ください" 
+  },
+  { 
+    "id": "l-10", 
+    "kanji": "会話", 
+    "reading": "かいわ", 
+    "meaning": "向かい合って話をすること。", 
+    "difficulty": 3, 
+    "components": ["会", "話"],
+    "sentence": "久しぶりの友と{{target}}が弾む" 
+  },
+  { 
+    "id": "l-11", 
+    "kanji": "言語", 
+    "reading": "げんご", 
+    "meaning": "考えや気持ちを伝えるための言葉。", 
+    "difficulty": 4, 
+    "components": ["言", "語"],
+    "sentence": "共通の{{target}}で理解し合う" 
+  },
+  { 
+    "id": "l-12", 
+    "kanji": "読書", 
+    "reading": "どくしょ", 
+    "meaning": "本を読むこと。", 
+    "difficulty": 3, 
+    "components": ["読", "書"],
+    "sentence": "秋の夜長は{{target}}に限る" 
+  },
+  { 
+    "id": "l-13", 
+    "kanji": "男気", 
+    "reading": "おとこぎ", 
+    "meaning": "弱い者を助けようとする男らしい気質。", 
+    "difficulty": 2, 
+    "components": ["男", "気"],
+    "sentence": "彼の{{target}}に惚れ直した" 
+  },
+  { 
+    "id": "l-14", 
+    "kanji": "町内", 
+    "reading": "ちょうない", 
+    "meaning": "町の中。その町の区域内。", 
+    "difficulty": 2, 
+    "components": ["町", "内"],
+    "sentence": "{{target}}会の掃除に参加する" 
+  },
+  { 
+    "id": "l-15", 
+    "kanji": "地図", 
+    "reading": "ちず", 
+    "meaning": "地形や様子を縮尺して平面に表した図。", 
+    "difficulty": 3, 
+    "components": ["地", "図"],
+    "sentence": "宝の{{target}}を広げる" 
+  },
+  { 
+    "id": "l-16", 
+    "kanji": "池", 
+    "reading": "いけ", 
+    "meaning": "地面がくぼんで水が溜まっている所。", 
+    "difficulty": 2, 
+    "components": ["池"],
+    "sentence": "庭の{{target}}に鯉がいる" 
+  },
+  { 
+    "id": "l-17", 
+    "kanji": "海外", 
+    "reading": "かいがい", 
+    "meaning": "海の外。外国。", 
+    "difficulty": 3, 
+    "components": ["海", "外"],
+    "sentence": "いつか{{target}}旅行に行きたい" 
+  },
+  { 
+    "id": "l-18", 
+    "kanji": "特急", 
+    "reading": "とっきゅう", 
+    "meaning": "特別に急ぐこと。特別急行列車。", 
+    "difficulty": 3, 
+    "components": ["特", "急"],
+    "sentence": "{{target}}電車で温泉へ向かう" 
+  },
+  { 
+    "id": "l-19", 
+    "kanji": "招待", 
+    "reading": "しょうたい", 
+    "meaning": "客として招くこと。", 
+    "difficulty": 3, 
+    "components": ["招", "待"],
+    "sentence": "結婚式の{{target}}状が届く" 
+  },
+  { 
+    "id": "l-20", 
+    "kanji": "持参", 
+    "reading": "じさん", 
+    "meaning": "物を持ってくること。", 
+    "difficulty": 3, 
+    "components": ["持", "参"],
+    "sentence": "お弁当は各自{{target}}です" 
+  },
+  { 
+    "id": "l-21", 
+    "kanji": "草原", 
+    "reading": "そうげん", 
+    "meaning": "草が一面に生えている広い土地。", 
+    "difficulty": 3, 
+    "components": ["草", "原"],
+    "sentence": "馬が{{target}}を駆ける" 
+  },
+  { 
+    "id": "l-22", 
+    "kanji": "花見", 
+    "reading": "はなみ", 
+    "meaning": "桜などの花を見て楽しむこと。", 
+    "difficulty": 3, 
+    "components": ["花", "見"],
+    "sentence": "公園で{{target}}の場所取りをする" 
+  },
+  { 
+    "id": "l-23", 
+    "kanji": "親子", 
+    "reading": "おやこ", 
+    "meaning": "親と子。", 
+    "difficulty": 3, 
+    "components": ["親", "子"],
+    "sentence": "仲良く{{target}}丼を食べる" 
+  },
+  { 
+    "id": "l-24", 
+    "kanji": "売買", 
+    "reading": "ばいばい", 
+    "meaning": "売ることと買うこと。", 
+    "difficulty": 4, 
+    "components": ["売", "買"],
+    "sentence": "土地の{{target}}契約を結ぶ" 
+  },
+  { 
+    "id": "l-25", 
+    "kanji": "算数", 
+    "reading": "さんすう", 
+    "meaning": "数の計算などを学ぶ教科。", 
+    "difficulty": 4, 
+    "components": ["算", "数"],
+    "sentence": "小学校で{{target}}を教える" 
+  },
+  { 
+    "id": "l-26", 
+    "kanji": "理科", 
+    "reading": "りか", 
+    "meaning": "自然科学を学ぶ教科。", 
+    "difficulty": 3, 
+    "components": ["理", "科"],
+    "sentence": "{{target}}の実験で爆発する" 
+  },
+  { 
+    "id": "l-27", 
+    "kanji": "早朝", 
+    "reading": "そうちょう", 
+    "meaning": "朝早い時間。", 
+    "difficulty": 3, 
+    "components": ["早", "朝"],
+    "sentence": "{{target}}の空気は澄んでいる" 
+  },
+  { 
+    "id": "l-28", 
+    "kanji": "鉄道", 
+    "reading": "てつどう", 
+    "meaning": "線路を敷き、その上で車両を走らせる交通機関。", 
+    "difficulty": 4, 
+    "components": ["鉄", "道"],
+    "sentence": "{{target}}模型を集めるのが趣味だ" 
+  },
+  { 
+    "id": "l-29", 
+    "kanji": "銀行", 
+    "reading": "ぎんこう", 
+    "meaning": "預金の受け入れや貸付を行う金融機関。", 
+    "difficulty": 4, 
+    "components": ["銀", "行"],
+    "sentence": "{{target}}にお金を預ける" 
+  },
+  { 
+    "id": "l-30", 
+    "kanji": "飲食", 
+    "reading": "いんしょく", 
+    "meaning": "飲んだり食べたりすること。", 
+    "difficulty": 3, 
+    "components": ["飲", "食"],
+    "sentence": "店内での{{target}}はお控えください" 
+  },
+  { 
+    "id": "l-31", 
+    "kanji": "鮮魚", 
+    "reading": "せんぎょ", 
+    "meaning": "新鮮な魚。", 
+    "difficulty": 5, 
+    "components": ["鮮", "魚"],
+    "sentence": "市場で{{target}}を仕入れる" 
+  },
+  { 
+    "id": "l-32", 
+    "kanji": "動物", 
+    "reading": "どうぶつ", 
+    "meaning": "運動・感覚機能を持つ生き物。", 
+    "difficulty": 3, 
+    "components": ["動", "物"],
+    "sentence": "{{target}}園の人気者パンダ" 
+  },
+  { 
+    "id": "l-33", 
+    "kanji": "回転", 
+    "reading": "かいてん", 
+    "meaning": "ぐるぐると回ること。", 
+    "difficulty": 3, 
+    "components": ["回", "転"],
+    "sentence": "{{target}}寿司で皿を積み上げる" 
+  },
+  { 
+    "id": "l-34", 
+    "kanji": "公園", 
+    "reading": "こうえん", 
+    "meaning": "公衆のために設けられた庭園や遊戯場。", 
+    "difficulty": 3, 
+    "components": ["公", "園"],
+    "sentence": "休日は{{target}}でピクニック" 
+  },
+  { 
+    "id": "l-35", 
+    "kanji": "暗室", 
+    "reading": "あんしつ", 
+    "meaning": "外からの光が入らないようにした部屋。", 
+    "difficulty": 4, 
+    "components": ["暗", "室"],
+    "sentence": "{{target}}で写真を現像する" 
+  },
+  { 
+    "id": "l-36", 
+    "kanji": "鳴き声", 
+    "reading": "なきごえ", 
+    "meaning": "鳥や虫、獣などが鳴く声。", 
+    "difficulty": 3, 
+    "components": ["鳴", "声"],
+    "sentence": "遠くから鳥の{{target}}がする" 
+  },
+  { 
+    "id": "l-37", 
+    "kanji": "黒板", 
+    "reading": "こくばん", 
+    "meaning": "チョークで文字や絵を書くための黒い板。", 
+    "difficulty": 3, 
+    "components": ["黒", "板"],
+    "sentence": "{{target}}消しで文字を消す" 
+  },
+  { 
+    "id": "l-38", 
+    "kanji": "電線", 
+    "reading": "でんせん", 
+    "meaning": "電気を通すための線。", 
+    "difficulty": 4, 
+    "components": ["電", "線"],
+    "sentence": "スズメが{{target}}に止まっている" 
+  },
+  { 
+    "id": "l-39", 
+    "kanji": "電話", 
+    "reading": "でんわ", 
+    "meaning": "離れた場所に声を伝える通信機。", 
+    "difficulty": 4, 
+    "components": ["電", "話"],
+    "sentence": "母に{{target}}をかける" 
+  },
+  { 
+    "id": "l-40", 
+    "kanji": "最強", 
+    "reading": "さいきょう", 
+    "meaning": "最も強いこと。", 
+    "difficulty": 5, 
+    "components": ["最", "強"],
+    "sentence": "人類{{target}}の戦士が決まる" 
+  }
 ]--- src/features/kanji-core/data/ids-map-auto.json ---
 {
   "丁": [
@@ -3663,6 +4817,10 @@ export interface IdsMap {
     "夂",
     "几"
   ],
+  "凰": [
+    "几",
+    "皇"
+  ],
   "凶": [
     "凵",
     "㐅"
@@ -3713,6 +4871,10 @@ export interface IdsMap {
   ],
   "刷": [
     "𡰯",
+    "刂"
+  ],
+  "刹": [
+    "杀",
     "刂"
   ],
   "刺": [
@@ -4063,6 +5225,10 @@ export interface IdsMap {
     "亼",
     "叩"
   ],
+  "咆": [
+    "口",
+    "包"
+  ],
   "和": [
     "禾",
     "口"
@@ -4086,6 +5252,10 @@ export interface IdsMap {
   "哨": [
     "口",
     "肖"
+  ],
+  "哮": [
+    "口",
+    "孝"
   ],
   "哲": [
     "折",
@@ -5923,6 +7093,10 @@ export interface IdsMap {
     "其",
     "月"
   ],
+  "朧": [
+    "月",
+    "龍"
+  ],
   "札": [
     "木",
     "乚"
@@ -6219,6 +7393,10 @@ export interface IdsMap {
     "歹",
     "直"
   ],
+  "殲": [
+    "歹",
+    "韱"
+  ],
   "殴": [
     "区",
     "殳"
@@ -6298,6 +7476,10 @@ export interface IdsMap {
   "沖": [
     "氵",
     "中"
+  ],
+  "沙": [
+    "氵",
+    "少"
   ],
   "没": [
     "氵",
@@ -6458,6 +7640,10 @@ export interface IdsMap {
   "深": [
     "氵",
     "罙"
+  ],
+  "淵": [
+    "氵",
+    "𣶒"
   ],
   "混": [
     "氵",
@@ -6827,6 +8013,10 @@ export interface IdsMap {
     "王",
     "元"
   ],
+  "珀": [
+    "王",
+    "白"
+  ],
   "珍": [
     "王",
     "㐱"
@@ -6847,6 +8037,10 @@ export interface IdsMap {
     "王",
     "里"
   ],
+  "琥": [
+    "王",
+    "虎"
+  ],
   "琳": [
     "王",
     "林"
@@ -6854,6 +8048,18 @@ export interface IdsMap {
   "琴": [
     "玨",
     "今"
+  ],
+  "瑠": [
+    "王",
+    "留"
+  ],
+  "璃": [
+    "王",
+    "离"
+  ],
+  "璧": [
+    "辟",
+    "玉"
   ],
   "環": [
     "王",
@@ -7086,6 +8292,10 @@ export interface IdsMap {
   "砕": [
     "石",
     "卆"
+  ],
+  "砦": [
+    "此",
+    "石"
   ],
   "砲": [
     "石",
@@ -7459,6 +8669,14 @@ export interface IdsMap {
     "羽",
     "立"
   ],
+  "翠": [
+    "羽",
+    "卒"
+  ],
+  "翡": [
+    "非",
+    "羽"
+  ],
   "翻": [
     "番",
     "羽"
@@ -7695,6 +8913,14 @@ export interface IdsMap {
     "艹",
     "𮍏"
   ],
+  "薇": [
+    "艹",
+    "微"
+  ],
+  "薔": [
+    "艹",
+    "嗇"
+  ],
   "薩": [
     "艹",
     "隡"
@@ -7751,6 +8977,10 @@ export interface IdsMap {
     "亦",
     "虫"
   ],
+  "蜃": [
+    "辰",
+    "虫"
+  ],
   "蝶": [
     "虫",
     "枼"
@@ -7758,6 +8988,10 @@ export interface IdsMap {
   "融": [
     "鬲",
     "虫"
+  ],
+  "螺": [
+    "虫",
+    "累"
   ],
   "血": [
     "丿",
@@ -8258,6 +9492,14 @@ export interface IdsMap {
   "蹴": [
     "𧾷",
     "就"
+  ],
+  "躇": [
+    "𧾷",
+    "著"
+  ],
+  "躊": [
+    "𧾷",
+    "壽"
   ],
   "躍": [
     "𧾷",
@@ -8863,6 +10105,10 @@ export interface IdsMap {
     "雨",
     "彐"
   ],
+  "雫": [
+    "雨",
+    "下"
+  ],
   "雰": [
     "雨",
     "分"
@@ -9067,6 +10313,10 @@ export interface IdsMap {
     "髟",
     "友"
   ],
+  "魁": [
+    "鬼",
+    "斗"
+  ],
   "魂": [
     "云",
     "鬼"
@@ -9074,6 +10324,18 @@ export interface IdsMap {
   "魅": [
     "鬼",
     "未"
+  ],
+  "魍": [
+    "鬼",
+    "罔"
+  ],
+  "魎": [
+    "鬼",
+    "兩"
+  ],
+  "魑": [
+    "鬼",
+    "离"
   ],
   "魔": [
     "麻",
@@ -9091,6 +10353,10 @@ export interface IdsMap {
     "魚",
     "京"
   ],
+  "鳳": [
+    "几",
+    "𩾏"
+  ],
   "鳴": [
     "口",
     "鳥"
@@ -9103,6 +10369,10 @@ export interface IdsMap {
     "隺",
     "鳥"
   ],
+  "麒": [
+    "鹿",
+    "其"
+  ],
   "麓": [
     "林",
     "鹿"
@@ -9110,6 +10380,10 @@ export interface IdsMap {
   "麗": [
     "丽",
     "鹿"
+  ],
+  "麟": [
+    "鹿",
+    "粦"
   ],
   "麦": [
     "龶",
@@ -9268,92 +10542,315 @@ export const createDictionarySlice: StateCreator<DictionarySlice> = (set, get) =
   isJukugoUnlocked: (id) => get().unlockedJukugos.includes(id),
 
   resetCollection: () => set({ unlockedIds: [], unlockedJukugos: [] }),
-});--- src/features/dictionary/views/DictionaryView.tsx ---
+});--- src/features/dictionary/views/JukugoListView.tsx ---
+"use client";
+
+import { useGameStore } from "@/features/game-board/stores/store";
+import jukugoData from "@/features/kanji-core/data/jukugo-db-auto.json";
+import { JukugoDefinition } from "@/features/kanji-core/types";
+
+export function JukugoListView() {
+  const unlockedJukugos = useGameStore((state) => state.unlockedJukugos);
+  const data = jukugoData as JukugoDefinition[];
+
+  // 文字数ごとにデータをグループ化 (2文字, 3文字, 4文字...)
+  const groupedData = data.reduce((acc, item) => {
+    const len = item.kanji.length;
+    if (!acc[len]) acc[len] = [];
+    acc[len].push(item);
+    return acc;
+  }, {} as Record<number, JukugoDefinition[]>);
+
+  // 文字数のキーを昇順にソート (2, 3, 4...)
+  const lengths = Object.keys(groupedData)
+    .map(Number)
+      .sort((a, b) => a - b);
+    
+  const scrollToSection = (len: number) => {
+    const element = document.getElementById(`jukugo-section-${len}`);
+    if (element) {
+      // ヘッダーなどの高さを考慮して少し上に余白を持たせるなら offset が必要ですが、
+      // ここではシンプルに要素の上端へスクロールさせます
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+  const toKansuji = (num: number) =>
+    ["", "一", "二", "三", "四", "五", "六"][num] || num;
+
+  return (
+    <div className="flex flex-col gap-12 pb-20">
+      <div className="flex flex-wrap gap-2 mb-8 sticky top-0 z-10 bg-[#f5f2eb]/95 backdrop-blur py-4 border-b border-[#3d3330]/10">
+        <span className="text-sm font-bold text-stone-400 flex items-center mr-2">
+          目次:
+        </span>
+        {lengths.map((len) => (
+          <button
+            key={`nav-${len}`}
+            onClick={() => scrollToSection(len)}
+            className="px-3 py-1 bg-white border border-[#3d3330]/20 rounded-full text-sm font-serif font-bold text-[#3d3330] hover:bg-[#d94a38] hover:text-white hover:border-[#d94a38] transition-colors shadow-sm"
+          >
+            {toKansuji(len)}字
+          </button>
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-12">
+        {lengths.map((len) => {
+          const items = groupedData[len];
+          const unlockedCount = items.filter((item) =>
+            unlockedJukugos.includes(item.id)
+          ).length;
+
+        // ヘッダー（漢数字変換: 2->二, 3->三...）
+        const kansuji = ["", "一", "二", "三", "四", "五", "六"][len] || len;
+        
+        return (
+          <div
+            key={len}
+            id={`jukugo-section-${len}`}
+            className="w-full scroll-mt-24" // scroll-mt でスクロール時の余白を確保
+          >
+            <h2 className="text-xl font-serif font-bold mb-4 border-l-4 border-[#d94a38] pl-3 text-[#3d3330]">
+              {kansuji}字熟語{" "}
+              <span className="text-sm font-normal text-stone-500 ml-2">
+                ({unlockedCount}/{items.length})
+              </span>
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {items.map((jukugo) => {
+                const isUnlocked = unlockedJukugos.includes(jukugo.id);
+
+                return (
+                  <div
+                    key={jukugo.id}
+                    className={`
+                      relative p-4 rounded-lg border-2 transition-all flex items-start gap-4
+                      ${
+                        isUnlocked
+                          ? "bg-white border-[#3d3330]/10 shadow-sm"
+                          : "bg-[#e0dcd5]/50 border-transparent opacity-60"
+                      }
+                    `}
+                  >
+                    {isUnlocked ? (
+                      <>
+                        {/* 左側: 漢字と読み */}
+                        {/* 修正: flex-shrink-0 -> shrink-0 */}
+                        <div className="shrink-0">
+                          <div className="text-2xl font-serif font-bold text-[#3d3330] tracking-widest leading-none mb-1">
+                            {jukugo.kanji}
+                          </div>
+                          <div className="text-xs text-[#d94a38] font-bold">
+                            {jukugo.reading}
+                          </div>
+                        </div>
+
+                        {/* 右側: 意味 */}
+                        {/* 修正: min-h-[3rem] -> min-h-12 */}
+                        <div className="flex-1 border-l border-stone-200 pl-3 min-h-12 flex items-center">
+                          <p className="text-xs text-stone-600 leading-relaxed font-serif">
+                            {jukugo.meaning || "（意味データなし）"}
+                          </p>
+                        </div>
+
+                        {/* 難易度バッジ (オプション) */}
+                        <div className="absolute top-2 right-2 text-[10px] bg-stone-100 text-stone-400 px-1 rounded">
+                          Lv.{jukugo.difficulty}
+                        </div>
+                      </>
+                    ) : (
+                      // 未発見時
+                      <div className="w-full h-12 flex items-center justify-center text-stone-400 font-serif tracking-widest">
+                        {/* ??? 表示 (文字数分) */}
+                        {Array(len).fill("?").join(" ")}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+          </div>
+    </div>
+  );
+}
+--- src/features/dictionary/views/DictionaryView.tsx ---
 "use client";
 
 import Link from "next/link";
-// パスエイリアス(@/)を使用して正しくimport
-import { useGameStore } from "@/features/game-board/stores";
-// ★修正: 自動生成された辞書を読み込む
+import { useState } from "react";
+import { useGameStore } from "@/features/game-board/stores/store";
 import idsMapData from "@/features/kanji-core/data/ids-map-auto.json";
+import jukugoData from "@/features/kanji-core/data/jukugo-db-auto.json";
+import { JukugoListView } from "./JukugoListView"; // ★作成したコンポーネントをインポート
 
 export function DictionaryView() {
+  // ★タブの状態管理 ('kanji' | 'jukugo')
+  const [activeTab, setActiveTab] = useState<"kanji" | "jukugo">("kanji");
+
+  // --- 統計データの計算 ---
   const unlockedIds = useGameStore((state) => state.unlockedIds);
+  const unlockedJukugos = useGameStore((state) => state.unlockedJukugos);
 
+  // 漢字の統計
   const allKanjiList = Object.keys(idsMapData);
+  const totalKanji = allKanjiList.length;
+  const collectedKanji = allKanjiList.filter((k) =>
+    unlockedIds.includes(k)
+  ).length;
 
-  const total = allKanjiList.length;
-  const collected = allKanjiList.filter((k) => unlockedIds.includes(k)).length;
-  const percentage = total > 0 ? Math.round((collected / total) * 100) : 0;
+  // 熟語の統計
+  const totalJukugo = jukugoData.length;
+  const collectedJukugo = unlockedJukugos.length;
+
+  // 表示用データ選択
+  const currentCollected =
+    activeTab === "kanji" ? collectedKanji : collectedJukugo;
+  const currentTotal = activeTab === "kanji" ? totalKanji : totalJukugo;
+  const percentage =
+    currentTotal > 0 ? Math.round((currentCollected / currentTotal) * 100) : 0;
 
   return (
-    <div className="min-h-screen bg-[#f5f2eb] text-[#3d3330] p-8">
+    <div className="min-h-screen bg-[#f5f2eb] text-[#3d3330] p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
-        {/* ヘッダー */}
-        <div className="flex justify-between items-end mb-8 border-b-2 border-[#3d3330]/10 pb-4">
+        {/* ヘッダーエリア */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-8 border-b-2 border-[#3d3330]/10 pb-4 gap-4">
           <div>
-            <h1 className="text-4xl font-serif font-bold mb-2">漢字図鑑</h1>
+            <h1 className="text-3xl md:text-4xl font-serif font-bold mb-2">
+              収集図鑑
+            </h1>
             <p className="text-stone-500">
-              収集率:{" "}
+              {activeTab === "kanji" ? "漢字" : "熟語"}収集率:{" "}
               <span className="text-2xl font-bold text-[#d94a38]">
                 {percentage}%
               </span>{" "}
-              ({collected}/{total})
+              ({currentCollected}/{currentTotal})
             </p>
           </div>
-          <Link
-            href="/"
-            className="px-6 py-2 bg-stone-200 rounded-full hover:bg-stone-300 transition-colors font-bold text-stone-600"
-          >
-            戻る
-          </Link>
+
+          <div className="flex items-center gap-4">
+            {/* タブ切り替えボタン */}
+            <div className="bg-[#e0dcd5] p-1 rounded-full flex text-sm font-bold">
+              <button
+                onClick={() => setActiveTab("kanji")}
+                className={`px-4 py-2 rounded-full transition-all ${
+                  activeTab === "kanji"
+                    ? "bg-[#3d3330] text-white shadow-md"
+                    : "text-stone-600 hover:text-stone-800"
+                }`}
+              >
+                漢字
+              </button>
+              <button
+                onClick={() => setActiveTab("jukugo")}
+                className={`px-4 py-2 rounded-full transition-all ${
+                  activeTab === "jukugo"
+                    ? "bg-[#3d3330] text-white shadow-md"
+                    : "text-stone-600 hover:text-stone-800"
+                }`}
+              >
+                熟語
+              </button>
+            </div>
+
+            <Link
+              href="/"
+              className="px-6 py-2 bg-stone-200 rounded-full hover:bg-stone-300 transition-colors font-bold text-stone-600 shadow-sm"
+            >
+              戻る
+            </Link>
+          </div>
         </div>
 
-        {/* グリッド表示 */}
-        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4">
-          {allKanjiList.map((char) => {
-            const isUnlocked = unlockedIds.includes(char);
-
-            return (
-              <div
-                key={char}
-                className={`
-                  aspect-square rounded-xl flex items-center justify-center text-3xl font-serif font-bold shadow-sm
-                  transition-all duration-300
-                  ${
-                    isUnlocked
-                      ? "bg-white text-[#3d3330] border-2 border-[#3d3330]/20"
-                      : "bg-[#e0dcd5] text-transparent border border-transparent"
-                  }
-                `}
-              >
-                {/* 未発見なら「？」を表示、発見済みなら漢字を表示 */}
-                {isUnlocked ? (
-                  char
-                ) : (
-                  <span className="text-stone-400 text-xl">?</span>
-                )}
-              </div>
-            );
-          })}
+        {/* コンテンツエリア */}
+        <div className="min-h-[50vh]">
+          {activeTab === "kanji" ? (
+            /* --- 既存の漢字グリッド --- */
+            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 md:gap-4">
+              {allKanjiList.map((char) => {
+                const isUnlocked = unlockedIds.includes(char);
+                return (
+                  <div
+                    key={char}
+                    className={`
+                      aspect-square rounded-xl flex items-center justify-center text-2xl md:text-3xl font-serif font-bold shadow-sm
+                      transition-all duration-300
+                      ${
+                        isUnlocked
+                          ? "bg-white text-[#3d3330] border-2 border-[#3d3330]/20"
+                          : "bg-[#e0dcd5] text-transparent border border-transparent"
+                      }
+                    `}
+                  >
+                    {isUnlocked ? (
+                      char
+                    ) : (
+                      <span className="text-stone-400 text-lg md:text-xl">
+                        ?
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            /* --- 新規の熟語リスト --- */
+            <JukugoListView />
+          )}
         </div>
       </div>
     </div>
   );
 }
+--- src/features/game-board/components/ThemeSwitcher.tsx ---
+"use client";
+
+import { useGameStore } from "../stores/store";
+import { THEMES, ThemeId } from "../constants/themes";
+import { motion } from "framer-motion";
+
+export function ThemeSwitcher() {
+  const currentTheme = useGameStore((state) => state.currentTheme);
+  const setTheme = useGameStore((state) => state.setTheme);
+  const theme = THEMES[currentTheme];
+
+  const handleToggle = () => {
+    const ids = Object.keys(THEMES) as ThemeId[];
+    const currentIndex = ids.indexOf(currentTheme);
+    const nextIndex = (currentIndex + 1) % ids.length;
+    setTheme(ids[nextIndex]);
+  };
+
+  return (
+    <button
+      onClick={handleToggle}
+      className={`
+        flex items-center gap-2 px-3 py-1.5 rounded-full border shadow-sm transition-all
+        hover:scale-105 active:scale-95 backdrop-blur-md
+        ${theme.colors.partBg} ${theme.colors.partBorder} ${theme.colors.text}
+      `}
+    >
+      <span className="text-lg">🎨</span>
+      <span className="text-xs font-bold">{theme.name}</span>
+    </button>
+  );
+}
 --- src/features/game-board/components/StageView.tsx ---
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { AnimatePresence } from "framer-motion";
-// ★修正: store.ts を直接指定するように変更
 import { useGameStore } from "../stores/store";
-import { FloatingPart } from "./FloatingPart";
+import { GameBoard } from "./GameBoard";
 import { GoalSlot } from "./GoalSlot";
 import { ResultOverlay } from "./ResultOverlay";
 import { soundEngine } from "@/lib/sounds/SoundEngine";
-import { JukugoDefinition } from "@/features/kanji-core/types";
+import { THEMES } from "../constants/themes";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 interface StageViewProps {
   levelDisplay?: number;
@@ -9361,30 +10858,10 @@ interface StageViewProps {
 }
 
 export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
-  const parts = useGameStore((state) => state.parts);
   const currentJukugo = useGameStore((state) => state.currentJukugo);
   const isCleared = useGameStore((state) => state.isCleared);
-
-  // 画面サイズ
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-
-  useEffect(() => {
-    // クライアントサイドでのみ実行
-    setDimensions({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-
-    const handleResize = () => {
-      setDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const currentTheme = useGameStore((state) => state.currentTheme);
+  const theme = THEMES[currentTheme];
 
   useEffect(() => {
     if (isCleared) {
@@ -9395,67 +10872,147 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
   }, [isCleared]);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-[#f5f2eb]">
-      {/* --- ヘッダーエリア --- */}
-      <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-start z-30 pointer-events-none">
-        <div className="flex flex-col gap-2 pointer-events-auto">
+    // h-screen で高さを画面いっぱいに固定
+    <div
+      className={`relative w-full h-screen overflow-hidden flex flex-col transition-colors duration-500 ${theme.colors.background}`}
+    >
+      {/* --- ヘッダーエリア (固定高さ) --- */}
+      <div className="w-full p-4 flex justify-between items-start z-30 shrink-0">
+        <div className="flex flex-col gap-1">
           <Link
             href="/"
-            className="bg-white/80 backdrop-blur border border-stone-300 px-3 py-1 rounded-full text-sm font-bold text-stone-600 shadow-sm hover:bg-stone-100 transition-colors flex items-center gap-1 w-fit"
+            className={`
+              backdrop-blur border px-4 py-1.5 rounded-full text-sm font-bold shadow-sm transition-colors flex items-center gap-1 w-fit
+              ${theme.colors.partBg} ${theme.colors.partBorder} ${theme.colors.sub}
+            `}
           >
             <span>🏠</span> 戻る
           </Link>
-          <div className="text-stone-400 font-bold tracking-widest text-sm pl-1">
+          <div
+            className={`font-bold tracking-widest text-xs pl-1 ${theme.colors.sub} opacity-70`}
+          >
             STAGE {levelDisplay}
           </div>
         </div>
-        <div></div>
-      </div>
 
-      {/* --- ゴールエリア --- */}
-      <div className="absolute top-16 left-0 right-0 z-10 flex justify-center pointer-events-none">
-        <div className="pointer-events-auto">
-          <GoalSlot target={currentJukugo} />
+        <div>
+          <ThemeSwitcher />
         </div>
       </div>
 
-      {/* --- プレイフィールド --- */}
-      <div className="absolute inset-0 z-20">
-        {parts.map((part) => {
-          let displayX = part.x;
-          let displayY = part.y;
-
-          if (part.x <= 1 && part.y <= 1 && dimensions.width > 0) {
-            displayX = part.x * dimensions.width;
-            displayY = part.y * dimensions.height;
-
-            if (displayX < 40) displayX = 40;
-            if (displayX > dimensions.width - 40)
-              displayX = dimensions.width - 40;
-          }
-
-          return (
-            <FloatingPart key={part.id} part={part} x={displayX} y={displayY} />
-          );
-        })}
+      {/* --- ゴールエリア (固定高さ・内容は可変だがshrinkさせない) --- */}
+      <div className="w-full flex justify-center z-10 shrink-0">
+        <GoalSlot target={currentJukugo} />
       </div>
 
-      <div className="absolute inset-0 opacity-10 pointer-events-none bg-stone-200 mix-blend-multiply z-0" />
+      {/* --- メイン盤面 (残りの高さを埋める) --- */}
+      <div className="flex-1 flex items-center justify-center z-20 pb-4 min-h-0">
+        {/* GameBoard内でスクロールが必要な場合はそこで対応 */}
+        <GameBoard />
+      </div>
 
-      {/* --- クリア画面 (ResultOverlay) --- */}
+      {/* --- クリア画面 --- */}
       <AnimatePresence>
         {isCleared && <ResultOverlay onNextLevel={onNextLevel} />}
       </AnimatePresence>
     </div>
   );
 }
---- src/features/game-board/components/GoalSlot.tsx ---
+--- src/features/game-board/components/GridSlot.tsx ---
 "use client";
 
 import { motion } from "framer-motion";
-import { JukugoDefinition } from "@/features/kanji-core/types";
-// ★修正: 正しいパスを指定
+import { GamePart } from "@/features/kanji-core/types";
 import { useGameStore } from "../stores/store";
+import { THEMES } from "../constants/themes";
+import { cn } from "@/lib/utils/tw-merge";
+
+interface GridSlotProps {
+  index: number;
+  part?: GamePart;
+  onClick: () => void;
+}
+
+export function GridSlot({ index, part, onClick }: GridSlotProps) {
+  const selectedPartId = useGameStore((state) => state.selectedPartId);
+  const currentTheme = useGameStore((state) => state.currentTheme);
+  const pendingMerge = useGameStore((state) => state.pendingMerge);
+
+  const theme = THEMES[currentTheme];
+  const isSelected = part && selectedPartId === part.id;
+
+  // 仮合体情報のチェック
+  const isPendingSource = pendingMerge?.sourceId === part?.id;
+  const isPendingTarget = pendingMerge?.targetId === part?.id;
+
+  // 表示すべき文字：仮合体先なら「プレビュー文字」、それ以外は「本来の文字」
+  const displayChar = isPendingTarget ? pendingMerge?.previewChar : part?.char;
+  return (
+    <div
+      onClick={onClick}
+      className={cn(
+        "relative aspect-square rounded-xl flex items-center justify-center cursor-pointer transition-all duration-200",
+        theme.colors.slotBg,
+        theme.colors.slotBorder,
+        "border-2",
+        // ▼ 修正: 選択時の枠線をより強調（朱色のはっきりした枠線 + 拡大）
+        isSelected &&
+          `border-[#d94a38] ring-2 ring-[#d94a38]/50 z-10 scale-105 shadow-lg`
+      )}
+    >
+      {/* マス番号 */}
+      <span
+        className={`absolute top-1 left-2 text-[10px] opacity-20 font-mono ${theme.colors.text}`}
+      >
+        {index + 1}
+      </span>
+
+      {/* パーツ表示 */}
+      {/* 元のパーツ(Source)は、仮合体中は隠す(opacity-0) */}
+      {(part || isPendingTarget) && (
+        <motion.div
+          layoutId={isPendingTarget ? undefined : `part-${part?.id}`}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{
+            scale: 1,
+            opacity: isPendingSource ? 0 : 1, // 仮合体元は消す
+          }}
+          // 仮合体先(Target)は点滅アニメーションさせて「仮」であることを伝える
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          className={cn(
+            "flex items-center justify-center rounded-full shadow-sm select-none",
+            "w-[80%] h-[80%] text-3xl md:text-4xl font-serif font-bold border",
+            theme.colors.partBg,
+            theme.colors.partBorder,
+            theme.colors.text,
+
+            // 漢字タイプの場合
+            part?.type === "KANJI" &&
+              "bg-amber-50 text-amber-900 border-amber-200",
+
+            // ▼ 仮合体中のプレビュー表示スタイル（点滅 + 色変化）
+            isPendingTarget &&
+              "animate-pulse border-dashed border-[#d94a38] text-[#d94a38] bg-[#d94a38]/10"
+          )}
+        >
+          {displayChar}
+        </motion.div>
+      )}
+
+      {/* 仮合体中の「？」マークや「決定」ガイドを出しても親切かも（今回はシンプルに） */}
+    </div>
+  );
+}
+--- src/features/game-board/components/GoalSlot.tsx ---
+"use client";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { JukugoDefinition } from "@/features/kanji-core/types";
+import { useGameStore } from "../stores/store";
+import { getSentenceParts } from "@/features/kanji-core/logic/sentenceHelper";
+import { THEMES } from "../constants/themes";
 
 interface GoalSlotProps {
   target: JukugoDefinition | null;
@@ -9463,159 +11020,203 @@ interface GoalSlotProps {
 
 export function GoalSlot({ target }: GoalSlotProps) {
   const filledIndices = useGameStore((state) => state.filledIndices);
+  const currentTheme = useGameStore((state) => state.currentTheme);
+  const difficultyMode = useGameStore((state) => state.difficultyMode);
+
+  const theme = THEMES[currentTheme];
+
+  const [showReading, setShowReading] = useState(false);
+
+  useEffect(() => {
+    if (difficultyMode === "EASY") {
+      setShowReading(true);
+    } else {
+      setShowReading(false);
+    }
+  }, [target?.id, difficultyMode]);
 
   if (!target) return null;
 
-  const charCount = target.components.length;
-  // 文字数が多い場合はスロットサイズを小さくする
-  const isLong = charCount >= 4;
-  const isMedium = charCount === 3;
-
-  // サイズクラスの決定
-  let slotSizeClass = "w-20 h-20"; // デフォルト(2文字)
-  let textSizeClass = "text-4xl";
-
-  if (isLong) {
-    slotSizeClass = "w-14 h-14 md:w-16 md:h-16";
-    textSizeClass = "text-2xl md:text-3xl";
-  } else if (isMedium) {
-    slotSizeClass = "w-16 h-16 md:w-20 md:h-20";
-    textSizeClass = "text-3xl md:text-4xl";
-  }
+  const sentenceParts = getSentenceParts(target);
+  const isCompleted = target.components.length === filledIndices.length;
+  const hasSentence = !!target.sentence;
 
   return (
-    <div className="flex flex-col items-center gap-2 p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-stone-200 transition-all duration-500 mx-4">
-      <div className="text-xs font-bold text-stone-400 tracking-widest">
-        TARGET
+    <motion.div
+      animate={isCompleted ? { scale: 1.05 } : {}}
+      transition={{ duration: 0.5 }}
+      // ▼ 余白(padding)を減らし、幅を画面いっぱい使う設定に変更
+      className="w-full max-w-4xl mx-auto flex flex-col items-center gap-2 py-4 relative"
+    >
+      {/* ラベルエリア */}
+      <div className="absolute top-0 left-4 md:left-8 flex items-center gap-2 opacity-50">
+        <div
+          className={`text-[10px] md:text-xs font-serif font-bold tracking-widest ${theme.colors.text}`}
+        >
+          難易度 Lv.{target.difficulty}
+        </div>
       </div>
 
-      <div className="flex gap-2 md:gap-4 justify-center">
-        {target.components.map((char, index) => {
-          const isFilled = filledIndices.includes(index);
+      {/* --- 意味 (フォールバック時) --- */}
+      {!hasSentence && target.meaning && (
+        <div className="w-full text-center mt-6 mb-2 px-2">
+          {/* ▼ フォントサイズを拡大 (text-2xl -> text-3xl) */}
+          <div
+            className={`font-serif text-2xl md:text-4xl font-bold ${theme.colors.text} leading-tight`}
+          >
+            {target.meaning}
+          </div>
+        </div>
+      )}
 
+      {/* --- 文章/スロットエリア --- */}
+      <div className="flex flex-wrap items-end justify-center gap-x-2 gap-y-3 w-full text-center leading-snug px-2 mt-2">
+        {sentenceParts.map((part, pIndex) => {
+          if (part.type === "TEXT") {
+            return (
+              <span
+                key={`text-${pIndex}`}
+                // ▼ 文章テキストも拡大
+                className={`font-serif text-2xl md:text-3xl font-bold ${theme.colors.text} mb-1`}
+              >
+                {part.text}
+              </span>
+            );
+          }
+
+          // ターゲットスロット
           return (
-            <div
-              key={`${target.id}-slot-${index}`}
-              className={`relative ${slotSizeClass} border-2 border-dashed border-stone-300 rounded-lg flex items-center justify-center bg-stone-50/50 overflow-hidden transition-all`}
-            >
-              {/* 正解の漢字 */}
-              {isFilled && (
-                <motion.div
-                  initial={{ scale: 0, opacity: 0, rotate: -10 }}
-                  animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                  className={`w-full h-full bg-amber-100 flex items-center justify-center ${textSizeClass} text-amber-900 font-bold font-serif`}
-                >
-                  {char}
-                </motion.div>
-              )}
-
-              {/* 未正解時のヒント */}
-              {!isFilled && (
-                <span
-                  className={`text-stone-200 font-serif opacity-20 ${textSizeClass}`}
-                >
-                  ?
-                </span>
-              )}
+            <div key="target-slots" className="flex items-center gap-3 mx-1">
+              {target.components.map((char, cIndex) => {
+                const isFilled = filledIndices.includes(cIndex);
+                return (
+                  <SlotItem
+                    key={`slot-${cIndex}`}
+                    char={char}
+                    isFilled={isFilled}
+                    theme={theme}
+                    isCompleted={isCompleted}
+                  />
+                );
+              })}
             </div>
           );
         })}
       </div>
 
-      <div className="text-sm font-medium text-stone-500 mt-1">
-        読み: {target.reading}
+      {/* --- 読みヒント --- */}
+      <div className="h-8 mt-4 flex items-center justify-center">
+        {showReading || isCompleted ? (
+          <motion.div
+            initial={{ opacity: 0, filter: "blur(4px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            className={`font-serif text-base md:text-lg tracking-[0.2em] ${
+              isCompleted ? "text-amber-600 font-bold" : theme.colors.sub
+            }`}
+          >
+            {target.reading}
+          </motion.div>
+        ) : (
+          <button
+            onClick={() => setShowReading(true)}
+            className={`text-xs border border-stone-300 ${theme.colors.sub} px-4 py-1 rounded-full hover:bg-stone-200 transition-colors flex items-center gap-2`}
+          >
+            <span>👁️</span> 読みヒント
+          </button>
+        )}
       </div>
+    </motion.div>
+  );
+}
+
+// スロットコンポーネント (サイズ拡大)
+function SlotItem({
+  char,
+  isFilled,
+  theme,
+  isCompleted,
+}: {
+  char: string;
+  isFilled: boolean;
+  theme: any;
+  isCompleted: boolean;
+}) {
+  return (
+    <div
+      // ▼ スロットサイズを拡大 (w-20 -> w-24)
+      className={`
+        relative w-20 h-20 md:w-28 md:h-28
+        flex items-center justify-center transition-all duration-500
+      `}
+    >
+      <div
+        className={`
+        absolute inset-0 border-2 rounded-lg
+        ${
+          isFilled
+            ? "border-stone-800 border-3 bg-white shadow-lg transform -rotate-1"
+            : "border-stone-400 border-dashed bg-stone-50/40"
+        }
+      `}
+      />
+
+      <AnimatePresence>
+        {isFilled ? (
+          <motion.div
+            initial={{ scale: 1.5, opacity: 0 }}
+            animate={{
+              scale: 1,
+              opacity: 1,
+              color: isCompleted ? "#d97706" : "#3d3330",
+            }}
+            // ▼ 文字サイズを拡大
+            className="z-10 text-5xl md:text-7xl font-serif font-bold select-none"
+          >
+            {char}
+          </motion.div>
+        ) : (
+          <span className="text-3xl opacity-10 font-serif text-stone-500 select-none">
+            ?
+          </span>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
---- src/features/game-board/components/FloatingPart.tsx ---
+--- src/features/game-board/components/GameBoard.tsx ---
 "use client";
 
-import { motion, useDragControls } from "framer-motion";
-import { useState } from "react";
+import { useGameStore } from "../stores/store";
+import { GridSlot } from "./GridSlot";
+import { useGridInteraction } from "../hooks/useGridInteraction";
 
-// エイリアス(@)を使わず、相対パスで確実に指定
-// components -> game-board -> features -> src -> kanji-core...
-import { GamePart } from "../../kanji-core/types";
-import { useMergeJudge } from "../hooks/useMergeJudge";
-// components -> game-board -> features -> src -> lib -> utils...
-import { cn } from "../../../lib/utils/tw-merge";
+export function GameBoard() {
+  const parts = useGameStore((state) => state.parts);
+  const { handleSlotClick } = useGridInteraction();
 
-interface FloatingPartProps {
-  part: GamePart;
-  x: number;
-  y: number;
-}
-
-// 指で隠れないようにずらす量 (px)
-const DRAG_OFFSET_Y = -60;
-
-export function FloatingPart({ part, x, y }: FloatingPartProps) {
-  const controls = useDragControls();
-  const { handleDragEnd } = useMergeJudge();
-  const [isDragging, setIsDragging] = useState(false);
+  // 4x4 = 16マス (難易度によって可変にするならここをprops化)
+  const gridSize = 16;
+  const slots = Array.from({ length: gridSize }, (_, i) => i);
 
   return (
-    <motion.div
-      drag
-      dragControls={controls}
-      dragMomentum={false} // 慣性を切って吸い付きを良くする
-      dragElastic={0} // ゴム紐効果も切る
-      // 座標は初期値のみ渡し、あとはFramer Motionに任せる
-      initial={{ x, y, scale: 0, opacity: 0 }}
-      animate={{
-        x,
-        y,
-        scale: isDragging ? 1.2 : 1, // ドラッグ中は大きく
-        opacity: 1,
-        zIndex: isDragging ? 50 : 0, // ドラッグ中は最前面
-        filter: isDragging
-          ? "drop-shadow(0px 10px 10px rgba(0,0,0,0.3))"
-          : "none", // 持ち上げてる感の影
-      }}
-      // ドラッグ開始・終了の検知
-      onDragStart={() => setIsDragging(true)}
-      onDragEnd={(_, info) => {
-        setIsDragging(false);
+    <div className="w-full max-w-md mx-auto p-4">
+      {/* 4列グリッド */}
+      <div className="grid grid-cols-4 gap-3 md:gap-4">
+        {slots.map((index) => {
+          // このマスにいるパーツを探す
+          const part = parts.find((p) => p.gridIndex === index);
 
-        // ドロップ時の絶対座標を計算
-        // x, y = ストア上の初期位置
-        // info.offset = ドラッグ開始位置からの移動量
-        const currentFingerX = x + info.offset.x;
-        const currentFingerY = y + info.offset.y;
-
-        // ★重要: 判定座標を「指の位置」ではなく「表示されている漢字の位置」に補正する
-        // 見た目を上にずらしているので、判定も上にずらさないと直感とズレる
-        const dropX = currentFingerX;
-        const dropY = currentFingerY + DRAG_OFFSET_Y;
-
-        handleDragEnd(part, dropX, dropY);
-      }}
-      className="absolute touch-none select-none flex items-center justify-center cursor-grab active:cursor-grabbing"
-    >
-      {/* ドラッグのヒット判定(親div)と、見た目の表示(子div)を分けることで
-        「判定は指の位置だが、見た目は上」を実現する
-      */}
-      <motion.div
-        animate={{
-          y: isDragging ? DRAG_OFFSET_Y : 0, // ドラッグ中だけ上にずらす
-        }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className={cn(
-          "flex items-center justify-center",
-          "w-16 h-16 rounded-full shadow-lg",
-          "bg-white border-2 border-stone-200 text-stone-800",
-          "font-serif text-3xl font-bold",
-          "transition-colors",
-          part.type === "KANJI"
-            ? "bg-amber-50 border-amber-200 text-amber-900 w-20 h-20 text-4xl"
-            : "bg-white"
-        )}
-      >
-        {part.char}
-      </motion.div>
-    </motion.div>
+          return (
+            <GridSlot
+              key={index}
+              index={index}
+              part={part}
+              onClick={() => handleSlotClick(index)}
+            />
+          );
+        })}
+      </div>
+    </div>
   );
 }
 --- src/features/game-board/components/MergeEffects.tsx ---
@@ -9776,10 +11377,10 @@ function EffectGroup({
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-// 修正: エイリアス(@/)を使用して確実に指定
 import { useGameStore } from "@/features/game-board/stores/store";
 import { soundEngine } from "@/lib/sounds/SoundEngine";
 import { JukugoDefinition } from "@/features/kanji-core/types";
+import { getSentenceParts } from "@/features/kanji-core/logic/sentenceHelper";
 
 interface ResultOverlayProps {
   onNextLevel?: () => void;
@@ -9790,18 +11391,16 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
   const [stampVisible, setStampVisible] = useState(false);
 
   useEffect(() => {
-    // 1.3秒後にスタンプ音を鳴らし、表示フラグを立てる
     const timer = setTimeout(() => {
       setStampVisible(true);
       if (soundEngine) {
-        // 安全策: メソッドの存在確認をしてから実行
         if (typeof (soundEngine as any).playStamp === "function") {
           (soundEngine as any).playStamp();
         } else {
           soundEngine.playMerge();
         }
       }
-    }, 1300);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -9810,27 +11409,24 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
   const meaning = (currentJukugo as JukugoDefinition & { meaning?: string })
     .meaning;
   const charCount = currentJukugo.kanji.length;
+  // 文章パーツを取得（例文表示用）
+  const sentenceParts = getSentenceParts(currentJukugo);
+  const hasSentenceData = !!currentJukugo.sentence;
 
   // --- 動的スタイルの決定 ---
-  // 文字数に応じてフォントサイズとレイアウトを微調整
-  let fontSizeClass = "";
   let gapClass = "gap-3 md:gap-5";
-  let readingPT = "pt-6"; // 読みの開始位置調整
+  let readingPT = "pt-6";
 
   if (charCount <= 2) {
-    // 2文字: ドンと大きく
+    // 2文字
   } else if (charCount === 3) {
-    // 3文字: バランス型
     gapClass = "gap-2 md:gap-4";
     readingPT = "pt-4";
   } else {
-    // 4文字以上: スラっと収める
     gapClass = "gap-2 md:gap-3";
     readingPT = "pt-2";
   }
 
-  // vw単位を使ったレスポンシブなフォントサイズ計算
-  // 画面幅が狭いときはvw、広いときはremでキャップする計算式
   const getDynamicFontSize = (count: number) => {
     if (count <= 2) return "min(8rem, 25vw)";
     if (count === 3) return "min(6rem, 18vw)";
@@ -9843,17 +11439,17 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
         initial={{ scale: 0.8, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
+        // ▼ 修正: aspect-[3/4] -> aspect-3/4
         className="relative bg-[#fcfaf5] w-full max-w-sm aspect-3/4 rounded-sm shadow-2xl flex flex-col items-center p-8 overflow-hidden"
         style={{
           boxShadow:
             "0 20px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(0,0,0,0.05)",
-          // 和紙パターンがない場合のフォールバック色
           backgroundColor: "#fcfaf5",
           backgroundImage:
             "url('https://www.transparenttextures.com/patterns/cream-paper.png')",
         }}
       >
-        {/* 四隅の装飾 (和風テイスト) */}
+        {/* 四隅の装飾 */}
         <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-stone-300" />
         <div className="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-stone-300" />
         <div className="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-stone-300" />
@@ -9861,8 +11457,6 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
 
         {/* --- メインコンテンツ --- */}
         <div className="flex-1 flex flex-col items-center justify-center w-full relative">
-          {/* 縦書きレイアウトコンテナ */}
-          {/* flex-row-reverse: 右側にメイン(漢字)、左側にサブ(読み)を配置 */}
           <div
             className={`flex flex-row-reverse items-center justify-center ${gapClass} mr-2`}
           >
@@ -9883,7 +11477,7 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
                 fontSize: getDynamicFontSize(charCount),
                 height: "auto",
                 whiteSpace: "nowrap",
-                marginLeft: "-0.1em", // 視覚補正
+                marginLeft: "-0.1em",
               }}
             >
               {currentJukugo.kanji}
@@ -9899,7 +11493,6 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
                 height: "auto",
-                // 読みが長すぎるときはスクロールさせず、はみ出さないように制限
                 maxHeight: charCount >= 4 ? "320px" : "260px",
               }}
             >
@@ -9908,7 +11501,6 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
           </div>
 
           {/* ハンコ (スタンプ) */}
-          {/* アニメーションで「ポンッ」と押される演出 */}
           <motion.div
             initial={{ scale: 3, opacity: 0, rotate: 20 }}
             animate={
@@ -9926,10 +11518,10 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
             style={{ zIndex: 10 }}
           >
             <div
-              className="w-full h-full border-[3px] border-red-600 rounded-lg flex items-center justify-center"
+              className="w-full h-full border-4 border-red-600 rounded-lg flex items-center justify-center"
               style={{ backgroundColor: "rgba(220, 38, 38, 0.05)" }}
             >
-              <div className="w-[88%] h-[88%] border border-red-600 rounded flex items-center justify-center">
+              <div className="w-[88%] h-[88%] border-2 border-red-600 rounded flex items-center justify-center">
                 <div className="text-red-600 font-serif font-bold text-4xl tracking-widest select-none transform rotate-0">
                   天晴
                 </div>
@@ -9938,18 +11530,29 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
           </motion.div>
         </div>
 
-        {/* 意味 (下に横書き) */}
-        {/* 4文字熟語などでスペースが厳しい場合はマージンを調整 */}
-        {meaning && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="text-sm md:text-base text-stone-600 font-serif text-center max-w-[90%] border-t border-stone-300 pt-4 mb-4 mt-2"
-          >
-            {meaning}
-          </motion.div>
-        )}
+        {/* 意味 & 例文 (下に横書き) */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="w-full max-w-[95%] pt-4 mb-4 mt-2 border-t border-stone-300 flex flex-col items-center gap-2"
+        >
+          {/* 意味 */}
+          {meaning && (
+            <div className="text-sm md:text-base text-stone-700 font-serif text-center font-bold">
+              {meaning}
+            </div>
+          )}
+
+          {/* 例文 (データがある場合のみ、少し小さく表示) */}
+          {hasSentenceData && (
+            <div className="text-xs md:text-sm text-stone-500 font-serif text-center mt-1 bg-stone-100 px-3 py-1 rounded-full">
+              {sentenceParts
+                .map((p) => (p.type === "SLOT" ? currentJukugo.kanji : p.text))
+                .join("")}
+            </div>
+          )}
+        </motion.div>
 
         {/* ボタンエリア */}
         <motion.div
@@ -9975,8 +11578,11 @@ import { persist } from 'zustand/middleware';
 import { PartsSlice, createPartsSlice } from './slices/partsSlice';
 import { StageSlice, createStageSlice } from './slices/stageSlice';
 import { DictionarySlice, createDictionarySlice } from '@/features/dictionary/stores/dictionarySlice';
+// ▼ 追加
+import { ThemeSlice, createThemeSlice } from './slices/themeSlice';
 
-type GameStore = PartsSlice & StageSlice & DictionarySlice;
+// ▼ 追加
+type GameStore = PartsSlice & StageSlice & DictionarySlice & ThemeSlice;
 
 export const useGameStore = create<GameStore>()(
   persist(
@@ -9984,6 +11590,8 @@ export const useGameStore = create<GameStore>()(
       ...createPartsSlice(...a),
       ...createStageSlice(...a),
       ...createDictionarySlice(...a),
+      // ▼ 追加
+      ...createThemeSlice(...a),
     }),
     {
       name: 'kanji-merge-storage',
@@ -9991,8 +11599,10 @@ export const useGameStore = create<GameStore>()(
         unlockedIds: state.unlockedIds,
         unlockedJukugos: state.unlockedJukugos,
         levelIndex: state.levelIndex,
-        maxReachedLevel: state.maxReachedLevel, // ★追加
-        historyIds: state.historyIds
+        maxReachedLevel: state.maxReachedLevel,
+        historyIds: state.historyIds,
+        // ▼ 追加
+        currentTheme: state.currentTheme,
       }),
     }
   )
@@ -10030,33 +11640,64 @@ export const createEffectSlice: StateCreator<EffectSlice> = (set) => ({
       effects: state.effects.filter((e) => e.id !== id),
     }));
   },
+});--- src/features/game-board/stores/slices/themeSlice.ts ---
+import { StateCreator } from 'zustand';
+import { ThemeId } from '../../constants/themes';
+
+export interface ThemeSlice {
+  currentTheme: ThemeId;
+  setTheme: (id: ThemeId) => void;
+}
+
+export const createThemeSlice: StateCreator<ThemeSlice> = (set) => ({
+  currentTheme: 'paper', // 初期値は「和紙」
+  setTheme: (id) => set({ currentTheme: id }),
 });--- src/features/game-board/stores/slices/partsSlice.ts ---
 import { StateCreator } from 'zustand';
 import { GamePart } from '@/features/kanji-core/types';
 
-// UI上でのパーツ型（ロジックの型 + 座標情報）
+// UI上でのパーツ型（グリッド版）
 export interface PartState extends GamePart {
-  x: number;
-  y: number;
+  gridIndex: number; // 0 ~ 15 (4x4の場合)
+}
+
+// 仮合体（プレビュー）の状態
+export interface PendingMergeState {
+  sourceId: string;    // 元のパーツ（手札）
+  targetId: string;    // 合体先のパーツ（場のパーツ）
+  previewChar: string; // 合体後の予測漢字（例："明"）
 }
 
 export interface PartsSlice {
   parts: PartState[];
+  selectedPartId: string | null;     // 選択中のパーツID
+  pendingMerge: PendingMergeState | null; // 仮合体中の情報
+
   setParts: (parts: PartState[]) => void;
-  updatePartPosition: (id: string, x: number, y: number) => void;
+  selectPart: (id: string | null) => void;
+  setPendingMerge: (state: PendingMergeState | null) => void;
+  
+  // パーツ移動（グリッド間移動や合体確定時）
+  movePart: (id: string, toIndex: number) => void;
   removePart: (id: string) => void;
   addPart: (part: PartState) => void;
 }
 
 export const createPartsSlice: StateCreator<PartsSlice> = (set) => ({
   parts: [],
+  selectedPartId: null,
+  pendingMerge: null,
   
-  setParts: (parts) => set({ parts }),
+  setParts: (parts) => set({ parts, selectedPartId: null, pendingMerge: null }),
+  
+  selectPart: (id) => set({ selectedPartId: id }),
+  
+  setPendingMerge: (state) => set({ pendingMerge: state }),
 
-  updatePartPosition: (id, x, y) => 
+  movePart: (id, toIndex) => 
     set((state) => ({
       parts: state.parts.map((p) => 
-        p.id === id ? { ...p, x, y } : p
+        p.id === id ? { ...p, gridIndex: toIndex } : p
       ),
     })),
 
@@ -10073,31 +11714,38 @@ export const createPartsSlice: StateCreator<PartsSlice> = (set) => ({
 import { StateCreator } from 'zustand';
 import { JukugoDefinition } from '@/features/kanji-core/types';
 
+// ▼ 追加
+export type DifficultyMode = 'EASY' | 'NORMAL';
+
 export interface StageSlice {
-  levelIndex: number;        // 現在プレイ中のレベル
-  maxReachedLevel: number;   // ★追加: 到達した最高レベル
+  levelIndex: number;
+  maxReachedLevel: number;
   currentJukugo: JukugoDefinition | null;
   isCleared: boolean;
   filledIndices: number[];
   historyIds: string[];
+  difficultyMode: DifficultyMode; // ▼ 追加
 
   setLevelIndex: (index: number) => void;
   setStage: (jukugo: JukugoDefinition) => void;
   setCleared: (cleared: boolean) => void;
   checkAndFillSlot: (char: string) => boolean;
   resetStage: () => void;
+  setDifficultyMode: (mode: DifficultyMode) => void; // ▼ 追加
 }
 
 export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
   levelIndex: 0,
-  maxReachedLevel: 0, // 初期値
+  maxReachedLevel: 0,
   currentJukugo: null,
   isCleared: false,
   filledIndices: [],
   historyIds: [],
+  difficultyMode: 'NORMAL', // ▼ 初期値はNORMALにしておきます
 
   setLevelIndex: (index) => set({ levelIndex: index }),
 
+  // ... (setStage, setCleared, checkAndFillSlot は変更なし) ...
   setStage: (jukugo) => {
     const { historyIds } = get();
     const newHistory = [...historyIds, jukugo.id].slice(-50);
@@ -10111,7 +11759,6 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
 
   setCleared: (cleared) => {
     const state = get();
-    // クリアした時、もし現在レベルが最高到達点なら更新する
     if (cleared) {
       if (state.levelIndex >= state.maxReachedLevel) {
         set({ isCleared: cleared, maxReachedLevel: state.levelIndex + 1 });
@@ -10133,7 +11780,6 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
       const newFilled = [...state.filledIndices, targetIndex];
       set({ filledIndices: newFilled });
       if (newFilled.length === state.currentJukugo.components.length) {
-        // ここで setCleared を呼ぶことで maxReachedLevel 更新ロジックが走る
         get().setCleared(true);
       }
       return true;
@@ -10142,6 +11788,9 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
   },
 
   resetStage: () => set({ isCleared: false, filledIndices: [] }),
+
+  // ▼ 追加
+  setDifficultyMode: (mode) => set({ difficultyMode: mode }),
 });--- src/features/game-board/stores/store.ts ---
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -10149,9 +11798,11 @@ import { PartsSlice, createPartsSlice } from './slices/partsSlice';
 import { StageSlice, createStageSlice } from './slices/stageSlice';
 import { DictionarySlice, createDictionarySlice } from '@/features/dictionary/stores/dictionarySlice';
 import { EffectSlice, createEffectSlice } from './slices/effectSlice';
+// ▼ 追加
+import { ThemeSlice, createThemeSlice } from './slices/themeSlice';
 
-// 型定義に EffectSlice を追加
-type GameStore = PartsSlice & StageSlice & DictionarySlice & EffectSlice;
+// ▼ 型定義に追加
+type GameStore = PartsSlice & StageSlice & DictionarySlice & EffectSlice & ThemeSlice;
 
 export const useGameStore = create<GameStore>()(
   persist(
@@ -10160,28 +11811,37 @@ export const useGameStore = create<GameStore>()(
       ...createStageSlice(...a),
       ...createDictionarySlice(...a),
       ...createEffectSlice(...a),
+      // ▼ 追加
+      ...createThemeSlice(...a),
     }),
     {
       name: 'kanji-merge-storage',
-      // エフェクト自体は保存する必要がないので除外する
       partialize: (state) => ({ 
         unlockedIds: state.unlockedIds,
-        levelIndex: state.levelIndex 
+        unlockedJukugos: state.unlockedJukugos,
+        levelIndex: state.levelIndex,
+        maxReachedLevel: state.maxReachedLevel,
+        historyIds: state.historyIds,
+        // ▼ 追加: テーマ設定も保存対象にする
+        currentTheme: state.currentTheme,
       }),
     }
   )
-);--- src/features/game-board/hooks/useMergeJudge.ts ---
+);--- src/features/game-board/hooks/useGridInteraction.ts ---
 import { useGameStore } from "../stores/store";
 import { judgeMerge } from "@/features/kanji-core/logic/merger";
-import { GamePart } from "@/features/kanji-core/types";
+import { getConstituents } from "@/features/kanji-core/logic/decomposer"; // 追加
 import { soundEngine } from "@/lib/sounds/SoundEngine";
 
-// 判定距離を少し広げて吸着しやすくする
-const MERGE_DISTANCE_THRESHOLD = 100;
-const GOAL_AREA_THRESHOLD_Y = 180;
-
-export function useMergeJudge() {
-  const updatePartPosition = useGameStore((state) => state.updatePartPosition);
+export function useGridInteraction() {
+  const parts = useGameStore((state) => state.parts);
+  const selectedPartId = useGameStore((state) => state.selectedPartId);
+  const selectPart = useGameStore((state) => state.selectPart);
+  
+  const pendingMerge = useGameStore((state) => state.pendingMerge);
+  const setPendingMerge = useGameStore((state) => state.setPendingMerge);
+  
+  const movePart = useGameStore((state) => state.movePart);
   const removePart = useGameStore((state) => state.removePart);
   const addPart = useGameStore((state) => state.addPart);
   const checkAndFillSlot = useGameStore((state) => state.checkAndFillSlot);
@@ -10189,122 +11849,232 @@ export function useMergeJudge() {
   const unlockJukugo = useGameStore((state) => state.unlockJukugo);
   const currentJukugo = useGameStore((state) => state.currentJukugo);
 
-  const generateId = () => Math.random().toString(36).substring(2, 9);
+  // 確定処理（合体）
+  const confirmMerge = () => {
+    if (!pendingMerge) return;
 
-  const handleDragEnd = (activePart: GamePart, x: number, y: number) => {
-    // 画面サイズを取得（相対座標→絶対座標変換のため）
-    const screenW = window.innerWidth;
-    const screenH = window.innerHeight;
+    soundEngine.playGoal(); // 決定音
+    unlockKanji(pendingMerge.previewChar);
+    removePart(pendingMerge.sourceId);
+    removePart(pendingMerge.targetId);
 
-    updatePartPosition(activePart.id, x, y);
-    soundEngine.init();
-
-    const currentParts = useGameStore.getState().parts;
-
-    // 1. 合体判定
-    // 自分以外のパーツ全てとの距離をチェック
-    const targetPart = currentParts.find((p) => {
-      if (p.id === activePart.id) return false;
-
-      // 相手の座標をピクセルに正規化
-      // (データが相対座標 0.0-1.0 なら画面サイズを掛ける、1以上ならそのまま)
-      const targetX = p.x <= 1 ? p.x * screenW : p.x;
-      const targetY = p.y <= 1 ? p.y * screenH : p.y;
-
-      const distance = Math.hypot(targetX - x, targetY - y);
-      return distance < MERGE_DISTANCE_THRESHOLD;
-    });
-
-    if (targetPart) {
-      // 相手の正規化座標（合体後の生成位置用）
-      const targetX = targetPart.x <= 1 ? targetPart.x * screenW : targetPart.x;
-      const targetY = targetPart.y <= 1 ? targetPart.y * screenH : targetPart.y;
-
-      const result = judgeMerge(activePart.char, targetPart.char);
-
-      if (result.success) {
-        soundEngine.playMerge();
-        if (result.newChar) unlockKanji(result.newChar);
-
-        removePart(activePart.id);
-        removePart(targetPart.id);
-
-        // 合体結果がいきなりゴール正解かチェック
-        const isGoalPart = checkAndFillSlot(result.newChar!);
-
-        if (isGoalPart) {
-          soundEngine.playGoal();
-          if (useGameStore.getState().isCleared && currentJukugo) {
-             unlockJukugo(currentJukugo.id);
-          }
-        } else {
-          // 盤面に生成 (2つのパーツの中間地点)
-          const newX = (x + targetX) / 2;
-          const newY = (y + targetY) / 2;
-          addPart({
-            id: generateId(),
-            char: result.newChar!,
-            type: "KANJI",
-            x: newX,
-            y: newY,
-          });
-        }
-        return;
+    // 1. ゴール判定
+    const isGoal = checkAndFillSlot(pendingMerge.previewChar);
+    
+    if (isGoal) {
+      soundEngine.playGoal();
+      if (useGameStore.getState().isCleared && currentJukugo) {
+        unlockJukugo(currentJukugo.id);
+      }
+    } else {
+      // 2. ゴールじゃないけど合体成功（盤面に置く）
+      // 合体先のパーツ位置を取得
+      const targetPart = parts.find(p => p.id === pendingMerge.targetId);
+      if (targetPart) {
+        addPart({
+          id: Math.random().toString(36).substring(2, 9),
+          char: pendingMerge.previewChar,
+          type: "KANJI",
+          gridIndex: targetPart.gridIndex,
+        });
       }
     }
 
-    // 2. ゴール判定
-    if (y < GOAL_AREA_THRESHOLD_Y) {
-      const isGoalPart = checkAndFillSlot(activePart.char);
-      if (isGoalPart) {
-        soundEngine.playGoal();
-        removePart(activePart.id);
-        
-        if (useGameStore.getState().isCleared && currentJukugo) {
-           unlockJukugo(currentJukugo.id);
+    setPendingMerge(null);
+    selectPart(null);
+  };
+
+  // 分解処理
+  const handleSplit = (partId: string) => {
+    const targetPart = parts.find(p => p.id === partId);
+    if (!targetPart) return;
+
+    // 構成パーツを取得
+    const constituents = getConstituents(targetPart.char);
+    if (!constituents) return; // 分解できない文字
+
+    // 空きマスを探す（分解するとパーツが1つ増えるため、1つ空きが必要）
+    // 現在のパーツがいた場所(1) + 空きマス(1) = 計2マス必要
+    const occupiedIndices = parts.map(p => p.gridIndex);
+    // 4x4=16マスと仮定 (storeで定数化すべきだが一旦マジックナンバー)
+    const gridSize = 16;
+    let emptyIndex = -1;
+    
+    for (let i = 0; i < gridSize; i++) {
+      if (!occupiedIndices.includes(i)) {
+        emptyIndex = i;
+        break;
+      }
+    }
+
+    if (emptyIndex === -1) {
+      // 空きがないので分解不可（エラー音など鳴らすと良い）
+      return;
+    }
+
+    // 分解実行
+    soundEngine.playSelect(); // 分解音（仮）
+    removePart(targetPart.id);
+    
+    // パーツAを元の位置に
+    addPart({
+      id: Math.random().toString(36).substring(2, 9),
+      char: constituents[0],
+      type: "RADICAL", // 便宜上RADICALに戻す（実際はKANJIかもだが）
+      gridIndex: targetPart.gridIndex,
+    });
+    
+    // パーツBを空き位置に
+    addPart({
+      id: Math.random().toString(36).substring(2, 9),
+      char: constituents[1],
+      type: "RADICAL",
+      gridIndex: emptyIndex,
+    });
+
+    selectPart(null);
+  };
+
+  const handleSlotClick = (index: number) => {
+    soundEngine.init();
+
+    // --- A. 仮合体中（プレビュー中） ---
+    if (pendingMerge) {
+      const targetPart = parts.find(p => p.id === pendingMerge.targetId);
+      if (targetPart && targetPart.gridIndex === index) {
+        confirmMerge(); // 確定
+        return;
+      }
+      setPendingMerge(null);
+      // キャンセルして通常処理へ
+    }
+
+    // --- B. 通常時 ---
+    const clickedPart = parts.find((p) => p.gridIndex === index);
+
+    // ★ クリックしたパーツがゴール対象なら即回収（これは維持）
+    if (clickedPart) {
+      const isSelfTap = clickedPart.id === selectedPartId;
+      if (!isSelfTap) {
+        const isGoal = checkAndFillSlot(clickedPart.char);
+        if (isGoal) {
+          soundEngine.playGoal();
+          removePart(clickedPart.id);
+          selectPart(null);
+          if (useGameStore.getState().isCleared && currentJukugo) {
+            unlockJukugo(currentJukugo.id);
+          }
+          return;
         }
+      }
+    }
+
+    // 1. 何も選択していない時
+    if (!selectedPartId) {
+      if (clickedPart) {
+        selectPart(clickedPart.id);
+      }
+      return;
+    }
+
+    // 2. 選択中、同じパーツをタップ → ★分解判定★
+    if (clickedPart && clickedPart.id === selectedPartId) {
+      // 選択中のものをもう一度タップしたら分解を試みる
+      const constituents = getConstituents(clickedPart.char);
+      if (constituents) {
+        handleSplit(clickedPart.id);
+      } else {
+        // 分解できないなら選択解除
+        selectPart(null);
+      }
+      return;
+    }
+
+    const sourcePart = parts.find((p) => p.id === selectedPartId);
+    if (!sourcePart) {
+      selectPart(null);
+      return;
+    }
+
+    // 3. 空きマスへ移動
+    if (!clickedPart) {
+      movePart(sourcePart.id, index);
+      selectPart(null);
+      return;
+    }
+
+    // 4. 別のパーツと合体判定
+    if (clickedPart) {
+      const result = judgeMerge(sourcePart.char, clickedPart.char);
+
+      if (result.success && result.newChar) {
+        setPendingMerge({
+          sourceId: sourcePart.id,
+          targetId: clickedPart.id,
+          previewChar: result.newChar,
+        });
+        soundEngine.playMerge();
+      } else {
+        selectPart(clickedPart.id);
       }
     }
   };
 
-  return { handleDragEnd };
+  return { handleSlotClick };
 }--- src/features/game-board/hooks/useLevelSystem.ts ---
 import { useEffect, useCallback, useRef } from "react";
-// 修正: store.ts からインポート
 import { useGameStore } from "../stores/store";
 import { generateRandomStage } from "@/features/kanji-core/logic/generator";
 import { generateStageParts } from "@/features/kanji-core/logic/decomposer";
 
 export function useLevelSystem() {
   const currentLevelIndex = useGameStore((state) => state.levelIndex);
-  const historyIds = useGameStore((state) => state.historyIds); // ★追加: 履歴を取得
+  // ★追加: 現在の難易度モードを監視
+  const difficultyMode = useGameStore((state) => state.difficultyMode);
+
   const setLevelIndex = useGameStore((state) => state.setLevelIndex);
-  
   const setParts = useGameStore((state) => state.setParts);
   const setStage = useGameStore((state) => state.setStage);
   const resetStage = useGameStore((state) => state.resetStage);
   
   const loadedLevelRef = useRef<number | null>(null);
+  // ★追加: ロードした時のモードも記録しておく（モード切替時の再ロード判定用）
+  const loadedModeRef = useRef<string | null>(null);
 
   const loadLevel = useCallback((index: number) => {
-    // ★修正: 履歴を渡して重複を避ける
-    const jukugoDef = generateRandomStage(index, historyIds);
+    // ストアから直接最新の状態を取得
+    const state = useGameStore.getState();
+    const currentHistoryIds = state.historyIds;
+    // ★追加: モードを取得
+    const mode = state.difficultyMode;
 
-    console.log(`📥 Loading Level ${index + 1}: ${jukugoDef.kanji} (Diff: ${jukugoDef.difficulty})`);
+    // ★修正: 第3引数に mode を渡す
+    const jukugoDef = generateRandomStage(index, currentHistoryIds, mode);
+
+    console.log(`📥 Loading Level ${index + 1} [${mode}]: ${jukugoDef.kanji} (Diff: ${jukugoDef.difficulty})`);
 
     resetStage();
     setStage(jukugoDef);
 
-    const initialParts = generateStageParts(jukugoDef, index);
+    // ★修正: 第3引数に mode を渡す
+    const initialParts = generateStageParts(jukugoDef, index, mode);
     setParts(initialParts as any);
     
     loadedLevelRef.current = index;
-  }, [setParts, setStage, resetStage, historyIds]); // historyIdsを依存配列に追加
+    loadedModeRef.current = mode; // ★記録
+  }, [setParts, setStage, resetStage]); 
 
   useEffect(() => {
-    if (loadedLevelRef.current === currentLevelIndex) return;
+    // レベルが変わった、またはモードが変わった場合にロードを実行
+    if (
+      loadedLevelRef.current === currentLevelIndex && 
+      loadedModeRef.current === difficultyMode
+    ) {
+      return;
+    }
+    
     loadLevel(currentLevelIndex);
-  }, [currentLevelIndex, loadLevel]);
+  }, [currentLevelIndex, difficultyMode, loadLevel]); // ★difficultyMode を依存配列に追加
 
   const nextLevel = () => {
     setLevelIndex(currentLevelIndex + 1);
@@ -10315,7 +12085,68 @@ export function useLevelSystem() {
     nextLevel,
     reloadLevel: () => loadLevel(currentLevelIndex)
   };
-}--- src/lib/sounds/SoundEngine.ts ---
+}--- src/features/game-board/constants/themes.ts ---
+export type ThemeId = 'paper' | 'blackboard' | 'cyber';
+
+export interface ThemeConfig {
+  id: ThemeId;
+  name: string;
+  colors: {
+    background: string;     // 全体の背景色
+    text: string;           // メイン文字色
+    accent: string;         // 強調色（ボタンや正解など）
+    sub: string;            // 補足文字色
+    partBg: string;         // パーツの背景
+    partBorder: string;     // パーツの枠線
+    slotBg: string;         // ゴールスロットの背景
+    slotBorder: string;     // ゴールスロットの枠
+  };
+}
+
+export const THEMES: Record<ThemeId, ThemeConfig> = {
+  paper: {
+    id: 'paper',
+    name: '和紙',
+    colors: {
+      background: 'bg-[#f5f2eb]',
+      text: 'text-[#3d3330]',
+      accent: 'text-[#d94a38]', // 朱色
+      sub: 'text-stone-500',
+      partBg: 'bg-white',
+      partBorder: 'border-stone-200',
+      slotBg: 'bg-stone-50/50',
+      slotBorder: 'border-stone-300',
+    },
+  },
+  blackboard: {
+    id: 'blackboard',
+    name: '黒板',
+    colors: {
+      background: 'bg-[#2b4033]', // 深緑
+      text: 'text-white',
+      accent: 'text-[#facc15]',   // チョークの黄色
+      sub: 'text-stone-300',
+      partBg: 'bg-[#1a2e22]',
+      partBorder: 'border-stone-400',
+      slotBg: 'bg-white/10',
+      slotBorder: 'border-white/30',
+    },
+  },
+  cyber: {
+    id: 'cyber',
+    name: '電脳',
+    colors: {
+      background: 'bg-[#0f172a]', // 濃い紺
+      text: 'text-[#22d3ee]',     // ネオンシアン
+      accent: 'text-[#f472b6]',   // ネオンピンク
+      sub: 'text-slate-400',
+      partBg: 'bg-[#1e293b]',
+      partBorder: 'border-[#22d3ee]/50',
+      slotBg: 'bg-[#1e293b]/50',
+      slotBorder: 'border-[#22d3ee]/30',
+    },
+  },
+};--- src/lib/sounds/SoundEngine.ts ---
 /**
  * 簡易シンセサイザーエンジン (Enhanced)
  * MP3ファイルなしで、BGMや環境音も生成します。
@@ -10502,6 +12333,12 @@ class SoundEngine {
     this.playTone(659.25, 'triangle', 0.5, now + 0.1); // ミ
     this.playTone(783.99, 'triangle', 0.5, now + 0.2); // ソ
     this.playTone(1046.50, 'sine', 0.8, now + 0.3);    // 高いド
+  }
+
+  public playSelect() {
+    this.init();
+    // 短く高い音で「コッ」という感じ
+    this.playTone(800, 'square', 0.05, 0, 0.1);
   }
 }
 

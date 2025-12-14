@@ -185,6 +185,12 @@ class SoundEngine {
     this.playTone(783.99, 'triangle', 0.5, now + 0.2); // ソ
     this.playTone(1046.50, 'sine', 0.8, now + 0.3);    // 高いド
   }
+
+  public playSelect() {
+    this.init();
+    // 短く高い音で「コッ」という感じ
+    this.playTone(800, 'square', 0.05, 0, 0.1);
+  }
 }
 
 export const soundEngine = new SoundEngine();

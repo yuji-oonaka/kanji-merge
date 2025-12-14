@@ -1,43 +1,371 @@
 [
-  { "id": "t-01", "kanji": "明", "reading": "あかり", "meaning": "光り輝くこと。物事がはっきりしているさま。", "difficulty": 1, "components": ["明"] },
-  { "id": "l-01", "kanji": "岩石", "reading": "がんせき", "meaning": "岩と石。地殻を構成する固い物質。", "difficulty": 2, "components": ["岩", "石"] },
-  { "id": "l-02", "kanji": "森林", "reading": "しんりん", "meaning": "樹木が密集して生えている場所。", "difficulty": 2, "components": ["森", "林"] },
-  { "id": "l-03", "kanji": "休日", "reading": "きゅうじつ", "meaning": "業務や授業を休む日。", "difficulty": 2, "components": ["休", "日"] },
-  { "id": "l-04", "kanji": "雷雨", "reading": "らいう", "meaning": "雷鳴や稲妻を伴って降る雨。", "difficulty": 3, "components": ["雷", "雨"] },
-  { "id": "l-05", "kanji": "大雪", "reading": "おおゆき", "meaning": "雪が激しく大量に降ること。", "difficulty": 3, "components": ["大", "雪"] },
-  { "id": "l-06", "kanji": "青空", "reading": "あおぞら", "meaning": "雲がなく晴れ渡った青い空。", "difficulty": 3, "components": ["青", "空"] },
-  { "id": "l-07", "kanji": "時間", "reading": "じかん", "meaning": "時の流れの一点から一点まで。", "difficulty": 3, "components": ["時", "間"] },
-  { "id": "l-08", "kanji": "新聞", "reading": "しんぶん", "meaning": "新しい出来事を報道する紙面。", "difficulty": 4, "components": ["新", "聞"] },
-  { "id": "l-09", "kanji": "開閉", "reading": "かいへい", "meaning": "開けることと閉じること。", "difficulty": 3, "components": ["開", "閉"] },
-  { "id": "l-10", "kanji": "会話", "reading": "かいわ", "meaning": "向かい合って話をすること。", "difficulty": 3, "components": ["会", "話"] },
-  { "id": "l-11", "kanji": "言語", "reading": "げんご", "meaning": "考えや気持ちを伝えるための言葉。", "difficulty": 4, "components": ["言", "語"] },
-  { "id": "l-12", "kanji": "読書", "reading": "どくしょ", "meaning": "本を読むこと。", "difficulty": 3, "components": ["読", "書"] },
-  { "id": "l-13", "kanji": "男気", "reading": "おとこぎ", "meaning": "弱い者を助けようとする男らしい気質。", "difficulty": 2, "components": ["男", "気"] },
-  { "id": "l-14", "kanji": "町内", "reading": "ちょうない", "meaning": "町の中。その町の区域内。", "difficulty": 2, "components": ["町", "内"] },
-  { "id": "l-15", "kanji": "地図", "reading": "ちず", "meaning": "地形や様子を縮尺して平面に表した図。", "difficulty": 3, "components": ["地", "図"] },
-  { "id": "l-16", "kanji": "池", "reading": "いけ", "meaning": "地面がくぼんで水が溜まっている所。", "difficulty": 2, "components": ["池"] },
-  { "id": "l-17", "kanji": "海外", "reading": "かいがい", "meaning": "海の外。外国。", "difficulty": 3, "components": ["海", "外"] },
-  { "id": "l-18", "kanji": "特急", "reading": "とっきゅう", "meaning": "特別に急ぐこと。特別急行列車。", "difficulty": 3, "components": ["特", "急"] },
-  { "id": "l-19", "kanji": "招待", "reading": "しょうたい", "meaning": "客として招くこと。", "difficulty": 3, "components": ["招", "待"] },
-  { "id": "l-20", "kanji": "持参", "reading": "じさん", "meaning": "物を持ってくること。", "difficulty": 3, "components": ["持", "参"] },
-  { "id": "l-21", "kanji": "草原", "reading": "そうげん", "meaning": "草が一面に生えている広い土地。", "difficulty": 3, "components": ["草", "原"] },
-  { "id": "l-22", "kanji": "花見", "reading": "はなみ", "meaning": "桜などの花を見て楽しむこと。", "difficulty": 3, "components": ["花", "見"] },
-  { "id": "l-23", "kanji": "親子", "reading": "おやこ", "meaning": "親と子。", "difficulty": 3, "components": ["親", "子"] },
-  { "id": "l-24", "kanji": "売買", "reading": "ばいばい", "meaning": "売ることと買うこと。", "difficulty": 4, "components": ["売", "買"] },
-  { "id": "l-25", "kanji": "算数", "reading": "さんすう", "meaning": "数の計算などを学ぶ教科。", "difficulty": 4, "components": ["算", "数"] },
-  { "id": "l-26", "kanji": "理科", "reading": "りか", "meaning": "自然科学を学ぶ教科。", "difficulty": 3, "components": ["理", "科"] },
-  { "id": "l-27", "kanji": "早朝", "reading": "そうちょう", "meaning": "朝早い時間。", "difficulty": 3, "components": ["早", "朝"] },
-  { "id": "l-28", "kanji": "鉄道", "reading": "てつどう", "meaning": "線路を敷き、その上で車両を走らせる交通機関。", "difficulty": 4, "components": ["鉄", "道"] },
-  { "id": "l-29", "kanji": "銀行", "reading": "ぎんこう", "meaning": "預金の受け入れや貸付を行う金融機関。", "difficulty": 4, "components": ["銀", "行"] },
-  { "id": "l-30", "kanji": "飲食", "reading": "いんしょく", "meaning": "飲んだり食べたりすること。", "difficulty": 3, "components": ["飲", "食"] },
-  { "id": "l-31", "kanji": "鮮魚", "reading": "せんぎょ", "meaning": "新鮮な魚。", "difficulty": 5, "components": ["鮮", "魚"] },
-  { "id": "l-32", "kanji": "動物", "reading": "どうぶつ", "meaning": "運動・感覚機能を持つ生き物。", "difficulty": 3, "components": ["動", "物"] },
-  { "id": "l-33", "kanji": "回転", "reading": "かいてん", "meaning": "ぐるぐると回ること。", "difficulty": 3, "components": ["回", "転"] },
-  { "id": "l-34", "kanji": "公園", "reading": "こうえん", "meaning": "公衆のために設けられた庭園や遊戯場。", "difficulty": 3, "components": ["公", "園"] },
-  { "id": "l-35", "kanji": "暗室", "reading": "あんしつ", "meaning": "外からの光が入らないようにした部屋。", "difficulty": 4, "components": ["暗", "室"] },
-  { "id": "l-36", "kanji": "鳴き声", "reading": "なきごえ", "meaning": "鳥や虫、獣などが鳴く声。", "difficulty": 3, "components": ["鳴", "声"] },
-  { "id": "l-37", "kanji": "黒板", "reading": "こくばん", "meaning": "チョークで文字や絵を書くための黒い板。", "difficulty": 3, "components": ["黒", "板"] },
-  { "id": "l-38", "kanji": "電線", "reading": "でんせん", "meaning": "電気を通すための線。", "difficulty": 4, "components": ["電", "線"] },
-  { "id": "l-39", "kanji": "電話", "reading": "でんわ", "meaning": "離れた場所に声を伝える通信機。", "difficulty": 4, "components": ["電", "話"] },
-  { "id": "l-40", "kanji": "最強", "reading": "さいきょう", "meaning": "最も強いこと。", "difficulty": 5, "components": ["最", "強"] }
+  { 
+    "id": "t-01", 
+    "kanji": "明", 
+    "reading": "あかり", 
+    "meaning": "光り輝くこと。物事がはっきりしているさま。", 
+    "difficulty": 1, 
+    "components": ["明"],
+    "sentence": "部屋に{{target}}を灯す" 
+  },
+  { 
+    "id": "l-01", 
+    "kanji": "岩石", 
+    "reading": "がんせき", 
+    "meaning": "岩と石。地殻を構成する固い物質。", 
+    "difficulty": 2, 
+    "components": ["岩", "石"],
+    "sentence": "ゴツゴツした{{target}}が転がる" 
+  },
+  { 
+    "id": "l-02", 
+    "kanji": "森林", 
+    "reading": "しんりん", 
+    "meaning": "樹木が密集して生えている場所。", 
+    "difficulty": 2, 
+    "components": ["森", "林"],
+    "sentence": "静かな{{target}}を散策する" 
+  },
+  { 
+    "id": "l-03", 
+    "kanji": "休日", 
+    "reading": "きゅうじつ", 
+    "meaning": "業務や授業を休む日。", 
+    "difficulty": 2, 
+    "components": ["休", "日"],
+    "sentence": "今日は待ちに待った{{target}}だ" 
+  },
+  { 
+    "id": "l-04", 
+    "kanji": "雷雨", 
+    "reading": "らいう", 
+    "meaning": "雷鳴や稲妻を伴って降る雨。", 
+    "difficulty": 3, 
+    "components": ["雷", "雨"],
+    "sentence": "激しい{{target}}に見舞われる" 
+  },
+  { 
+    "id": "l-05", 
+    "kanji": "大雪", 
+    "reading": "おおゆき", 
+    "meaning": "雪が激しく大量に降ること。", 
+    "difficulty": 3, 
+    "components": ["大", "雪"],
+    "sentence": "記録的な{{target}}への備え" 
+  },
+  { 
+    "id": "l-06", 
+    "kanji": "青空", 
+    "reading": "あおぞら", 
+    "meaning": "雲がなく晴れ渡った青い空。", 
+    "difficulty": 3, 
+    "components": ["青", "空"],
+    "sentence": "見上げれば{{target}}が広がる" 
+  },
+  { 
+    "id": "l-07", 
+    "kanji": "時間", 
+    "reading": "じかん", 
+    "meaning": "時の流れの一点から一点まで。", 
+    "difficulty": 3, 
+    "components": ["時", "間"],
+    "sentence": "楽しい{{target}}はあっという間" 
+  },
+  { 
+    "id": "l-08", 
+    "kanji": "新聞", 
+    "reading": "しんぶん", 
+    "meaning": "新しい出来事を報道する紙面。", 
+    "difficulty": 4, 
+    "components": ["新", "聞"],
+    "sentence": "朝食を食べながら{{target}}を読む" 
+  },
+  { 
+    "id": "l-09", 
+    "kanji": "開閉", 
+    "reading": "かいへい", 
+    "meaning": "開けることと閉じること。", 
+    "difficulty": 3, 
+    "components": ["開", "閉"],
+    "sentence": "ドアの{{target}}にご注意ください" 
+  },
+  { 
+    "id": "l-10", 
+    "kanji": "会話", 
+    "reading": "かいわ", 
+    "meaning": "向かい合って話をすること。", 
+    "difficulty": 3, 
+    "components": ["会", "話"],
+    "sentence": "久しぶりの友と{{target}}が弾む" 
+  },
+  { 
+    "id": "l-11", 
+    "kanji": "言語", 
+    "reading": "げんご", 
+    "meaning": "考えや気持ちを伝えるための言葉。", 
+    "difficulty": 4, 
+    "components": ["言", "語"],
+    "sentence": "共通の{{target}}で理解し合う" 
+  },
+  { 
+    "id": "l-12", 
+    "kanji": "読書", 
+    "reading": "どくしょ", 
+    "meaning": "本を読むこと。", 
+    "difficulty": 3, 
+    "components": ["読", "書"],
+    "sentence": "秋の夜長は{{target}}に限る" 
+  },
+  { 
+    "id": "l-13", 
+    "kanji": "男気", 
+    "reading": "おとこぎ", 
+    "meaning": "弱い者を助けようとする男らしい気質。", 
+    "difficulty": 2, 
+    "components": ["男", "気"],
+    "sentence": "彼の{{target}}に惚れ直した" 
+  },
+  { 
+    "id": "l-14", 
+    "kanji": "町内", 
+    "reading": "ちょうない", 
+    "meaning": "町の中。その町の区域内。", 
+    "difficulty": 2, 
+    "components": ["町", "内"],
+    "sentence": "{{target}}会の掃除に参加する" 
+  },
+  { 
+    "id": "l-15", 
+    "kanji": "地図", 
+    "reading": "ちず", 
+    "meaning": "地形や様子を縮尺して平面に表した図。", 
+    "difficulty": 3, 
+    "components": ["地", "図"],
+    "sentence": "宝の{{target}}を広げる" 
+  },
+  { 
+    "id": "l-16", 
+    "kanji": "池", 
+    "reading": "いけ", 
+    "meaning": "地面がくぼんで水が溜まっている所。", 
+    "difficulty": 2, 
+    "components": ["池"],
+    "sentence": "庭の{{target}}に鯉がいる" 
+  },
+  { 
+    "id": "l-17", 
+    "kanji": "海外", 
+    "reading": "かいがい", 
+    "meaning": "海の外。外国。", 
+    "difficulty": 3, 
+    "components": ["海", "外"],
+    "sentence": "いつか{{target}}旅行に行きたい" 
+  },
+  { 
+    "id": "l-18", 
+    "kanji": "特急", 
+    "reading": "とっきゅう", 
+    "meaning": "特別に急ぐこと。特別急行列車。", 
+    "difficulty": 3, 
+    "components": ["特", "急"],
+    "sentence": "{{target}}電車で温泉へ向かう" 
+  },
+  { 
+    "id": "l-19", 
+    "kanji": "招待", 
+    "reading": "しょうたい", 
+    "meaning": "客として招くこと。", 
+    "difficulty": 3, 
+    "components": ["招", "待"],
+    "sentence": "結婚式の{{target}}状が届く" 
+  },
+  { 
+    "id": "l-20", 
+    "kanji": "持参", 
+    "reading": "じさん", 
+    "meaning": "物を持ってくること。", 
+    "difficulty": 3, 
+    "components": ["持", "参"],
+    "sentence": "お弁当は各自{{target}}です" 
+  },
+  { 
+    "id": "l-21", 
+    "kanji": "草原", 
+    "reading": "そうげん", 
+    "meaning": "草が一面に生えている広い土地。", 
+    "difficulty": 3, 
+    "components": ["草", "原"],
+    "sentence": "馬が{{target}}を駆ける" 
+  },
+  { 
+    "id": "l-22", 
+    "kanji": "花見", 
+    "reading": "はなみ", 
+    "meaning": "桜などの花を見て楽しむこと。", 
+    "difficulty": 3, 
+    "components": ["花", "見"],
+    "sentence": "公園で{{target}}の場所取りをする" 
+  },
+  { 
+    "id": "l-23", 
+    "kanji": "親子", 
+    "reading": "おやこ", 
+    "meaning": "親と子。", 
+    "difficulty": 3, 
+    "components": ["親", "子"],
+    "sentence": "仲良く{{target}}丼を食べる" 
+  },
+  { 
+    "id": "l-24", 
+    "kanji": "売買", 
+    "reading": "ばいばい", 
+    "meaning": "売ることと買うこと。", 
+    "difficulty": 4, 
+    "components": ["売", "買"],
+    "sentence": "土地の{{target}}契約を結ぶ" 
+  },
+  { 
+    "id": "l-25", 
+    "kanji": "算数", 
+    "reading": "さんすう", 
+    "meaning": "数の計算などを学ぶ教科。", 
+    "difficulty": 4, 
+    "components": ["算", "数"],
+    "sentence": "小学校で{{target}}を教える" 
+  },
+  { 
+    "id": "l-26", 
+    "kanji": "理科", 
+    "reading": "りか", 
+    "meaning": "自然科学を学ぶ教科。", 
+    "difficulty": 3, 
+    "components": ["理", "科"],
+    "sentence": "{{target}}の実験で爆発する" 
+  },
+  { 
+    "id": "l-27", 
+    "kanji": "早朝", 
+    "reading": "そうちょう", 
+    "meaning": "朝早い時間。", 
+    "difficulty": 3, 
+    "components": ["早", "朝"],
+    "sentence": "{{target}}の空気は澄んでいる" 
+  },
+  { 
+    "id": "l-28", 
+    "kanji": "鉄道", 
+    "reading": "てつどう", 
+    "meaning": "線路を敷き、その上で車両を走らせる交通機関。", 
+    "difficulty": 4, 
+    "components": ["鉄", "道"],
+    "sentence": "{{target}}模型を集めるのが趣味だ" 
+  },
+  { 
+    "id": "l-29", 
+    "kanji": "銀行", 
+    "reading": "ぎんこう", 
+    "meaning": "預金の受け入れや貸付を行う金融機関。", 
+    "difficulty": 4, 
+    "components": ["銀", "行"],
+    "sentence": "{{target}}にお金を預ける" 
+  },
+  { 
+    "id": "l-30", 
+    "kanji": "飲食", 
+    "reading": "いんしょく", 
+    "meaning": "飲んだり食べたりすること。", 
+    "difficulty": 3, 
+    "components": ["飲", "食"],
+    "sentence": "店内での{{target}}はお控えください" 
+  },
+  { 
+    "id": "l-31", 
+    "kanji": "鮮魚", 
+    "reading": "せんぎょ", 
+    "meaning": "新鮮な魚。", 
+    "difficulty": 5, 
+    "components": ["鮮", "魚"],
+    "sentence": "市場で{{target}}を仕入れる" 
+  },
+  { 
+    "id": "l-32", 
+    "kanji": "動物", 
+    "reading": "どうぶつ", 
+    "meaning": "運動・感覚機能を持つ生き物。", 
+    "difficulty": 3, 
+    "components": ["動", "物"],
+    "sentence": "{{target}}園の人気者パンダ" 
+  },
+  { 
+    "id": "l-33", 
+    "kanji": "回転", 
+    "reading": "かいてん", 
+    "meaning": "ぐるぐると回ること。", 
+    "difficulty": 3, 
+    "components": ["回", "転"],
+    "sentence": "{{target}}寿司で皿を積み上げる" 
+  },
+  { 
+    "id": "l-34", 
+    "kanji": "公園", 
+    "reading": "こうえん", 
+    "meaning": "公衆のために設けられた庭園や遊戯場。", 
+    "difficulty": 3, 
+    "components": ["公", "園"],
+    "sentence": "休日は{{target}}でピクニック" 
+  },
+  { 
+    "id": "l-35", 
+    "kanji": "暗室", 
+    "reading": "あんしつ", 
+    "meaning": "外からの光が入らないようにした部屋。", 
+    "difficulty": 4, 
+    "components": ["暗", "室"],
+    "sentence": "{{target}}で写真を現像する" 
+  },
+  { 
+    "id": "l-36", 
+    "kanji": "鳴き声", 
+    "reading": "なきごえ", 
+    "meaning": "鳥や虫、獣などが鳴く声。", 
+    "difficulty": 3, 
+    "components": ["鳴", "声"],
+    "sentence": "遠くから鳥の{{target}}がする" 
+  },
+  { 
+    "id": "l-37", 
+    "kanji": "黒板", 
+    "reading": "こくばん", 
+    "meaning": "チョークで文字や絵を書くための黒い板。", 
+    "difficulty": 3, 
+    "components": ["黒", "板"],
+    "sentence": "{{target}}消しで文字を消す" 
+  },
+  { 
+    "id": "l-38", 
+    "kanji": "電線", 
+    "reading": "でんせん", 
+    "meaning": "電気を通すための線。", 
+    "difficulty": 4, 
+    "components": ["電", "線"],
+    "sentence": "スズメが{{target}}に止まっている" 
+  },
+  { 
+    "id": "l-39", 
+    "kanji": "電話", 
+    "reading": "でんわ", 
+    "meaning": "離れた場所に声を伝える通信機。", 
+    "difficulty": 4, 
+    "components": ["電", "話"],
+    "sentence": "母に{{target}}をかける" 
+  },
+  { 
+    "id": "l-40", 
+    "kanji": "最強", 
+    "reading": "さいきょう", 
+    "meaning": "最も強いこと。", 
+    "difficulty": 5, 
+    "components": ["最", "強"],
+    "sentence": "人類{{target}}の戦士が決まる" 
+  }
 ]

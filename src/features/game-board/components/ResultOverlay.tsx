@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-// 修正: エイリアス(@/)を使用して確実に指定
 import { useGameStore } from "@/features/game-board/stores/store";
 import { soundEngine } from "@/lib/sounds/SoundEngine";
 import { JukugoDefinition } from "@/features/kanji-core/types";
+import { getSentenceParts } from "@/features/kanji-core/logic/sentenceHelper";
 
 interface ResultOverlayProps {
   onNextLevel?: () => void;
@@ -16,18 +16,16 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
   const [stampVisible, setStampVisible] = useState(false);
 
   useEffect(() => {
-    // 1.3秒後にスタンプ音を鳴らし、表示フラグを立てる
     const timer = setTimeout(() => {
       setStampVisible(true);
       if (soundEngine) {
-        // 安全策: メソッドの存在確認をしてから実行
         if (typeof (soundEngine as any).playStamp === "function") {
           (soundEngine as any).playStamp();
         } else {
           soundEngine.playMerge();
         }
       }
-    }, 1300);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -36,27 +34,24 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
   const meaning = (currentJukugo as JukugoDefinition & { meaning?: string })
     .meaning;
   const charCount = currentJukugo.kanji.length;
+  // 文章パーツを取得（例文表示用）
+  const sentenceParts = getSentenceParts(currentJukugo);
+  const hasSentenceData = !!currentJukugo.sentence;
 
   // --- 動的スタイルの決定 ---
-  // 文字数に応じてフォントサイズとレイアウトを微調整
-  let fontSizeClass = "";
   let gapClass = "gap-3 md:gap-5";
-  let readingPT = "pt-6"; // 読みの開始位置調整
+  let readingPT = "pt-6";
 
   if (charCount <= 2) {
-    // 2文字: ドンと大きく
+    // 2文字
   } else if (charCount === 3) {
-    // 3文字: バランス型
     gapClass = "gap-2 md:gap-4";
     readingPT = "pt-4";
   } else {
-    // 4文字以上: スラっと収める
     gapClass = "gap-2 md:gap-3";
     readingPT = "pt-2";
   }
 
-  // vw単位を使ったレスポンシブなフォントサイズ計算
-  // 画面幅が狭いときはvw、広いときはremでキャップする計算式
   const getDynamicFontSize = (count: number) => {
     if (count <= 2) return "min(8rem, 25vw)";
     if (count === 3) return "min(6rem, 18vw)";
@@ -69,17 +64,17 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
         initial={{ scale: 0.8, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
+        // ▼ 修正: aspect-[3/4] -> aspect-3/4
         className="relative bg-[#fcfaf5] w-full max-w-sm aspect-3/4 rounded-sm shadow-2xl flex flex-col items-center p-8 overflow-hidden"
         style={{
           boxShadow:
             "0 20px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(0,0,0,0.05)",
-          // 和紙パターンがない場合のフォールバック色
           backgroundColor: "#fcfaf5",
           backgroundImage:
             "url('https://www.transparenttextures.com/patterns/cream-paper.png')",
         }}
       >
-        {/* 四隅の装飾 (和風テイスト) */}
+        {/* 四隅の装飾 */}
         <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-stone-300" />
         <div className="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-stone-300" />
         <div className="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-stone-300" />
@@ -87,8 +82,6 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
 
         {/* --- メインコンテンツ --- */}
         <div className="flex-1 flex flex-col items-center justify-center w-full relative">
-          {/* 縦書きレイアウトコンテナ */}
-          {/* flex-row-reverse: 右側にメイン(漢字)、左側にサブ(読み)を配置 */}
           <div
             className={`flex flex-row-reverse items-center justify-center ${gapClass} mr-2`}
           >
@@ -109,7 +102,7 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
                 fontSize: getDynamicFontSize(charCount),
                 height: "auto",
                 whiteSpace: "nowrap",
-                marginLeft: "-0.1em", // 視覚補正
+                marginLeft: "-0.1em",
               }}
             >
               {currentJukugo.kanji}
@@ -125,7 +118,6 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
                 height: "auto",
-                // 読みが長すぎるときはスクロールさせず、はみ出さないように制限
                 maxHeight: charCount >= 4 ? "320px" : "260px",
               }}
             >
@@ -134,7 +126,6 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
           </div>
 
           {/* ハンコ (スタンプ) */}
-          {/* アニメーションで「ポンッ」と押される演出 */}
           <motion.div
             initial={{ scale: 3, opacity: 0, rotate: 20 }}
             animate={
@@ -152,10 +143,10 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
             style={{ zIndex: 10 }}
           >
             <div
-              className="w-full h-full border-[3px] border-red-600 rounded-lg flex items-center justify-center"
+              className="w-full h-full border-4 border-red-600 rounded-lg flex items-center justify-center"
               style={{ backgroundColor: "rgba(220, 38, 38, 0.05)" }}
             >
-              <div className="w-[88%] h-[88%] border border-red-600 rounded flex items-center justify-center">
+              <div className="w-[88%] h-[88%] border-2 border-red-600 rounded flex items-center justify-center">
                 <div className="text-red-600 font-serif font-bold text-4xl tracking-widest select-none transform rotate-0">
                   天晴
                 </div>
@@ -164,18 +155,29 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
           </motion.div>
         </div>
 
-        {/* 意味 (下に横書き) */}
-        {/* 4文字熟語などでスペースが厳しい場合はマージンを調整 */}
-        {meaning && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="text-sm md:text-base text-stone-600 font-serif text-center max-w-[90%] border-t border-stone-300 pt-4 mb-4 mt-2"
-          >
-            {meaning}
-          </motion.div>
-        )}
+        {/* 意味 & 例文 (下に横書き) */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="w-full max-w-[95%] pt-4 mb-4 mt-2 border-t border-stone-300 flex flex-col items-center gap-2"
+        >
+          {/* 意味 */}
+          {meaning && (
+            <div className="text-sm md:text-base text-stone-700 font-serif text-center font-bold">
+              {meaning}
+            </div>
+          )}
+
+          {/* 例文 (データがある場合のみ、少し小さく表示) */}
+          {hasSentenceData && (
+            <div className="text-xs md:text-sm text-stone-500 font-serif text-center mt-1 bg-stone-100 px-3 py-1 rounded-full">
+              {sentenceParts
+                .map((p) => (p.type === "SLOT" ? currentJukugo.kanji : p.text))
+                .join("")}
+            </div>
+          )}
+        </motion.div>
 
         {/* ボタンエリア */}
         <motion.div

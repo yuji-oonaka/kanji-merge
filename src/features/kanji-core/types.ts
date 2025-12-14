@@ -10,6 +10,10 @@ export interface GamePart {
   id: string;
   char: string;
   type: PartType;
+  // グリッド表示用
+  gridIndex?: number;
+  x?: number; // 互換性のため残存
+  y?: number; // 互換性のため残存
 }
 
 // マージ判定の結果
@@ -24,10 +28,16 @@ export interface JukugoDefinition {
   reading: string;
   difficulty: number;
   components: string[];
-  meaning?: string; // ★追加: 意味（オプション）
+  meaning?: string;
+  // ▼ 追加: 穴埋め用の例文
+  // ターゲットとなる熟語部分は "{{target}}" というプレースホルダーで表現
+  // 例: "夏の夜空に{{target}}が上がる"
+  sentence?: string;
 }
 
 // 分解辞書型
 export interface IdsMap {
   [key: string]: string[];
 }
+
+export type DifficultyMode = 'EASY' | 'NORMAL';

@@ -1,31 +1,38 @@
 import { StateCreator } from 'zustand';
 import { JukugoDefinition } from '@/features/kanji-core/types';
 
+// ▼ 追加
+export type DifficultyMode = 'EASY' | 'NORMAL';
+
 export interface StageSlice {
-  levelIndex: number;        // 現在プレイ中のレベル
-  maxReachedLevel: number;   // ★追加: 到達した最高レベル
+  levelIndex: number;
+  maxReachedLevel: number;
   currentJukugo: JukugoDefinition | null;
   isCleared: boolean;
   filledIndices: number[];
   historyIds: string[];
+  difficultyMode: DifficultyMode; // ▼ 追加
 
   setLevelIndex: (index: number) => void;
   setStage: (jukugo: JukugoDefinition) => void;
   setCleared: (cleared: boolean) => void;
   checkAndFillSlot: (char: string) => boolean;
   resetStage: () => void;
+  setDifficultyMode: (mode: DifficultyMode) => void; // ▼ 追加
 }
 
 export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
   levelIndex: 0,
-  maxReachedLevel: 0, // 初期値
+  maxReachedLevel: 0,
   currentJukugo: null,
   isCleared: false,
   filledIndices: [],
   historyIds: [],
+  difficultyMode: 'NORMAL', // ▼ 初期値はNORMALにしておきます
 
   setLevelIndex: (index) => set({ levelIndex: index }),
 
+  // ... (setStage, setCleared, checkAndFillSlot は変更なし) ...
   setStage: (jukugo) => {
     const { historyIds } = get();
     const newHistory = [...historyIds, jukugo.id].slice(-50);
@@ -39,7 +46,6 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
 
   setCleared: (cleared) => {
     const state = get();
-    // クリアした時、もし現在レベルが最高到達点なら更新する
     if (cleared) {
       if (state.levelIndex >= state.maxReachedLevel) {
         set({ isCleared: cleared, maxReachedLevel: state.levelIndex + 1 });
@@ -61,7 +67,6 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
       const newFilled = [...state.filledIndices, targetIndex];
       set({ filledIndices: newFilled });
       if (newFilled.length === state.currentJukugo.components.length) {
-        // ここで setCleared を呼ぶことで maxReachedLevel 更新ロジックが走る
         get().setCleared(true);
       }
       return true;
@@ -70,4 +75,7 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
   },
 
   resetStage: () => set({ isCleared: false, filledIndices: [] }),
+
+  // ▼ 追加
+  setDifficultyMode: (mode) => set({ difficultyMode: mode }),
 });

@@ -1,4 +1,4 @@
-import { JukugoDefinition } from '../types';
+import { JukugoDefinition, DifficultyMode } from '../types';
 import jukugoData from '../data/jukugo-db-auto.json';
 
 /**
@@ -6,53 +6,57 @@ import jukugoData from '../data/jukugo-db-auto.json';
  * @param levelIndex 現在のレベル
  * @param excludeIds 出題履歴にあるIDリスト (これらは候補から除外)
  */
-export function generateRandomStage(levelIndex: number, excludeIds: string[] = []): JukugoDefinition {
+export function generateRandomStage(
+  levelIndex: number, 
+  excludeIds: string[] = [], 
+  mode: DifficultyMode = 'NORMAL'
+): JukugoDefinition {
   
-  let minDiff = 1;
-  let maxDiff = 1;
+  const data = jukugoData as JukugoDefinition[];
+  let candidates: JukugoDefinition[] = [];
 
-  // レベルカーブ設定
-  if (levelIndex < 5) {
-    minDiff = 1; maxDiff = 2;
-  } else if (levelIndex < 15) {
-    minDiff = 2; maxDiff = 4;
-  } else if (levelIndex < 25) {
-    minDiff = 4; maxDiff = 7;
-  } else if (levelIndex < 40) {
-    minDiff = 6; maxDiff = 9;
+  if (mode === 'EASY') {
+    // 【初級モード】
+    // 1. 構成パーツが2つ以下（2文字熟語 or 1文字漢字）に限定
+    // 2. 難易度(difficulty)が低いものに限定 (例: 3以下)
+    candidates = data.filter(j => 
+      j.components.length <= 2 && j.difficulty <= 3
+    );
   } else {
-    minDiff = 8; maxDiff = 10;
+    // 【標準モード】(既存のロジック + レベル補正)
+    let minDiff = 1;
+    let maxDiff = 1;
+
+    // レベルカーブ設定
+    if (levelIndex < 5) { minDiff = 1; maxDiff = 2; } 
+    else if (levelIndex < 15) { minDiff = 2; maxDiff = 4; } 
+    else if (levelIndex < 25) { minDiff = 4; maxDiff = 7; } 
+    else if (levelIndex < 40) { minDiff = 6; maxDiff = 9; } 
+    else { minDiff = 8; maxDiff = 10; }
+    
+    candidates = data.filter(j => j.difficulty >= minDiff && j.difficulty <= maxDiff);
   }
 
-  const data = jukugoData as JukugoDefinition[];
-
-  // 1. まず難易度で絞り込む
-  let candidates = data.filter(j => j.difficulty >= minDiff && j.difficulty <= maxDiff);
-
-  // 2. さらに履歴にあるものを除外する
+  // --- 共通: 履歴フィルタリング ---
   const freshCandidates = candidates.filter(j => !excludeIds.includes(j.id));
-
-  // もし履歴除外後の候補が残っていれば、そこから選ぶ (優先)
   if (freshCandidates.length > 0) {
     candidates = freshCandidates;
-  } else {
-    // 候補が尽きてしまった場合 (履歴が多すぎる、またはデータ不足)
-    // 仕方ないので履歴フィルターを解除し、難易度フィルターのみで再挑戦
-    // (それでもなければ全データへフォールバック)
-    if (candidates.length === 0) {
-       candidates = data.filter(j => j.difficulty <= maxDiff);
-    }
+  } else if (candidates.length === 0) {
+    // 候補がない場合のフォールバック（全データから簡単なものを探す）
+    candidates = data.filter(j => j.components.length === 2);
   }
   
+  // 安全策
   if (candidates.length === 0) {
-    // 最終手段
     return {
-      id: "error",
-      kanji: "空気",
-      reading: "くうき",
+      id: "fallback",
+      kanji: "平和",
+      reading: "へいわ",
       difficulty: 1,
-      components: ["空", "気"],
-      meaning: "データがありません"
+      components: ["平", "和"],
+      meaning: "穏やかな状態",
+      // ▼ 追加: フォールバック用文章
+      sentence: "世界の{{target}}を祈る"
     };
   }
 
@@ -82,20 +86,17 @@ const DEFAULT_DISTRACTORS = ["日", "月", "木", "山", "石", "田", "力", "�
 
 export function getDistractorParts(count: number, correctParts: string[]): string[] {
   const candidates = new Set<string>();
-
   correctParts.forEach(char => {
     if (CONFUSING_PAIRS[char]) {
       CONFUSING_PAIRS[char].forEach(d => candidates.add(d));
     }
   });
-
   DEFAULT_DISTRACTORS.forEach(d => candidates.add(d));
 
   const candidateArray = Array.from(candidates);
   const validCandidates = candidateArray.filter(c => !correctParts.includes(c));
   
   const result: string[] = [];
-  
   while (result.length < count) {
     if (validCandidates.length === 0) break;
     const idx = Math.floor(Math.random() * validCandidates.length);

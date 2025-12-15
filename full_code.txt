@@ -106,6 +106,8 @@ export default function AdventurePage() {
   return <WorldMap />;
 }
 --- src/app/page.tsx ---
+// src/app/page.tsx
+
 "use client";
 
 import { TitleBackground } from "../components/ui/TitleBackground";
@@ -118,10 +120,24 @@ export default function Home() {
   const setDifficultyMode = useGameStore((state) => state.setDifficultyMode);
   const resetStage = useGameStore((state) => state.resetStage);
 
+  // ▼ 追加: ストアからリセット関数を取得
+  const resetSaveData = useGameStore((state) => state.resetSaveData);
+
   const handleStart = (mode: DifficultyMode) => {
     setDifficultyMode(mode);
     resetStage();
     router.push("/play");
+  };
+
+  // ▼ 追加: リセット処理のハンドラ
+  const handleReset = () => {
+    if (
+      confirm(
+        "【警告】\nこれまでの収集データやクリア状況がすべて消えます。\n本当にリセットしますか？"
+      )
+    ) {
+      resetSaveData();
+    }
   };
 
   return (
@@ -130,7 +146,7 @@ export default function Home() {
 
       <div className="relative z-10 flex flex-col items-center w-full max-w-sm">
         <div className="mb-10 text-center">
-          {/* ▼ 修正: デザインを少しシャープにし、コンセプトを強調 */}
+          {/* ロゴデザイン */}
           <div className="inline-block border-4 border-[#3d3330] p-8 mb-6 bg-white shadow-xl transform -rotate-2 relative">
             {/* 装飾用の赤いハンコ風マーク */}
             <div className="absolute -top-3 -right-3 w-12 h-12 bg-[#d94a38] rounded-full flex items-center justify-center text-white font-bold text-xs shadow-md border-2 border-white transform rotate-12">
@@ -190,23 +206,30 @@ export default function Home() {
             </div>
           </button>
 
-          {/* 3. 冒険モード */}
-          <div className="w-full relative">
+          {/* 3. 冒険モード（準備中） */}
+          <div className="w-full relative opacity-60 cursor-not-allowed">
             <button
-              // ★冒険モードへ遷移
-              onClick={() => router.push("/adventure")}
-              className="group w-full py-4 bg-[#d94a38] text-white rounded-xl shadow-inner hover:bg-[#b93a28] flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+              disabled
+              className="group w-full py-4 bg-[#d94a38] text-white rounded-xl shadow-inner flex items-center justify-center gap-3"
             >
               <span className="text-2xl">🗺️</span>
               <div className="text-left">
-                <div className="font-bold font-serif text-lg tracking-widest">
+                <div className="font-bold font-serif text-lg tracking-widest flex items-center gap-2">
                   冒険の旅
+                  <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full">
+                    開発中
+                  </span>
                 </div>
                 <div className="text-[10px] opacity-80 font-sans tracking-wider">
-                  ADVENTURE
+                  ADVENTURE MODE
                 </div>
               </div>
             </button>
+
+            {/* ロックアイコン */}
+            <div className="absolute top-2 right-3 text-white/70 text-sm">
+              🔒
+            </div>
           </div>
 
           {/* 4. 図鑑 */}
@@ -217,6 +240,14 @@ export default function Home() {
             収集図鑑
           </button>
         </div>
+
+        {/* ▼ 追加: データを初期化するボタン (デバッグ用) */}
+        <button
+          onClick={handleReset}
+          className="mt-8 text-[10px] text-stone-400 underline hover:text-[#d94a38] transition-colors font-serif"
+        >
+          データを初期化する (Reset Data)
+        </button>
       </div>
 
       <div className="absolute bottom-4 text-[10px] text-stone-400 font-serif tracking-wider z-10">
@@ -241,7 +272,27 @@ export default function PlayPage() {
     <StageView levelDisplay={currentLevelIndex + 1} onNextLevel={nextLevel} />
   );
 }
---- src/app/collection/page.tsx ---
+--- src/app/manifest.ts ---
+import { MetadataRoute } from 'next';
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: '漢字合体 (Kanji Merge)', // ホーム画面での表示名
+    short_name: '漢字合体',
+    description: '漢字を触って発明する感覚的ロジックパズル',
+    start_url: '/',
+    display: 'standalone', // ★重要: これでブラウザのバーが消えてアプリっぽくなります
+    background_color: '#f5f2eb',
+    theme_color: '#3d3330',
+    icons: [
+      {
+        src: '/icon-512.png', // publicフォルダの画像を指定
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
+  }
+}--- src/app/collection/page.tsx ---
 import { DictionaryView } from "@/features/dictionary/views/DictionaryView";
 
 export default function CollectionPage() {
@@ -249,20 +300,17 @@ export default function CollectionPage() {
 }
 --- src/app/layout.tsx ---
 import type { Metadata } from "next";
-// import { Shippori_Mincho } from "next/font/google"; // 和風フォントのインポート
+// ❌ 削除: import { Shippori_Mincho } from "next/font/google";
 import "./globals.css";
 
-// フォントのロード設定
-// const shippori = Shippori_Mincho({
-//   weight: ["400", "500", "700", "800"],
-//   subsets: ["latin"],
-//   variable: "--font-shippori",
-//   display: "swap",
-// });
+// ❌ 削除: const shippori = Shippori_Mincho({ ... });
 
 export const metadata: Metadata = {
   title: "漢字合体 (Kanji Merge)",
   description: "漢字を触って発明する感覚的ロジックパズル",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -270,31 +318,31 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // suppressHydrationWarning: ブラウザ拡張機能等が属性を注入することによるHydrationエラーを抑制
   return (
     <html lang="ja" suppressHydrationWarning>
-      {/* bodyにフォント変数を適用 */}
-      <body
-        className={`font-serif bg-[#f5f2eb] text-[#3d3330]`}
-      >
-        {children}
-      </body>
+      {/* ▼ 修正: shippori.variable を削除。
+        "font-serif" クラスをつけるだけで、globals.css で設定したフォントが適用されます。
+      */}
+      <body className="font-serif bg-[#f5f2eb] text-[#3d3330]">{children}</body>
     </html>
   );
 }
 --- src/app/globals.css ---
+/* src/app/globals.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;800&display=swap');
+
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
+  /* カスタムプロパティをここに移動 (以前は @theme 内にありました) */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-serif: "Shippori Mincho", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -307,9 +355,8 @@ export default function RootLayout({
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
---- src/features/adventure/components/WorldMap.tsx ---
+  /* font-family の指定は不要（クラスで制御するため） */
+}--- src/features/adventure/components/WorldMap.tsx ---
 "use client";
 
 import Link from "next/link";
@@ -848,52 +895,31 @@ export interface IdsMap {
 export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/jukugo-db-auto.json ---
 [
   {
-    "id": "6886a2f2",
+    "id": "a4b1ebb1",
     "kanji": "明暗",
     "reading": "めいあん",
     "meaning": "明るさと暗さ",
     "difficulty": 2,
-    "components": ["明", "暗"],
-    "sentence": "勝負の{{target}}が分かれる瞬間"
+    "components": [
+      "明",
+      "暗"
+    ],
+    "sentence": "張り詰めた静寂の中、一瞬の判断が勝負の{{target}}を分けることになった。"
   },
   {
-    "id": "f4b6431c",
+    "id": "a9503091",
     "kanji": "森林",
     "reading": "しんりん",
     "meaning": "木がたくさん茂っている場所",
     "difficulty": 2,
-    "components": ["森", "林"],
-    "sentence": "豊かな{{target}}を守ろう"
+    "components": [
+      "森",
+      "林"
+    ],
+    "sentence": "何百年もの時を超えて生き続ける、深く静かな{{target}}の息吹を感じる。"
   },
   {
-    "id": "87cc076a",
-    "kanji": "日本",
-    "reading": "にほん",
-    "meaning": "東アジアにある島国",
-    "difficulty": 1,
-    "components": ["日", "本"],
-    "sentence": "ここは{{target}}です"
-  },
-  {
-    "id": "7007c72f",
-    "kanji": "花火",
-    "reading": "はなび",
-    "meaning": "空に光を咲かせる火薬",
-    "difficulty": 1,
-    "components": ["花", "火"],
-    "sentence": "夏の夜空に{{target}}が上がる"
-  },
-  {
-    "id": "47d0a698",
-    "kanji": "平和",
-    "reading": "へいわ",
-    "meaning": "穏やかな状態",
-    "difficulty": 1,
-    "components": ["平", "和"],
-    "sentence": "世界の{{target}}を祈る"
-  },
-  {
-    "id": "89f00fe5",
+    "id": "714c282b",
     "kanji": "岩石",
     "reading": "がんせき",
     "meaning": "岩と石",
@@ -901,10 +927,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "岩",
       "石"
-    ]
+    ],
+    "sentence": "荒涼とした大地には、風雨に削られた無骨な{{target}}が無数に転がっていた。"
   },
   {
-    "id": "245b927e",
+    "id": "8ecc2e04",
     "kanji": "火山",
     "reading": "かざん",
     "meaning": "マグマを噴き出す山",
@@ -912,10 +939,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "火",
       "山"
-    ]
+    ],
+    "sentence": "大地の怒りを代弁するかのように、激しく噴煙を上げる{{target}}が目の前にそびえる。"
   },
   {
-    "id": "21be6d44",
+    "id": "5b2282ab",
     "kanji": "休火山",
     "reading": "きゅうかざん",
     "meaning": "現在は活動していない火山",
@@ -924,10 +952,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "休",
       "火",
       "山"
-    ]
+    ],
+    "sentence": "かつての激しさを秘めたまま、今は静かに眠りについている{{target}}の姿。"
   },
   {
-    "id": "2b968c6c",
+    "id": "f5dc03d5",
     "kanji": "活火山",
     "reading": "かつかざん",
     "meaning": "現在も活動している火山",
@@ -936,10 +965,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "活",
       "火",
       "山"
-    ]
+    ],
+    "sentence": "地底深くから響く地鳴りと共に、{{target}}は今もなお生き続けている。"
   },
   {
-    "id": "87cc076a",
+    "id": "2db0a11c",
     "kanji": "日本",
     "reading": "にほん",
     "meaning": "東アジアにある島国",
@@ -947,10 +977,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "日",
       "本"
-    ]
+    ],
+    "sentence": "四季折々の美しい自然と、長い歴史が織りなすこの国は{{target}}と呼ばれる。"
   },
   {
-    "id": "914a174a",
+    "id": "1e5ee92c",
     "kanji": "休日",
     "reading": "きゅうじつ",
     "meaning": "仕事や学校が休みの日",
@@ -958,10 +989,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "休",
       "日"
-    ]
+    ],
+    "sentence": "騒がしい日常から離れ、心と体を癒やすための穏やかな{{target}}を過ごす。"
   },
   {
-    "id": "ee3c738f",
+    "id": "16f3a9b8",
     "kanji": "大金",
     "reading": "たいきん",
     "meaning": "たくさんのお金",
@@ -969,10 +1001,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "大",
       "金"
-    ]
+    ],
+    "sentence": "人生を狂わせるほどの{{target}}を前にして、彼の目は怪しく輝き始めた。"
   },
   {
-    "id": "ddb62af9",
+    "id": "baa1e26f",
     "kanji": "金魚",
     "reading": "きんぎょ",
     "meaning": "観賞用の美しい魚",
@@ -980,10 +1013,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "金",
       "魚"
-    ]
+    ],
+    "sentence": "夏の夜祭りの喧騒の中、水槽の中で涼しげに泳ぐ{{target}}の赤色が目に焼き付く。"
   },
   {
-    "id": "9f1b6f22",
+    "id": "a86f50c4",
     "kanji": "人魚",
     "reading": "にんぎょ",
     "meaning": "伝説上の生き物",
@@ -991,10 +1025,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "人",
       "魚"
-    ]
+    ],
+    "sentence": "月明かりの海で歌うという、美しくも哀しい{{target}}の伝説がこの村には残っている。"
   },
   {
-    "id": "745f4d96",
+    "id": "b3c78964",
     "kanji": "雷雨",
     "reading": "らいう",
     "meaning": "雷をともなって激しく降る雨",
@@ -1002,10 +1037,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "雷",
       "雨"
-    ]
+    ],
+    "sentence": "空を引き裂くような閃光と共に、激しい{{target}}が乾いた大地を打ち叩く。"
   },
   {
-    "id": "8d82ffa5",
+    "id": "e051e60e",
     "kanji": "青空",
     "reading": "あおぞら",
     "meaning": "雲が少なく晴れ渡った空",
@@ -1013,10 +1049,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "青",
       "空"
-    ]
+    ],
+    "sentence": "雨上がりの空を見上げると、そこには心が洗われるような澄み切った{{target}}が広がっていた。"
   },
   {
-    "id": "25e18498",
+    "id": "872bb064",
     "kanji": "空気",
     "reading": "くうき",
     "meaning": "地球を包んでいる気体",
@@ -1024,10 +1061,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "空",
       "気"
-    ]
+    ],
+    "sentence": "高原の澄んだ{{target}}を深く吸い込むと、都会の喧騒が嘘のように消えていく。"
   },
   {
-    "id": "c7fddfaf",
+    "id": "b695abea",
     "kanji": "電気",
     "reading": "でんき",
     "meaning": "光や熱を発生させるエネルギー",
@@ -1035,10 +1073,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "電",
       "気"
-    ]
+    ],
+    "sentence": "文明の夜を照らし、私たちの生活を支え続けている{{target}}という名のエネルギー。"
   },
   {
-    "id": "ced475a8",
+    "id": "fe2f428d",
     "kanji": "電車",
     "reading": "でんしゃ",
     "meaning": "電気で走る鉄道車両",
@@ -1046,10 +1085,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "電",
       "車"
-    ]
+    ],
+    "sentence": "ガタゴトと揺れる{{target}}の窓から、流れていく夕暮れの街並みをぼんやりと眺める。"
   },
   {
-    "id": "34ce45c5",
+    "id": "e7f3ffc3",
     "kanji": "電話",
     "reading": "でんわ",
     "meaning": "遠くの人と話せる機械",
@@ -1057,10 +1097,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "電",
       "話"
-    ]
+    ],
+    "sentence": "懐かしい声が受話器越しに響き、{{target}}線を通じて遠く離れた二人の距離が縮まる。"
   },
   {
-    "id": "9ba8e255",
+    "id": "d6916be9",
     "kanji": "会話",
     "reading": "かいわ",
     "meaning": "向かい合って話をすること",
@@ -1068,10 +1109,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "会",
       "話"
-    ]
+    ],
+    "sentence": "焚き火を囲みながら交わした何気ない{{target}}が、旅の疲れを心地よく癒やしてくれる。"
   },
   {
-    "id": "459a59dd",
+    "id": "dfc2f541",
     "kanji": "読書",
     "reading": "どくしょ",
     "meaning": "本を読むこと",
@@ -1079,10 +1121,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "読",
       "書"
-    ]
+    ],
+    "sentence": "ページをめくる音だけが響く部屋で、時間を忘れて{{target}}の世界に没頭する。"
   },
   {
-    "id": "85bfff3b",
+    "id": "a3cdd4d7",
     "kanji": "書店",
     "reading": "しょてん",
     "meaning": "本を売っている店",
@@ -1090,10 +1133,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "書",
       "店"
-    ]
+    ],
+    "sentence": "インクと紙の匂いが漂う{{target}}の棚には、まだ見ぬ物語たちが静かに眠っている。"
   },
   {
-    "id": "888c4bc6",
+    "id": "2fa770ec",
     "kanji": "売店",
     "reading": "ばいてん",
     "meaning": "商品を売っている小さな店",
@@ -1101,10 +1145,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "売",
       "店"
-    ]
+    ],
+    "sentence": "旅の途中に立ち寄った古びた{{target}}で、名物の焼き菓子を買い求めた。"
   },
   {
-    "id": "7007c72f",
+    "id": "f42a2bad",
     "kanji": "花火",
     "reading": "はなび",
     "meaning": "空に光を咲かせる火薬",
@@ -1112,10 +1157,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "花",
       "火"
-    ]
+    ],
+    "sentence": "夜空に大輪の花を咲かせては儚く消えゆく{{target}}に、去りゆく夏の名残を感じる。"
   },
   {
-    "id": "29148d5e",
+    "id": "7f764a5f",
     "kanji": "花見",
     "reading": "はなみ",
     "meaning": "桜を見て楽しむこと",
@@ -1123,10 +1169,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "花",
       "見"
-    ]
+    ],
+    "sentence": "舞い散る桜の下で杯を交わし、春の訪れを祝う{{target}}の宴が始まった。"
   },
   {
-    "id": "6e9f03dc",
+    "id": "0f21dc71",
     "kanji": "見学",
     "reading": "けんがく",
     "meaning": "現地に行って学ぶこと",
@@ -1134,10 +1181,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "見",
       "学"
-    ]
+    ],
+    "sentence": "教科書でしか知らなかった歴史的遺産を、実際に訪れて{{target}}する貴重な機会を得た。"
   },
   {
-    "id": "e4e7c832",
+    "id": "38274fae",
     "kanji": "学校",
     "reading": "がっこう",
     "meaning": "勉強を教わるところ",
@@ -1145,10 +1193,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "学",
       "校"
-    ]
+    ],
+    "sentence": "チャイムの音が響き渡る{{target}}の廊下には、青春の日々の思い出が詰まっている。"
   },
   {
-    "id": "392455c4",
+    "id": "4cb61071",
     "kanji": "校歌",
     "reading": "こうか",
     "meaning": "その学校の歌",
@@ -1156,10 +1205,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "校",
       "歌"
-    ]
+    ],
+    "sentence": "卒業の時を迎え、涙をこらえながら全員で{{target}}を斉唱した。"
   },
   {
-    "id": "f037d026",
+    "id": "fae56ef4",
     "kanji": "歌手",
     "reading": "かしゅ",
     "meaning": "歌を歌う人",
@@ -1167,10 +1217,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "歌",
       "手"
-    ]
+    ],
+    "sentence": "スポットライトを浴びて、その{{target}}は魂を揺さぶるような歌声を響かせた。"
   },
   {
-    "id": "70e83e57",
+    "id": "5e856c3e",
     "kanji": "手足",
     "reading": "てあし",
     "meaning": "手と足",
@@ -1178,10 +1229,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "手",
       "足"
-    ]
+    ],
+    "sentence": "凍えるような寒さの中で、かじかんだ{{target}}を必死に擦り合わせて暖を取る。"
   },
   {
-    "id": "e8300b36",
+    "id": "7d4a346d",
     "kanji": "不足",
     "reading": "ふそく",
     "meaning": "足りないこと",
@@ -1189,10 +1241,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "不",
       "足"
-    ]
+    ],
+    "sentence": "慢性的な人手{{target}}により、現場の作業員たちは疲労の色を隠せない。"
   },
   {
-    "id": "3b51fb77",
+    "id": "586fa251",
     "kanji": "遠足",
     "reading": "えんそく",
     "meaning": "遠くへ出かける行事",
@@ -1200,10 +1253,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "遠",
       "足"
-    ]
+    ],
+    "sentence": "リュックにお菓子を詰め込んで、明日の{{target}}を楽しみに眠りにつく子供たち。"
   },
   {
-    "id": "fc88b0be",
+    "id": "54db1e53",
     "kanji": "男気",
     "reading": "おとこぎ",
     "meaning": "弱い者を助ける気性",
@@ -1211,10 +1265,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "男",
       "気"
-    ]
+    ],
+    "sentence": "損得勘定抜きで困っている人を助ける、彼の{{target}}溢れる行動に誰もが心を打たれた。"
   },
   {
-    "id": "210786e5",
+    "id": "989233b9",
     "kanji": "町内",
     "reading": "ちょうない",
     "meaning": "町の中",
@@ -1222,10 +1277,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "町",
       "内"
-    ]
+    ],
+    "sentence": "祭りの季節が近づき、{{target}}会の集まりでは太鼓の練習の音が響き始めた。"
   },
   {
-    "id": "175a79b9",
+    "id": "b7f9a86d",
     "kanji": "地図",
     "reading": "ちず",
     "meaning": "地形を描いた図",
@@ -1233,20 +1289,22 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "地",
       "図"
-    ]
+    ],
+    "sentence": "色褪せた古びた{{target}}を頼りに、伝説の財宝が眠るという洞窟を目指して進む。"
   },
   {
-    "id": "6dcd3270",
+    "id": "c1965d98",
     "kanji": "池",
     "reading": "いけ",
     "meaning": "水がたまっている所",
     "difficulty": 1,
     "components": [
       "池"
-    ]
+    ],
+    "sentence": "静寂に包まれた森の奥深く、水面に月を映し出す神秘的な{{target}}が存在する。"
   },
   {
-    "id": "995a4c37",
+    "id": "401b8231",
     "kanji": "海外",
     "reading": "かいがい",
     "meaning": "外国",
@@ -1254,10 +1312,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "海",
       "外"
-    ]
+    ],
+    "sentence": "見知らぬ土地、言葉、文化。初めての{{target}}旅行は、私の価値観を大きく変えた。"
   },
   {
-    "id": "8c76705c",
+    "id": "13990143",
     "kanji": "特急",
     "reading": "とっきゅう",
     "meaning": "特別急行列車",
@@ -1265,10 +1324,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "特",
       "急"
-    ]
+    ],
+    "sentence": "駅のホームを風のように通過していく{{target}}列車を見送りながら、次の旅への思いを馳せる。"
   },
   {
-    "id": "fd7c5144",
+    "id": "e8013479",
     "kanji": "招待",
     "reading": "しょうたい",
     "meaning": "客として招くこと",
@@ -1276,10 +1336,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "招",
       "待"
-    ]
+    ],
+    "sentence": "王宮で開かれる舞踏会への{{target}}状が届き、彼女の心はときめきで満たされた。"
   },
   {
-    "id": "3f6f5bfa",
+    "id": "bdea4983",
     "kanji": "持参",
     "reading": "じさん",
     "meaning": "持って行くこと",
@@ -1287,10 +1348,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "持",
       "参"
-    ]
+    ],
+    "sentence": "このパーティーは持ち寄り形式なので、自慢の手料理を{{target}}して参加する。"
   },
   {
-    "id": "0d2f4a4c",
+    "id": "eb024bbc",
     "kanji": "草原",
     "reading": "そうげん",
     "meaning": "草が生えている原",
@@ -1298,10 +1360,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "草",
       "原"
-    ]
+    ],
+    "sentence": "どこまでも続く緑の{{target}}を、一頭の白馬が風を切って駆け抜けていく。"
   },
   {
-    "id": "49c8b4a4",
+    "id": "ef6c58ef",
     "kanji": "親子",
     "reading": "おやこ",
     "meaning": "親と子",
@@ -1309,10 +1372,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "親",
       "子"
-    ]
+    ],
+    "sentence": "夕暮れの公園で、手をつないで帰路につく{{target}}のシルエットが微笑ましい。"
   },
   {
-    "id": "fb1ff04b",
+    "id": "dc1634a2",
     "kanji": "売買",
     "reading": "ばいばい",
     "meaning": "売ることと買うこと",
@@ -1320,10 +1384,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "売",
       "買"
-    ]
+    ],
+    "sentence": "活気あふれる市場では、朝から晩まで様々な商品の{{target}}が行われている。"
   },
   {
-    "id": "1d73c4ff",
+    "id": "f34f960d",
     "kanji": "算数",
     "reading": "さんすう",
     "meaning": "数の計算などを学ぶ教科",
@@ -1331,10 +1396,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "算",
       "数"
-    ]
+    ],
+    "sentence": "単純な計算に見えて奥が深い、それが{{target}}という学問の入り口だ。"
   },
   {
-    "id": "1be634e8",
+    "id": "9a18b8a6",
     "kanji": "理科",
     "reading": "りか",
     "meaning": "自然現象を学ぶ教科",
@@ -1342,10 +1408,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "理",
       "科"
-    ]
+    ],
+    "sentence": "実験室での失敗から学んだことは、教科書の{{target}}の知識よりも記憶に残っている。"
   },
   {
-    "id": "86e3fc9e",
+    "id": "7ce35836",
     "kanji": "早朝",
     "reading": "そうちょう",
     "meaning": "朝早い時間",
@@ -1353,10 +1420,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "早",
       "朝"
-    ]
+    ],
+    "sentence": "街がまだ眠りについている{{target}}の澄んだ空気の中、新聞配達のバイクの音だけが響く。"
   },
   {
-    "id": "6429bfc8",
+    "id": "be2b8a04",
     "kanji": "鉄道",
     "reading": "てつどう",
     "meaning": "レールを走る交通機関",
@@ -1364,10 +1432,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "鉄",
       "道"
-    ]
+    ],
+    "sentence": "大陸を横断する長い{{target}}の旅は、多くの旅人たちにロマンを与え続けてきた。"
   },
   {
-    "id": "c333fe78",
+    "id": "788aa7b5",
     "kanji": "銀行",
     "reading": "ぎんこう",
     "meaning": "お金を扱う機関",
@@ -1375,10 +1444,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "銀",
       "行"
-    ]
+    ],
+    "sentence": "堅牢な金庫室の奥深くで、{{target}}は人々の大切な財産を静かに守り続けている。"
   },
   {
-    "id": "aea125bc",
+    "id": "dfc285da",
     "kanji": "飲食",
     "reading": "いんしょく",
     "meaning": "飲んだり食べたりすること",
@@ -1386,10 +1456,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "飲",
       "食"
-    ]
+    ],
+    "sentence": "健康的な生活を送るためには、日々の{{target}}のバランスに気を配ることが大切だ。"
   },
   {
-    "id": "e817591b",
+    "id": "41877a11",
     "kanji": "鮮魚",
     "reading": "せんぎょ",
     "meaning": "新鮮な魚",
@@ -1397,10 +1468,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "鮮",
       "魚"
-    ]
+    ],
+    "sentence": "港の朝市には、水揚げされたばかりの{{target}}が所狭しと並べられている。"
   },
   {
-    "id": "4ed0d2d6",
+    "id": "5180fc26",
     "kanji": "動物",
     "reading": "どうぶつ",
     "meaning": "人間以外の生き物",
@@ -1408,10 +1480,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "動",
       "物"
-    ]
+    ],
+    "sentence": "厳しい自然界の掟の中で、野生の{{target}}たちは懸命に命をつないでいる。"
   },
   {
-    "id": "13fe4b0c",
+    "id": "90ff2d25",
     "kanji": "回転",
     "reading": "かいてん",
     "meaning": "回ること",
@@ -1419,10 +1492,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "回",
       "転"
-    ]
+    ],
+    "sentence": "運命の歯車が{{target}}し始め、彼らの物語は予想もしない方向へと動き出した。"
   },
   {
-    "id": "64e02ec9",
+    "id": "d96784bb",
     "kanji": "公園",
     "reading": "こうえん",
     "meaning": "憩いの場所",
@@ -1430,10 +1504,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "公",
       "園"
-    ]
+    ],
+    "sentence": "都会のオアシスであるこの{{target}}では、昼休みになると多くの人々がベンチで休息をとる。"
   },
   {
-    "id": "b5e53a84",
+    "id": "1ef0ec7e",
     "kanji": "暗室",
     "reading": "あんしつ",
     "meaning": "光が入らない部屋",
@@ -1441,10 +1516,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "暗",
       "室"
-    ]
+    ],
+    "sentence": "赤いランプだけが灯る{{target}}の中で、白い印画紙にゆっくりと像が浮かび上がる瞬間。"
   },
   {
-    "id": "b83a8c32",
+    "id": "07ecf720",
     "kanji": "鳴き声",
     "reading": "なきごえ",
     "meaning": "動物の声",
@@ -1453,10 +1529,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "鳴",
       "き",
       "声"
-    ]
+    ],
+    "sentence": "静まり返った夜の森に、正体不明の獣の{{target}}が不気味に響き渡った。"
   },
   {
-    "id": "a466253c",
+    "id": "05687956",
     "kanji": "黒板",
     "reading": "こくばん",
     "meaning": "チョークで書く板",
@@ -1464,10 +1541,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "黒",
       "板"
-    ]
+    ],
+    "sentence": "放課後の教室、{{target}}に残された落書きが、楽しかった一日の終わりを告げている。"
   },
   {
-    "id": "1abd3e37",
+    "id": "dac0c372",
     "kanji": "電線",
     "reading": "でんせん",
     "meaning": "電気を通す線",
@@ -1475,10 +1553,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "電",
       "線"
-    ]
+    ],
+    "sentence": "夕焼け空を背景に、無数の{{target}}に止まった鳥たちが五線譜の音符のように見える。"
   },
   {
-    "id": "92249c5f",
+    "id": "ab89e8be",
     "kanji": "最強",
     "reading": "さいきょう",
     "meaning": "最も強いこと",
@@ -1486,10 +1565,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "最",
       "強"
-    ]
+    ],
+    "sentence": "数多の戦場を生き抜き、誰もが認める{{target}}の剣士としてその名を轟かせた。"
   },
   {
-    "id": "47d0a698",
+    "id": "abc8e778",
     "kanji": "平和",
     "reading": "へいわ",
     "meaning": "穏やかな状態",
@@ -1497,10 +1577,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "平",
       "和"
-    ]
+    ],
+    "sentence": "争いのない世界、すべての人が笑顔で暮らせる{{target}}な未来を心から祈り続ける。"
   },
   {
-    "id": "2dbf4b45",
+    "id": "8bcd0d95",
     "kanji": "未来",
     "reading": "みらい",
     "meaning": "これから来る時",
@@ -1508,10 +1589,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "未",
       "来"
-    ]
+    ],
+    "sentence": "今の積み重ねが、やがて来る輝かしい{{target}}への道を切り拓いていく。"
   },
   {
-    "id": "11e04ecb",
+    "id": "1de2bfec",
     "kanji": "希望",
     "reading": "きぼう",
     "meaning": "将来への願い",
@@ -1519,10 +1601,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "希",
       "望"
-    ]
+    ],
+    "sentence": "どんなに深い絶望の淵にいても、パンドラの箱の底には最後に{{target}}が残されている。"
   },
   {
-    "id": "31cf499f",
+    "id": "f0bb9afd",
     "kanji": "勇気",
     "reading": "ゆうき",
     "meaning": "立ち向かう心",
@@ -1530,10 +1613,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "勇",
       "気"
-    ]
+    ],
+    "sentence": "震える足を一歩前へ踏み出す、その小さな行動こそが真の{{target}}と呼ばれるものだ。"
   },
   {
-    "id": "71307a2f",
+    "id": "c3f9c64e",
     "kanji": "冒険",
     "reading": "ぼうけん",
     "meaning": "危険を承知で行うこと",
@@ -1541,10 +1625,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "冒",
       "険"
-    ]
+    ],
+    "sentence": "地図にない場所を目指し、未知なる世界へと旅立つ{{target}}が今、始まる。"
   },
   {
-    "id": "ea895c16",
+    "id": "846afbe0",
     "kanji": "宇宙",
     "reading": "うちゅう",
     "meaning": "地球の外に広がる空間",
@@ -1552,10 +1637,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "宇",
       "宙"
-    ]
+    ],
+    "sentence": "広大無辺な{{target}}の彼方には、まだ人類が知らない神秘が数多く眠っている。"
   },
   {
-    "id": "ca2741d1",
+    "id": "131ffa4d",
     "kanji": "銀河",
     "reading": "ぎんが",
     "meaning": "星の集まり",
@@ -1563,10 +1649,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "銀",
       "河"
-    ]
+    ],
+    "sentence": "夜空を横切る天の川、それは無数の星々が集まってできた壮大な{{target}}の姿だ。"
   },
   {
-    "id": "615945a9",
+    "id": "cf248b11",
     "kanji": "惑星",
     "reading": "わくせい",
     "meaning": "恒星の周りを回る星",
@@ -1574,10 +1661,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "惑",
       "星"
-    ]
+    ],
+    "sentence": "生命の存在が可能とされる、地球に似た環境を持つ未知の{{target}}を探査する。"
   },
   {
-    "id": "7261f8e7",
+    "id": "e0b38f07",
     "kanji": "地球",
     "reading": "ちきゅう",
     "meaning": "私たちが住む星",
@@ -1585,10 +1673,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "地",
       "球"
-    ]
+    ],
+    "sentence": "宇宙から見たその星は、青く輝く水の惑星、私たちの故郷である{{target}}だった。"
   },
   {
-    "id": "5cfdf619",
+    "id": "b53d7774",
     "kanji": "太陽",
     "reading": "たいよう",
     "meaning": "光と熱を与える星",
@@ -1596,10 +1685,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "太",
       "陽"
-    ]
+    ],
+    "sentence": "地平線から昇る{{target}}の光が、世界に新しい一日の始まりを告げる。"
   },
   {
-    "id": "83ac13cb",
+    "id": "97bda439",
     "kanji": "月光",
     "reading": "げっこう",
     "meaning": "月の光",
@@ -1607,10 +1697,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "月",
       "光"
-    ]
+    ],
+    "sentence": "静かな湖面に{{target}}が降り注ぎ、幻想的な銀色の道を浮かび上がらせた。"
   },
   {
-    "id": "c73a9f1a",
+    "id": "c09caae9",
     "kanji": "星空",
     "reading": "ほしぞら",
     "meaning": "星が出ている空",
@@ -1618,10 +1709,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "星",
       "空"
-    ]
+    ],
+    "sentence": "見上げれば満天の{{target}}が広がり、降るような星々が私たちを包み込む。"
   },
   {
-    "id": "eaed8ea3",
+    "id": "354de97f",
     "kanji": "流星",
     "reading": "りゅうせい",
     "meaning": "流れ星",
@@ -1629,10 +1721,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "流",
       "星"
-    ]
+    ],
+    "sentence": "夜空を一瞬で切り裂く{{target}}に、消えてしまう前に急いで願い事を唱えた。"
   },
   {
-    "id": "856d9bdb",
+    "id": "dc7f354a",
     "kanji": "彗星",
     "reading": "すいせい",
     "meaning": "尾を引く星",
@@ -1640,10 +1733,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "彗",
       "星"
-    ]
+    ],
+    "sentence": "長い尾を引いて夜空を旅する{{target}}は、数十年に一度だけ地球に接近する。"
   },
   {
-    "id": "548cf6ca",
+    "id": "60b65bac",
     "kanji": "天体",
     "reading": "てんたい",
     "meaning": "宇宙にある星など",
@@ -1651,10 +1745,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "天",
       "体"
-    ]
+    ],
+    "sentence": "巨大な望遠鏡を覗き込み、遥か彼方の{{target}}の動きを観測し続ける天文学者たち。"
   },
   {
-    "id": "beb2fc5b",
+    "id": "031581bb",
     "kanji": "科学",
     "reading": "かがく",
     "meaning": "自然法則の研究",
@@ -1662,10 +1757,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "科",
       "学"
-    ]
+    ],
+    "sentence": "魔法のように見える現象も、いつかは{{target}}の力ですべて解明される日が来るだろう。"
   },
   {
-    "id": "5a25a163",
+    "id": "e22fd8f8",
     "kanji": "技術",
     "reading": "ぎじゅつ",
     "meaning": "物事を行う技",
@@ -1673,10 +1769,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "技",
       "術"
-    ]
+    ],
+    "sentence": "職人たちが長い年月をかけて磨き上げた{{target}}の結晶が、この製品には詰まっている。"
   },
   {
-    "id": "c3145977",
+    "id": "ede142a7",
     "kanji": "発明",
     "reading": "はつめい",
     "meaning": "新しいものを生み出すこと",
@@ -1684,10 +1781,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "発",
       "明"
-    ]
+    ],
+    "sentence": "失敗を何千回も繰り返し、ついに世紀の大{{target}}を成し遂げた。"
   },
   {
-    "id": "8c56113e",
+    "id": "6b861978",
     "kanji": "発見",
     "reading": "はっけん",
     "meaning": "未知のものを見つけること",
@@ -1695,10 +1793,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "発",
       "見"
-    ]
+    ],
+    "sentence": "偶然の出来事がきっかけで、歴史を覆すような大{{target}}がもたらされた。"
   },
   {
-    "id": "ab6710f1",
+    "id": "fbc0ad84",
     "kanji": "進化",
     "reading": "しんか",
     "meaning": "生物の変化",
@@ -1706,10 +1805,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "進",
       "化"
-    ]
+    ],
+    "sentence": "環境の変化に適応するため、生物は長い時間をかけて独自の{{target}}を遂げてきた。"
   },
   {
-    "id": "897baa7a",
+    "id": "8db3a096",
     "kanji": "歴史",
     "reading": "れきし",
     "meaning": "社会の移り変わり",
@@ -1717,10 +1817,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "歴",
       "史"
-    ]
+    ],
+    "sentence": "古文書を紐解き、埋もれてしまった過去の{{target}}の真実を明らかにする。"
   },
   {
-    "id": "4edd8c7f",
+    "id": "bad3c35b",
     "kanji": "文化",
     "reading": "ぶんか",
     "meaning": "生活様式や芸術",
@@ -1728,10 +1829,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "文",
       "化"
-    ]
+    ],
+    "sentence": "国境を越えて互いの{{target}}を尊重し合うことが、真の国際交流への第一歩だ。"
   },
   {
-    "id": "89374112",
+    "id": "f08b2b49",
     "kanji": "芸術",
     "reading": "げいじゅつ",
     "meaning": "美しい表現",
@@ -1739,10 +1841,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "芸",
       "術"
-    ]
+    ],
+    "sentence": "言葉では表現しきれない感情を、絵画や音楽という{{target}}に昇華させる。"
   },
   {
-    "id": "300ee8c1",
+    "id": "25665da6",
     "kanji": "音楽",
     "reading": "おんがく",
     "meaning": "音による芸術",
@@ -1750,10 +1853,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "音",
       "楽"
-    ]
+    ],
+    "sentence": "言葉が通じなくても、奏でられる{{target}}は国境を超えて人々の心を一つにする。"
   },
   {
-    "id": "e90e6438",
+    "id": "b0fcb7b5",
     "kanji": "絵画",
     "reading": "かいが",
     "meaning": "絵のこと",
@@ -1761,10 +1865,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "絵",
       "画"
-    ]
+    ],
+    "sentence": "美術館の壁に飾られた一枚の{{target}}が、見る者の心に強烈な印象を残す。"
   },
   {
-    "id": "77bd35bb",
+    "id": "a7772508",
     "kanji": "小説",
     "reading": "しょうせつ",
     "meaning": "物語文学",
@@ -1772,10 +1877,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "小",
       "説"
-    ]
+    ],
+    "sentence": "現実を忘れて、作家が紡ぎ出した{{target}}の世界へと深く没入していく。"
   },
   {
-    "id": "6d6eba35",
+    "id": "ff7c1e72",
     "kanji": "映画",
     "reading": "えいが",
     "meaning": "映像作品",
@@ -1783,10 +1889,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "映",
       "画"
-    ]
+    ],
+    "sentence": "スクリーンに映し出される壮大な物語、それはまさに夢のような{{target}}体験だった。"
   },
   {
-    "id": "61749b90",
+    "id": "2001092b",
     "kanji": "写真",
     "reading": "しゃしん",
     "meaning": "カメラで写した像",
@@ -1794,10 +1901,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "写",
       "真"
-    ]
+    ],
+    "sentence": "色褪せた一枚の{{target}}が、遠い昔の幸せな記憶を鮮やかに蘇らせる。"
   },
   {
-    "id": "2a520285",
+    "id": "ea6806ea",
     "kanji": "放送",
     "reading": "ほうそう",
     "meaning": "電波で情報を送ること",
@@ -1805,10 +1913,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "放",
       "送"
-    ]
+    ],
+    "sentence": "緊急ニュースの{{target}}が入り、街中のモニターに人々の視線が釘付けになった。"
   },
   {
-    "id": "db62cadd",
+    "id": "b1f3110b",
     "kanji": "通信",
     "reading": "つうしん",
     "meaning": "情報のやり取り",
@@ -1816,10 +1925,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "通",
       "信"
-    ]
+    ],
+    "sentence": "嵐の影響で{{target}}が途絶え、孤立した島との連絡が取れなくなってしまった。"
   },
   {
-    "id": "16cad622",
+    "id": "fb1cc7f3",
     "kanji": "情報",
     "reading": "じょうほう",
     "meaning": "知らせ",
@@ -1827,10 +1937,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "情",
       "報"
-    ]
+    ],
+    "sentence": "現代社会では、氾濫する膨大な{{target}}の中から真実を見極める力が必要とされる。"
   },
   {
-    "id": "326302bc",
+    "id": "142b6836",
     "kanji": "知識",
     "reading": "ちしき",
     "meaning": "知っていること",
@@ -1838,10 +1949,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "知",
       "識"
-    ]
+    ],
+    "sentence": "本から得た{{target}}だけでなく、実際に体験して得た知恵こそが人生の糧となる。"
   },
   {
-    "id": "e62fff84",
+    "id": "b0514278",
     "kanji": "学習",
     "reading": "がくしゅう",
     "meaning": "学ぶこと",
@@ -1849,10 +1961,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "学",
       "習"
-    ]
+    ],
+    "sentence": "失敗を恐れずに挑戦し続けること、それ自体が最も効果的な{{target}}のプロセスだ。"
   },
   {
-    "id": "14edc4f4",
+    "id": "f4dcab78",
     "kanji": "教育",
     "reading": "きょういく",
     "meaning": "教え育てること",
@@ -1860,10 +1973,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "教",
       "育"
-    ]
+    ],
+    "sentence": "子供たちの可能性を信じ、個性を伸ばすことこそが真の{{target}}のあり方だ。"
   },
   {
-    "id": "2dd4577d",
+    "id": "a0da9647",
     "kanji": "先生",
     "reading": "せんせい",
     "meaning": "教える人",
@@ -1871,10 +1985,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "先",
       "生"
-    ]
+    ],
+    "sentence": "恩師である{{target}}の言葉は、今も私の人生の指針として心に刻まれている。"
   },
   {
-    "id": "3897405f",
+    "id": "ba106c72",
     "kanji": "生徒",
     "reading": "せいと",
     "meaning": "教わる人",
@@ -1882,10 +1997,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "生",
       "徒"
-    ]
+    ],
+    "sentence": "チャイムと共に教室を飛び出していく、元気な{{target}}たちの背中を見守る。"
   },
   {
-    "id": "7c70d10e",
+    "id": "31199cb9",
     "kanji": "教室",
     "reading": "きょうしつ",
     "meaning": "授業をする部屋",
@@ -1893,10 +2009,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "教",
       "室"
-    ]
+    ],
+    "sentence": "放課後の夕日が差し込む無人の{{target}}には、どこか切ない空気が漂っていた。"
   },
   {
-    "id": "d17797d4",
+    "id": "8da0a91a",
     "kanji": "白墨",
     "reading": "はくぼく",
     "meaning": "チョーク",
@@ -1904,10 +2021,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "白",
       "墨"
-    ]
+    ],
+    "sentence": "黒板に{{target}}で数式を書き殴る音が、静まり返った教室にカツカツと響く。"
   },
   {
-    "id": "720ff691",
+    "id": "de4d30ee",
     "kanji": "文房具",
     "reading": "ぶんぼうぐ",
     "meaning": "筆記用具など",
@@ -1916,10 +2034,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "文",
       "房",
       "具"
-    ]
+    ],
+    "sentence": "新しい季節の始まりに、お気に入りの{{target}}を揃えて気分を一新する。"
   },
   {
-    "id": "9ec03c19",
+    "id": "91c49507",
     "kanji": "鉛筆",
     "reading": "えんぴつ",
     "meaning": "筆記具",
@@ -1927,10 +2046,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "鉛",
       "筆"
-    ]
+    ],
+    "sentence": "短くなった{{target}}を握りしめ、最後の最後まで諦めずに答えを書き続けた。"
   },
   {
-    "id": "42e4dd73",
+    "id": "a2188946",
     "kanji": "消しゴム",
     "reading": "けしごむ",
     "meaning": "字を消す道具",
@@ -1940,10 +2060,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "し",
       "ゴ",
       "ム"
-    ]
+    ],
+    "sentence": "間違いを{{target}}で消して書き直すように、人生も何度でもやり直せたらいいのに。"
   },
   {
-    "id": "79ee0fc3",
+    "id": "b5999d52",
     "kanji": "定規",
     "reading": "じょうぎ",
     "meaning": "直線を引く道具",
@@ -1951,10 +2072,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "定",
       "規"
-    ]
+    ],
+    "sentence": "自分の価値観という{{target}}だけで、他人の生き方を測ってはいけない。"
   },
   {
-    "id": "f7127e24",
+    "id": "b42a0695",
     "kanji": "美化",
     "reading": "びか",
     "meaning": "美しくすること",
@@ -1962,10 +2084,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "美",
       "化"
-    ]
+    ],
+    "sentence": "思い出は時が経つにつれて{{target}}され、実際よりも美しく感じられるものだ。"
   },
   {
-    "id": "1d61622c",
+    "id": "d13c1a9f",
     "kanji": "美学",
     "reading": "びがく",
     "meaning": "美についての学問",
@@ -1973,10 +2096,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "美",
       "学"
-    ]
+    ],
+    "sentence": "敗北の中にも美しさを見出す、彼なりの独特な{{target}}がそこにはあった。"
   },
   {
-    "id": "677397c1",
+    "id": "df21d184",
     "kanji": "美人",
     "reading": "びじん",
     "meaning": "美しい人",
@@ -1984,10 +2108,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "美",
       "人"
-    ]
+    ],
+    "sentence": "その立ち居振る舞いの優雅さから、彼女は街一番の{{target}}として知られていた。"
   },
   {
-    "id": "d2332071",
+    "id": "0805118b",
     "kanji": "美術",
     "reading": "びじゅつ",
     "meaning": "造形芸術",
@@ -1995,10 +2120,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "美",
       "術"
-    ]
+    ],
+    "sentence": "感性を刺激される{{target}}館巡りは、休日の私の密かな楽しみの一つだ。"
   },
   {
-    "id": "3e9ee612",
+    "id": "3b436246",
     "kanji": "美食",
     "reading": "びしょく",
     "meaning": "美味しい食事",
@@ -2006,10 +2132,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "美",
       "食"
-    ]
+    ],
+    "sentence": "世界中の珍味を求めて旅をする、飽くなき探求心を持つ{{target}}家たち。"
   },
   {
-    "id": "a8e7ed72",
+    "id": "7f11945c",
     "kanji": "美味",
     "reading": "びみ",
     "meaning": "美味しい味",
@@ -2017,10 +2144,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "美",
       "味"
-    ]
+    ],
+    "sentence": "旬の食材をふんだんに使った料理は、言葉を失うほどの{{target}}だった。"
   },
   {
-    "id": "3fa73967",
+    "id": "32dfbab8",
     "kanji": "備考",
     "reading": "びこう",
     "meaning": "参考のメモ",
@@ -2028,10 +2156,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "備",
       "考"
-    ]
+    ],
+    "sentence": "特記事項がある場合は、書類の{{target}}欄に詳細を記入してください。"
   },
   {
-    "id": "afa47364",
+    "id": "97d2484c",
     "kanji": "微風",
     "reading": "びふう",
     "meaning": "そよ風",
@@ -2039,10 +2168,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "微",
       "風"
-    ]
+    ],
+    "sentence": "春の午後、窓から吹き込む心地よい{{target}}がカーテンを優しく揺らしている。"
   },
   {
-    "id": "32070891",
+    "id": "7d612ffe",
     "kanji": "微生物",
     "reading": "びせいぶつ",
     "meaning": "小さな生物",
@@ -2051,10 +2181,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "微",
       "生",
       "物"
-    ]
+    ],
+    "sentence": "顕微鏡を覗き込むと、そこには肉眼では見えない{{target}}たちの小宇宙が広がっていた。"
   },
   {
-    "id": "6547c8f2",
+    "id": "49eb3c8a",
     "kanji": "微妙",
     "reading": "びみょう",
     "meaning": "何とも言えないこと",
@@ -2062,10 +2193,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "微",
       "妙"
-    ]
+    ],
+    "sentence": "その場の空気を読んで、賛成とも反対ともつかない{{target}}な返事をした。"
   },
   {
-    "id": "1e0acded",
+    "id": "d91ed50e",
     "kanji": "微笑",
     "reading": "びしょう",
     "meaning": "ほほえみ",
@@ -2073,10 +2205,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "微",
       "笑"
-    ]
+    ],
+    "sentence": "彼女の口元に浮かんだ謎めいた{{target}}の意味を、僕はまだ理解できずにいた。"
   },
   {
-    "id": "3c6f0755",
+    "id": "f65fd701",
     "kanji": "微動",
     "reading": "びどう",
     "meaning": "かすかに動くこと",
@@ -2084,10 +2217,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "微",
       "動"
-    ]
+    ],
+    "sentence": "狙いを定めたハンターは、獲物が近づくまで物陰で{{target}}だにしなかった。"
   },
   {
-    "id": "0acfbfaa",
+    "id": "9cbc4f87",
     "kanji": "微量",
     "reading": "びりょう",
     "meaning": "わずかな量",
@@ -2095,10 +2229,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "微",
       "量"
-    ]
+    ],
+    "sentence": "現場に残された{{target}}な証拠が、迷宮入りと思われた事件解決の糸口となった。"
   },
   {
-    "id": "f31f0644",
+    "id": "559987c1",
     "kanji": "微細",
     "reading": "びさい",
     "meaning": "きわめて細かいこと",
@@ -2106,10 +2241,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "微",
       "細"
-    ]
+    ],
+    "sentence": "職人の手による{{target}}な彫刻は、見る者を圧倒する精巧さを持っていた。"
   },
   {
-    "id": "7f36ce31",
+    "id": "c9a3c89b",
     "kanji": "春夏秋冬",
     "reading": "しゅんかしゅうとう",
     "meaning": "四季のこと",
@@ -2119,10 +2255,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "夏",
       "秋",
       "冬"
-    ]
+    ],
+    "sentence": "移ろいゆく日本の{{target}}、その折々の景色を愛でる風流な心。"
   },
   {
-    "id": "227f6157",
+    "id": "44b611ac",
     "kanji": "一石二鳥",
     "reading": "いっせきにちょう",
     "meaning": "一つのことで二つの利益を得ること",
@@ -2132,10 +2269,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "石",
       "二",
       "鳥"
-    ]
+    ],
+    "sentence": "健康になれて節約もできる、まさに{{target}}の名案だ。"
   },
   {
-    "id": "521a582e",
+    "id": "17a611a0",
     "kanji": "三寒四温",
     "reading": "さんかんしおん",
     "meaning": "寒い日と暖かい日が繰り返されること",
@@ -2145,10 +2283,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "寒",
       "四",
       "温"
-    ]
+    ],
+    "sentence": "{{target}}を繰り返しながら、季節はゆっくりと春へと向かっていく。"
   },
   {
-    "id": "ad600471",
+    "id": "6a17c2f8",
     "kanji": "五里霧中",
     "reading": "ごりむちゅう",
     "meaning": "どうすればよいか迷うこと",
@@ -2158,10 +2297,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "里",
       "霧",
       "中"
-    ]
+    ],
+    "sentence": "手がかりが全く掴めず、捜査は{{target}}の状態に陥ってしまった。"
   },
   {
-    "id": "d75b3226",
+    "id": "0cda1e58",
     "kanji": "七転八起",
     "reading": "ななころびやおき",
     "meaning": "何度失敗しても立ち上がること",
@@ -2171,10 +2311,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "転",
       "八",
       "起"
-    ]
+    ],
+    "sentence": "何度失敗しても諦めない、{{target}}の精神で夢を追いかける。"
   },
   {
-    "id": "7532346e",
+    "id": "0a43eb49",
     "kanji": "十人十色",
     "reading": "じゅうにんといろ",
     "meaning": "好みや考えは人それぞれであること",
@@ -2184,10 +2325,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "人",
       "十",
       "色"
-    ]
+    ],
+    "sentence": "考え方は{{target}}、みんな違ってみんないいのだ。"
   },
   {
-    "id": "bbc70962",
+    "id": "6bc24069",
     "kanji": "百発百中",
     "reading": "ひゃっぱつひゃくちゅう",
     "meaning": "予想や計画がすべて当たること",
@@ -2197,10 +2339,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "発",
       "百",
       "中"
-    ]
+    ],
+    "sentence": "彼が放つ矢は{{target}}、狙った獲物は決して逃さない。"
   },
   {
-    "id": "89e0d349",
+    "id": "a91266df",
     "kanji": "千載一遇",
     "reading": "せんざいいちぐう",
     "meaning": "めったにない良い機会",
@@ -2210,10 +2353,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "載",
       "一",
       "遇"
-    ]
+    ],
+    "sentence": "これは{{target}}のチャンスだ、この機を逃してはならない。"
   },
   {
-    "id": "0af111a8",
+    "id": "43b40bd6",
     "kanji": "万全",
     "reading": "ばんぜん",
     "meaning": "手落ちがないこと",
@@ -2221,10 +2365,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "万",
       "全"
-    ]
+    ],
+    "sentence": "準備{{target}}で挑んだはずの試合だったが、結果は惨敗だった。"
   },
   {
-    "id": "29227e7f",
+    "id": "405483ed",
     "kanji": "一期一会",
     "reading": "いちごいちえ",
     "meaning": "一生に一度だけの出会い",
@@ -2234,10 +2379,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "期",
       "一",
       "会"
-    ]
+    ],
+    "sentence": "茶道の精神である{{target}}の心で、客人を心を込めてもてなす。"
   },
   {
-    "id": "d7e3db60",
+    "id": "67176411",
     "kanji": "以心伝心",
     "reading": "いしんでんしん",
     "meaning": "言葉にしなくても心が通じ合うこと",
@@ -2247,10 +2393,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "心",
       "伝",
       "心"
-    ]
+    ],
+    "sentence": "長年連れ添った夫婦は、言葉を交わさずとも{{target}}で通じ合っている。"
   },
   {
-    "id": "efe9b7e4",
+    "id": "e5958fe8",
     "kanji": "温故知新",
     "reading": "おんこちしん",
     "meaning": "昔のことを調べて新しい知識を得ること",
@@ -2260,10 +2407,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "故",
       "知",
       "新"
-    ]
+    ],
+    "sentence": "{{target}}の精神で、古典から現代に通じる知恵を学ぶ。"
   },
   {
-    "id": "8325878c",
+    "id": "13638277",
     "kanji": "花鳥風月",
     "reading": "かちょうふうげつ",
     "meaning": "自然の美しい景色",
@@ -2273,10 +2421,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "鳥",
       "風",
       "月"
-    ]
+    ],
+    "sentence": "{{target}}を友とし、自然の中で静かに暮らす隠居生活。"
   },
   {
-    "id": "22bcbdeb",
+    "id": "81fbc839",
     "kanji": "我田引水",
     "reading": "がでんいんすい",
     "meaning": "自分の都合の良いようにすること",
@@ -2286,10 +2435,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "田",
       "引",
       "水"
-    ]
+    ],
+    "sentence": "彼の主張は結局のところ{{target}}で、自分に有利なことしか言っていない。"
   },
   {
-    "id": "c16197ca",
+    "id": "74cb1297",
     "kanji": "完全無欠",
     "reading": "かんぜんむけつ",
     "meaning": "欠点が全くないこと",
@@ -2299,10 +2449,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "全",
       "無",
       "欠"
-    ]
+    ],
+    "sentence": "容姿端麗、頭脳明晰、彼はまさに{{target}}のヒーローだった。"
   },
   {
-    "id": "4b07f63d",
+    "id": "cf104ea3",
     "kanji": "起死回生",
     "reading": "きしかいせい",
     "meaning": "絶望的な状態から立ち直ること",
@@ -2312,10 +2463,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "死",
       "回",
       "生"
-    ]
+    ],
+    "sentence": "九回裏、ツーアウト満塁からの{{target}}のホームランが飛び出した。"
   },
   {
-    "id": "2bada5c8",
+    "id": "85768a0b",
     "kanji": "急転直下",
     "reading": "きゅうてんちょっか",
     "meaning": "事態が急に変わること",
@@ -2325,10 +2477,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "転",
       "直",
       "下"
-    ]
+    ],
+    "sentence": "順調に見えた交渉は、ある一言をきっかけに{{target}}、決裂した。"
   },
   {
-    "id": "0de9543a",
+    "id": "38c9243d",
     "kanji": "空前絶後",
     "reading": "くうぜんぜつご",
     "meaning": "今までにもこれからもないようなこと",
@@ -2338,10 +2491,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "前",
       "絶",
       "後"
-    ]
+    ],
+    "sentence": "それは歴史に残る、{{target}}の大イベントとなった。"
   },
   {
-    "id": "df43ddfb",
+    "id": "70cdaf31",
     "kanji": "言語道断",
     "reading": "ごんごどうだん",
     "meaning": "もってのほかであること",
@@ -2351,10 +2505,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "語",
       "道",
       "断"
-    ]
+    ],
+    "sentence": "信頼していた部下に裏切られるとは、まさに{{target}}の所業だ。"
   },
   {
-    "id": "d79d4025",
+    "id": "3cc0f02f",
     "kanji": "自画自賛",
     "reading": "じがじさん",
     "meaning": "自分のことを自分で褒めること",
@@ -2364,10 +2519,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "画",
       "自",
       "賛"
-    ]
+    ],
+    "sentence": "誰も褒めてくれないので、自分で自分の料理を{{target}}する。"
   },
   {
-    "id": "ac43c4f4",
+    "id": "0d397199",
     "kanji": "四面楚歌",
     "reading": "しめんそか",
     "meaning": "周りが敵ばかりで助けがないこと",
@@ -2377,10 +2533,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "面",
       "楚",
       "歌"
-    ]
+    ],
+    "sentence": "味方は一人もおらず、敵に囲まれて{{target}}の状況だ。"
   },
   {
-    "id": "cc44ccef",
+    "id": "02648d71",
     "kanji": "自由自在",
     "reading": "じゆうじざい",
     "meaning": "思いのままであること",
@@ -2390,10 +2547,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "由",
       "自",
       "在"
-    ]
+    ],
+    "sentence": "大空を{{target}}に飛び回る鳥のように生きたいと願った。"
   },
   {
-    "id": "2b3f4dfa",
+    "id": "31d290a3",
     "kanji": "主客転倒",
     "reading": "しゅかくてんとう",
     "meaning": "立場が逆になること",
@@ -2403,10 +2561,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "客",
       "転",
       "倒"
-    ]
+    ],
+    "sentence": "ゲストがホストをもてなすなんて、それでは{{target}}だ。"
   },
   {
-    "id": "63797ba9",
+    "id": "b0221df8",
     "kanji": "心機一転",
     "reading": "しんきいってん",
     "meaning": "気持ちを入れ替えること",
@@ -2416,10 +2575,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "機",
       "一",
       "転"
-    ]
+    ],
+    "sentence": "新しい街に引っ越し、{{target}}して新しい生活を始めることにした。"
   },
   {
-    "id": "98ad37bd",
+    "id": "bf4db7a2",
     "kanji": "誠心誠意",
     "reading": "せいしんせいい",
     "meaning": "まごころを込めること",
@@ -2429,10 +2589,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "心",
       "誠",
       "意"
-    ]
+    ],
+    "sentence": "過ちを認め、相手に対して{{target}}謝罪の言葉を述べた。"
   },
   {
-    "id": "deb4d868",
+    "id": "b4c95b05",
     "kanji": "絶体絶命",
     "reading": "ぜったいぜつめい",
     "meaning": "どうにもならない危険な状態",
@@ -2442,10 +2603,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "体",
       "絶",
       "命"
-    ]
+    ],
+    "sentence": "逃げ場のない崖っぷち、まさに{{target}}のピンチに追い込まれた。"
   },
   {
-    "id": "ccfeaf21",
+    "id": "7d9c320f",
     "kanji": "千差万別",
     "reading": "せんさばんべつ",
     "meaning": "さまざまに違っていること",
@@ -2455,10 +2617,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "差",
       "万",
       "別"
-    ]
+    ],
+    "sentence": "人の好みは{{target}}であり、万人に受ける作品を作るのは難しい。"
   },
   {
-    "id": "81f9fe34",
+    "id": "e5c76685",
     "kanji": "大器晩成",
     "reading": "たいきばんせい",
     "meaning": "偉大な人は大成するのが遅いこと",
@@ -2468,10 +2631,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "器",
       "晩",
       "成"
-    ]
+    ],
+    "sentence": "彼は若い頃は目立たなかったが、典型的な{{target}}型の人だった。"
   },
   {
-    "id": "bc57f40c",
+    "id": "7356d5c4",
     "kanji": "単刀直入",
     "reading": "たんとうちょくにゅう",
     "meaning": "前置きなしに本題に入ること",
@@ -2481,10 +2645,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "刀",
       "直",
       "入"
-    ]
+    ],
+    "sentence": "回りくどい言い方はやめて、{{target}}に用件を切り出した。"
   },
   {
-    "id": "cc68b513",
+    "id": "83f2afa1",
     "kanji": "朝三暮四",
     "reading": "ちょうさんぼし",
     "meaning": "目先の違いにごまかされること",
@@ -2494,10 +2659,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "三",
       "暮",
       "四"
-    ]
+    ],
+    "sentence": "目先の利益に惑わされるなんて、{{target}}の猿と同じだ。"
   },
   {
-    "id": "6cf91e0e",
+    "id": "f2a8599b",
     "kanji": "電光石火",
     "reading": "でんこうせっか",
     "meaning": "動作が非常に素早いこと",
@@ -2507,10 +2673,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "光",
       "石",
       "火"
-    ]
+    ],
+    "sentence": "敵の隙を見逃さず、{{target}}の早業で勝負を決めた。"
   },
   {
-    "id": "34c207c4",
+    "id": "618e76f1",
     "kanji": "日進月歩",
     "reading": "にっしんげっぽ",
     "meaning": "絶え間なく進歩すること",
@@ -2520,10 +2687,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "進",
       "月",
       "歩"
-    ]
+    ],
+    "sentence": "IT業界の技術は{{target}}で、少し前の知識もすぐに古くなる。"
   },
   {
-    "id": "8fe95967",
+    "id": "b5d06f35",
     "kanji": "半信半疑",
     "reading": "はんしんはんぎ",
     "meaning": "本当かどうか迷うこと",
@@ -2533,10 +2701,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "信",
       "半",
       "疑"
-    ]
+    ],
+    "sentence": "あまりにもうますぎる話に、私は{{target}}のまま聞き入っていた。"
   },
   {
-    "id": "de6dc3ed",
+    "id": "63f17a3c",
     "kanji": "不言実行",
     "reading": "ふげんじっこう",
     "meaning": "文句を言わずに実行すること",
@@ -2546,10 +2715,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "言",
       "実",
       "行"
-    ]
+    ],
+    "sentence": "多くを語らず背中で語る、父は{{target}}の人だった。"
   },
   {
-    "id": "8ede1143",
+    "id": "ecab23db",
     "kanji": "粉骨砕身",
     "reading": "ふんこつさいしん",
     "meaning": "力の限り努力すること",
@@ -2559,10 +2729,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "骨",
       "砕",
       "身"
-    ]
+    ],
+    "sentence": "会社再建のために、社員一同{{target}}の覚悟で働く。"
   },
   {
-    "id": "96a6467b",
+    "id": "e8d639b0",
     "kanji": "傍若無人",
     "reading": "ぼうじゃくぶじん",
     "meaning": "勝手気ままに振る舞うこと",
@@ -2572,10 +2743,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "若",
       "無",
       "人"
-    ]
+    ],
+    "sentence": "周囲の迷惑を顧みない彼の{{target}}な振る舞いに、皆が眉をひそめた。"
   },
   {
-    "id": "674277f6",
+    "id": "775b3025",
     "kanji": "本末転倒",
     "reading": "ほんまつてんとう",
     "meaning": "大事なこととつまらないことを取り違えること",
@@ -2585,10 +2757,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "末",
       "転",
       "倒"
-    ]
+    ],
+    "sentence": "健康のために運動して怪我をしては、{{target}}もいいところだ。"
   },
   {
-    "id": "7d02a727",
+    "id": "6abb6a86",
     "kanji": "無我夢中",
     "reading": "むがむちゅう",
     "meaning": "我を忘れて熱中すること",
@@ -2598,10 +2771,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "我",
       "夢",
       "中"
-    ]
+    ],
+    "sentence": "時間を忘れて、{{target}}でプラモデル作りに没頭していた。"
   },
   {
-    "id": "387a66ad",
+    "id": "f1a0125f",
     "kanji": "油断大敵",
     "reading": "ゆだんたいてき",
     "meaning": "油断は失敗のもとであること",
@@ -2611,10 +2785,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "断",
       "大",
       "敵"
-    ]
+    ],
+    "sentence": "勝ったと思っても気を抜くな、勝負事は最後まで{{target}}だ。"
   },
   {
-    "id": "26a02b0a",
+    "id": "01571fe4",
     "kanji": "臨機応変",
     "reading": "りんきおうへん",
     "meaning": "状況に合わせて適切に行動すること",
@@ -2624,10 +2799,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "機",
       "応",
       "変"
-    ]
+    ],
+    "sentence": "マニュアル通りではなく、その場の状況に応じて{{target}}に対応する。"
   },
   {
-    "id": "c9bfef84",
+    "id": "24e0face",
     "kanji": "老若男女",
     "reading": "ろうにゃくなんにょ",
     "meaning": "あらゆる年齢の男女",
@@ -2637,10 +2813,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "若",
       "男",
       "女"
-    ]
+    ],
+    "sentence": "この祭りは、{{target}}問わず誰でも楽しめるのが魅力だ。"
   },
   {
-    "id": "22640b78",
+    "id": "066ad10f",
     "kanji": "和洋折衷",
     "reading": "わようせっちゅう",
     "meaning": "日本風と西洋風を合わせること",
@@ -2650,10 +2827,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "洋",
       "折",
       "衷"
-    ]
+    ],
+    "sentence": "着物にブーツを合わせる、モダンな{{target}}のスタイル。"
   },
   {
-    "id": "47d648ec",
+    "id": "b4ee4b9b",
     "kanji": "異口同音",
     "reading": "いくどうおん",
     "meaning": "多くの人が同じことを言うこと",
@@ -2663,10 +2841,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "口",
       "同",
       "音"
-    ]
+    ],
+    "sentence": "その提案に対して、出席者たちは{{target}}に賛成の意を示した。"
   },
   {
-    "id": "5dfcf694",
+    "id": "54c17894",
     "kanji": "一心同体",
     "reading": "いっしんどうたい",
     "meaning": "二人以上の心が一つになること",
@@ -2676,10 +2855,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "心",
       "同",
       "体"
-    ]
+    ],
+    "sentence": "長年の相棒である彼とは、もはや{{target}}と言っても過言ではない。"
   },
   {
-    "id": "b1038cc8",
+    "id": "48830dcd",
     "kanji": "意味深長",
     "reading": "いみしんちょう",
     "meaning": "言葉の奥に深い意味があること",
@@ -2689,10 +2869,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "味",
       "深",
       "長"
-    ]
+    ],
+    "sentence": "別れ際に彼女が残した{{target}}な一言が、ずっと気になっている。"
   },
   {
-    "id": "795d04db",
+    "id": "7e9b3519",
     "kanji": "因果応報",
     "reading": "いんがおうほう",
     "meaning": "行いの報いは自分に来ること",
@@ -2702,10 +2883,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "果",
       "応",
       "報"
-    ]
+    ],
+    "sentence": "悪いことはできない、善き行いもまた{{target}}だ。"
   },
   {
-    "id": "4b7a25bb",
+    "id": "d8e570de",
     "kanji": "右往左往",
     "reading": "うおうさおう",
     "meaning": "混乱してあちこち動き回ること",
@@ -2715,10 +2897,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "往",
       "左",
       "往"
-    ]
+    ],
+    "sentence": "突然のトラブル発生に、現場のスタッフたちは{{target}}していた。"
   },
   {
-    "id": "32942354",
+    "id": "2dada2f7",
     "kanji": "雲散霧消",
     "reading": "うんさんむしょう",
     "meaning": "跡形もなく消えること",
@@ -2728,10 +2911,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "散",
       "霧",
       "消"
-    ]
+    ],
+    "sentence": "彼の一言で、それまでの不安や悩みは{{target}}した。"
   },
   {
-    "id": "ff3e1700",
+    "id": "1ea34b69",
     "kanji": "栄枯盛衰",
     "reading": "えいこせいすい",
     "meaning": "栄えたり衰えたりすること",
@@ -2741,10 +2925,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "枯",
       "盛",
       "衰"
-    ]
+    ],
+    "sentence": "かつて繁栄した都の廃墟に立ち、歴史の{{target}}を肌で感じる。"
   },
   {
-    "id": "ecd72738",
+    "id": "432bc6a1",
     "kanji": "温厚篤実",
     "reading": "おんこうとくじつ",
     "meaning": "穏やかで誠実なこと",
@@ -2754,10 +2939,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "厚",
       "篤",
       "実"
-    ]
+    ],
+    "sentence": "誰に対しても優しく誠実な彼は、{{target}}な人柄で慕われている。"
   },
   {
-    "id": "591af1a9",
+    "id": "9561b8e3",
     "kanji": "快刀乱麻",
     "reading": "かいとうらんま",
     "meaning": "複雑な問題を鮮やかに解決すること",
@@ -2767,10 +2953,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "刀",
       "乱",
       "麻"
-    ]
+    ],
+    "sentence": "絡み合った難事件を、名探偵が{{target}}のごとく解決した。"
   },
   {
-    "id": "ddd75296",
+    "id": "cafc39e6",
     "kanji": "危機一髪",
     "reading": "ききいっぱつ",
     "meaning": "非常に危険な状態",
@@ -2780,10 +2967,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "機",
       "一",
       "髪"
-    ]
+    ],
+    "sentence": "崩れ落ちる瓦礫の下から、間一髪、{{target}}で脱出に成功した。"
   },
   {
-    "id": "a6555b13",
+    "id": "2775e031",
     "kanji": "疑心暗鬼",
     "reading": "ぎしんあんき",
     "meaning": "疑うあまり何でも怖くなること",
@@ -2793,10 +2981,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "心",
       "暗",
       "鬼"
-    ]
+    ],
+    "sentence": "一度裏切られると、何もかもが信じられなくなり{{target}}に陥る。"
   },
   {
-    "id": "2e9c69f9",
+    "id": "7eb7aed4",
     "kanji": "奇想天外",
     "reading": "きそうてんがい",
     "meaning": "思いもよらないこと",
@@ -2806,10 +2995,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "想",
       "天",
       "外"
-    ]
+    ],
+    "sentence": "彼の頭の中からは、常人には思いつかない{{target}}なアイデアが溢れ出る。"
   },
   {
-    "id": "6271dffc",
+    "id": "61b03e8b",
     "kanji": "喜怒哀楽",
     "reading": "きどあいらく",
     "meaning": "人間の様々な感情",
@@ -2819,10 +3009,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "怒",
       "哀",
       "楽"
-    ]
+    ],
+    "sentence": "彼女は{{target}}がはっきりしていて、見ていて飽きない人だ。"
   },
   {
-    "id": "2a950a02",
+    "id": "50bafdb2",
     "kanji": "興味津々",
     "reading": "きょうみしんしん",
     "meaning": "興味が尽きないこと",
@@ -2832,10 +3023,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "味",
       "津",
       "々"
-    ]
+    ],
+    "sentence": "新しい転校生に対して、クラスメイトたちは{{target}}の様子だ。"
   },
   {
-    "id": "825bc44b",
+    "id": "16f2932b",
     "kanji": "公明正大",
     "reading": "こうめいせいだい",
     "meaning": "公平で隠し事がないこと",
@@ -2845,10 +3037,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "明",
       "正",
       "大"
-    ]
+    ],
+    "sentence": "嘘偽りのない、{{target}}な選挙が行われることを望む。"
   },
   {
-    "id": "7845866a",
+    "id": "419ff7e0",
     "kanji": "孤立無援",
     "reading": "こりつむえん",
     "meaning": "助けがなく一人ぼっちなこと",
@@ -2858,10 +3051,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "立",
       "無",
       "援"
-    ]
+    ],
+    "sentence": "敵陣の真ん中で味方とはぐれ、{{target}}の状態になってしまった。"
   },
   {
-    "id": "33188490",
+    "id": "52103657",
     "kanji": "才色兼備",
     "reading": "さいしょくけんび",
     "meaning": "才能も容姿も優れていること",
@@ -2871,10 +3065,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "色",
       "兼",
       "備"
-    ]
+    ],
+    "sentence": "美しく聡明な彼女は、まさに{{target}}を体現したような女性だ。"
   },
   {
-    "id": "c23c9c12",
+    "id": "b6c2f43a",
     "kanji": "自業自得",
     "reading": "じごうじとく",
     "meaning": "自分の行いの報いを受けること",
@@ -2884,10 +3079,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "業",
       "自",
       "得"
-    ]
+    ],
+    "sentence": "勉強せずに遊んでばかりいて試験に落ちたのは、完全に{{target}}だ。"
   },
   {
-    "id": "7adeb814",
+    "id": "bb129d25",
     "kanji": "質実剛健",
     "reading": "しつじつごうけん",
     "meaning": "飾り気がなく真面目で強いこと",
@@ -2897,10 +3093,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "実",
       "剛",
       "健"
-    ]
+    ],
+    "sentence": "我が校の校訓は{{target}}、華美さを嫌い実直さを重んじる。"
   },
   {
-    "id": "1107d538",
+    "id": "fa488c90",
     "kanji": "弱肉強食",
     "reading": "じゃくにくきょうしょく",
     "meaning": "強い者が弱い者を犠牲にすること",
@@ -2910,10 +3107,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "肉",
       "強",
       "食"
-    ]
+    ],
+    "sentence": "サバンナの掟は{{target}}、強い者だけが生き残る世界だ。"
   },
   {
-    "id": "350bc19c",
+    "id": "92517834",
     "kanji": "首尾一貫",
     "reading": "しゅびいっかん",
     "meaning": "最初から最後まで筋が通っていること",
@@ -2923,10 +3121,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "尾",
       "一",
       "貫"
-    ]
+    ],
+    "sentence": "彼の主張は最初から最後まで{{target}}しており、揺らぐことがない。"
   },
   {
-    "id": "95ee7486",
+    "id": "a804dbd9",
     "kanji": "支離滅裂",
     "reading": "しりめつれつ",
     "meaning": "めちゃくちゃで筋が通らないこと",
@@ -2936,10 +3135,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "離",
       "滅",
       "裂"
-    ]
+    ],
+    "sentence": "興奮した彼の説明は{{target}}で、何を言っているのか理解できなかった。"
   },
   {
-    "id": "03cf3d80",
+    "id": "95bf8077",
     "kanji": "神出鬼没",
     "reading": "しんしゅつきぼつ",
     "meaning": "自由自在に現れたり消えたりすること",
@@ -2949,10 +3149,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "出",
       "鬼",
       "没"
-    ]
+    ],
+    "sentence": "あの怪盗は{{target}}、いつどこに現れるか誰にも予測できない。"
   },
   {
-    "id": "1e00ecc1",
+    "id": "ad0ae76a",
     "kanji": "針小棒大",
     "reading": "しんしょうぼうだい",
     "meaning": "小さなことを大げさに言うこと",
@@ -2962,10 +3163,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "小",
       "棒",
       "大"
-    ]
+    ],
+    "sentence": "些細なミスを{{target}}に騒ぎ立てるのはやめてほしい。"
   },
   {
-    "id": "77f543fa",
+    "id": "39350907",
     "kanji": "晴耕雨読",
     "reading": "せいこううどく",
     "meaning": "自然の中で気ままに暮らすこと",
@@ -2975,10 +3177,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "耕",
       "雨",
       "読"
-    ]
+    ],
+    "sentence": "定年後は田舎に移住し、{{target}}の悠々自適な生活を送るのが夢だ。"
   },
   {
-    "id": "dc51bf79",
+    "id": "d37e0455",
     "kanji": "清廉潔白",
     "reading": "せいれんけっぱく",
     "meaning": "心が清くて後ろ暗いところがないこと",
@@ -2988,10 +3191,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "廉",
       "潔",
       "白"
-    ]
+    ],
+    "sentence": "彼は金銭に関して非常に厳格で、常に{{target}}な態度を貫いている。"
   },
   {
-    "id": "2d7ec0bd",
+    "id": "8961c868",
     "kanji": "切磋琢磨",
     "reading": "せっさたくま",
     "meaning": "互いに励まし合って向上すること",
@@ -3001,10 +3205,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "磋",
       "琢",
       "磨"
-    ]
+    ],
+    "sentence": "良きライバルとして互いに{{target}}し合い、技術を高め合ってきた。"
   },
   {
-    "id": "a44dea8a",
+    "id": "868a7d1c",
     "kanji": "前代未聞",
     "reading": "ぜんだいみもん",
     "meaning": "今までに聞いたこともないこと",
@@ -3014,10 +3219,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "代",
       "未",
       "聞"
-    ]
+    ],
+    "sentence": "新人がいきなり優勝するなんて、{{target}}の快挙だ。"
   },
   {
-    "id": "59eb2d34",
+    "id": "bee09828",
     "kanji": "大同小異",
     "reading": "だいどうしょうい",
     "meaning": "大体同じで細かい違いしかないこと",
@@ -3027,10 +3233,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "同",
       "小",
       "異"
-    ]
+    ],
+    "sentence": "二つの案は細部は異なるが、基本的には{{target}}と言えるだろう。"
   },
   {
-    "id": "82de1e8f",
+    "id": "013c0364",
     "kanji": "天真爛漫",
     "reading": "てんしんらんまん",
     "meaning": "飾らず無邪気なこと",
@@ -3040,10 +3247,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "真",
       "爛",
       "漫"
-    ]
+    ],
+    "sentence": "彼女の{{target}}な笑顔は、周りの人々を明るい気持ちにさせる。"
   },
   {
-    "id": "39e20c86",
+    "id": "adc053b2",
     "kanji": "東奔西走",
     "reading": "とうほんせいそう",
     "meaning": "あちこち忙しく走り回ること",
@@ -3053,10 +3261,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "奔",
       "西",
       "走"
-    ]
+    ],
+    "sentence": "資金集めのために、彼は全国各地を{{target}}している。"
   },
   {
-    "id": "4c747ef7",
+    "id": "60b3a725",
     "kanji": "独立独歩",
     "reading": "どくりつどっぽ",
     "meaning": "他人に頼らず自分の信じる道を行くこと",
@@ -3066,10 +3275,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "立",
       "独",
       "歩"
-    ]
+    ],
+    "sentence": "流行に流されず、我が道を行く{{target}}の精神を持つ。"
   },
   {
-    "id": "4ff6aa63",
+    "id": "0eeb643f",
     "kanji": "難攻不落",
     "reading": "なんこうふらく",
     "meaning": "攻めるのが難しくなかなか落ちないこと",
@@ -3079,10 +3289,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "攻",
       "不",
       "落"
-    ]
+    ],
+    "sentence": "断崖絶壁の上に築かれた、{{target}}の要塞として恐れられた城。"
   },
   {
-    "id": "bf224968",
+    "id": "cdc0aa97",
     "kanji": "二束三文",
     "reading": "にそくさんもん",
     "meaning": "数が多くても値段が安いこと",
@@ -3092,10 +3303,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "束",
       "三",
       "文"
-    ]
+    ],
+    "sentence": "苦労して集めたコレクションを、{{target}}で手放すことになった。"
   },
   {
-    "id": "cf5c512c",
+    "id": "216808b5",
     "kanji": "馬耳東風",
     "reading": "ばじとうふう",
     "meaning": "人の意見を聞き流すこと",
@@ -3105,10 +3317,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "耳",
       "東",
       "風"
-    ]
+    ],
+    "sentence": "親がいくら説教しても、彼は{{target}}で全く聞く耳を持たない。"
   },
   {
-    "id": "62926131",
+    "id": "93aa8424",
     "kanji": "半面教師",
     "reading": "はんめんきょうし",
     "meaning": "悪い見本として学ぶべき人",
@@ -3118,10 +3331,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "面",
       "教",
       "師"
-    ]
+    ],
+    "sentence": "あのような失敗をしないよう、彼を{{target}}として我が身を振り返る。"
   },
   {
-    "id": "dc8ca9ac",
+    "id": "1e76e76b",
     "kanji": "風光明媚",
     "reading": "ふうこうめいび",
     "meaning": "自然の景色が美しいこと",
@@ -3131,10 +3345,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "光",
       "明",
       "媚"
-    ]
+    ],
+    "sentence": "この辺りは{{target}}な観光地として知られ、多くの旅人が訪れる。"
   },
   {
-    "id": "6798680e",
+    "id": "0878fb2d",
     "kanji": "不眠不休",
     "reading": "ふみんふきゅう",
     "meaning": "眠らず休まず働くこと",
@@ -3144,10 +3359,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "眠",
       "不",
       "休"
-    ]
+    ],
+    "sentence": "締め切りに間に合わせるため、{{target}}で作業を続けた。"
   },
   {
-    "id": "4c03a1bb",
+    "id": "32da33f3",
     "kanji": "付和雷同",
     "reading": "ふわらいどう",
     "meaning": "自分を持たず他人の意見にすぐ賛成すること",
@@ -3157,10 +3373,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "和",
       "雷",
       "同"
-    ]
+    ],
+    "sentence": "自分の意見を持たず、安易に周りに{{target}}するのは良くない。"
   },
   {
-    "id": "82a60f88",
+    "id": "76bc653c",
     "kanji": "平穏無事",
     "reading": "へいおんぶじ",
     "meaning": "変わったこともなく穏やかなこと",
@@ -3170,10 +3387,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "穏",
       "無",
       "事"
-    ]
+    ],
+    "sentence": "大きなトラブルもなく、今日も一日が{{target}}に終わった。"
   },
   {
-    "id": "6e073c32",
+    "id": "d388e00c",
     "kanji": "抱腹絶倒",
     "reading": "ほうふくぜっとう",
     "meaning": "腹を抱えて大笑いすること",
@@ -3183,10 +3401,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "腹",
       "絶",
       "倒"
-    ]
+    ],
+    "sentence": "そのコメディアンの漫才はあまりに面白く、会場は{{target}}の渦に包まれた。"
   },
   {
-    "id": "94ed4a8a",
+    "id": "acf0ffe7",
     "kanji": "無味乾燥",
     "reading": "むみかんそう",
     "meaning": "面白みが全くないこと",
@@ -3196,10 +3415,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "味",
       "乾",
       "燥"
-    ]
+    ],
+    "sentence": "数字だけが羅列された{{target}}な報告書を読むのは退屈だ。"
   },
   {
-    "id": "28786d78",
+    "id": "03ec4d18",
     "kanji": "明鏡止水",
     "reading": "めいきょうしすい",
     "meaning": "曇りのない鏡と静かな水のような心",
@@ -3209,10 +3429,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "鏡",
       "止",
       "水"
-    ]
+    ],
+    "sentence": "雑念を払い、{{target}}の心境で試合に臨む。"
   },
   {
-    "id": "9f6abf6b",
+    "id": "a76c9942",
     "kanji": "有名無実",
     "reading": "ゆうめいむじつ",
     "meaning": "名ばかりで実質が伴わないこと",
@@ -3222,10 +3443,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "名",
       "無",
       "実"
-    ]
+    ],
+    "sentence": "ルールはあるものの誰も守っておらず、もはや{{target}}化している。"
   },
   {
-    "id": "fb49e189",
+    "id": "398d6fdd",
     "kanji": "用意周到",
     "reading": "よういしゅうとう",
     "meaning": "準備が十分に行き届いていること",
@@ -3235,10 +3457,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "意",
       "周",
       "到"
-    ]
+    ],
+    "sentence": "犯行計画は{{target}}で、証拠は一切残されていなかった。"
   },
   {
-    "id": "c2e9207a",
+    "id": "c0fd253e",
     "kanji": "利害関係",
     "reading": "りがいかんけい",
     "meaning": "利益と損害が絡む関係",
@@ -3248,10 +3471,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "害",
       "関",
       "係"
-    ]
+    ],
+    "sentence": "そこには政治的な{{target}}が複雑に絡み合っているようだ。"
   },
   {
-    "id": "26460ad9",
+    "id": "e3c5ec39",
     "kanji": "竜頭蛇尾",
     "reading": "りゅうとうだび",
     "meaning": "初めは勢いがよいが終わりは振るわないこと",
@@ -3261,210 +3485,231 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "頭",
       "蛇",
       "尾"
-    ]
+    ],
+    "sentence": "壮大な始まりだったが、結末は呆気なく{{target}}に終わった。"
   },
   {
-    "id": "d534c81d",
+    "id": "f0f24ca6",
     "kanji": "魁",
     "reading": "さきがけ",
     "meaning": "先頭に立って進むこと",
     "difficulty": 1,
     "components": [
       "魁"
-    ]
+    ],
+    "sentence": "彼は時代の{{target}}となって、新しい文化を切り拓いていった。"
   },
   {
-    "id": "9ca1e2a3",
+    "id": "def9e82c",
     "kanji": "誉",
     "reading": "ほまれ",
     "meaning": "良い評判や誇り",
     "difficulty": 1,
     "components": [
       "誉"
-    ]
+    ],
+    "sentence": "優勝できたことは、我がチームにとって最高の{{target}}です。"
   },
   {
-    "id": "9cd1faf1",
+    "id": "3c21053b",
     "kanji": "暁",
     "reading": "あかつき",
     "meaning": "夜明け",
     "difficulty": 1,
     "components": [
       "暁"
-    ]
+    ],
+    "sentence": "長い苦労の末、成功の{{target}}には二人で祝杯をあげようと約束した。"
   },
   {
-    "id": "4d047ae5",
+    "id": "d4fb8eaa",
     "kanji": "瞬",
     "reading": "またたき",
     "meaning": "まばたきするほどの短い時間",
     "difficulty": 1,
     "components": [
       "瞬"
-    ]
+    ],
+    "sentence": "それは{{target}}の出来事だったが、私の記憶には永遠に刻まれた。"
   },
   {
-    "id": "ea33efc0",
+    "id": "e92cdef5",
     "kanji": "響",
     "reading": "ひびき",
     "meaning": "あたりに伝わる音",
     "difficulty": 1,
     "components": [
       "響"
-    ]
+    ],
+    "sentence": "静寂な堂内に、鐘の厳かな{{target}}がいつまでも残っている。"
   },
   {
-    "id": "279df0f0",
+    "id": "195a2d46",
     "kanji": "匠",
     "reading": "たくみ",
     "meaning": "優れた技術を持つ人",
     "difficulty": 1,
     "components": [
       "匠"
-    ]
+    ],
+    "sentence": "その精巧な細工には、日本の伝統を受け継ぐ{{target}}の技が光っている。"
   },
   {
-    "id": "c018874a",
+    "id": "0346edde",
     "kanji": "盾",
     "reading": "たて",
     "meaning": "身を守る武具",
     "difficulty": 1,
     "components": [
       "盾"
-    ]
+    ],
+    "sentence": "彼は自らの体を{{target}}にして、仲間を敵の攻撃から守り抜いた。"
   },
   {
-    "id": "b38f0eeb",
+    "id": "39580712",
     "kanji": "矛",
     "reading": "ほこ",
     "meaning": "突き刺す武器",
     "difficulty": 1,
     "components": [
       "矛"
-    ]
+    ],
+    "sentence": "かつて最強を誇ったその{{target}}も、時の流れと共に錆びついてしまった。"
   },
   {
-    "id": "f7d8f05b",
+    "id": "f7060c45",
     "kanji": "魂",
     "reading": "たましい",
     "meaning": "精神や心",
     "difficulty": 1,
     "components": [
       "魂"
-    ]
+    ],
+    "sentence": "一球一球に{{target}}を込める投手の気迫に、球場全体が飲み込まれた。"
   },
   {
-    "id": "28ca5869",
+    "id": "49a68b7b",
     "kanji": "翼",
     "reading": "つばさ",
     "meaning": "空を飛ぶための器官",
     "difficulty": 1,
     "components": [
       "翼"
-    ]
+    ],
+    "sentence": "自由への憧れを胸に、大空へと{{target}}を広げて飛び立つ鳥たち。"
   },
   {
-    "id": "29110f5d",
+    "id": "951c704b",
     "kanji": "闇",
     "reading": "やみ",
     "meaning": "光のない状態",
     "difficulty": 1,
     "components": [
       "闇"
-    ]
+    ],
+    "sentence": "一寸先も見えない深い{{target}}の中で、ただ一つだけの希望の光を探し求めた。"
   },
   {
-    "id": "e6daae9b",
+    "id": "1e73a717",
     "kanji": "雷",
     "reading": "かみなり",
     "meaning": "稲妻と音",
     "difficulty": 1,
     "components": [
       "雷"
-    ]
+    ],
+    "sentence": "青天の{{target}}のごとく、その衝撃的なニュースは世界中を駆け巡った。"
   },
   {
-    "id": "8b18f1b8",
+    "id": "fc847177",
     "kanji": "雫",
     "reading": "しずく",
     "meaning": "したたり落ちる液体",
     "difficulty": 1,
     "components": [
       "雫"
-    ]
+    ],
+    "sentence": "雨上がりの葉先からこぼれ落ちる{{target}}が、朝日を浴びて宝石のように輝く。"
   },
   {
-    "id": "e7103ee3",
+    "id": "5711c0ca",
     "kanji": "嵐",
     "reading": "あらし",
     "meaning": "激しい風雨",
     "difficulty": 1,
     "components": [
       "嵐"
-    ]
+    ],
+    "sentence": "吹き荒れる{{target}}の海へと船を出すのは、自殺行為に等しい。"
   },
   {
-    "id": "5cdf273a",
+    "id": "7d9fa31b",
     "kanji": "砦",
     "reading": "とりで",
     "meaning": "敵を防ぐ小さな城",
     "difficulty": 1,
     "components": [
       "砦"
-    ]
+    ],
+    "sentence": "ここはこの国を守る最後の{{target}}だ、一歩も退くわけにはいかない。"
   },
   {
-    "id": "aebd41ee",
+    "id": "96366cb6",
     "kanji": "侍",
     "reading": "さむらい",
     "meaning": "昔の日本の戦士",
     "difficulty": 1,
     "components": [
       "侍"
-    ]
+    ],
+    "sentence": "主君のために命を捧げる、それがかつての{{target}}の生き様だった。"
   },
   {
-    "id": "6237fd4f",
+    "id": "c2534e8a",
     "kanji": "忍",
     "reading": "しのび",
     "meaning": "隠密に行動する者",
     "difficulty": 1,
     "components": [
       "忍"
-    ]
+    ],
+    "sentence": "闇に紛れて任務を遂行する、誰にも知られることのない{{target}}の孤独。"
   },
   {
-    "id": "a4828606",
+    "id": "253c75dd",
     "kanji": "龍",
     "reading": "りゅう",
     "meaning": "伝説上の神獣",
     "difficulty": 1,
     "components": [
       "龍"
-    ]
+    ],
+    "sentence": "滝を登り切った鯉は、やがて天を駆ける{{target}}になると言い伝えられている。"
   },
   {
-    "id": "55d3aa4e",
+    "id": "7d56a99b",
     "kanji": "鳳",
     "reading": "おおとり",
     "meaning": "伝説上の聖なる鳥",
     "difficulty": 1,
     "components": [
       "鳳"
-    ]
+    ],
+    "sentence": "その鳥は炎の中から蘇り、{{target}}凰となって永遠の時を生きるという。"
   },
   {
-    "id": "fe1953f2",
+    "id": "85a3762a",
     "kanji": "凰",
     "reading": "おおとり",
     "meaning": "伝説上の聖なる鳥のメス",
     "difficulty": 1,
     "components": [
       "凰"
-    ]
+    ],
+    "sentence": "鳳{{target}}が舞う時、その地には平和と繁栄がもたらされる。"
   },
   {
-    "id": "2718f0a3",
+    "id": "59d14c32",
     "kanji": "刹那",
     "reading": "せつな",
     "meaning": "極めて短い時間",
@@ -3472,10 +3717,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "刹",
       "那"
-    ]
+    ],
+    "sentence": "視線が交差した{{target}}、二人は互いが運命の相手であることを悟った。"
   },
   {
-    "id": "21b51e92",
+    "id": "a1a8ff4c",
     "kanji": "螺旋",
     "reading": "らせん",
     "meaning": "渦巻き状の形",
@@ -3483,10 +3729,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "螺",
       "旋"
-    ]
+    ],
+    "sentence": "終わりのない{{target}}階段を登り続けるように、思考が同じ場所を巡っている。"
   },
   {
-    "id": "92ad78c1",
+    "id": "26775304",
     "kanji": "琥珀",
     "reading": "こはく",
     "meaning": "松脂が化石になった宝石",
@@ -3494,10 +3741,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "琥",
       "珀"
-    ]
+    ],
+    "sentence": "太古の虫を閉じ込めた{{target}}が、夕陽に透かされて黄金色に輝く。"
   },
   {
-    "id": "c526df29",
+    "id": "a454656f",
     "kanji": "翡翠",
     "reading": "ひすい",
     "meaning": "深緑色の美しい宝石",
@@ -3505,10 +3753,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "翡",
       "翠"
-    ]
+    ],
+    "sentence": "雨上がりの森のような、深く吸い込まれるような{{target}}色の瞳。"
   },
   {
-    "id": "aa920e73",
+    "id": "9e521b8f",
     "kanji": "瑠璃",
     "reading": "るり",
     "meaning": "紫がかった青色の宝石",
@@ -3516,10 +3765,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "瑠",
       "璃"
-    ]
+    ],
+    "sentence": "夜明け前の空の色を映し取ったような、鮮やかな{{target}}色のガラス。"
   },
   {
-    "id": "d1692e6b",
+    "id": "e4953533",
     "kanji": "煉獄",
     "reading": "れんごく",
     "meaning": "激しい炎の苦しみ",
@@ -3527,10 +3777,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "煉",
       "獄"
-    ]
+    ],
+    "sentence": "罪を浄化するために焼かれるという{{target}}の炎が、彼の心を苛み続ける。"
   },
   {
-    "id": "0c90482a",
+    "id": "0254ee41",
     "kanji": "冥界",
     "reading": "めいかい",
     "meaning": "死後の世界",
@@ -3538,10 +3789,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "冥",
       "界"
-    ]
+    ],
+    "sentence": "川を渡ればそこは生者の立ち入れない場所、{{target}}の入り口だ。"
   },
   {
-    "id": "889e5ae8",
+    "id": "1c6e9982",
     "kanji": "深淵",
     "reading": "しんえん",
     "meaning": "底知れず深い場所",
@@ -3549,10 +3801,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "深",
       "淵"
-    ]
+    ],
+    "sentence": "{{target}}を覗く時、{{target}}もまたこちらを覗いているのだ。"
   },
   {
-    "id": "eaf4fd04",
+    "id": "123ac127",
     "kanji": "鼓動",
     "reading": "こどう",
     "meaning": "心臓が打つ音",
@@ -3560,10 +3813,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "鼓",
       "動"
-    ]
+    ],
+    "sentence": "緊張で早まる胸の{{target}}が、耳の奥でドクドクと大きく鳴り響く。"
   },
   {
-    "id": "daf1059d",
+    "id": "74829d68",
     "kanji": "咆哮",
     "reading": "ほうこう",
     "meaning": "猛獣が吠えること",
@@ -3571,10 +3825,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "咆",
       "哮"
-    ]
+    ],
+    "sentence": "大地を震わせるような獣の{{target}}が、夜のジャングルに轟いた。"
   },
   {
-    "id": "8efa712f",
+    "id": "d9e68a57",
     "kanji": "殲滅",
     "reading": "せんめつ",
     "meaning": "皆殺しにすること",
@@ -3582,10 +3837,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "殲",
       "滅"
-    ]
+    ],
+    "sentence": "圧倒的な火力を前に、敵の部隊は瞬く間に{{target}}させられた。"
   },
   {
-    "id": "9b32eee4",
+    "id": "4c707aa8",
     "kanji": "翻弄",
     "reading": "ほんろう",
     "meaning": "思うままにもてあそぶこと",
@@ -3593,10 +3849,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "翻",
       "弄"
-    ]
+    ],
+    "sentence": "激しい運命の波に{{target}}されながらも、彼は必死に生きる道を探した。"
   },
   {
-    "id": "21d07a9e",
+    "id": "c566a3db",
     "kanji": "躊躇",
     "reading": "ちゅうちょ",
     "meaning": "ためらうこと",
@@ -3604,10 +3861,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "躊",
       "躇"
-    ]
+    ],
+    "sentence": "一瞬の{{target}}が命取りになる、戦場とはそういう場所だ。"
   },
   {
-    "id": "bc27f4c8",
+    "id": "544bd597",
     "kanji": "完璧",
     "reading": "かんぺき",
     "meaning": "欠点が全くないこと",
@@ -3615,10 +3873,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "完",
       "璧"
-    ]
+    ],
+    "sentence": "非の打ち所がない、まさに{{target}}な演技に観客はスタンディングオベーションを送った。"
   },
   {
-    "id": "fcde92e5",
+    "id": "5952720d",
     "kanji": "薔薇",
     "reading": "ばら",
     "meaning": "棘のある美しい花",
@@ -3626,10 +3885,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "薔",
       "薇"
-    ]
+    ],
+    "sentence": "美しいものには棘がある、情熱の赤き{{target}}のように。"
   },
   {
-    "id": "9e426180",
+    "id": "9f511677",
     "kanji": "麒麟",
     "reading": "きりん",
     "meaning": "伝説上の聖なる獣",
@@ -3637,10 +3897,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
     "components": [
       "麒",
       "麟"
-    ]
+    ],
+    "sentence": "優れた才能を持つ若者を、人々は将来を嘱望される{{target}}児と呼んだ。"
   },
   {
-    "id": "f39246d8",
+    "id": "856f22c6",
     "kanji": "五月雨",
     "reading": "さみだれ",
     "meaning": "梅雨の時期に降る雨",
@@ -3649,10 +3910,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "五",
       "月",
       "雨"
-    ]
+    ],
+    "sentence": "終わることなく降り続く{{target}}を眺めながら、物思いにふける午後。"
   },
   {
-    "id": "aa867d83",
+    "id": "cf3ba1c6",
     "kanji": "不知火",
     "reading": "しらぬい",
     "meaning": "海上に現れる不思議な火",
@@ -3661,10 +3923,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "不",
       "知",
       "火"
-    ]
+    ],
+    "sentence": "暗い海上に揺らめく光の列、それは九州の海に現れる{{target}}の幻影だ。"
   },
   {
-    "id": "fe7c02a1",
+    "id": "d380efa2",
     "kanji": "雪月花",
     "reading": "せつげつか",
     "meaning": "四季の美しい景色",
@@ -3673,10 +3936,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "雪",
       "月",
       "花"
-    ]
+    ],
+    "sentence": "日本の四季の美しさを象徴する{{target}}を愛でる心。"
   },
   {
-    "id": "332614c0",
+    "id": "5fd075bd",
     "kanji": "朧月夜",
     "reading": "おぼろづきよ",
     "meaning": "霧などでかすんだ月の夜",
@@ -3685,10 +3949,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "朧",
       "月",
       "夜"
-    ]
+    ],
+    "sentence": "菜の花畠に入日薄れ、見渡す山の端は霞深き{{target}}。"
   },
   {
-    "id": "05749a54",
+    "id": "f41e0108",
     "kanji": "金字塔",
     "reading": "きんじとう",
     "meaning": "後世に残る偉大な業績",
@@ -3697,10 +3962,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "金",
       "字",
       "塔"
-    ]
+    ],
+    "sentence": "彼が打ち立てた記録は、スポーツ界における不滅の{{target}}として語り継がれるだろう。"
   },
   {
-    "id": "5585d728",
+    "id": "9d3e84ef",
     "kanji": "走馬灯",
     "reading": "そうまとう",
     "meaning": "死ぬ間際に過去が巡ること",
@@ -3709,10 +3975,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "走",
       "馬",
       "灯"
-    ]
+    ],
+    "sentence": "事故の瞬間、今までの人生が{{target}}のように駆け巡った。"
   },
   {
-    "id": "56517d62",
+    "id": "7d30bfa3",
     "kanji": "蜃気楼",
     "reading": "しんきろう",
     "meaning": "景色が浮いて見える現象",
@@ -3721,10 +3988,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "蜃",
       "気",
       "楼"
-    ]
+    ],
+    "sentence": "砂漠の彼方に見えるオアシスは、熱気が作り出した{{target}}に過ぎない。"
   },
   {
-    "id": "474df6e7",
+    "id": "8d0f660f",
     "kanji": "曼珠沙華",
     "reading": "まんじゅしゃげ",
     "meaning": "彼岸花のこと",
@@ -3734,10 +4002,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "珠",
       "沙",
       "華"
-    ]
+    ],
+    "sentence": "秋の彼岸の頃、田んぼの畦道に燃えるような赤色の{{target}}が咲き乱れる。"
   },
   {
-    "id": "328090fc",
+    "id": "e4e59338",
     "kanji": "無造作",
     "reading": "むぞうさ",
     "meaning": "気取らず手軽なこと",
@@ -3746,10 +4015,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "無",
       "造",
       "作"
-    ]
+    ],
+    "sentence": "彼はポケットから{{target}}に紙切れを取り出し、電話番号を書き殴った。"
   },
   {
-    "id": "3ea3c1ee",
+    "id": "7cf1afb3",
     "kanji": "殺風景",
     "reading": "さっぷうけい",
     "meaning": "趣がなく寒々しいこと",
@@ -3758,10 +4028,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "殺",
       "風",
       "景"
-    ]
+    ],
+    "sentence": "家具も何もない{{target}}な部屋に、ポツンと椅子が一つ置かれている。"
   },
   {
-    "id": "e2295eee",
+    "id": "865c12d2",
     "kanji": "破廉恥",
     "reading": "はれんち",
     "meaning": "恥を恥とも思わないこと",
@@ -3770,10 +4041,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "破",
       "廉",
       "恥"
-    ]
+    ],
+    "sentence": "公衆の面前でそのような振る舞いをするとは、実に{{target}}極まりない。"
   },
   {
-    "id": "17079b70",
+    "id": "e62cd6b0",
     "kanji": "百花繚乱",
     "reading": "ひゃっかりょうらん",
     "meaning": "優れた人物が一時期にたくさん現れること",
@@ -3783,10 +4055,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "花",
       "繚",
       "乱"
-    ]
+    ],
+    "sentence": "個性豊かな才能たちが競い合う、まさに{{target}}の時代が到来した。"
   },
   {
-    "id": "bd109638",
+    "id": "7a83eb4a",
     "kanji": "天下無双",
     "reading": "てんかむそう",
     "meaning": "世に並ぶ者がいないこと",
@@ -3796,10 +4069,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "下",
       "無",
       "双"
-    ]
+    ],
+    "sentence": "その武勇は国中に知れ渡り、{{target}}の豪傑として恐れられた。"
   },
   {
-    "id": "3adcc920",
+    "id": "73d17f8a",
     "kanji": "国士無双",
     "reading": "こくしむそう",
     "meaning": "国内で最も優れた人物",
@@ -3809,10 +4083,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "士",
       "無",
       "双"
-    ]
+    ],
+    "sentence": "彼は類い稀なる才能を持った、まさに{{target}}の傑物だ。"
   },
   {
-    "id": "a824b8f9",
+    "id": "9ef9b7b2",
     "kanji": "魑魅魍魎",
     "reading": "ちみもうりょう",
     "meaning": "化け物や妖怪の総称",
@@ -3822,10 +4097,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "魅",
       "魍",
       "魎"
-    ]
+    ],
+    "sentence": "夜の闇には、人知を超えた{{target}}が跋扈しているという。"
   },
   {
-    "id": "5407d149",
+    "id": "7c46d28e",
     "kanji": "跳梁跋扈",
     "reading": "ちょうりょうばっこ",
     "meaning": "悪人が好き勝手に振る舞うこと",
@@ -3835,10 +4111,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "梁",
       "跋",
       "扈"
-    ]
+    ],
+    "sentence": "秩序が乱れた都では、悪党どもが{{target}}し、民を苦しめていた。"
   },
   {
-    "id": "0711c5d8",
+    "id": "f018d88f",
     "kanji": "疾風迅雷",
     "reading": "しっぷうじんらい",
     "meaning": "行動が素早く激しいこと",
@@ -3848,23 +4125,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "風",
       "迅",
       "雷"
-    ]
+    ],
+    "sentence": "戦場を駆け抜けるその姿は、まさに{{target}}の如き速さだった。"
   },
   {
-    "id": "58b6dd78",
-    "kanji": "明鏡止水",
-    "reading": "めいきょうしすい",
-    "meaning": "邪念がなく澄み切った心",
-    "difficulty": 3,
-    "components": [
-      "明",
-      "鏡",
-      "止",
-      "水"
-    ]
-  },
-  {
-    "id": "adb77975",
+    "id": "351e0dd5",
     "kanji": "不撓不屈",
     "reading": "ふとうふくつ",
     "meaning": "どんな困難にもくじけないこと",
@@ -3874,10 +4139,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "撓",
       "不",
       "屈"
-    ]
+    ],
+    "sentence": "幾多の失敗にもめげず、{{target}}の精神で研究を続けた。"
   },
   {
-    "id": "b7708cb5",
+    "id": "34e54210",
     "kanji": "一騎当千",
     "reading": "いっきとうせん",
     "meaning": "一人で千人の敵に対抗できるほど強いこと",
@@ -3887,10 +4153,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "騎",
       "当",
       "千"
-    ]
+    ],
+    "sentence": "彼一人で戦況を変えてしまう、まさに{{target}}の猛者だ。"
   },
   {
-    "id": "35d61e05",
+    "id": "5e3ba031",
     "kanji": "画竜点睛",
     "reading": "がりょうてんせい",
     "meaning": "物事の最後の仕上げ",
@@ -3900,10 +4167,11 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "竜",
       "点",
       "睛"
-    ]
+    ],
+    "sentence": "素晴らしい出来栄えだが、最後に{{target}}を欠いてしまったのが惜しまれる。"
   },
   {
-    "id": "ce62b1a5",
+    "id": "37abf028",
     "kanji": "森羅万象",
     "reading": "しんらばんしょう",
     "meaning": "宇宙に存在するすべてのもの",
@@ -3913,20 +4181,409 @@ export type DifficultyMode = 'EASY' | 'NORMAL';--- src/features/kanji-core/data/
       "羅",
       "万",
       "象"
-    ]
+    ],
+    "sentence": "この世のありとあらゆるもの、{{target}}を司る神の力。"
   },
   {
-    "id": "3a801048",
-    "kanji": "因果応報",
-    "reading": "いんがおうほう",
-    "meaning": "行いの報いは必ず自分に返ってくること",
-    "difficulty": 5,
+    "id": "87348a59",
+    "kanji": "唯一無二",
+    "reading": "ゆいいつむに",
+    "meaning": "ただ一つで二つとないこと",
+    "difficulty": 3,
     "components": [
-      "因",
+      "唯",
+      "一",
+      "無",
+      "二"
+    ],
+    "sentence": "世界中どこを探しても代わりはいない、君は私にとって{{target}}の存在だ。"
+  },
+  {
+    "id": "06d654af",
+    "kanji": "天下泰平",
+    "reading": "てんかたいへい",
+    "meaning": "世の中が平和でよく治まっていること",
+    "difficulty": 4,
+    "components": [
+      "天",
+      "下",
+      "泰",
+      "平"
+    ],
+    "sentence": "戦乱の世が終わり、人々が笑って暮らせる{{target}}の世が訪れた。"
+  },
+  {
+    "id": "89012d21",
+    "kanji": "一朝一夕",
+    "reading": "いっちょういっせき",
+    "meaning": "わずかな時間",
+    "difficulty": 3,
+    "components": [
+      "一",
+      "朝",
+      "一",
+      "夕"
+    ],
+    "sentence": "伝統の味は長い年月の積み重ねがあってこそ、{{target}}に作れるものではない。"
+  },
+  {
+    "id": "f26f944a",
+    "kanji": "暴飲暴食",
+    "reading": "ぼういんぼうしょく",
+    "meaning": "度を越して飲み食いすること",
+    "difficulty": 3,
+    "components": [
+      "暴",
+      "飲",
+      "暴",
+      "食"
+    ],
+    "sentence": "ストレス発散とはいえ、毎晩の{{target}}が祟って体を壊してしまった。"
+  },
+  {
+    "id": "52e8b415",
+    "kanji": "一喜一憂",
+    "reading": "いっきいちゆう",
+    "meaning": "状況が変わるたびに喜んだり心配したりすること",
+    "difficulty": 2,
+    "components": [
+      "一",
+      "喜",
+      "一",
+      "憂"
+    ],
+    "sentence": "株価の変動に{{target}}する毎日だ。"
+  },
+  {
+    "id": "8afdcd32",
+    "kanji": "感慨無量",
+    "reading": "かんがいむりょう",
+    "meaning": "胸がいっぱいになるほど深く感動すること",
+    "difficulty": 2,
+    "components": [
+      "感",
+      "慨",
+      "無",
+      "量"
+    ],
+    "sentence": "教え子の成長した姿を見て、{{target}}だ。"
+  },
+  {
+    "id": "4aa69f1a",
+    "kanji": "自暴自棄",
+    "reading": "じぼうじき",
+    "meaning": "失望して自分などどうなってもいいと思うこと",
+    "difficulty": 2,
+    "components": [
+      "自",
+      "暴",
+      "自",
+      "棄"
+    ],
+    "sentence": "失敗が続いたからといって、{{target}}になってはいけない。"
+  },
+  {
+    "id": "7b5addf9",
+    "kanji": "料理",
+    "reading": "りょうり",
+    "meaning": "食材を加工して食事を作ること",
+    "difficulty": 2,
+    "components": [
+      "料",
+      "理"
+    ],
+    "sentence": "母の手作り{{target}}が一番の好物だ。"
+  },
+  {
+    "id": "95fe47c2",
+    "kanji": "野菜",
+    "reading": "やさい",
+    "meaning": "食用の草本植物",
+    "difficulty": 3,
+    "components": [
+      "野",
+      "菜"
+    ],
+    "sentence": "健康のために毎日{{target}}をたっぷり食べる。"
+  },
+  {
+    "id": "a00e1bfb",
+    "kanji": "果物",
+    "reading": "くだもの",
+    "meaning": "食用の果実",
+    "difficulty": 1,
+    "components": [
       "果",
-      "応",
-      "報"
-    ]
+      "物"
+    ],
+    "sentence": "食後のデザートに季節の{{target}}を剥く。"
+  },
+  {
+    "id": "d0a3b79f",
+    "kanji": "朝食",
+    "reading": "ちょうしょく",
+    "meaning": "朝に食べる食事",
+    "difficulty": 2,
+    "components": [
+      "朝",
+      "食"
+    ],
+    "sentence": "{{target}}をしっかり食べてエネルギーを充填する。"
+  },
+  {
+    "id": "8781f555",
+    "kanji": "掃除",
+    "reading": "そうじ",
+    "meaning": "ゴミやほこりを取り除くこと",
+    "difficulty": 2,
+    "components": [
+      "掃",
+      "除"
+    ],
+    "sentence": "年末の大{{target}}で家をピカピカにする。"
+  },
+  {
+    "id": "6dfef050",
+    "kanji": "洗濯",
+    "reading": "せんたく",
+    "meaning": "衣類などを洗うこと",
+    "difficulty": 2,
+    "components": [
+      "洗",
+      "濯"
+    ],
+    "sentence": "晴れた日は{{target}}物がよく乾くので気持ちがいい。"
+  },
+  {
+    "id": "fa64ca49",
+    "kanji": "玄関",
+    "reading": "げんかん",
+    "meaning": "建物の出入り口",
+    "difficulty": 2,
+    "components": [
+      "玄",
+      "関"
+    ],
+    "sentence": "{{target}}で靴を揃えてから家に入るのがマナーだ。"
+  },
+  {
+    "id": "a2d13fa6",
+    "kanji": "筋肉",
+    "reading": "きんにく",
+    "meaning": "体を動かす組織",
+    "difficulty": 1,
+    "components": [
+      "筋",
+      "肉"
+    ],
+    "sentence": "毎日のトレーニングで強靭な{{target}}を鍛え上げる。"
+  },
+  {
+    "id": "b6c50ca9",
+    "kanji": "病院",
+    "reading": "びょういん",
+    "meaning": "病気や怪我を治療する場所",
+    "difficulty": 3,
+    "components": [
+      "病",
+      "院"
+    ],
+    "sentence": "風邪をひいたので、近所の{{target}}で診察を受ける。"
+  },
+  {
+    "id": "9ff6ce9d",
+    "kanji": "安心",
+    "reading": "あんしん",
+    "meaning": "心が安らぐこと",
+    "difficulty": 1,
+    "components": [
+      "安",
+      "心"
+    ],
+    "sentence": "君の元気な顔を見て、ようやく{{target}}したよ。"
+  },
+  {
+    "id": "352e2e1f",
+    "kanji": "記憶",
+    "reading": "きおく",
+    "meaning": "過去の経験を覚えていること",
+    "difficulty": 2,
+    "components": [
+      "記",
+      "憶"
+    ],
+    "sentence": "この古い写真を見ると、幼い頃の{{target}}が鮮明に蘇る。"
+  },
+  {
+    "id": "b53e65e5",
+    "kanji": "約束",
+    "reading": "やくそく",
+    "meaning": "将来のことを決めておくこと",
+    "difficulty": 1,
+    "components": [
+      "約",
+      "束"
+    ],
+    "sentence": "指切りげんまんで、また会う{{target}}を交わした。"
+  },
+  {
+    "id": "033fc875",
+    "kanji": "時計",
+    "reading": "とけい",
+    "meaning": "時間を計る道具",
+    "difficulty": 2,
+    "components": [
+      "時",
+      "計"
+    ],
+    "sentence": "壁の{{target}}の針が、深夜の12時を回った。"
+  },
+  {
+    "id": "50559dbe",
+    "kanji": "鏡",
+    "reading": "かがみ",
+    "meaning": "姿を映す道具",
+    "difficulty": 1,
+    "components": [
+      "鏡"
+    ],
+    "sentence": "出かける前に{{target}}の前で身だしなみを整える。"
+  },
+  {
+    "id": "996ca64d",
+    "kanji": "帽子",
+    "reading": "ぼうし",
+    "meaning": "頭にかぶるもの",
+    "difficulty": 1,
+    "components": [
+      "帽",
+      "子"
+    ],
+    "sentence": "日差しが強いので、お気に入りの麦わら{{target}}をかぶる。"
+  },
+  {
+    "id": "c6642452",
+    "kanji": "眼鏡",
+    "reading": "めがね",
+    "meaning": "視力を補正する道具",
+    "difficulty": 2,
+    "components": [
+      "眼",
+      "鏡"
+    ],
+    "sentence": "{{target}}をかけ忘れて、黒板の文字がよく見えない。"
+  },
+  {
+    "id": "50d0c7ba",
+    "kanji": "辞書",
+    "reading": "じしょ",
+    "meaning": "言葉の意味を調べる本",
+    "difficulty": 2,
+    "components": [
+      "辞",
+      "書"
+    ],
+    "sentence": "分からない単語があったら、すぐに{{target}}を引く癖をつける。"
+  },
+  {
+    "id": "3c0ee0a8",
+    "kanji": "万年筆",
+    "reading": "まんねんひつ",
+    "meaning": "インクを補充して使うペン",
+    "difficulty": 2,
+    "components": [
+      "万",
+      "年",
+      "筆"
+    ],
+    "sentence": "祖父の形見である{{target}}を使って、心を込めて手紙を書く。"
+  },
+  {
+    "id": "40004356",
+    "kanji": "飛行機",
+    "reading": "ひこうき",
+    "meaning": "空を飛ぶ乗り物",
+    "difficulty": 2,
+    "components": [
+      "飛",
+      "行",
+      "機"
+    ],
+    "sentence": "{{target}}の窓から見下ろす雲海は、息をのむほど美しかった。"
+  },
+  {
+    "id": "a347b2f1",
+    "kanji": "自転車",
+    "reading": "じてんしゃ",
+    "meaning": "ペダルを漕いで進む二輪車",
+    "difficulty": 2,
+    "components": [
+      "自",
+      "転",
+      "車"
+    ],
+    "sentence": "坂道を{{target}}で一気に駆け下りる爽快感。"
+  },
+  {
+    "id": "7811d65b",
+    "kanji": "冒険者",
+    "reading": "ぼうけんしゃ",
+    "meaning": "危険を冒して旅をする人",
+    "difficulty": 2,
+    "components": [
+      "冒",
+      "険",
+      "者"
+    ],
+    "sentence": "かつてこのダンジョンに挑んだ{{target}}の日記を見つけた。"
+  },
+  {
+    "id": "ef817158",
+    "kanji": "魔法",
+    "reading": "まほう",
+    "meaning": "不思議な力",
+    "difficulty": 2,
+    "components": [
+      "魔",
+      "法"
+    ],
+    "sentence": "もしも一つだけ{{target}}が使えるなら、空を飛んでみたい。"
+  },
+  {
+    "id": "7196f65c",
+    "kanji": "勇者",
+    "reading": "ゆうしゃ",
+    "meaning": "勇気ある者",
+    "difficulty": 1,
+    "components": [
+      "勇",
+      "者"
+    ],
+    "sentence": "伝説の剣を抜き、魔王を倒す{{target}}の旅が始まる。"
+  },
+  {
+    "id": "77ef9c7b",
+    "kanji": "迷宮",
+    "reading": "めいきゅう",
+    "meaning": "入り組んで迷いやすい場所",
+    "difficulty": 2,
+    "components": [
+      "迷",
+      "宮"
+    ],
+    "sentence": "この地下遺跡はまるで巨大な{{target}}のようだ。"
+  },
+  {
+    "id": "b749f51d",
+    "kanji": "宝箱",
+    "reading": "たからばこ",
+    "meaning": "宝物を入れる箱",
+    "difficulty": 3,
+    "components": [
+      "宝",
+      "箱"
+    ],
+    "sentence": "部屋の隅に置かれた古い{{target}}を開けると、中から光が溢れ出した。"
   }
 ]--- src/features/kanji-core/data/jukugo-db.json ---
 [
@@ -10543,200 +11200,327 @@ export const createDictionarySlice: StateCreator<DictionarySlice> = (set, get) =
 
   resetCollection: () => set({ unlockedIds: [], unlockedJukugos: [] }),
 });--- src/features/dictionary/views/JukugoListView.tsx ---
+// src/features/dictionary/views/JukugoListView.tsx
 "use client";
 
 import { useGameStore } from "@/features/game-board/stores/store";
 import jukugoData from "@/features/kanji-core/data/jukugo-db-auto.json";
 import { JukugoDefinition } from "@/features/kanji-core/types";
+import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// 五十音インデックス
+const SYLLABARY_ROWS = [
+  { label: "全", value: "all" },
+  { label: "あ", value: "a" },
+  { label: "か", value: "ka" },
+  { label: "さ", value: "sa" },
+  { label: "た", value: "ta" },
+  { label: "な", value: "na" },
+  { label: "は", value: "ha" },
+  { label: "ま", value: "ma" },
+  { label: "や", value: "ya" },
+  { label: "ら", value: "ra" },
+  { label: "わ", value: "wa" },
+];
 
 export function JukugoListView() {
   const unlockedJukugos = useGameStore((state) => state.unlockedJukugos);
   const data = jukugoData as JukugoDefinition[];
 
-  // 文字数ごとにデータをグループ化 (2文字, 3文字, 4文字...)
-  const groupedData = data.reduce((acc, item) => {
-    const len = item.kanji.length;
-    if (!acc[len]) acc[len] = [];
-    acc[len].push(item);
-    return acc;
-  }, {} as Record<number, JukugoDefinition[]>);
+  const [filterRow, setFilterRow] = useState<string>("all");
+  const [selectedJukugo, setSelectedJukugo] = useState<JukugoDefinition | null>(
+    null
+  );
 
-  // 文字数のキーを昇順にソート (2, 3, 4...)
-  const lengths = Object.keys(groupedData)
-    .map(Number)
-      .sort((a, b) => a - b);
-    
-  const scrollToSection = (len: number) => {
-    const element = document.getElementById(`jukugo-section-${len}`);
-    if (element) {
-      // ヘッダーなどの高さを考慮して少し上に余白を持たせるなら offset が必要ですが、
-      // ここではシンプルに要素の上端へスクロールさせます
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-  const toKansuji = (num: number) =>
-    ["", "一", "二", "三", "四", "五", "六"][num] || num;
+  // フィルタリング処理
+  const filteredJukugos = useMemo(() => {
+    if (filterRow === "all") return data;
+
+    const checkRow = (reading: string, row: string) => {
+      if (row === "a") return /^[あ-お]/.test(reading);
+      if (row === "ka") return /^[か-こが-ご]/.test(reading);
+      if (row === "sa") return /^[さ-そざ-ぞ]/.test(reading);
+      if (row === "ta") return /^[た-とだ-ど]/.test(reading);
+      if (row === "na") return /^[な-の]/.test(reading);
+      if (row === "ha") return /^[は-ほば-ぼぱ-ぽ]/.test(reading);
+      if (row === "ma") return /^[ま-も]/.test(reading);
+      if (row === "ya") return /^[や-よ]/.test(reading);
+      if (row === "ra") return /^[ら-ろ]/.test(reading);
+      if (row === "wa") return /^[わ-ん]/.test(reading);
+      return true;
+    };
+
+    return data.filter((j) => checkRow(j.reading, filterRow));
+  }, [data, filterRow]);
+
+  // 現在表示中のリストでの収集済みカウント
+  const currentUnlockedCount = filteredJukugos.filter((item) =>
+    unlockedJukugos.includes(item.id)
+  ).length;
 
   return (
-    <div className="flex flex-col gap-12 pb-20">
-      <div className="flex flex-wrap gap-2 mb-8 sticky top-0 z-10 bg-[#f5f2eb]/95 backdrop-blur py-4 border-b border-[#3d3330]/10">
-        <span className="text-sm font-bold text-stone-400 flex items-center mr-2">
-          目次:
-        </span>
-        {lengths.map((len) => (
-          <button
-            key={`nav-${len}`}
-            onClick={() => scrollToSection(len)}
-            className="px-3 py-1 bg-white border border-[#3d3330]/20 rounded-full text-sm font-serif font-bold text-[#3d3330] hover:bg-[#d94a38] hover:text-white hover:border-[#d94a38] transition-colors shadow-sm"
-          >
-            {toKansuji(len)}字
-          </button>
-        ))}
+    <>
+      {/* --- あかさたなフィルター (追従ヘッダー) --- */}
+      <div className="sticky top-0 z-30 bg-[#f5f2eb]/95 backdrop-blur pt-2 pb-4 mb-4 border-b border-[#3d3330]/10">
+        <div className="overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex gap-2 min-w-max px-1">
+            {SYLLABARY_ROWS.map((row) => (
+              <button
+                key={row.value}
+                onClick={() => setFilterRow(row.value)}
+                className={`
+                    w-10 h-10 rounded-full font-serif font-bold text-sm transition-all border shrink-0
+                    ${
+                      filterRow === row.value
+                        ? "bg-[#d94a38] text-white border-[#d94a38] shadow-md scale-110"
+                        : "bg-white text-stone-600 border-stone-200 hover:bg-stone-100"
+                    }
+                  `}
+              >
+                {row.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        {/* 件数表示 */}
+        <div className="text-right text-xs font-serif text-stone-500 px-2 mt-1">
+          {currentUnlockedCount} / {filteredJukugos.length} 件 表示中
+        </div>
       </div>
 
-      <div className="flex flex-col gap-12">
-        {lengths.map((len) => {
-          const items = groupedData[len];
-          const unlockedCount = items.filter((item) =>
-            unlockedJukugos.includes(item.id)
-          ).length;
-
-        // ヘッダー（漢数字変換: 2->二, 3->三...）
-        const kansuji = ["", "一", "二", "三", "四", "五", "六"][len] || len;
-        
-        return (
-          <div
-            key={len}
-            id={`jukugo-section-${len}`}
-            className="w-full scroll-mt-24" // scroll-mt でスクロール時の余白を確保
-          >
-            <h2 className="text-xl font-serif font-bold mb-4 border-l-4 border-[#d94a38] pl-3 text-[#3d3330]">
-              {kansuji}字熟語{" "}
-              <span className="text-sm font-normal text-stone-500 ml-2">
-                ({unlockedCount}/{items.length})
-              </span>
-            </h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {items.map((jukugo) => {
-                const isUnlocked = unlockedJukugos.includes(jukugo.id);
-
-                return (
-                  <div
-                    key={jukugo.id}
-                    className={`
-                      relative p-4 rounded-lg border-2 transition-all flex items-start gap-4
-                      ${
-                        isUnlocked
-                          ? "bg-white border-[#3d3330]/10 shadow-sm"
-                          : "bg-[#e0dcd5]/50 border-transparent opacity-60"
-                      }
-                    `}
-                  >
-                    {isUnlocked ? (
-                      <>
-                        {/* 左側: 漢字と読み */}
-                        {/* 修正: flex-shrink-0 -> shrink-0 */}
-                        <div className="shrink-0">
-                          <div className="text-2xl font-serif font-bold text-[#3d3330] tracking-widest leading-none mb-1">
-                            {jukugo.kanji}
-                          </div>
-                          <div className="text-xs text-[#d94a38] font-bold">
-                            {jukugo.reading}
-                          </div>
-                        </div>
-
-                        {/* 右側: 意味 */}
-                        {/* 修正: min-h-[3rem] -> min-h-12 */}
-                        <div className="flex-1 border-l border-stone-200 pl-3 min-h-12 flex items-center">
-                          <p className="text-xs text-stone-600 leading-relaxed font-serif">
-                            {jukugo.meaning || "（意味データなし）"}
-                          </p>
-                        </div>
-
-                        {/* 難易度バッジ (オプション) */}
-                        <div className="absolute top-2 right-2 text-[10px] bg-stone-100 text-stone-400 px-1 rounded">
-                          Lv.{jukugo.difficulty}
-                        </div>
-                      </>
-                    ) : (
-                      // 未発見時
-                      <div className="w-full h-12 flex items-center justify-center text-stone-400 font-serif tracking-widest">
-                        {/* ??? 表示 (文字数分) */}
-                        {Array(len).fill("?").join(" ")}
-                      </div>
-                    )}
+      {/* --- リスト本体 --- */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-20">
+        <AnimatePresence mode="popLayout">
+          {filteredJukugos.map((jukugo) => {
+            const isUnlocked = unlockedJukugos.includes(jukugo.id);
+            return (
+              <motion.div
+                layout
+                key={jukugo.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => isUnlocked && setSelectedJukugo(jukugo)}
+                className={`
+                  relative p-4 rounded-lg border-2 transition-all flex items-center justify-between
+                  ${
+                    isUnlocked
+                      ? "bg-white border-[#3d3330]/10 shadow-sm cursor-pointer hover:border-[#d94a38]/50 hover:shadow-md hover:-translate-y-0.5"
+                      : "bg-[#e0dcd5]/40 border-dashed border-stone-300 opacity-60 pointer-events-none"
+                  }
+                `}
+              >
+                <div>
+                  <div className="text-2xl font-serif font-bold text-[#3d3330] mb-1">
+                    {isUnlocked ? jukugo.kanji : "???"}
                   </div>
-                );
-              })}
+                  <div className="text-xs text-[#d94a38] font-bold tracking-widest">
+                    {isUnlocked ? jukugo.reading : "???"}
+                  </div>
+                </div>
+
+                {isUnlocked && (
+                  <div className="text-[10px] bg-stone-100 text-stone-400 px-2 py-1 rounded border border-stone-200">
+                    Lv.{jukugo.difficulty}
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+
+        {filteredJukugos.length === 0 && (
+          <div className="col-span-full text-center py-20 text-stone-400 font-serif">
+            該当する熟語はありません
+          </div>
+        )}
+      </div>
+
+      {/* --- 詳細モーダル (共通) --- */}
+      <AnimatePresence>
+        {selectedJukugo && (
+          <JukugoDetailModal
+            item={selectedJukugo}
+            onClose={() => setSelectedJukugo(null)}
+          />
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+// モーダル (前回の最強z-index版と同じもの)
+function JukugoDetailModal({
+  item,
+  onClose,
+}: {
+  item: JukugoDefinition;
+  onClose: () => void;
+}) {
+  const formattedSentence = useMemo(() => {
+    if (!item.sentence) return null;
+    const parts = item.sentence.split("{{target}}");
+    return (
+      <>
+        {parts.map((part, i) => (
+          <span key={i}>
+            {part}
+            {i < parts.length - 1 && (
+              <span className="text-[#d94a38] font-bold mx-1 border-b border-[#d94a38]/30">
+                {item.kanji}
+              </span>
+            )}
+          </span>
+        ))}
+      </>
+    );
+  }, [item]);
+
+  return (
+    <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-[#3d3330]/70 backdrop-blur-sm"
+      />
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        className="relative w-full max-w-lg bg-[#fdfcf8] rounded-xl shadow-2xl overflow-hidden border border-[#3d3330]/10"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="h-2 w-full bg-[#d94a38]" />
+        <div className="p-8 flex flex-col items-center text-center">
+          <div className="text-sm text-stone-500 tracking-[0.2em] font-serif mb-2">
+            {item.reading}
+          </div>
+          <div className="text-5xl md:text-6xl font-serif font-bold text-[#3d3330] mb-6">
+            {item.kanji}
+          </div>
+          <div className="w-12 h-px bg-[#3d3330]/20 mb-6" />
+          {item.meaning && (
+            <div className="text-[#3d3330] font-serif leading-relaxed mb-8 text-lg">
+              {item.meaning}
             </div>
-          </div>
-        );
-      })}
-          </div>
+          )}
+          {formattedSentence ? (
+            <div className="bg-[#f5f2eb] rounded-lg p-5 w-full text-left border border-[#3d3330]/5 relative">
+              <div className="absolute top-0 right-0 transform -translate-y-1/2 translate-x-2 bg-white px-2 text-[10px] text-[#d94a38] font-bold tracking-widest border border-[#d94a38]/20 rounded-full">
+                USAGE
+              </div>
+              <div className="text-stone-700 font-serif text-lg leading-loose">
+                “ {formattedSentence} ”
+              </div>
+            </div>
+          ) : (
+            <div className="text-stone-400 text-sm font-serif">
+              (例文データはありません)
+            </div>
+          )}
+        </div>
+        <div className="bg-[#f5f2eb] p-4 flex justify-center border-t border-[#3d3330]/10">
+          <button
+            onClick={onClose}
+            className="px-8 py-2 rounded-full bg-[#3d3330] text-[#fdfcf8] text-sm font-bold hover:bg-[#594a46] transition-colors shadow-md"
+          >
+            閉じる
+          </button>
+        </div>
+      </motion.div>
     </div>
   );
 }
 --- src/features/dictionary/views/DictionaryView.tsx ---
+// src/features/dictionary/views/DictionaryView.tsx
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useGameStore } from "@/features/game-board/stores/store";
 import idsMapData from "@/features/kanji-core/data/ids-map-auto.json";
 import jukugoData from "@/features/kanji-core/data/jukugo-db-auto.json";
-import { JukugoListView } from "./JukugoListView"; // ★作成したコンポーネントをインポート
+import { JukugoDefinition } from "@/features/kanji-core/types";
+import { JukugoListView } from "./JukugoListView";
+import { KanjiListView } from "./KanjiListView";
 
 export function DictionaryView() {
-  // ★タブの状態管理 ('kanji' | 'jukugo')
   const [activeTab, setActiveTab] = useState<"kanji" | "jukugo">("kanji");
 
-  // --- 統計データの計算 ---
   const unlockedIds = useGameStore((state) => state.unlockedIds);
   const unlockedJukugos = useGameStore((state) => state.unlockedJukugos);
 
-  // 漢字の統計
-  const allKanjiList = Object.keys(idsMapData);
-  const totalKanji = allKanjiList.length;
-  const collectedKanji = allKanjiList.filter((k) =>
+  // --- 統計データの計算 ---
+
+  // 1. ゲーム内で実際に登場する漢字のリストを計算
+  const validKanjiList = useMemo(() => {
+    const usedChars = new Set<string>();
+    const data = jukugoData as JukugoDefinition[];
+
+    data.forEach((jukugo) => {
+      // 熟語の構成パーツをセットに追加
+      jukugo.components.forEach((char) => usedChars.add(char));
+    });
+
+    // ids-mapにあるキーのうち、実際に使われているものだけをリスト化
+    return (
+      Object.keys(idsMapData)
+        .filter((key) => usedChars.has(key))
+        // ▼ 追加: 漢字(一-龠)、々、〆、ヵ、ヶ 以外を除外する強力なフィルター
+        .filter((key) => key.match(/^[一-龠々〆ヵヶ]+$/))
+    );
+  }, []);
+
+  // 2. 収集率の計算
+  const totalKanji = validKanjiList.length;
+  const collectedKanji = validKanjiList.filter((k) =>
     unlockedIds.includes(k)
   ).length;
 
-  // 熟語の統計
   const totalJukugo = jukugoData.length;
   const collectedJukugo = unlockedJukugos.length;
 
-  // 表示用データ選択
+  // 表示用データ
   const currentCollected =
     activeTab === "kanji" ? collectedKanji : collectedJukugo;
   const currentTotal = activeTab === "kanji" ? totalKanji : totalJukugo;
+
+  // 小数点第1位まで表示 (例: 0.3%)
   const percentage =
-    currentTotal > 0 ? Math.round((currentCollected / currentTotal) * 100) : 0;
+    currentTotal > 0
+      ? ((currentCollected / currentTotal) * 100).toFixed(1)
+      : "0.0";
 
   return (
     <div className="min-h-screen bg-[#f5f2eb] text-[#3d3330] p-4 md:p-8">
-      <div className="max-w-4xl mx-auto">
-        {/* ヘッダーエリア */}
+      <div className="max-w-5xl mx-auto">
+        {/* --- ヘッダーエリア --- */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 border-b-2 border-[#3d3330]/10 pb-4 gap-4">
           <div>
-            <h1 className="text-3xl md:text-4xl font-serif font-bold mb-2">
+            <h1 className="text-3xl md:text-4xl font-serif font-bold mb-2 tracking-widest text-[#3d3330]">
               収集図鑑
             </h1>
-            <p className="text-stone-500">
+            <p className="text-stone-500 font-serif">
               {activeTab === "kanji" ? "漢字" : "熟語"}収集率:{" "}
               <span className="text-2xl font-bold text-[#d94a38]">
                 {percentage}%
               </span>{" "}
-              ({currentCollected}/{currentTotal})
+              <span className="text-sm">
+                ({currentCollected}/{currentTotal})
+              </span>
             </p>
           </div>
 
           <div className="flex items-center gap-4">
-            {/* タブ切り替えボタン */}
-            <div className="bg-[#e0dcd5] p-1 rounded-full flex text-sm font-bold">
+            {/* タブ切り替え */}
+            <div className="bg-[#e0dcd5] p-1 rounded-full flex text-sm font-bold shadow-inner">
               <button
                 onClick={() => setActiveTab("kanji")}
-                className={`px-4 py-2 rounded-full transition-all ${
+                className={`px-6 py-2 rounded-full transition-all ${
                   activeTab === "kanji"
                     ? "bg-[#3d3330] text-white shadow-md"
                     : "text-stone-600 hover:text-stone-800"
@@ -10746,7 +11530,7 @@ export function DictionaryView() {
               </button>
               <button
                 onClick={() => setActiveTab("jukugo")}
-                className={`px-4 py-2 rounded-full transition-all ${
+                className={`px-6 py-2 rounded-full transition-all ${
                   activeTab === "jukugo"
                     ? "bg-[#3d3330] text-white shadow-md"
                     : "text-stone-600 hover:text-stone-800"
@@ -10765,43 +11549,181 @@ export function DictionaryView() {
           </div>
         </div>
 
-        {/* コンテンツエリア */}
+        {/* --- コンテンツエリア --- */}
         <div className="min-h-[50vh]">
-          {activeTab === "kanji" ? (
-            /* --- 既存の漢字グリッド --- */
-            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 md:gap-4">
-              {allKanjiList.map((char) => {
-                const isUnlocked = unlockedIds.includes(char);
-                return (
-                  <div
-                    key={char}
-                    className={`
-                      aspect-square rounded-xl flex items-center justify-center text-2xl md:text-3xl font-serif font-bold shadow-sm
-                      transition-all duration-300
-                      ${
-                        isUnlocked
-                          ? "bg-white text-[#3d3330] border-2 border-[#3d3330]/20"
-                          : "bg-[#e0dcd5] text-transparent border border-transparent"
-                      }
-                    `}
-                  >
-                    {isUnlocked ? (
-                      char
-                    ) : (
-                      <span className="text-stone-400 text-lg md:text-xl">
-                        ?
-                      </span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            /* --- 新規の熟語リスト --- */
-            <JukugoListView />
-          )}
+          {activeTab === "kanji" ? <KanjiListView /> : <JukugoListView />}
         </div>
       </div>
+    </div>
+  );
+}
+--- src/features/dictionary/views/KanjiListView.tsx ---
+// src/features/dictionary/views/KanjiListView.tsx
+"use client";
+
+import { useGameStore } from "@/features/game-board/stores/store";
+import jukugoData from "@/features/kanji-core/data/jukugo-db-auto.json";
+import { JukugoDefinition } from "@/features/kanji-core/types";
+import { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+export function KanjiListView() {
+  const unlockedIds = useGameStore((state) => state.unlockedIds); // 単純な発見ID
+  const unlockedJukugos = useGameStore((state) => state.unlockedJukugos);
+  const data = jukugoData as JukugoDefinition[];
+
+  // ゲーム内で収集対象となる漢字リスト（熟語から逆算）
+  const validKanjiList = useMemo(() => {
+    const usedChars = new Set<string>();
+    data.forEach((jukugo) => {
+      jukugo.components.forEach((char) => usedChars.add(char));
+    });
+
+    // ▼ 修正: 漢字(一-龠)、々、〆、ヵ、ヶ 以外（③などの記号）を除外してソート
+    return Array.from(usedChars)
+      .filter((char) => char.match(/^[一-龠々〆ヵヶ]+$/))
+      .sort();
+  }, []);
+
+  const [selectedKanji, setSelectedKanji] = useState<string | null>(null);
+
+  return (
+    <>
+      <div className="pb-20">
+        <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 gap-3">
+          {validKanjiList.map((char) => {
+            const isUnlocked = unlockedIds.includes(char);
+            return (
+              <motion.button
+                key={char}
+                disabled={!isUnlocked}
+                whileHover={isUnlocked ? { scale: 1.1, zIndex: 10 } : {}}
+                whileTap={isUnlocked ? { scale: 0.95 } : {}}
+                onClick={() => isUnlocked && setSelectedKanji(char)}
+                className={`
+                  aspect-square rounded-lg flex items-center justify-center 
+                  text-xl md:text-2xl font-serif font-bold shadow-sm border
+                  transition-colors duration-300
+                  ${
+                    isUnlocked
+                      ? "bg-white text-[#3d3330] border-[#3d3330]/20 cursor-pointer hover:border-[#d94a38] hover:shadow-md"
+                      : "bg-[#e0dcd5] text-transparent border-transparent cursor-default"
+                  }
+                `}
+              >
+                {isUnlocked ? char : "?"}
+              </motion.button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 逆引きモーダル */}
+      <AnimatePresence>
+        {selectedKanji && (
+          <KanjiDetailModal
+            kanji={selectedKanji}
+            allData={data}
+            unlockedIds={unlockedJukugos}
+            onClose={() => setSelectedKanji(null)}
+          />
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+function KanjiDetailModal({
+  kanji,
+  allData,
+  unlockedIds,
+  onClose,
+}: {
+  kanji: string;
+  allData: JukugoDefinition[];
+  unlockedIds: string[];
+  onClose: () => void;
+}) {
+  // この漢字を含む熟語を検索
+  const relatedJukugos = useMemo(() => {
+    return allData.filter((item) => item.components.includes(kanji));
+  }, [kanji, allData]);
+
+  return (
+    // ▼ 修正: z-100 -> z-[100] (Tailwindの任意値記法)
+    <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-[#3d3330]/70 backdrop-blur-sm"
+      />
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        className="relative w-full max-w-md bg-[#fdfcf8] rounded-xl shadow-2xl overflow-hidden border border-[#3d3330]/10"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="bg-[#f5f2eb] p-6 text-center border-b border-[#3d3330]/10">
+          <div className="text-xs text-stone-500 font-bold tracking-widest mb-2">
+            SELECTED KANJI
+          </div>
+          <div className="text-6xl font-serif font-bold text-[#3d3330]">
+            {kanji}
+          </div>
+        </div>
+        <div className="p-6 max-h-[50vh] overflow-y-auto">
+          <h3 className="text-sm font-bold text-stone-400 mb-4 flex items-center gap-2">
+            <span>使用されている熟語</span>
+            <span className="bg-stone-200 text-stone-600 px-2 rounded-full text-[10px]">
+              {relatedJukugos.length}
+            </span>
+          </h3>
+          <div className="flex flex-col gap-3">
+            {relatedJukugos.map((jukugo) => {
+              const isUnlocked = unlockedIds.includes(jukugo.id);
+              return (
+                <div
+                  key={jukugo.id}
+                  className={`flex items-center gap-3 p-3 rounded border ${
+                    isUnlocked
+                      ? "bg-white border-[#3d3330]/10"
+                      : "bg-stone-100 border-dashed border-stone-300 opacity-60"
+                  }`}
+                >
+                  <div
+                    className={`w-10 h-10 flex items-center justify-center rounded text-lg font-serif font-bold ${
+                      isUnlocked
+                        ? "bg-[#d94a38] text-white"
+                        : "bg-stone-300 text-stone-500"
+                    }`}
+                  >
+                    {isUnlocked ? jukugo.kanji[0] : "?"}
+                  </div>
+                  <div>
+                    <div className="font-serif font-bold text-[#3d3330]">
+                      {isUnlocked ? jukugo.kanji : "???"}
+                    </div>
+                    <div className="text-xs text-stone-500">
+                      {isUnlocked ? jukugo.reading : "未発見"}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="p-4 bg-[#f5f2eb] text-center border-t border-[#3d3330]/10">
+          <button
+            onClick={onClose}
+            className="text-stone-500 hover:text-[#3d3330] text-sm font-bold transition-colors"
+          >
+            閉じる
+          </button>
+        </div>
+      </motion.div>
     </div>
   );
 }
@@ -11005,6 +11927,8 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
   );
 }
 --- src/features/game-board/components/GoalSlot.tsx ---
+// src/features/game-board/components/GoalSlot.tsx
+
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -11024,15 +11948,11 @@ export function GoalSlot({ target }: GoalSlotProps) {
   const difficultyMode = useGameStore((state) => state.difficultyMode);
 
   const theme = THEMES[currentTheme];
-
   const [showReading, setShowReading] = useState(false);
 
+  // ターゲットが変わったら読みを隠す
   useEffect(() => {
-    if (difficultyMode === "EASY") {
-      setShowReading(true);
-    } else {
-      setShowReading(false);
-    }
+    setShowReading(difficultyMode === "EASY");
   }, [target?.id, difficultyMode]);
 
   if (!target) return null;
@@ -11043,141 +11963,168 @@ export function GoalSlot({ target }: GoalSlotProps) {
 
   return (
     <motion.div
-      animate={isCompleted ? { scale: 1.05 } : {}}
-      transition={{ duration: 0.5 }}
-      // ▼ 余白(padding)を減らし、幅を画面いっぱい使う設定に変更
-      className="w-full max-w-4xl mx-auto flex flex-col items-center gap-2 py-4 relative"
+      layout
+      className="w-full max-w-3xl mx-auto flex flex-col items-center py-6 relative"
     >
-      {/* ラベルエリア */}
-      <div className="absolute top-0 left-4 md:left-8 flex items-center gap-2 opacity-50">
+      {/* ラベル */}
+      <div className="absolute top-0 left-4 opacity-50">
         <div
-          className={`text-[10px] md:text-xs font-serif font-bold tracking-widest ${theme.colors.text}`}
+          className={`text-xs font-serif font-bold tracking-widest ${theme.colors.text}`}
         >
-          難易度 Lv.{target.difficulty}
+          文脈読解 Lv.{target.difficulty}
         </div>
       </div>
 
-      {/* --- 意味 (フォールバック時) --- */}
-      {!hasSentence && target.meaning && (
-        <div className="w-full text-center mt-6 mb-2 px-2">
-          {/* ▼ フォントサイズを拡大 (text-2xl -> text-3xl) */}
-          <div
-            className={`font-serif text-2xl md:text-4xl font-bold ${theme.colors.text} leading-tight`}
-          >
-            {target.meaning}
-          </div>
-        </div>
-      )}
-
-      {/* --- 文章/スロットエリア --- */}
-      <div className="flex flex-wrap items-end justify-center gap-x-2 gap-y-3 w-full text-center leading-snug px-2 mt-2">
-        {sentenceParts.map((part, pIndex) => {
-          if (part.type === "TEXT") {
-            return (
-              <span
-                key={`text-${pIndex}`}
-                // ▼ 文章テキストも拡大
-                className={`font-serif text-2xl md:text-3xl font-bold ${theme.colors.text} mb-1`}
-              >
-                {part.text}
-              </span>
-            );
-          }
-
-          // ターゲットスロット
-          return (
-            <div key="target-slots" className="flex items-center gap-3 mx-1">
-              {target.components.map((char, cIndex) => {
-                const isFilled = filledIndices.includes(cIndex);
-                return (
-                  <SlotItem
-                    key={`slot-${cIndex}`}
-                    char={char}
-                    isFilled={isFilled}
-                    theme={theme}
-                    isCompleted={isCompleted}
-                  />
-                );
-              })}
+      {/* --- メインエリア --- */}
+      <div className="w-full px-2 mt-8 mb-4">
+        {!hasSentence ? (
+          // 文章がない場合 (意味を表示)
+          <div className="text-center">
+            <h2
+              className={`font-serif text-3xl md:text-4xl font-bold ${theme.colors.text} mb-6`}
+            >
+              {target.meaning || "???"}
+            </h2>
+            <div className="flex justify-center gap-2 mt-4">
+              <SlotGroup
+                target={target}
+                filledIndices={filledIndices}
+                theme={theme}
+                isCompleted={isCompleted}
+              />
             </div>
-          );
-        })}
+          </div>
+        ) : (
+          // 文章がある場合 (テキストとスロットを混ぜて表示)
+          <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-6 leading-loose text-center">
+            {sentenceParts.map((part, pIndex) => {
+              if (part.type === "TEXT") {
+                return (
+                  <span
+                    key={`text-${pIndex}`}
+                    // ▼ 文字サイズを拡大: text-xl (スマホ) / text-3xl (PC)
+                    className={`font-serif text-xl md:text-3xl font-bold ${theme.colors.text} opacity-80 mx-1`}
+                  >
+                    {part.text}
+                  </span>
+                );
+              }
+              // スロット
+              return (
+                <SlotGroup
+                  key="slots"
+                  target={target}
+                  filledIndices={filledIndices}
+                  theme={theme}
+                  isCompleted={isCompleted}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* --- 読みヒント --- */}
-      <div className="h-8 mt-4 flex items-center justify-center">
-        {showReading || isCompleted ? (
-          <motion.div
-            initial={{ opacity: 0, filter: "blur(4px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            className={`font-serif text-base md:text-lg tracking-[0.2em] ${
-              isCompleted ? "text-amber-600 font-bold" : theme.colors.sub
-            }`}
-          >
-            {target.reading}
-          </motion.div>
-        ) : (
-          <button
-            onClick={() => setShowReading(true)}
-            className={`text-xs border border-stone-300 ${theme.colors.sub} px-4 py-1 rounded-full hover:bg-stone-200 transition-colors flex items-center gap-2`}
-          >
-            <span>👁️</span> 読みヒント
-          </button>
-        )}
+      <div className="h-10 mt-4 flex items-center justify-center">
+        <AnimatePresence mode="wait">
+          {showReading || isCompleted ? (
+            <motion.div
+              initial={{ opacity: 0, filter: "blur(4px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0 }}
+              // ▼ 読み仮名も少し大きく
+              className={`font-serif text-lg md:text-xl tracking-[0.2em] font-bold ${
+                isCompleted ? "text-amber-600" : theme.colors.sub
+              }`}
+            >
+              {target.reading}
+            </motion.div>
+          ) : (
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowReading(true)}
+              className="text-xs text-stone-400 hover:text-stone-600 border border-stone-300 rounded-full px-4 py-1.5 transition-colors flex items-center gap-1"
+            >
+              <span>👁️</span> 読みヒント
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
   );
 }
 
-// スロットコンポーネント (サイズ拡大)
-function SlotItem({
+// スロットグループ
+function SlotGroup({ target, filledIndices, theme, isCompleted }: any) {
+  return (
+    <div className="inline-flex items-center gap-1 mx-1 align-middle">
+      {target.components.map((char: string, cIndex: number) => {
+        const isFilled = filledIndices.includes(cIndex);
+        return (
+          <SingleSlot
+            key={`slot-${cIndex}`}
+            char={char}
+            isFilled={isFilled}
+            isCompleted={isCompleted}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+// 個別のスロット (サイズ拡大版)
+function SingleSlot({
   char,
   isFilled,
-  theme,
   isCompleted,
 }: {
   char: string;
   isFilled: boolean;
-  theme: any;
   isCompleted: boolean;
 }) {
   return (
     <div
-      // ▼ スロットサイズを拡大 (w-20 -> w-24)
       className={`
-        relative w-20 h-20 md:w-28 md:h-28
-        flex items-center justify-center transition-all duration-500
+        relative flex items-center justify-center
+        transition-all duration-300
+        
+        /* ▼ サイズ変更箇所 */
+        w-16 h-16      /* スマホ: 48px -> 64px */
+        md:w-20 md:h-20 /* PC: 64px -> 80px */
       `}
     >
+      {/* 枠線 */}
       <div
         className={`
-        absolute inset-0 border-2 rounded-lg
-        ${
-          isFilled
-            ? "border-stone-800 border-3 bg-white shadow-lg transform -rotate-1"
-            : "border-stone-400 border-dashed bg-stone-50/40"
-        }
-      `}
+          absolute inset-0 rounded-lg
+          ${
+            isFilled
+              ? "border-2 border-stone-800 bg-white shadow-sm transform -rotate-1"
+              : "border-2 border-dashed border-stone-400 bg-stone-100/30"
+          }
+          ${isCompleted ? "border-amber-500 bg-amber-50" : ""}
+        `}
       />
 
       <AnimatePresence>
-        {isFilled ? (
+        {isFilled && (
           <motion.div
-            initial={{ scale: 1.5, opacity: 0 }}
-            animate={{
-              scale: 1,
-              opacity: 1,
-              color: isCompleted ? "#d97706" : "#3d3330",
-            }}
-            // ▼ 文字サイズを拡大
-            className="z-10 text-5xl md:text-7xl font-serif font-bold select-none"
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className={`
+              z-10 font-serif font-bold select-none 
+              /* ▼ フォントサイズ変更箇所 */
+              text-4xl       /* スマホ: 2xl -> 4xl */
+              md:text-5xl    /* PC: 3xl -> 5xl */
+              
+              ${isCompleted ? "text-amber-700" : "text-stone-800"}
+            `}
           >
             {char}
           </motion.div>
-        ) : (
-          <span className="text-3xl opacity-10 font-serif text-stone-500 select-none">
-            ?
-          </span>
         )}
       </AnimatePresence>
     </div>
@@ -11792,37 +12739,52 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
   // ▼ 追加
   setDifficultyMode: (mode) => set({ difficultyMode: mode }),
 });--- src/features/game-board/stores/store.ts ---
+// src/features/game-board/stores/store.ts
+
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { PartsSlice, createPartsSlice } from './slices/partsSlice';
 import { StageSlice, createStageSlice } from './slices/stageSlice';
-import { DictionarySlice, createDictionarySlice } from '@/features/dictionary/stores/dictionarySlice';
+import { DictionarySlice, createDictionarySlice } from '@/features/dictionary/stores/dictionarySlice'; // パスは環境に合わせてください
 import { EffectSlice, createEffectSlice } from './slices/effectSlice';
-// ▼ 追加
 import { ThemeSlice, createThemeSlice } from './slices/themeSlice';
 
-// ▼ 型定義に追加
-type GameStore = PartsSlice & StageSlice & DictionarySlice & EffectSlice & ThemeSlice;
+// ▼ 型定義に追加: resetSaveData を含める
+type GameStore = PartsSlice & StageSlice & DictionarySlice & EffectSlice & ThemeSlice & {
+  resetSaveData: () => void;
+};
 
 export const useGameStore = create<GameStore>()(
   persist(
     (...a) => ({
       ...createPartsSlice(...a),
       ...createStageSlice(...a),
-      ...createDictionarySlice(...a),
+      // もし createDictionarySlice の引数や型が合わない場合は調整してください
+      // 基本的には ...a (set, get, api) を渡せばOKです
+      ...createDictionarySlice(...a), 
       ...createEffectSlice(...a),
-      // ▼ 追加
       ...createThemeSlice(...a),
+
+      // ▼ 追加: リセット機能の実装
+      resetSaveData: () => {
+        // 1. ローカルストレージを削除
+        localStorage.removeItem('kanji-merge-storage');
+        
+        // 2. ページをリロードして、強制的に初期状態（デフォルト値）で再開させる
+        // (stateを個別にsetで戻すより、これが一番確実でバグが起きにくいです)
+        window.location.reload();
+      },
     }),
     {
       name: 'kanji-merge-storage',
       partialize: (state) => ({ 
         unlockedIds: state.unlockedIds,
         unlockedJukugos: state.unlockedJukugos,
-        levelIndex: state.levelIndex,
+        // levelIndex や maxReachedLevel など、StageSliceのプロパティ名に合わせてください
+        // StageSliceの定義によりますが、恐らく currentLevel などを保存しているはずです
+        levelIndex: state.levelIndex, 
         maxReachedLevel: state.maxReachedLevel,
-        historyIds: state.historyIds,
-        // ▼ 追加: テーマ設定も保存対象にする
+        historyIds: state.historyIds, 
         currentTheme: state.currentTheme,
       }),
     }

@@ -1,10 +1,10 @@
 [
   {
-    "id": "a4b1ebb1",
+    "id": "643277dd",
     "kanji": "明暗",
     "reading": "めいあん",
     "meaning": "明るさと暗さ",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "明",
       "暗"
@@ -12,11 +12,11 @@
     "sentence": "張り詰めた静寂の中、一瞬の判断が勝負の{{target}}を分けることになった。"
   },
   {
-    "id": "a9503091",
+    "id": "ce45aaf4",
     "kanji": "森林",
     "reading": "しんりん",
     "meaning": "木がたくさん茂っている場所",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "森",
       "林"
@@ -24,11 +24,11 @@
     "sentence": "何百年もの時を超えて生き続ける、深く静かな{{target}}の息吹を感じる。"
   },
   {
-    "id": "714c282b",
+    "id": "bff173f3",
     "kanji": "岩石",
     "reading": "がんせき",
     "meaning": "岩と石",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "岩",
       "石"
@@ -36,11 +36,11 @@
     "sentence": "荒涼とした大地には、風雨に削られた無骨な{{target}}が無数に転がっていた。"
   },
   {
-    "id": "8ecc2e04",
+    "id": "c97b7e34",
     "kanji": "火山",
     "reading": "かざん",
     "meaning": "マグマを噴き出す山",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "火",
       "山"
@@ -48,11 +48,11 @@
     "sentence": "大地の怒りを代弁するかのように、激しく噴煙を上げる{{target}}が目の前にそびえる。"
   },
   {
-    "id": "5b2282ab",
+    "id": "d7a714a9",
     "kanji": "休火山",
     "reading": "きゅうかざん",
     "meaning": "現在は活動していない火山",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "休",
       "火",
@@ -61,11 +61,11 @@
     "sentence": "かつての激しさを秘めたまま、今は静かに眠りについている{{target}}の姿。"
   },
   {
-    "id": "f5dc03d5",
+    "id": "7a105c4b",
     "kanji": "活火山",
     "reading": "かつかざん",
     "meaning": "現在も活動している火山",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "活",
       "火",
@@ -74,11 +74,11 @@
     "sentence": "地底深くから響く地鳴りと共に、{{target}}は今もなお生き続けている。"
   },
   {
-    "id": "2db0a11c",
+    "id": "72ff825b",
     "kanji": "日本",
     "reading": "にほん",
     "meaning": "東アジアにある島国",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "日",
       "本"
@@ -86,11 +86,11 @@
     "sentence": "四季折々の美しい自然と、長い歴史が織りなすこの国は{{target}}と呼ばれる。"
   },
   {
-    "id": "1e5ee92c",
+    "id": "3ba5ae3a",
     "kanji": "休日",
     "reading": "きゅうじつ",
     "meaning": "仕事や学校が休みの日",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "休",
       "日"
@@ -98,11 +98,11 @@
     "sentence": "騒がしい日常から離れ、心と体を癒やすための穏やかな{{target}}を過ごす。"
   },
   {
-    "id": "16f3a9b8",
+    "id": "7989ac35",
     "kanji": "大金",
     "reading": "たいきん",
     "meaning": "たくさんのお金",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "大",
       "金"
@@ -110,11 +110,11 @@
     "sentence": "人生を狂わせるほどの{{target}}を前にして、彼の目は怪しく輝き始めた。"
   },
   {
-    "id": "baa1e26f",
+    "id": "6a719e30",
     "kanji": "金魚",
     "reading": "きんぎょ",
     "meaning": "観賞用の美しい魚",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "金",
       "魚"
@@ -122,11 +122,11 @@
     "sentence": "夏の夜祭りの喧騒の中、水槽の中で涼しげに泳ぐ{{target}}の赤色が目に焼き付く。"
   },
   {
-    "id": "a86f50c4",
+    "id": "f74b6d32",
     "kanji": "人魚",
     "reading": "にんぎょ",
     "meaning": "伝説上の生き物",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "人",
       "魚"
@@ -134,11 +134,11 @@
     "sentence": "月明かりの海で歌うという、美しくも哀しい{{target}}の伝説がこの村には残っている。"
   },
   {
-    "id": "b3c78964",
+    "id": "9180c7e5",
     "kanji": "雷雨",
     "reading": "らいう",
     "meaning": "雷をともなって激しく降る雨",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "雷",
       "雨"
@@ -146,11 +146,11 @@
     "sentence": "空を引き裂くような閃光と共に、激しい{{target}}が乾いた大地を打ち叩く。"
   },
   {
-    "id": "e051e60e",
+    "id": "1d79f25c",
     "kanji": "青空",
     "reading": "あおぞら",
     "meaning": "雲が少なく晴れ渡った空",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "青",
       "空"
@@ -158,11 +158,11 @@
     "sentence": "雨上がりの空を見上げると、そこには心が洗われるような澄み切った{{target}}が広がっていた。"
   },
   {
-    "id": "872bb064",
+    "id": "288b735b",
     "kanji": "空気",
     "reading": "くうき",
     "meaning": "地球を包んでいる気体",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "空",
       "気"
@@ -170,11 +170,11 @@
     "sentence": "高原の澄んだ{{target}}を深く吸い込むと、都会の喧騒が嘘のように消えていく。"
   },
   {
-    "id": "b695abea",
+    "id": "60dce61a",
     "kanji": "電気",
     "reading": "でんき",
     "meaning": "光や熱を発生させるエネルギー",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "電",
       "気"
@@ -182,11 +182,11 @@
     "sentence": "文明の夜を照らし、私たちの生活を支え続けている{{target}}という名のエネルギー。"
   },
   {
-    "id": "fe2f428d",
+    "id": "6fb4ae22",
     "kanji": "電車",
     "reading": "でんしゃ",
     "meaning": "電気で走る鉄道車両",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "電",
       "車"
@@ -194,11 +194,11 @@
     "sentence": "ガタゴトと揺れる{{target}}の窓から、流れていく夕暮れの街並みをぼんやりと眺める。"
   },
   {
-    "id": "e7f3ffc3",
+    "id": "f1491de6",
     "kanji": "電話",
     "reading": "でんわ",
     "meaning": "遠くの人と話せる機械",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "電",
       "話"
@@ -206,11 +206,11 @@
     "sentence": "懐かしい声が受話器越しに響き、{{target}}線を通じて遠く離れた二人の距離が縮まる。"
   },
   {
-    "id": "d6916be9",
+    "id": "e599e322",
     "kanji": "会話",
     "reading": "かいわ",
     "meaning": "向かい合って話をすること",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "会",
       "話"
@@ -218,11 +218,11 @@
     "sentence": "焚き火を囲みながら交わした何気ない{{target}}が、旅の疲れを心地よく癒やしてくれる。"
   },
   {
-    "id": "dfc2f541",
+    "id": "6971ba0b",
     "kanji": "読書",
     "reading": "どくしょ",
     "meaning": "本を読むこと",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "読",
       "書"
@@ -230,11 +230,11 @@
     "sentence": "ページをめくる音だけが響く部屋で、時間を忘れて{{target}}の世界に没頭する。"
   },
   {
-    "id": "a3cdd4d7",
+    "id": "01a24880",
     "kanji": "書店",
     "reading": "しょてん",
     "meaning": "本を売っている店",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "書",
       "店"
@@ -242,11 +242,11 @@
     "sentence": "インクと紙の匂いが漂う{{target}}の棚には、まだ見ぬ物語たちが静かに眠っている。"
   },
   {
-    "id": "2fa770ec",
+    "id": "6e45f0d0",
     "kanji": "売店",
     "reading": "ばいてん",
     "meaning": "商品を売っている小さな店",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "売",
       "店"
@@ -254,11 +254,11 @@
     "sentence": "旅の途中に立ち寄った古びた{{target}}で、名物の焼き菓子を買い求めた。"
   },
   {
-    "id": "f42a2bad",
+    "id": "21462da9",
     "kanji": "花火",
     "reading": "はなび",
     "meaning": "空に光を咲かせる火薬",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "花",
       "火"
@@ -266,11 +266,11 @@
     "sentence": "夜空に大輪の花を咲かせては儚く消えゆく{{target}}に、去りゆく夏の名残を感じる。"
   },
   {
-    "id": "7f764a5f",
+    "id": "a50f8c22",
     "kanji": "花見",
     "reading": "はなみ",
     "meaning": "桜を見て楽しむこと",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "花",
       "見"
@@ -278,11 +278,11 @@
     "sentence": "舞い散る桜の下で杯を交わし、春の訪れを祝う{{target}}の宴が始まった。"
   },
   {
-    "id": "0f21dc71",
+    "id": "f8d7af3c",
     "kanji": "見学",
     "reading": "けんがく",
     "meaning": "現地に行って学ぶこと",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "見",
       "学"
@@ -290,11 +290,11 @@
     "sentence": "教科書でしか知らなかった歴史的遺産を、実際に訪れて{{target}}する貴重な機会を得た。"
   },
   {
-    "id": "38274fae",
+    "id": "92356cdd",
     "kanji": "学校",
     "reading": "がっこう",
     "meaning": "勉強を教わるところ",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "学",
       "校"
@@ -302,11 +302,11 @@
     "sentence": "チャイムの音が響き渡る{{target}}の廊下には、青春の日々の思い出が詰まっている。"
   },
   {
-    "id": "4cb61071",
+    "id": "1ddac2f5",
     "kanji": "校歌",
     "reading": "こうか",
     "meaning": "その学校の歌",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "校",
       "歌"
@@ -314,11 +314,11 @@
     "sentence": "卒業の時を迎え、涙をこらえながら全員で{{target}}を斉唱した。"
   },
   {
-    "id": "fae56ef4",
+    "id": "139189bd",
     "kanji": "歌手",
     "reading": "かしゅ",
     "meaning": "歌を歌う人",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "歌",
       "手"
@@ -326,11 +326,11 @@
     "sentence": "スポットライトを浴びて、その{{target}}は魂を揺さぶるような歌声を響かせた。"
   },
   {
-    "id": "5e856c3e",
+    "id": "491919fc",
     "kanji": "手足",
     "reading": "てあし",
     "meaning": "手と足",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "手",
       "足"
@@ -338,11 +338,11 @@
     "sentence": "凍えるような寒さの中で、かじかんだ{{target}}を必死に擦り合わせて暖を取る。"
   },
   {
-    "id": "7d4a346d",
+    "id": "627cbd55",
     "kanji": "不足",
     "reading": "ふそく",
     "meaning": "足りないこと",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "不",
       "足"
@@ -350,11 +350,11 @@
     "sentence": "慢性的な人手{{target}}により、現場の作業員たちは疲労の色を隠せない。"
   },
   {
-    "id": "586fa251",
+    "id": "2ac40f0f",
     "kanji": "遠足",
     "reading": "えんそく",
     "meaning": "遠くへ出かける行事",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "遠",
       "足"
@@ -362,11 +362,11 @@
     "sentence": "リュックにお菓子を詰め込んで、明日の{{target}}を楽しみに眠りにつく子供たち。"
   },
   {
-    "id": "54db1e53",
+    "id": "4a5246a1",
     "kanji": "男気",
     "reading": "おとこぎ",
     "meaning": "弱い者を助ける気性",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "男",
       "気"
@@ -374,11 +374,11 @@
     "sentence": "損得勘定抜きで困っている人を助ける、彼の{{target}}溢れる行動に誰もが心を打たれた。"
   },
   {
-    "id": "989233b9",
+    "id": "56c29ab1",
     "kanji": "町内",
     "reading": "ちょうない",
     "meaning": "町の中",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "町",
       "内"
@@ -386,11 +386,11 @@
     "sentence": "祭りの季節が近づき、{{target}}会の集まりでは太鼓の練習の音が響き始めた。"
   },
   {
-    "id": "b7f9a86d",
+    "id": "ef4e0833",
     "kanji": "地図",
     "reading": "ちず",
     "meaning": "地形を描いた図",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "地",
       "図"
@@ -398,22 +398,22 @@
     "sentence": "色褪せた古びた{{target}}を頼りに、伝説の財宝が眠るという洞窟を目指して進む。"
   },
   {
-    "id": "c1965d98",
+    "id": "bdc62534",
     "kanji": "池",
     "reading": "いけ",
     "meaning": "水がたまっている所",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "池"
     ],
     "sentence": "静寂に包まれた森の奥深く、水面に月を映し出す神秘的な{{target}}が存在する。"
   },
   {
-    "id": "401b8231",
+    "id": "44918c36",
     "kanji": "海外",
     "reading": "かいがい",
     "meaning": "外国",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "海",
       "外"
@@ -421,11 +421,11 @@
     "sentence": "見知らぬ土地、言葉、文化。初めての{{target}}旅行は、私の価値観を大きく変えた。"
   },
   {
-    "id": "13990143",
+    "id": "d5d27f74",
     "kanji": "特急",
     "reading": "とっきゅう",
     "meaning": "特別急行列車",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "特",
       "急"
@@ -433,11 +433,11 @@
     "sentence": "駅のホームを風のように通過していく{{target}}列車を見送りながら、次の旅への思いを馳せる。"
   },
   {
-    "id": "e8013479",
+    "id": "92db2d14",
     "kanji": "招待",
     "reading": "しょうたい",
     "meaning": "客として招くこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "招",
       "待"
@@ -445,11 +445,11 @@
     "sentence": "王宮で開かれる舞踏会への{{target}}状が届き、彼女の心はときめきで満たされた。"
   },
   {
-    "id": "bdea4983",
+    "id": "7e3bfc83",
     "kanji": "持参",
     "reading": "じさん",
     "meaning": "持って行くこと",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "持",
       "参"
@@ -457,11 +457,11 @@
     "sentence": "このパーティーは持ち寄り形式なので、自慢の手料理を{{target}}して参加する。"
   },
   {
-    "id": "eb024bbc",
+    "id": "bbf4990d",
     "kanji": "草原",
     "reading": "そうげん",
     "meaning": "草が生えている原",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "草",
       "原"
@@ -469,11 +469,11 @@
     "sentence": "どこまでも続く緑の{{target}}を、一頭の白馬が風を切って駆け抜けていく。"
   },
   {
-    "id": "ef6c58ef",
+    "id": "781e79af",
     "kanji": "親子",
     "reading": "おやこ",
     "meaning": "親と子",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "親",
       "子"
@@ -481,11 +481,11 @@
     "sentence": "夕暮れの公園で、手をつないで帰路につく{{target}}のシルエットが微笑ましい。"
   },
   {
-    "id": "dc1634a2",
+    "id": "5fbca050",
     "kanji": "売買",
     "reading": "ばいばい",
     "meaning": "売ることと買うこと",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "売",
       "買"
@@ -493,11 +493,11 @@
     "sentence": "活気あふれる市場では、朝から晩まで様々な商品の{{target}}が行われている。"
   },
   {
-    "id": "f34f960d",
+    "id": "3cb22fc5",
     "kanji": "算数",
     "reading": "さんすう",
     "meaning": "数の計算などを学ぶ教科",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "算",
       "数"
@@ -505,11 +505,11 @@
     "sentence": "単純な計算に見えて奥が深い、それが{{target}}という学問の入り口だ。"
   },
   {
-    "id": "9a18b8a6",
+    "id": "3a883b67",
     "kanji": "理科",
     "reading": "りか",
     "meaning": "自然現象を学ぶ教科",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "理",
       "科"
@@ -517,11 +517,11 @@
     "sentence": "実験室での失敗から学んだことは、教科書の{{target}}の知識よりも記憶に残っている。"
   },
   {
-    "id": "7ce35836",
+    "id": "e8049227",
     "kanji": "早朝",
     "reading": "そうちょう",
     "meaning": "朝早い時間",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "早",
       "朝"
@@ -529,11 +529,11 @@
     "sentence": "街がまだ眠りについている{{target}}の澄んだ空気の中、新聞配達のバイクの音だけが響く。"
   },
   {
-    "id": "be2b8a04",
+    "id": "fa5ef8a0",
     "kanji": "鉄道",
     "reading": "てつどう",
     "meaning": "レールを走る交通機関",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "鉄",
       "道"
@@ -541,11 +541,11 @@
     "sentence": "大陸を横断する長い{{target}}の旅は、多くの旅人たちにロマンを与え続けてきた。"
   },
   {
-    "id": "788aa7b5",
+    "id": "d1feadb4",
     "kanji": "銀行",
     "reading": "ぎんこう",
     "meaning": "お金を扱う機関",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "銀",
       "行"
@@ -553,11 +553,11 @@
     "sentence": "堅牢な金庫室の奥深くで、{{target}}は人々の大切な財産を静かに守り続けている。"
   },
   {
-    "id": "dfc285da",
+    "id": "9fbecf59",
     "kanji": "飲食",
     "reading": "いんしょく",
     "meaning": "飲んだり食べたりすること",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "飲",
       "食"
@@ -565,11 +565,11 @@
     "sentence": "健康的な生活を送るためには、日々の{{target}}のバランスに気を配ることが大切だ。"
   },
   {
-    "id": "41877a11",
+    "id": "92be52d4",
     "kanji": "鮮魚",
     "reading": "せんぎょ",
     "meaning": "新鮮な魚",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "鮮",
       "魚"
@@ -577,11 +577,11 @@
     "sentence": "港の朝市には、水揚げされたばかりの{{target}}が所狭しと並べられている。"
   },
   {
-    "id": "5180fc26",
+    "id": "317c237e",
     "kanji": "動物",
     "reading": "どうぶつ",
     "meaning": "人間以外の生き物",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "動",
       "物"
@@ -589,11 +589,11 @@
     "sentence": "厳しい自然界の掟の中で、野生の{{target}}たちは懸命に命をつないでいる。"
   },
   {
-    "id": "90ff2d25",
+    "id": "f6f835d0",
     "kanji": "回転",
     "reading": "かいてん",
     "meaning": "回ること",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "回",
       "転"
@@ -601,11 +601,11 @@
     "sentence": "運命の歯車が{{target}}し始め、彼らの物語は予想もしない方向へと動き出した。"
   },
   {
-    "id": "d96784bb",
+    "id": "3db39a24",
     "kanji": "公園",
     "reading": "こうえん",
     "meaning": "憩いの場所",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "公",
       "園"
@@ -613,11 +613,11 @@
     "sentence": "都会のオアシスであるこの{{target}}では、昼休みになると多くの人々がベンチで休息をとる。"
   },
   {
-    "id": "1ef0ec7e",
+    "id": "e6defb28",
     "kanji": "暗室",
     "reading": "あんしつ",
     "meaning": "光が入らない部屋",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "暗",
       "室"
@@ -625,11 +625,11 @@
     "sentence": "赤いランプだけが灯る{{target}}の中で、白い印画紙にゆっくりと像が浮かび上がる瞬間。"
   },
   {
-    "id": "07ecf720",
+    "id": "8cb4e01e",
     "kanji": "鳴き声",
     "reading": "なきごえ",
     "meaning": "動物の声",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "鳴",
       "き",
@@ -638,11 +638,11 @@
     "sentence": "静まり返った夜の森に、正体不明の獣の{{target}}が不気味に響き渡った。"
   },
   {
-    "id": "05687956",
+    "id": "81719a08",
     "kanji": "黒板",
     "reading": "こくばん",
     "meaning": "チョークで書く板",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "黒",
       "板"
@@ -650,11 +650,11 @@
     "sentence": "放課後の教室、{{target}}に残された落書きが、楽しかった一日の終わりを告げている。"
   },
   {
-    "id": "dac0c372",
+    "id": "d21ac627",
     "kanji": "電線",
     "reading": "でんせん",
     "meaning": "電気を通す線",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "電",
       "線"
@@ -662,11 +662,11 @@
     "sentence": "夕焼け空を背景に、無数の{{target}}に止まった鳥たちが五線譜の音符のように見える。"
   },
   {
-    "id": "ab89e8be",
+    "id": "1ad02f83",
     "kanji": "最強",
     "reading": "さいきょう",
     "meaning": "最も強いこと",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "最",
       "強"
@@ -674,11 +674,11 @@
     "sentence": "数多の戦場を生き抜き、誰もが認める{{target}}の剣士としてその名を轟かせた。"
   },
   {
-    "id": "abc8e778",
+    "id": "102fb7ea",
     "kanji": "平和",
     "reading": "へいわ",
     "meaning": "穏やかな状態",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "平",
       "和"
@@ -686,11 +686,11 @@
     "sentence": "争いのない世界、すべての人が笑顔で暮らせる{{target}}な未来を心から祈り続ける。"
   },
   {
-    "id": "8bcd0d95",
+    "id": "b2ea0d35",
     "kanji": "未来",
     "reading": "みらい",
     "meaning": "これから来る時",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "未",
       "来"
@@ -698,11 +698,11 @@
     "sentence": "今の積み重ねが、やがて来る輝かしい{{target}}への道を切り拓いていく。"
   },
   {
-    "id": "1de2bfec",
+    "id": "efd91c5a",
     "kanji": "希望",
     "reading": "きぼう",
     "meaning": "将来への願い",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "希",
       "望"
@@ -710,11 +710,11 @@
     "sentence": "どんなに深い絶望の淵にいても、パンドラの箱の底には最後に{{target}}が残されている。"
   },
   {
-    "id": "f0bb9afd",
+    "id": "9f280db1",
     "kanji": "勇気",
     "reading": "ゆうき",
     "meaning": "立ち向かう心",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "勇",
       "気"
@@ -722,11 +722,11 @@
     "sentence": "震える足を一歩前へ踏み出す、その小さな行動こそが真の{{target}}と呼ばれるものだ。"
   },
   {
-    "id": "c3f9c64e",
+    "id": "97e5d404",
     "kanji": "冒険",
     "reading": "ぼうけん",
     "meaning": "危険を承知で行うこと",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "冒",
       "険"
@@ -734,11 +734,11 @@
     "sentence": "地図にない場所を目指し、未知なる世界へと旅立つ{{target}}が今、始まる。"
   },
   {
-    "id": "846afbe0",
+    "id": "40246afa",
     "kanji": "宇宙",
     "reading": "うちゅう",
     "meaning": "地球の外に広がる空間",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "宇",
       "宙"
@@ -746,11 +746,11 @@
     "sentence": "広大無辺な{{target}}の彼方には、まだ人類が知らない神秘が数多く眠っている。"
   },
   {
-    "id": "131ffa4d",
+    "id": "8add86a2",
     "kanji": "銀河",
     "reading": "ぎんが",
     "meaning": "星の集まり",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "銀",
       "河"
@@ -758,11 +758,11 @@
     "sentence": "夜空を横切る天の川、それは無数の星々が集まってできた壮大な{{target}}の姿だ。"
   },
   {
-    "id": "cf248b11",
+    "id": "b6da49ac",
     "kanji": "惑星",
     "reading": "わくせい",
     "meaning": "恒星の周りを回る星",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "惑",
       "星"
@@ -770,11 +770,11 @@
     "sentence": "生命の存在が可能とされる、地球に似た環境を持つ未知の{{target}}を探査する。"
   },
   {
-    "id": "e0b38f07",
+    "id": "f20ccdc2",
     "kanji": "地球",
     "reading": "ちきゅう",
     "meaning": "私たちが住む星",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "地",
       "球"
@@ -782,11 +782,11 @@
     "sentence": "宇宙から見たその星は、青く輝く水の惑星、私たちの故郷である{{target}}だった。"
   },
   {
-    "id": "b53d7774",
+    "id": "0476c5c3",
     "kanji": "太陽",
     "reading": "たいよう",
     "meaning": "光と熱を与える星",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "太",
       "陽"
@@ -794,11 +794,11 @@
     "sentence": "地平線から昇る{{target}}の光が、世界に新しい一日の始まりを告げる。"
   },
   {
-    "id": "97bda439",
+    "id": "4abf094b",
     "kanji": "月光",
     "reading": "げっこう",
     "meaning": "月の光",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "月",
       "光"
@@ -806,11 +806,11 @@
     "sentence": "静かな湖面に{{target}}が降り注ぎ、幻想的な銀色の道を浮かび上がらせた。"
   },
   {
-    "id": "c09caae9",
+    "id": "b19ebd4b",
     "kanji": "星空",
     "reading": "ほしぞら",
     "meaning": "星が出ている空",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "星",
       "空"
@@ -818,11 +818,11 @@
     "sentence": "見上げれば満天の{{target}}が広がり、降るような星々が私たちを包み込む。"
   },
   {
-    "id": "354de97f",
+    "id": "218c488b",
     "kanji": "流星",
     "reading": "りゅうせい",
     "meaning": "流れ星",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "流",
       "星"
@@ -830,11 +830,11 @@
     "sentence": "夜空を一瞬で切り裂く{{target}}に、消えてしまう前に急いで願い事を唱えた。"
   },
   {
-    "id": "dc7f354a",
+    "id": "6bc4299f",
     "kanji": "彗星",
     "reading": "すいせい",
     "meaning": "尾を引く星",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "彗",
       "星"
@@ -842,11 +842,11 @@
     "sentence": "長い尾を引いて夜空を旅する{{target}}は、数十年に一度だけ地球に接近する。"
   },
   {
-    "id": "60b65bac",
+    "id": "b3e0b770",
     "kanji": "天体",
     "reading": "てんたい",
     "meaning": "宇宙にある星など",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "天",
       "体"
@@ -854,11 +854,11 @@
     "sentence": "巨大な望遠鏡を覗き込み、遥か彼方の{{target}}の動きを観測し続ける天文学者たち。"
   },
   {
-    "id": "031581bb",
+    "id": "c5eb4dc1",
     "kanji": "科学",
     "reading": "かがく",
     "meaning": "自然法則の研究",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "科",
       "学"
@@ -866,11 +866,11 @@
     "sentence": "魔法のように見える現象も、いつかは{{target}}の力ですべて解明される日が来るだろう。"
   },
   {
-    "id": "e22fd8f8",
+    "id": "1078f589",
     "kanji": "技術",
     "reading": "ぎじゅつ",
     "meaning": "物事を行う技",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "技",
       "術"
@@ -878,11 +878,11 @@
     "sentence": "職人たちが長い年月をかけて磨き上げた{{target}}の結晶が、この製品には詰まっている。"
   },
   {
-    "id": "ede142a7",
+    "id": "02e04f0d",
     "kanji": "発明",
     "reading": "はつめい",
     "meaning": "新しいものを生み出すこと",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "発",
       "明"
@@ -890,11 +890,11 @@
     "sentence": "失敗を何千回も繰り返し、ついに世紀の大{{target}}を成し遂げた。"
   },
   {
-    "id": "6b861978",
+    "id": "7b6ad52e",
     "kanji": "発見",
     "reading": "はっけん",
     "meaning": "未知のものを見つけること",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "発",
       "見"
@@ -902,11 +902,11 @@
     "sentence": "偶然の出来事がきっかけで、歴史を覆すような大{{target}}がもたらされた。"
   },
   {
-    "id": "fbc0ad84",
+    "id": "5a25ec26",
     "kanji": "進化",
     "reading": "しんか",
     "meaning": "生物の変化",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "進",
       "化"
@@ -914,11 +914,11 @@
     "sentence": "環境の変化に適応するため、生物は長い時間をかけて独自の{{target}}を遂げてきた。"
   },
   {
-    "id": "8db3a096",
+    "id": "436d5a75",
     "kanji": "歴史",
     "reading": "れきし",
     "meaning": "社会の移り変わり",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "歴",
       "史"
@@ -926,11 +926,11 @@
     "sentence": "古文書を紐解き、埋もれてしまった過去の{{target}}の真実を明らかにする。"
   },
   {
-    "id": "bad3c35b",
+    "id": "946952e4",
     "kanji": "文化",
     "reading": "ぶんか",
     "meaning": "生活様式や芸術",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "文",
       "化"
@@ -938,11 +938,11 @@
     "sentence": "国境を越えて互いの{{target}}を尊重し合うことが、真の国際交流への第一歩だ。"
   },
   {
-    "id": "f08b2b49",
+    "id": "0126b3a2",
     "kanji": "芸術",
     "reading": "げいじゅつ",
     "meaning": "美しい表現",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "芸",
       "術"
@@ -950,11 +950,11 @@
     "sentence": "言葉では表現しきれない感情を、絵画や音楽という{{target}}に昇華させる。"
   },
   {
-    "id": "25665da6",
+    "id": "f3a82c9c",
     "kanji": "音楽",
     "reading": "おんがく",
     "meaning": "音による芸術",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "音",
       "楽"
@@ -962,11 +962,11 @@
     "sentence": "言葉が通じなくても、奏でられる{{target}}は国境を超えて人々の心を一つにする。"
   },
   {
-    "id": "b0fcb7b5",
+    "id": "976765ce",
     "kanji": "絵画",
     "reading": "かいが",
     "meaning": "絵のこと",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "絵",
       "画"
@@ -974,11 +974,11 @@
     "sentence": "美術館の壁に飾られた一枚の{{target}}が、見る者の心に強烈な印象を残す。"
   },
   {
-    "id": "a7772508",
+    "id": "1a82d945",
     "kanji": "小説",
     "reading": "しょうせつ",
     "meaning": "物語文学",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "小",
       "説"
@@ -986,11 +986,11 @@
     "sentence": "現実を忘れて、作家が紡ぎ出した{{target}}の世界へと深く没入していく。"
   },
   {
-    "id": "ff7c1e72",
+    "id": "2e85ac12",
     "kanji": "映画",
     "reading": "えいが",
     "meaning": "映像作品",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "映",
       "画"
@@ -998,11 +998,11 @@
     "sentence": "スクリーンに映し出される壮大な物語、それはまさに夢のような{{target}}体験だった。"
   },
   {
-    "id": "2001092b",
+    "id": "f534fb63",
     "kanji": "写真",
     "reading": "しゃしん",
     "meaning": "カメラで写した像",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "写",
       "真"
@@ -1010,11 +1010,11 @@
     "sentence": "色褪せた一枚の{{target}}が、遠い昔の幸せな記憶を鮮やかに蘇らせる。"
   },
   {
-    "id": "ea6806ea",
+    "id": "cd029a23",
     "kanji": "放送",
     "reading": "ほうそう",
     "meaning": "電波で情報を送ること",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "放",
       "送"
@@ -1022,11 +1022,11 @@
     "sentence": "緊急ニュースの{{target}}が入り、街中のモニターに人々の視線が釘付けになった。"
   },
   {
-    "id": "b1f3110b",
+    "id": "35510f50",
     "kanji": "通信",
     "reading": "つうしん",
     "meaning": "情報のやり取り",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "通",
       "信"
@@ -1034,11 +1034,11 @@
     "sentence": "嵐の影響で{{target}}が途絶え、孤立した島との連絡が取れなくなってしまった。"
   },
   {
-    "id": "fb1cc7f3",
+    "id": "05241113",
     "kanji": "情報",
     "reading": "じょうほう",
     "meaning": "知らせ",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "情",
       "報"
@@ -1046,11 +1046,11 @@
     "sentence": "現代社会では、氾濫する膨大な{{target}}の中から真実を見極める力が必要とされる。"
   },
   {
-    "id": "142b6836",
+    "id": "10ce6f1d",
     "kanji": "知識",
     "reading": "ちしき",
     "meaning": "知っていること",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "知",
       "識"
@@ -1058,11 +1058,11 @@
     "sentence": "本から得た{{target}}だけでなく、実際に体験して得た知恵こそが人生の糧となる。"
   },
   {
-    "id": "b0514278",
+    "id": "f939a127",
     "kanji": "学習",
     "reading": "がくしゅう",
     "meaning": "学ぶこと",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "学",
       "習"
@@ -1070,11 +1070,11 @@
     "sentence": "失敗を恐れずに挑戦し続けること、それ自体が最も効果的な{{target}}のプロセスだ。"
   },
   {
-    "id": "f4dcab78",
+    "id": "b6ddc01f",
     "kanji": "教育",
     "reading": "きょういく",
     "meaning": "教え育てること",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "教",
       "育"
@@ -1082,11 +1082,11 @@
     "sentence": "子供たちの可能性を信じ、個性を伸ばすことこそが真の{{target}}のあり方だ。"
   },
   {
-    "id": "a0da9647",
+    "id": "d47099ef",
     "kanji": "先生",
     "reading": "せんせい",
     "meaning": "教える人",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "先",
       "生"
@@ -1094,11 +1094,11 @@
     "sentence": "恩師である{{target}}の言葉は、今も私の人生の指針として心に刻まれている。"
   },
   {
-    "id": "ba106c72",
+    "id": "7db4323d",
     "kanji": "生徒",
     "reading": "せいと",
     "meaning": "教わる人",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "生",
       "徒"
@@ -1106,11 +1106,11 @@
     "sentence": "チャイムと共に教室を飛び出していく、元気な{{target}}たちの背中を見守る。"
   },
   {
-    "id": "31199cb9",
+    "id": "3f2297c5",
     "kanji": "教室",
     "reading": "きょうしつ",
     "meaning": "授業をする部屋",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "教",
       "室"
@@ -1118,11 +1118,11 @@
     "sentence": "放課後の夕日が差し込む無人の{{target}}には、どこか切ない空気が漂っていた。"
   },
   {
-    "id": "8da0a91a",
+    "id": "ea58a9eb",
     "kanji": "白墨",
     "reading": "はくぼく",
     "meaning": "チョーク",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "白",
       "墨"
@@ -1130,11 +1130,11 @@
     "sentence": "黒板に{{target}}で数式を書き殴る音が、静まり返った教室にカツカツと響く。"
   },
   {
-    "id": "de4d30ee",
+    "id": "409fd17c",
     "kanji": "文房具",
     "reading": "ぶんぼうぐ",
     "meaning": "筆記用具など",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "文",
       "房",
@@ -1143,11 +1143,11 @@
     "sentence": "新しい季節の始まりに、お気に入りの{{target}}を揃えて気分を一新する。"
   },
   {
-    "id": "91c49507",
+    "id": "070a3288",
     "kanji": "鉛筆",
     "reading": "えんぴつ",
     "meaning": "筆記具",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "鉛",
       "筆"
@@ -1155,11 +1155,11 @@
     "sentence": "短くなった{{target}}を握りしめ、最後の最後まで諦めずに答えを書き続けた。"
   },
   {
-    "id": "a2188946",
+    "id": "08e7c4e0",
     "kanji": "消しゴム",
     "reading": "けしごむ",
     "meaning": "字を消す道具",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "消",
       "し",
@@ -1169,11 +1169,11 @@
     "sentence": "間違いを{{target}}で消して書き直すように、人生も何度でもやり直せたらいいのに。"
   },
   {
-    "id": "b5999d52",
+    "id": "52f08edc",
     "kanji": "定規",
     "reading": "じょうぎ",
     "meaning": "直線を引く道具",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "定",
       "規"
@@ -1181,11 +1181,11 @@
     "sentence": "自分の価値観という{{target}}だけで、他人の生き方を測ってはいけない。"
   },
   {
-    "id": "b42a0695",
+    "id": "fcacd5f4",
     "kanji": "美化",
     "reading": "びか",
     "meaning": "美しくすること",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "美",
       "化"
@@ -1193,11 +1193,11 @@
     "sentence": "思い出は時が経つにつれて{{target}}され、実際よりも美しく感じられるものだ。"
   },
   {
-    "id": "d13c1a9f",
+    "id": "58cb9ea8",
     "kanji": "美学",
     "reading": "びがく",
     "meaning": "美についての学問",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "美",
       "学"
@@ -1205,11 +1205,11 @@
     "sentence": "敗北の中にも美しさを見出す、彼なりの独特な{{target}}がそこにはあった。"
   },
   {
-    "id": "df21d184",
+    "id": "7a591e00",
     "kanji": "美人",
     "reading": "びじん",
     "meaning": "美しい人",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "美",
       "人"
@@ -1217,11 +1217,11 @@
     "sentence": "その立ち居振る舞いの優雅さから、彼女は街一番の{{target}}として知られていた。"
   },
   {
-    "id": "0805118b",
+    "id": "e5596335",
     "kanji": "美術",
     "reading": "びじゅつ",
     "meaning": "造形芸術",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "美",
       "術"
@@ -1229,11 +1229,11 @@
     "sentence": "感性を刺激される{{target}}館巡りは、休日の私の密かな楽しみの一つだ。"
   },
   {
-    "id": "3b436246",
+    "id": "8ef2ab00",
     "kanji": "美食",
     "reading": "びしょく",
     "meaning": "美味しい食事",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "美",
       "食"
@@ -1241,11 +1241,11 @@
     "sentence": "世界中の珍味を求めて旅をする、飽くなき探求心を持つ{{target}}家たち。"
   },
   {
-    "id": "7f11945c",
+    "id": "744281b9",
     "kanji": "美味",
     "reading": "びみ",
     "meaning": "美味しい味",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "美",
       "味"
@@ -1253,11 +1253,11 @@
     "sentence": "旬の食材をふんだんに使った料理は、言葉を失うほどの{{target}}だった。"
   },
   {
-    "id": "32dfbab8",
+    "id": "22235c12",
     "kanji": "備考",
     "reading": "びこう",
     "meaning": "参考のメモ",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "備",
       "考"
@@ -1265,11 +1265,11 @@
     "sentence": "特記事項がある場合は、書類の{{target}}欄に詳細を記入してください。"
   },
   {
-    "id": "97d2484c",
+    "id": "449dd533",
     "kanji": "微風",
     "reading": "びふう",
     "meaning": "そよ風",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "微",
       "風"
@@ -1277,11 +1277,11 @@
     "sentence": "春の午後、窓から吹き込む心地よい{{target}}がカーテンを優しく揺らしている。"
   },
   {
-    "id": "7d612ffe",
+    "id": "1fb040e9",
     "kanji": "微生物",
     "reading": "びせいぶつ",
     "meaning": "小さな生物",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "微",
       "生",
@@ -1290,11 +1290,11 @@
     "sentence": "顕微鏡を覗き込むと、そこには肉眼では見えない{{target}}たちの小宇宙が広がっていた。"
   },
   {
-    "id": "49eb3c8a",
+    "id": "787461e2",
     "kanji": "微妙",
     "reading": "びみょう",
     "meaning": "何とも言えないこと",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "微",
       "妙"
@@ -1302,11 +1302,11 @@
     "sentence": "その場の空気を読んで、賛成とも反対ともつかない{{target}}な返事をした。"
   },
   {
-    "id": "d91ed50e",
+    "id": "bba2b097",
     "kanji": "微笑",
     "reading": "びしょう",
     "meaning": "ほほえみ",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "微",
       "笑"
@@ -1314,11 +1314,11 @@
     "sentence": "彼女の口元に浮かんだ謎めいた{{target}}の意味を、僕はまだ理解できずにいた。"
   },
   {
-    "id": "f65fd701",
+    "id": "650195a9",
     "kanji": "微動",
     "reading": "びどう",
     "meaning": "かすかに動くこと",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "微",
       "動"
@@ -1326,11 +1326,11 @@
     "sentence": "狙いを定めたハンターは、獲物が近づくまで物陰で{{target}}だにしなかった。"
   },
   {
-    "id": "9cbc4f87",
+    "id": "64a5a8ca",
     "kanji": "微量",
     "reading": "びりょう",
     "meaning": "わずかな量",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "微",
       "量"
@@ -1338,11 +1338,11 @@
     "sentence": "現場に残された{{target}}な証拠が、迷宮入りと思われた事件解決の糸口となった。"
   },
   {
-    "id": "559987c1",
+    "id": "a94098d2",
     "kanji": "微細",
     "reading": "びさい",
     "meaning": "きわめて細かいこと",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "微",
       "細"
@@ -1350,11 +1350,11 @@
     "sentence": "職人の手による{{target}}な彫刻は、見る者を圧倒する精巧さを持っていた。"
   },
   {
-    "id": "c9a3c89b",
+    "id": "5372c0ad",
     "kanji": "春夏秋冬",
     "reading": "しゅんかしゅうとう",
     "meaning": "四季のこと",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "春",
       "夏",
@@ -1364,11 +1364,11 @@
     "sentence": "移ろいゆく日本の{{target}}、その折々の景色を愛でる風流な心。"
   },
   {
-    "id": "44b611ac",
+    "id": "bc2f323d",
     "kanji": "一石二鳥",
     "reading": "いっせきにちょう",
     "meaning": "一つのことで二つの利益を得ること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "一",
       "石",
@@ -1378,11 +1378,11 @@
     "sentence": "健康になれて節約もできる、まさに{{target}}の名案だ。"
   },
   {
-    "id": "17a611a0",
+    "id": "6c2c26f7",
     "kanji": "三寒四温",
     "reading": "さんかんしおん",
     "meaning": "寒い日と暖かい日が繰り返されること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "三",
       "寒",
@@ -1392,11 +1392,11 @@
     "sentence": "{{target}}を繰り返しながら、季節はゆっくりと春へと向かっていく。"
   },
   {
-    "id": "6a17c2f8",
+    "id": "60b8bc33",
     "kanji": "五里霧中",
     "reading": "ごりむちゅう",
     "meaning": "どうすればよいか迷うこと",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "五",
       "里",
@@ -1406,11 +1406,11 @@
     "sentence": "手がかりが全く掴めず、捜査は{{target}}の状態に陥ってしまった。"
   },
   {
-    "id": "0cda1e58",
+    "id": "d04fe114",
     "kanji": "七転八起",
     "reading": "ななころびやおき",
     "meaning": "何度失敗しても立ち上がること",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "七",
       "転",
@@ -1420,11 +1420,11 @@
     "sentence": "何度失敗しても諦めない、{{target}}の精神で夢を追いかける。"
   },
   {
-    "id": "0a43eb49",
+    "id": "1ec2a304",
     "kanji": "十人十色",
     "reading": "じゅうにんといろ",
     "meaning": "好みや考えは人それぞれであること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "十",
       "人",
@@ -1434,11 +1434,11 @@
     "sentence": "考え方は{{target}}、みんな違ってみんないいのだ。"
   },
   {
-    "id": "6bc24069",
+    "id": "eb26b877",
     "kanji": "百発百中",
     "reading": "ひゃっぱつひゃくちゅう",
     "meaning": "予想や計画がすべて当たること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "百",
       "発",
@@ -1448,11 +1448,11 @@
     "sentence": "彼が放つ矢は{{target}}、狙った獲物は決して逃さない。"
   },
   {
-    "id": "a91266df",
+    "id": "54550ebb",
     "kanji": "千載一遇",
     "reading": "せんざいいちぐう",
     "meaning": "めったにない良い機会",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "千",
       "載",
@@ -1462,11 +1462,11 @@
     "sentence": "これは{{target}}のチャンスだ、この機を逃してはならない。"
   },
   {
-    "id": "43b40bd6",
+    "id": "356342f7",
     "kanji": "万全",
     "reading": "ばんぜん",
     "meaning": "手落ちがないこと",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "万",
       "全"
@@ -1474,11 +1474,11 @@
     "sentence": "準備{{target}}で挑んだはずの試合だったが、結果は惨敗だった。"
   },
   {
-    "id": "405483ed",
+    "id": "99b0dd17",
     "kanji": "一期一会",
     "reading": "いちごいちえ",
     "meaning": "一生に一度だけの出会い",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "一",
       "期",
@@ -1488,11 +1488,11 @@
     "sentence": "茶道の精神である{{target}}の心で、客人を心を込めてもてなす。"
   },
   {
-    "id": "67176411",
+    "id": "1ce2338d",
     "kanji": "以心伝心",
     "reading": "いしんでんしん",
     "meaning": "言葉にしなくても心が通じ合うこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "以",
       "心",
@@ -1502,11 +1502,11 @@
     "sentence": "長年連れ添った夫婦は、言葉を交わさずとも{{target}}で通じ合っている。"
   },
   {
-    "id": "e5958fe8",
+    "id": "dcca725b",
     "kanji": "温故知新",
     "reading": "おんこちしん",
     "meaning": "昔のことを調べて新しい知識を得ること",
-    "difficulty": 5,
+    "difficulty": 10,
     "components": [
       "温",
       "故",
@@ -1516,11 +1516,11 @@
     "sentence": "{{target}}の精神で、古典から現代に通じる知恵を学ぶ。"
   },
   {
-    "id": "13638277",
+    "id": "aed8e528",
     "kanji": "花鳥風月",
     "reading": "かちょうふうげつ",
     "meaning": "自然の美しい景色",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "花",
       "鳥",
@@ -1530,11 +1530,11 @@
     "sentence": "{{target}}を友とし、自然の中で静かに暮らす隠居生活。"
   },
   {
-    "id": "81fbc839",
+    "id": "2cd72a27",
     "kanji": "我田引水",
     "reading": "がでんいんすい",
     "meaning": "自分の都合の良いようにすること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "我",
       "田",
@@ -1544,11 +1544,11 @@
     "sentence": "彼の主張は結局のところ{{target}}で、自分に有利なことしか言っていない。"
   },
   {
-    "id": "74cb1297",
+    "id": "574b019f",
     "kanji": "完全無欠",
     "reading": "かんぜんむけつ",
     "meaning": "欠点が全くないこと",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "完",
       "全",
@@ -1558,11 +1558,11 @@
     "sentence": "容姿端麗、頭脳明晰、彼はまさに{{target}}のヒーローだった。"
   },
   {
-    "id": "cf104ea3",
+    "id": "bd4b610b",
     "kanji": "起死回生",
     "reading": "きしかいせい",
     "meaning": "絶望的な状態から立ち直ること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "起",
       "死",
@@ -1572,11 +1572,11 @@
     "sentence": "九回裏、ツーアウト満塁からの{{target}}のホームランが飛び出した。"
   },
   {
-    "id": "85768a0b",
+    "id": "5848f32f",
     "kanji": "急転直下",
     "reading": "きゅうてんちょっか",
     "meaning": "事態が急に変わること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "急",
       "転",
@@ -1586,11 +1586,11 @@
     "sentence": "順調に見えた交渉は、ある一言をきっかけに{{target}}、決裂した。"
   },
   {
-    "id": "38c9243d",
+    "id": "6a4906ab",
     "kanji": "空前絶後",
     "reading": "くうぜんぜつご",
     "meaning": "今までにもこれからもないようなこと",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "空",
       "前",
@@ -1600,11 +1600,11 @@
     "sentence": "それは歴史に残る、{{target}}の大イベントとなった。"
   },
   {
-    "id": "70cdaf31",
+    "id": "0b798ff7",
     "kanji": "言語道断",
     "reading": "ごんごどうだん",
     "meaning": "もってのほかであること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "言",
       "語",
@@ -1614,11 +1614,11 @@
     "sentence": "信頼していた部下に裏切られるとは、まさに{{target}}の所業だ。"
   },
   {
-    "id": "3cc0f02f",
+    "id": "9d174053",
     "kanji": "自画自賛",
     "reading": "じがじさん",
     "meaning": "自分のことを自分で褒めること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "自",
       "画",
@@ -1628,11 +1628,11 @@
     "sentence": "誰も褒めてくれないので、自分で自分の料理を{{target}}する。"
   },
   {
-    "id": "0d397199",
+    "id": "4b898d1f",
     "kanji": "四面楚歌",
     "reading": "しめんそか",
     "meaning": "周りが敵ばかりで助けがないこと",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "四",
       "面",
@@ -1642,11 +1642,11 @@
     "sentence": "味方は一人もおらず、敵に囲まれて{{target}}の状況だ。"
   },
   {
-    "id": "02648d71",
+    "id": "7e28a940",
     "kanji": "自由自在",
     "reading": "じゆうじざい",
     "meaning": "思いのままであること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "自",
       "由",
@@ -1656,11 +1656,11 @@
     "sentence": "大空を{{target}}に飛び回る鳥のように生きたいと願った。"
   },
   {
-    "id": "31d290a3",
+    "id": "94a0ad60",
     "kanji": "主客転倒",
     "reading": "しゅかくてんとう",
     "meaning": "立場が逆になること",
-    "difficulty": 5,
+    "difficulty": 10,
     "components": [
       "主",
       "客",
@@ -1670,11 +1670,11 @@
     "sentence": "ゲストがホストをもてなすなんて、それでは{{target}}だ。"
   },
   {
-    "id": "b0221df8",
+    "id": "d73fc7f1",
     "kanji": "心機一転",
     "reading": "しんきいってん",
     "meaning": "気持ちを入れ替えること",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "心",
       "機",
@@ -1684,11 +1684,11 @@
     "sentence": "新しい街に引っ越し、{{target}}して新しい生活を始めることにした。"
   },
   {
-    "id": "bf4db7a2",
+    "id": "9524cfaa",
     "kanji": "誠心誠意",
     "reading": "せいしんせいい",
     "meaning": "まごころを込めること",
-    "difficulty": 5,
+    "difficulty": 10,
     "components": [
       "誠",
       "心",
@@ -1698,11 +1698,11 @@
     "sentence": "過ちを認め、相手に対して{{target}}謝罪の言葉を述べた。"
   },
   {
-    "id": "b4c95b05",
+    "id": "819b15c7",
     "kanji": "絶体絶命",
     "reading": "ぜったいぜつめい",
     "meaning": "どうにもならない危険な状態",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "絶",
       "体",
@@ -1712,11 +1712,11 @@
     "sentence": "逃げ場のない崖っぷち、まさに{{target}}のピンチに追い込まれた。"
   },
   {
-    "id": "7d9c320f",
+    "id": "6cefa659",
     "kanji": "千差万別",
     "reading": "せんさばんべつ",
     "meaning": "さまざまに違っていること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "千",
       "差",
@@ -1726,11 +1726,11 @@
     "sentence": "人の好みは{{target}}であり、万人に受ける作品を作るのは難しい。"
   },
   {
-    "id": "e5c76685",
+    "id": "eb9ad9b4",
     "kanji": "大器晩成",
     "reading": "たいきばんせい",
     "meaning": "偉大な人は大成するのが遅いこと",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "大",
       "器",
@@ -1740,11 +1740,11 @@
     "sentence": "彼は若い頃は目立たなかったが、典型的な{{target}}型の人だった。"
   },
   {
-    "id": "7356d5c4",
+    "id": "3e94494e",
     "kanji": "単刀直入",
     "reading": "たんとうちょくにゅう",
     "meaning": "前置きなしに本題に入ること",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "単",
       "刀",
@@ -1754,11 +1754,11 @@
     "sentence": "回りくどい言い方はやめて、{{target}}に用件を切り出した。"
   },
   {
-    "id": "83f2afa1",
+    "id": "29cd70bb",
     "kanji": "朝三暮四",
     "reading": "ちょうさんぼし",
     "meaning": "目先の違いにごまかされること",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "朝",
       "三",
@@ -1768,11 +1768,11 @@
     "sentence": "目先の利益に惑わされるなんて、{{target}}の猿と同じだ。"
   },
   {
-    "id": "f2a8599b",
+    "id": "c31ded4f",
     "kanji": "電光石火",
     "reading": "でんこうせっか",
     "meaning": "動作が非常に素早いこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "電",
       "光",
@@ -1782,11 +1782,11 @@
     "sentence": "敵の隙を見逃さず、{{target}}の早業で勝負を決めた。"
   },
   {
-    "id": "618e76f1",
+    "id": "c561bd2a",
     "kanji": "日進月歩",
     "reading": "にっしんげっぽ",
     "meaning": "絶え間なく進歩すること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "日",
       "進",
@@ -1796,11 +1796,11 @@
     "sentence": "IT業界の技術は{{target}}で、少し前の知識もすぐに古くなる。"
   },
   {
-    "id": "b5d06f35",
+    "id": "8baa0bbe",
     "kanji": "半信半疑",
     "reading": "はんしんはんぎ",
     "meaning": "本当かどうか迷うこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "半",
       "信",
@@ -1810,11 +1810,11 @@
     "sentence": "あまりにもうますぎる話に、私は{{target}}のまま聞き入っていた。"
   },
   {
-    "id": "63f17a3c",
+    "id": "49398502",
     "kanji": "不言実行",
     "reading": "ふげんじっこう",
     "meaning": "文句を言わずに実行すること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "不",
       "言",
@@ -1824,11 +1824,11 @@
     "sentence": "多くを語らず背中で語る、父は{{target}}の人だった。"
   },
   {
-    "id": "ecab23db",
+    "id": "908ee3d9",
     "kanji": "粉骨砕身",
     "reading": "ふんこつさいしん",
     "meaning": "力の限り努力すること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "粉",
       "骨",
@@ -1838,11 +1838,11 @@
     "sentence": "会社再建のために、社員一同{{target}}の覚悟で働く。"
   },
   {
-    "id": "e8d639b0",
+    "id": "0fc94283",
     "kanji": "傍若無人",
     "reading": "ぼうじゃくぶじん",
     "meaning": "勝手気ままに振る舞うこと",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "傍",
       "若",
@@ -1852,11 +1852,11 @@
     "sentence": "周囲の迷惑を顧みない彼の{{target}}な振る舞いに、皆が眉をひそめた。"
   },
   {
-    "id": "775b3025",
+    "id": "e1f8f8f0",
     "kanji": "本末転倒",
     "reading": "ほんまつてんとう",
     "meaning": "大事なこととつまらないことを取り違えること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "本",
       "末",
@@ -1866,11 +1866,11 @@
     "sentence": "健康のために運動して怪我をしては、{{target}}もいいところだ。"
   },
   {
-    "id": "6abb6a86",
+    "id": "cd285d27",
     "kanji": "無我夢中",
     "reading": "むがむちゅう",
     "meaning": "我を忘れて熱中すること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "無",
       "我",
@@ -1880,11 +1880,11 @@
     "sentence": "時間を忘れて、{{target}}でプラモデル作りに没頭していた。"
   },
   {
-    "id": "f1a0125f",
+    "id": "ae15fcac",
     "kanji": "油断大敵",
     "reading": "ゆだんたいてき",
     "meaning": "油断は失敗のもとであること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "油",
       "断",
@@ -1894,11 +1894,11 @@
     "sentence": "勝ったと思っても気を抜くな、勝負事は最後まで{{target}}だ。"
   },
   {
-    "id": "01571fe4",
+    "id": "f0523954",
     "kanji": "臨機応変",
     "reading": "りんきおうへん",
     "meaning": "状況に合わせて適切に行動すること",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "臨",
       "機",
@@ -1908,11 +1908,11 @@
     "sentence": "マニュアル通りではなく、その場の状況に応じて{{target}}に対応する。"
   },
   {
-    "id": "24e0face",
+    "id": "45c54035",
     "kanji": "老若男女",
     "reading": "ろうにゃくなんにょ",
     "meaning": "あらゆる年齢の男女",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "老",
       "若",
@@ -1922,11 +1922,11 @@
     "sentence": "この祭りは、{{target}}問わず誰でも楽しめるのが魅力だ。"
   },
   {
-    "id": "066ad10f",
+    "id": "a978d31e",
     "kanji": "和洋折衷",
     "reading": "わようせっちゅう",
     "meaning": "日本風と西洋風を合わせること",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "和",
       "洋",
@@ -1936,11 +1936,11 @@
     "sentence": "着物にブーツを合わせる、モダンな{{target}}のスタイル。"
   },
   {
-    "id": "b4ee4b9b",
+    "id": "cf00b63f",
     "kanji": "異口同音",
     "reading": "いくどうおん",
     "meaning": "多くの人が同じことを言うこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "異",
       "口",
@@ -1950,11 +1950,11 @@
     "sentence": "その提案に対して、出席者たちは{{target}}に賛成の意を示した。"
   },
   {
-    "id": "54c17894",
+    "id": "58f7fe48",
     "kanji": "一心同体",
     "reading": "いっしんどうたい",
     "meaning": "二人以上の心が一つになること",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "一",
       "心",
@@ -1964,11 +1964,11 @@
     "sentence": "長年の相棒である彼とは、もはや{{target}}と言っても過言ではない。"
   },
   {
-    "id": "48830dcd",
+    "id": "e21795e2",
     "kanji": "意味深長",
     "reading": "いみしんちょう",
     "meaning": "言葉の奥に深い意味があること",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "意",
       "味",
@@ -1978,11 +1978,11 @@
     "sentence": "別れ際に彼女が残した{{target}}な一言が、ずっと気になっている。"
   },
   {
-    "id": "7e9b3519",
+    "id": "480a1e94",
     "kanji": "因果応報",
     "reading": "いんがおうほう",
     "meaning": "行いの報いは自分に来ること",
-    "difficulty": 5,
+    "difficulty": 10,
     "components": [
       "因",
       "果",
@@ -1992,11 +1992,11 @@
     "sentence": "悪いことはできない、善き行いもまた{{target}}だ。"
   },
   {
-    "id": "d8e570de",
+    "id": "7e261592",
     "kanji": "右往左往",
     "reading": "うおうさおう",
     "meaning": "混乱してあちこち動き回ること",
-    "difficulty": 5,
+    "difficulty": 10,
     "components": [
       "右",
       "往",
@@ -2006,11 +2006,11 @@
     "sentence": "突然のトラブル発生に、現場のスタッフたちは{{target}}していた。"
   },
   {
-    "id": "2dada2f7",
+    "id": "db700434",
     "kanji": "雲散霧消",
     "reading": "うんさんむしょう",
     "meaning": "跡形もなく消えること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "雲",
       "散",
@@ -2020,11 +2020,11 @@
     "sentence": "彼の一言で、それまでの不安や悩みは{{target}}した。"
   },
   {
-    "id": "1ea34b69",
+    "id": "c4f2eb32",
     "kanji": "栄枯盛衰",
     "reading": "えいこせいすい",
     "meaning": "栄えたり衰えたりすること",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "栄",
       "枯",
@@ -2034,11 +2034,11 @@
     "sentence": "かつて繁栄した都の廃墟に立ち、歴史の{{target}}を肌で感じる。"
   },
   {
-    "id": "432bc6a1",
+    "id": "40eb03d4",
     "kanji": "温厚篤実",
     "reading": "おんこうとくじつ",
     "meaning": "穏やかで誠実なこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "温",
       "厚",
@@ -2048,11 +2048,11 @@
     "sentence": "誰に対しても優しく誠実な彼は、{{target}}な人柄で慕われている。"
   },
   {
-    "id": "9561b8e3",
+    "id": "35d3c21a",
     "kanji": "快刀乱麻",
     "reading": "かいとうらんま",
     "meaning": "複雑な問題を鮮やかに解決すること",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "快",
       "刀",
@@ -2062,11 +2062,11 @@
     "sentence": "絡み合った難事件を、名探偵が{{target}}のごとく解決した。"
   },
   {
-    "id": "cafc39e6",
+    "id": "ecae1d77",
     "kanji": "危機一髪",
     "reading": "ききいっぱつ",
     "meaning": "非常に危険な状態",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "危",
       "機",
@@ -2076,11 +2076,11 @@
     "sentence": "崩れ落ちる瓦礫の下から、間一髪、{{target}}で脱出に成功した。"
   },
   {
-    "id": "2775e031",
+    "id": "5c38a5ae",
     "kanji": "疑心暗鬼",
     "reading": "ぎしんあんき",
     "meaning": "疑うあまり何でも怖くなること",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "疑",
       "心",
@@ -2090,11 +2090,11 @@
     "sentence": "一度裏切られると、何もかもが信じられなくなり{{target}}に陥る。"
   },
   {
-    "id": "7eb7aed4",
+    "id": "a314ab2f",
     "kanji": "奇想天外",
     "reading": "きそうてんがい",
     "meaning": "思いもよらないこと",
-    "difficulty": 5,
+    "difficulty": 10,
     "components": [
       "奇",
       "想",
@@ -2104,11 +2104,11 @@
     "sentence": "彼の頭の中からは、常人には思いつかない{{target}}なアイデアが溢れ出る。"
   },
   {
-    "id": "61b03e8b",
+    "id": "0f8bb1c0",
     "kanji": "喜怒哀楽",
     "reading": "きどあいらく",
     "meaning": "人間の様々な感情",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "喜",
       "怒",
@@ -2118,11 +2118,11 @@
     "sentence": "彼女は{{target}}がはっきりしていて、見ていて飽きない人だ。"
   },
   {
-    "id": "50bafdb2",
+    "id": "e87c1dc4",
     "kanji": "興味津々",
     "reading": "きょうみしんしん",
     "meaning": "興味が尽きないこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "興",
       "味",
@@ -2132,11 +2132,11 @@
     "sentence": "新しい転校生に対して、クラスメイトたちは{{target}}の様子だ。"
   },
   {
-    "id": "16f2932b",
+    "id": "25383215",
     "kanji": "公明正大",
     "reading": "こうめいせいだい",
     "meaning": "公平で隠し事がないこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "公",
       "明",
@@ -2146,11 +2146,11 @@
     "sentence": "嘘偽りのない、{{target}}な選挙が行われることを望む。"
   },
   {
-    "id": "419ff7e0",
+    "id": "ad1ff2b6",
     "kanji": "孤立無援",
     "reading": "こりつむえん",
     "meaning": "助けがなく一人ぼっちなこと",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "孤",
       "立",
@@ -2160,11 +2160,11 @@
     "sentence": "敵陣の真ん中で味方とはぐれ、{{target}}の状態になってしまった。"
   },
   {
-    "id": "52103657",
+    "id": "044b3999",
     "kanji": "才色兼備",
     "reading": "さいしょくけんび",
     "meaning": "才能も容姿も優れていること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "才",
       "色",
@@ -2174,11 +2174,11 @@
     "sentence": "美しく聡明な彼女は、まさに{{target}}を体現したような女性だ。"
   },
   {
-    "id": "b6c2f43a",
+    "id": "00cac1d4",
     "kanji": "自業自得",
     "reading": "じごうじとく",
     "meaning": "自分の行いの報いを受けること",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "自",
       "業",
@@ -2188,11 +2188,11 @@
     "sentence": "勉強せずに遊んでばかりいて試験に落ちたのは、完全に{{target}}だ。"
   },
   {
-    "id": "bb129d25",
+    "id": "a4004a57",
     "kanji": "質実剛健",
     "reading": "しつじつごうけん",
     "meaning": "飾り気がなく真面目で強いこと",
-    "difficulty": 4,
+    "difficulty": 9,
     "components": [
       "質",
       "実",
@@ -2202,11 +2202,11 @@
     "sentence": "我が校の校訓は{{target}}、華美さを嫌い実直さを重んじる。"
   },
   {
-    "id": "fa488c90",
+    "id": "4f816448",
     "kanji": "弱肉強食",
     "reading": "じゃくにくきょうしょく",
     "meaning": "強い者が弱い者を犠牲にすること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "弱",
       "肉",
@@ -2216,11 +2216,11 @@
     "sentence": "サバンナの掟は{{target}}、強い者だけが生き残る世界だ。"
   },
   {
-    "id": "92517834",
+    "id": "01a521c4",
     "kanji": "首尾一貫",
     "reading": "しゅびいっかん",
     "meaning": "最初から最後まで筋が通っていること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "首",
       "尾",
@@ -2230,11 +2230,11 @@
     "sentence": "彼の主張は最初から最後まで{{target}}しており、揺らぐことがない。"
   },
   {
-    "id": "a804dbd9",
+    "id": "f73813d7",
     "kanji": "支離滅裂",
     "reading": "しりめつれつ",
     "meaning": "めちゃくちゃで筋が通らないこと",
-    "difficulty": 4,
+    "difficulty": 9,
     "components": [
       "支",
       "離",
@@ -2244,11 +2244,11 @@
     "sentence": "興奮した彼の説明は{{target}}で、何を言っているのか理解できなかった。"
   },
   {
-    "id": "95bf8077",
+    "id": "a29b9538",
     "kanji": "神出鬼没",
     "reading": "しんしゅつきぼつ",
     "meaning": "自由自在に現れたり消えたりすること",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "神",
       "出",
@@ -2258,11 +2258,11 @@
     "sentence": "あの怪盗は{{target}}、いつどこに現れるか誰にも予測できない。"
   },
   {
-    "id": "ad0ae76a",
+    "id": "edf7758a",
     "kanji": "針小棒大",
     "reading": "しんしょうぼうだい",
     "meaning": "小さなことを大げさに言うこと",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "針",
       "小",
@@ -2272,11 +2272,11 @@
     "sentence": "些細なミスを{{target}}に騒ぎ立てるのはやめてほしい。"
   },
   {
-    "id": "39350907",
+    "id": "c136d45d",
     "kanji": "晴耕雨読",
     "reading": "せいこううどく",
     "meaning": "自然の中で気ままに暮らすこと",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "晴",
       "耕",
@@ -2286,11 +2286,11 @@
     "sentence": "定年後は田舎に移住し、{{target}}の悠々自適な生活を送るのが夢だ。"
   },
   {
-    "id": "d37e0455",
+    "id": "7de88e9b",
     "kanji": "清廉潔白",
     "reading": "せいれんけっぱく",
     "meaning": "心が清くて後ろ暗いところがないこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "清",
       "廉",
@@ -2300,11 +2300,11 @@
     "sentence": "彼は金銭に関して非常に厳格で、常に{{target}}な態度を貫いている。"
   },
   {
-    "id": "8961c868",
+    "id": "9c643871",
     "kanji": "切磋琢磨",
     "reading": "せっさたくま",
     "meaning": "互いに励まし合って向上すること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "切",
       "磋",
@@ -2314,11 +2314,11 @@
     "sentence": "良きライバルとして互いに{{target}}し合い、技術を高め合ってきた。"
   },
   {
-    "id": "868a7d1c",
+    "id": "a50fc020",
     "kanji": "前代未聞",
     "reading": "ぜんだいみもん",
     "meaning": "今までに聞いたこともないこと",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "前",
       "代",
@@ -2328,11 +2328,11 @@
     "sentence": "新人がいきなり優勝するなんて、{{target}}の快挙だ。"
   },
   {
-    "id": "bee09828",
+    "id": "0f89121d",
     "kanji": "大同小異",
     "reading": "だいどうしょうい",
     "meaning": "大体同じで細かい違いしかないこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "大",
       "同",
@@ -2342,11 +2342,11 @@
     "sentence": "二つの案は細部は異なるが、基本的には{{target}}と言えるだろう。"
   },
   {
-    "id": "013c0364",
+    "id": "f1237856",
     "kanji": "天真爛漫",
     "reading": "てんしんらんまん",
     "meaning": "飾らず無邪気なこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "天",
       "真",
@@ -2356,11 +2356,11 @@
     "sentence": "彼女の{{target}}な笑顔は、周りの人々を明るい気持ちにさせる。"
   },
   {
-    "id": "adc053b2",
+    "id": "d7398572",
     "kanji": "東奔西走",
     "reading": "とうほんせいそう",
     "meaning": "あちこち忙しく走り回ること",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "東",
       "奔",
@@ -2370,11 +2370,11 @@
     "sentence": "資金集めのために、彼は全国各地を{{target}}している。"
   },
   {
-    "id": "60b3a725",
+    "id": "98413ed0",
     "kanji": "独立独歩",
     "reading": "どくりつどっぽ",
     "meaning": "他人に頼らず自分の信じる道を行くこと",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "独",
       "立",
@@ -2384,11 +2384,11 @@
     "sentence": "流行に流されず、我が道を行く{{target}}の精神を持つ。"
   },
   {
-    "id": "0eeb643f",
+    "id": "9ae065ae",
     "kanji": "難攻不落",
     "reading": "なんこうふらく",
     "meaning": "攻めるのが難しくなかなか落ちないこと",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "難",
       "攻",
@@ -2398,11 +2398,11 @@
     "sentence": "断崖絶壁の上に築かれた、{{target}}の要塞として恐れられた城。"
   },
   {
-    "id": "cdc0aa97",
+    "id": "880a63f5",
     "kanji": "二束三文",
     "reading": "にそくさんもん",
     "meaning": "数が多くても値段が安いこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "二",
       "束",
@@ -2412,11 +2412,11 @@
     "sentence": "苦労して集めたコレクションを、{{target}}で手放すことになった。"
   },
   {
-    "id": "216808b5",
+    "id": "ba4a76a6",
     "kanji": "馬耳東風",
     "reading": "ばじとうふう",
     "meaning": "人の意見を聞き流すこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "馬",
       "耳",
@@ -2426,11 +2426,11 @@
     "sentence": "親がいくら説教しても、彼は{{target}}で全く聞く耳を持たない。"
   },
   {
-    "id": "93aa8424",
+    "id": "94343e7d",
     "kanji": "半面教師",
     "reading": "はんめんきょうし",
     "meaning": "悪い見本として学ぶべき人",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "半",
       "面",
@@ -2440,11 +2440,11 @@
     "sentence": "あのような失敗をしないよう、彼を{{target}}として我が身を振り返る。"
   },
   {
-    "id": "1e76e76b",
+    "id": "03813624",
     "kanji": "風光明媚",
     "reading": "ふうこうめいび",
     "meaning": "自然の景色が美しいこと",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "風",
       "光",
@@ -2454,11 +2454,11 @@
     "sentence": "この辺りは{{target}}な観光地として知られ、多くの旅人が訪れる。"
   },
   {
-    "id": "0878fb2d",
+    "id": "a4540687",
     "kanji": "不眠不休",
     "reading": "ふみんふきゅう",
     "meaning": "眠らず休まず働くこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "不",
       "眠",
@@ -2468,11 +2468,11 @@
     "sentence": "締め切りに間に合わせるため、{{target}}で作業を続けた。"
   },
   {
-    "id": "32da33f3",
+    "id": "3b37aeba",
     "kanji": "付和雷同",
     "reading": "ふわらいどう",
     "meaning": "自分を持たず他人の意見にすぐ賛成すること",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "付",
       "和",
@@ -2482,11 +2482,11 @@
     "sentence": "自分の意見を持たず、安易に周りに{{target}}するのは良くない。"
   },
   {
-    "id": "76bc653c",
+    "id": "fba50ddf",
     "kanji": "平穏無事",
     "reading": "へいおんぶじ",
     "meaning": "変わったこともなく穏やかなこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "平",
       "穏",
@@ -2496,11 +2496,11 @@
     "sentence": "大きなトラブルもなく、今日も一日が{{target}}に終わった。"
   },
   {
-    "id": "d388e00c",
+    "id": "a9bcf136",
     "kanji": "抱腹絶倒",
     "reading": "ほうふくぜっとう",
     "meaning": "腹を抱えて大笑いすること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "抱",
       "腹",
@@ -2510,11 +2510,11 @@
     "sentence": "そのコメディアンの漫才はあまりに面白く、会場は{{target}}の渦に包まれた。"
   },
   {
-    "id": "acf0ffe7",
+    "id": "2669625f",
     "kanji": "無味乾燥",
     "reading": "むみかんそう",
     "meaning": "面白みが全くないこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "無",
       "味",
@@ -2524,11 +2524,11 @@
     "sentence": "数字だけが羅列された{{target}}な報告書を読むのは退屈だ。"
   },
   {
-    "id": "03ec4d18",
+    "id": "6d3d5f5f",
     "kanji": "明鏡止水",
     "reading": "めいきょうしすい",
     "meaning": "曇りのない鏡と静かな水のような心",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "明",
       "鏡",
@@ -2538,11 +2538,11 @@
     "sentence": "雑念を払い、{{target}}の心境で試合に臨む。"
   },
   {
-    "id": "a76c9942",
+    "id": "fb954a72",
     "kanji": "有名無実",
     "reading": "ゆうめいむじつ",
     "meaning": "名ばかりで実質が伴わないこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "有",
       "名",
@@ -2552,11 +2552,11 @@
     "sentence": "ルールはあるものの誰も守っておらず、もはや{{target}}化している。"
   },
   {
-    "id": "398d6fdd",
+    "id": "6a45bee0",
     "kanji": "用意周到",
     "reading": "よういしゅうとう",
     "meaning": "準備が十分に行き届いていること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "用",
       "意",
@@ -2566,11 +2566,11 @@
     "sentence": "犯行計画は{{target}}で、証拠は一切残されていなかった。"
   },
   {
-    "id": "c0fd253e",
+    "id": "f2db5832",
     "kanji": "利害関係",
     "reading": "りがいかんけい",
     "meaning": "利益と損害が絡む関係",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "利",
       "害",
@@ -2580,11 +2580,11 @@
     "sentence": "そこには政治的な{{target}}が複雑に絡み合っているようだ。"
   },
   {
-    "id": "e3c5ec39",
+    "id": "d9366d2e",
     "kanji": "竜頭蛇尾",
     "reading": "りゅうとうだび",
     "meaning": "初めは勢いがよいが終わりは振るわないこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "竜",
       "頭",
@@ -2594,51 +2594,51 @@
     "sentence": "壮大な始まりだったが、結末は呆気なく{{target}}に終わった。"
   },
   {
-    "id": "f0f24ca6",
+    "id": "c4aebd70",
     "kanji": "魁",
     "reading": "さきがけ",
     "meaning": "先頭に立って進むこと",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "魁"
     ],
     "sentence": "彼は時代の{{target}}となって、新しい文化を切り拓いていった。"
   },
   {
-    "id": "def9e82c",
+    "id": "0c02aafa",
     "kanji": "誉",
     "reading": "ほまれ",
     "meaning": "良い評判や誇り",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "誉"
     ],
     "sentence": "優勝できたことは、我がチームにとって最高の{{target}}です。"
   },
   {
-    "id": "3c21053b",
+    "id": "f3c9658e",
     "kanji": "暁",
     "reading": "あかつき",
     "meaning": "夜明け",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "暁"
     ],
     "sentence": "長い苦労の末、成功の{{target}}には二人で祝杯をあげようと約束した。"
   },
   {
-    "id": "d4fb8eaa",
+    "id": "31def902",
     "kanji": "瞬",
     "reading": "またたき",
     "meaning": "まばたきするほどの短い時間",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "瞬"
     ],
     "sentence": "それは{{target}}の出来事だったが、私の記憶には永遠に刻まれた。"
   },
   {
-    "id": "e92cdef5",
+    "id": "a5c70233",
     "kanji": "響",
     "reading": "ひびき",
     "meaning": "あたりに伝わる音",
@@ -2649,29 +2649,29 @@
     "sentence": "静寂な堂内に、鐘の厳かな{{target}}がいつまでも残っている。"
   },
   {
-    "id": "195a2d46",
+    "id": "f1b8f304",
     "kanji": "匠",
     "reading": "たくみ",
     "meaning": "優れた技術を持つ人",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "匠"
     ],
     "sentence": "その精巧な細工には、日本の伝統を受け継ぐ{{target}}の技が光っている。"
   },
   {
-    "id": "0346edde",
+    "id": "4d70cbc8",
     "kanji": "盾",
     "reading": "たて",
     "meaning": "身を守る武具",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "盾"
     ],
     "sentence": "彼は自らの体を{{target}}にして、仲間を敵の攻撃から守り抜いた。"
   },
   {
-    "id": "39580712",
+    "id": "95ca72f2",
     "kanji": "矛",
     "reading": "ほこ",
     "meaning": "突き刺す武器",
@@ -2682,29 +2682,29 @@
     "sentence": "かつて最強を誇ったその{{target}}も、時の流れと共に錆びついてしまった。"
   },
   {
-    "id": "f7060c45",
+    "id": "6c9caa9d",
     "kanji": "魂",
     "reading": "たましい",
     "meaning": "精神や心",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "魂"
     ],
     "sentence": "一球一球に{{target}}を込める投手の気迫に、球場全体が飲み込まれた。"
   },
   {
-    "id": "49a68b7b",
+    "id": "a42687e7",
     "kanji": "翼",
     "reading": "つばさ",
     "meaning": "空を飛ぶための器官",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "翼"
     ],
     "sentence": "自由への憧れを胸に、大空へと{{target}}を広げて飛び立つ鳥たち。"
   },
   {
-    "id": "951c704b",
+    "id": "65599ff4",
     "kanji": "闇",
     "reading": "やみ",
     "meaning": "光のない状態",
@@ -2715,110 +2715,110 @@
     "sentence": "一寸先も見えない深い{{target}}の中で、ただ一つだけの希望の光を探し求めた。"
   },
   {
-    "id": "1e73a717",
+    "id": "7d367967",
     "kanji": "雷",
     "reading": "かみなり",
     "meaning": "稲妻と音",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "雷"
     ],
     "sentence": "青天の{{target}}のごとく、その衝撃的なニュースは世界中を駆け巡った。"
   },
   {
-    "id": "fc847177",
+    "id": "cf817cc8",
     "kanji": "雫",
     "reading": "しずく",
     "meaning": "したたり落ちる液体",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "雫"
     ],
     "sentence": "雨上がりの葉先からこぼれ落ちる{{target}}が、朝日を浴びて宝石のように輝く。"
   },
   {
-    "id": "5711c0ca",
+    "id": "8be62692",
     "kanji": "嵐",
     "reading": "あらし",
     "meaning": "激しい風雨",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "嵐"
     ],
     "sentence": "吹き荒れる{{target}}の海へと船を出すのは、自殺行為に等しい。"
   },
   {
-    "id": "7d9fa31b",
+    "id": "82ac8184",
     "kanji": "砦",
     "reading": "とりで",
     "meaning": "敵を防ぐ小さな城",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "砦"
     ],
     "sentence": "ここはこの国を守る最後の{{target}}だ、一歩も退くわけにはいかない。"
   },
   {
-    "id": "96366cb6",
+    "id": "1a224fcc",
     "kanji": "侍",
     "reading": "さむらい",
     "meaning": "昔の日本の戦士",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "侍"
     ],
     "sentence": "主君のために命を捧げる、それがかつての{{target}}の生き様だった。"
   },
   {
-    "id": "c2534e8a",
+    "id": "c9fd7fea",
     "kanji": "忍",
     "reading": "しのび",
     "meaning": "隠密に行動する者",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "忍"
     ],
     "sentence": "闇に紛れて任務を遂行する、誰にも知られることのない{{target}}の孤独。"
   },
   {
-    "id": "253c75dd",
+    "id": "910707c7",
     "kanji": "龍",
     "reading": "りゅう",
     "meaning": "伝説上の神獣",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "龍"
     ],
     "sentence": "滝を登り切った鯉は、やがて天を駆ける{{target}}になると言い伝えられている。"
   },
   {
-    "id": "7d56a99b",
+    "id": "ad4b9fde",
     "kanji": "鳳",
     "reading": "おおとり",
     "meaning": "伝説上の聖なる鳥",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "鳳"
     ],
     "sentence": "その鳥は炎の中から蘇り、{{target}}凰となって永遠の時を生きるという。"
   },
   {
-    "id": "85a3762a",
+    "id": "97584519",
     "kanji": "凰",
     "reading": "おおとり",
     "meaning": "伝説上の聖なる鳥のメス",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "凰"
     ],
     "sentence": "鳳{{target}}が舞う時、その地には平和と繁栄がもたらされる。"
   },
   {
-    "id": "59d14c32",
+    "id": "3d51406d",
     "kanji": "刹那",
     "reading": "せつな",
     "meaning": "極めて短い時間",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "刹",
       "那"
@@ -2826,11 +2826,11 @@
     "sentence": "視線が交差した{{target}}、二人は互いが運命の相手であることを悟った。"
   },
   {
-    "id": "a1a8ff4c",
+    "id": "839e4e0a",
     "kanji": "螺旋",
     "reading": "らせん",
     "meaning": "渦巻き状の形",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "螺",
       "旋"
@@ -2838,11 +2838,11 @@
     "sentence": "終わりのない{{target}}階段を登り続けるように、思考が同じ場所を巡っている。"
   },
   {
-    "id": "26775304",
+    "id": "ae1c4a10",
     "kanji": "琥珀",
     "reading": "こはく",
     "meaning": "松脂が化石になった宝石",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "琥",
       "珀"
@@ -2850,11 +2850,11 @@
     "sentence": "太古の虫を閉じ込めた{{target}}が、夕陽に透かされて黄金色に輝く。"
   },
   {
-    "id": "a454656f",
+    "id": "f7dd9731",
     "kanji": "翡翠",
     "reading": "ひすい",
     "meaning": "深緑色の美しい宝石",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "翡",
       "翠"
@@ -2862,11 +2862,11 @@
     "sentence": "雨上がりの森のような、深く吸い込まれるような{{target}}色の瞳。"
   },
   {
-    "id": "9e521b8f",
+    "id": "4e0493d8",
     "kanji": "瑠璃",
     "reading": "るり",
     "meaning": "紫がかった青色の宝石",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "瑠",
       "璃"
@@ -2874,11 +2874,11 @@
     "sentence": "夜明け前の空の色を映し取ったような、鮮やかな{{target}}色のガラス。"
   },
   {
-    "id": "e4953533",
+    "id": "d4c0a254",
     "kanji": "煉獄",
     "reading": "れんごく",
     "meaning": "激しい炎の苦しみ",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "煉",
       "獄"
@@ -2886,11 +2886,11 @@
     "sentence": "罪を浄化するために焼かれるという{{target}}の炎が、彼の心を苛み続ける。"
   },
   {
-    "id": "0254ee41",
+    "id": "306b90c1",
     "kanji": "冥界",
     "reading": "めいかい",
     "meaning": "死後の世界",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "冥",
       "界"
@@ -2898,11 +2898,11 @@
     "sentence": "川を渡ればそこは生者の立ち入れない場所、{{target}}の入り口だ。"
   },
   {
-    "id": "1c6e9982",
+    "id": "79cfeb5b",
     "kanji": "深淵",
     "reading": "しんえん",
     "meaning": "底知れず深い場所",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "深",
       "淵"
@@ -2910,11 +2910,11 @@
     "sentence": "{{target}}を覗く時、{{target}}もまたこちらを覗いているのだ。"
   },
   {
-    "id": "123ac127",
+    "id": "73e774b5",
     "kanji": "鼓動",
     "reading": "こどう",
     "meaning": "心臓が打つ音",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "鼓",
       "動"
@@ -2922,11 +2922,11 @@
     "sentence": "緊張で早まる胸の{{target}}が、耳の奥でドクドクと大きく鳴り響く。"
   },
   {
-    "id": "74829d68",
+    "id": "45eb447f",
     "kanji": "咆哮",
     "reading": "ほうこう",
     "meaning": "猛獣が吠えること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "咆",
       "哮"
@@ -2934,11 +2934,11 @@
     "sentence": "大地を震わせるような獣の{{target}}が、夜のジャングルに轟いた。"
   },
   {
-    "id": "d9e68a57",
+    "id": "f7b1ad1e",
     "kanji": "殲滅",
     "reading": "せんめつ",
     "meaning": "皆殺しにすること",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "殲",
       "滅"
@@ -2946,11 +2946,11 @@
     "sentence": "圧倒的な火力を前に、敵の部隊は瞬く間に{{target}}させられた。"
   },
   {
-    "id": "4c707aa8",
+    "id": "c899b110",
     "kanji": "翻弄",
     "reading": "ほんろう",
     "meaning": "思うままにもてあそぶこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "翻",
       "弄"
@@ -2958,11 +2958,11 @@
     "sentence": "激しい運命の波に{{target}}されながらも、彼は必死に生きる道を探した。"
   },
   {
-    "id": "c566a3db",
+    "id": "b12959e6",
     "kanji": "躊躇",
     "reading": "ちゅうちょ",
     "meaning": "ためらうこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "躊",
       "躇"
@@ -2970,11 +2970,11 @@
     "sentence": "一瞬の{{target}}が命取りになる、戦場とはそういう場所だ。"
   },
   {
-    "id": "544bd597",
+    "id": "f7481289",
     "kanji": "完璧",
     "reading": "かんぺき",
     "meaning": "欠点が全くないこと",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "完",
       "璧"
@@ -2982,11 +2982,11 @@
     "sentence": "非の打ち所がない、まさに{{target}}な演技に観客はスタンディングオベーションを送った。"
   },
   {
-    "id": "5952720d",
+    "id": "b176a996",
     "kanji": "薔薇",
     "reading": "ばら",
     "meaning": "棘のある美しい花",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "薔",
       "薇"
@@ -2994,11 +2994,11 @@
     "sentence": "美しいものには棘がある、情熱の赤き{{target}}のように。"
   },
   {
-    "id": "9f511677",
+    "id": "c0553467",
     "kanji": "麒麟",
     "reading": "きりん",
     "meaning": "伝説上の聖なる獣",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "麒",
       "麟"
@@ -3006,11 +3006,11 @@
     "sentence": "優れた才能を持つ若者を、人々は将来を嘱望される{{target}}児と呼んだ。"
   },
   {
-    "id": "856f22c6",
+    "id": "8f37c3c3",
     "kanji": "五月雨",
     "reading": "さみだれ",
     "meaning": "梅雨の時期に降る雨",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "五",
       "月",
@@ -3019,11 +3019,11 @@
     "sentence": "終わることなく降り続く{{target}}を眺めながら、物思いにふける午後。"
   },
   {
-    "id": "cf3ba1c6",
+    "id": "5416979d",
     "kanji": "不知火",
     "reading": "しらぬい",
     "meaning": "海上に現れる不思議な火",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "不",
       "知",
@@ -3032,11 +3032,11 @@
     "sentence": "暗い海上に揺らめく光の列、それは九州の海に現れる{{target}}の幻影だ。"
   },
   {
-    "id": "d380efa2",
+    "id": "a19b7108",
     "kanji": "雪月花",
     "reading": "せつげつか",
     "meaning": "四季の美しい景色",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "雪",
       "月",
@@ -3045,11 +3045,11 @@
     "sentence": "日本の四季の美しさを象徴する{{target}}を愛でる心。"
   },
   {
-    "id": "5fd075bd",
+    "id": "2fcb8bc9",
     "kanji": "朧月夜",
     "reading": "おぼろづきよ",
     "meaning": "霧などでかすんだ月の夜",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "朧",
       "月",
@@ -3058,11 +3058,11 @@
     "sentence": "菜の花畠に入日薄れ、見渡す山の端は霞深き{{target}}。"
   },
   {
-    "id": "f41e0108",
+    "id": "b337007b",
     "kanji": "金字塔",
     "reading": "きんじとう",
     "meaning": "後世に残る偉大な業績",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "金",
       "字",
@@ -3071,11 +3071,11 @@
     "sentence": "彼が打ち立てた記録は、スポーツ界における不滅の{{target}}として語り継がれるだろう。"
   },
   {
-    "id": "9d3e84ef",
+    "id": "534c1504",
     "kanji": "走馬灯",
     "reading": "そうまとう",
     "meaning": "死ぬ間際に過去が巡ること",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "走",
       "馬",
@@ -3084,11 +3084,11 @@
     "sentence": "事故の瞬間、今までの人生が{{target}}のように駆け巡った。"
   },
   {
-    "id": "7d30bfa3",
+    "id": "90113548",
     "kanji": "蜃気楼",
     "reading": "しんきろう",
     "meaning": "景色が浮いて見える現象",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "蜃",
       "気",
@@ -3097,11 +3097,11 @@
     "sentence": "砂漠の彼方に見えるオアシスは、熱気が作り出した{{target}}に過ぎない。"
   },
   {
-    "id": "8d0f660f",
+    "id": "846df9f6",
     "kanji": "曼珠沙華",
     "reading": "まんじゅしゃげ",
     "meaning": "彼岸花のこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "曼",
       "珠",
@@ -3111,11 +3111,11 @@
     "sentence": "秋の彼岸の頃、田んぼの畦道に燃えるような赤色の{{target}}が咲き乱れる。"
   },
   {
-    "id": "e4e59338",
+    "id": "970f08db",
     "kanji": "無造作",
     "reading": "むぞうさ",
     "meaning": "気取らず手軽なこと",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "無",
       "造",
@@ -3124,11 +3124,11 @@
     "sentence": "彼はポケットから{{target}}に紙切れを取り出し、電話番号を書き殴った。"
   },
   {
-    "id": "7cf1afb3",
+    "id": "51a699a4",
     "kanji": "殺風景",
     "reading": "さっぷうけい",
     "meaning": "趣がなく寒々しいこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "殺",
       "風",
@@ -3137,11 +3137,11 @@
     "sentence": "家具も何もない{{target}}な部屋に、ポツンと椅子が一つ置かれている。"
   },
   {
-    "id": "865c12d2",
+    "id": "11b35b5c",
     "kanji": "破廉恥",
     "reading": "はれんち",
     "meaning": "恥を恥とも思わないこと",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "破",
       "廉",
@@ -3150,11 +3150,11 @@
     "sentence": "公衆の面前でそのような振る舞いをするとは、実に{{target}}極まりない。"
   },
   {
-    "id": "e62cd6b0",
+    "id": "f345aaa4",
     "kanji": "百花繚乱",
     "reading": "ひゃっかりょうらん",
     "meaning": "優れた人物が一時期にたくさん現れること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "百",
       "花",
@@ -3164,11 +3164,11 @@
     "sentence": "個性豊かな才能たちが競い合う、まさに{{target}}の時代が到来した。"
   },
   {
-    "id": "7a83eb4a",
+    "id": "3d2eaf82",
     "kanji": "天下無双",
     "reading": "てんかむそう",
     "meaning": "世に並ぶ者がいないこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "天",
       "下",
@@ -3178,11 +3178,11 @@
     "sentence": "その武勇は国中に知れ渡り、{{target}}の豪傑として恐れられた。"
   },
   {
-    "id": "73d17f8a",
+    "id": "b0c849e7",
     "kanji": "国士無双",
     "reading": "こくしむそう",
     "meaning": "国内で最も優れた人物",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "国",
       "士",
@@ -3192,11 +3192,11 @@
     "sentence": "彼は類い稀なる才能を持った、まさに{{target}}の傑物だ。"
   },
   {
-    "id": "9ef9b7b2",
+    "id": "1724bd7a",
     "kanji": "魑魅魍魎",
     "reading": "ちみもうりょう",
     "meaning": "化け物や妖怪の総称",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "魑",
       "魅",
@@ -3206,11 +3206,11 @@
     "sentence": "夜の闇には、人知を超えた{{target}}が跋扈しているという。"
   },
   {
-    "id": "7c46d28e",
+    "id": "416bd6c8",
     "kanji": "跳梁跋扈",
     "reading": "ちょうりょうばっこ",
     "meaning": "悪人が好き勝手に振る舞うこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "跳",
       "梁",
@@ -3220,11 +3220,11 @@
     "sentence": "秩序が乱れた都では、悪党どもが{{target}}し、民を苦しめていた。"
   },
   {
-    "id": "f018d88f",
+    "id": "7ab085a3",
     "kanji": "疾風迅雷",
     "reading": "しっぷうじんらい",
     "meaning": "行動が素早く激しいこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "疾",
       "風",
@@ -3234,11 +3234,11 @@
     "sentence": "戦場を駆け抜けるその姿は、まさに{{target}}の如き速さだった。"
   },
   {
-    "id": "351e0dd5",
+    "id": "14699b4d",
     "kanji": "不撓不屈",
     "reading": "ふとうふくつ",
     "meaning": "どんな困難にもくじけないこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "不",
       "撓",
@@ -3248,11 +3248,11 @@
     "sentence": "幾多の失敗にもめげず、{{target}}の精神で研究を続けた。"
   },
   {
-    "id": "34e54210",
+    "id": "1eeb1f97",
     "kanji": "一騎当千",
     "reading": "いっきとうせん",
     "meaning": "一人で千人の敵に対抗できるほど強いこと",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "一",
       "騎",
@@ -3262,11 +3262,11 @@
     "sentence": "彼一人で戦況を変えてしまう、まさに{{target}}の猛者だ。"
   },
   {
-    "id": "5e3ba031",
+    "id": "199b8f84",
     "kanji": "画竜点睛",
     "reading": "がりょうてんせい",
     "meaning": "物事の最後の仕上げ",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "画",
       "竜",
@@ -3276,11 +3276,11 @@
     "sentence": "素晴らしい出来栄えだが、最後に{{target}}を欠いてしまったのが惜しまれる。"
   },
   {
-    "id": "37abf028",
+    "id": "8d003693",
     "kanji": "森羅万象",
     "reading": "しんらばんしょう",
     "meaning": "宇宙に存在するすべてのもの",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "森",
       "羅",
@@ -3290,11 +3290,11 @@
     "sentence": "この世のありとあらゆるもの、{{target}}を司る神の力。"
   },
   {
-    "id": "87348a59",
+    "id": "27f1aaab",
     "kanji": "唯一無二",
     "reading": "ゆいいつむに",
     "meaning": "ただ一つで二つとないこと",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "唯",
       "一",
@@ -3304,11 +3304,11 @@
     "sentence": "世界中どこを探しても代わりはいない、君は私にとって{{target}}の存在だ。"
   },
   {
-    "id": "06d654af",
+    "id": "6320eae1",
     "kanji": "天下泰平",
     "reading": "てんかたいへい",
     "meaning": "世の中が平和でよく治まっていること",
-    "difficulty": 4,
+    "difficulty": 8,
     "components": [
       "天",
       "下",
@@ -3318,11 +3318,11 @@
     "sentence": "戦乱の世が終わり、人々が笑って暮らせる{{target}}の世が訪れた。"
   },
   {
-    "id": "89012d21",
+    "id": "c3de5061",
     "kanji": "一朝一夕",
     "reading": "いっちょういっせき",
     "meaning": "わずかな時間",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "一",
       "朝",
@@ -3332,11 +3332,11 @@
     "sentence": "伝統の味は長い年月の積み重ねがあってこそ、{{target}}に作れるものではない。"
   },
   {
-    "id": "f26f944a",
+    "id": "9c05dfa5",
     "kanji": "暴飲暴食",
     "reading": "ぼういんぼうしょく",
     "meaning": "度を越して飲み食いすること",
-    "difficulty": 3,
+    "difficulty": 7,
     "components": [
       "暴",
       "飲",
@@ -3346,11 +3346,11 @@
     "sentence": "ストレス発散とはいえ、毎晩の{{target}}が祟って体を壊してしまった。"
   },
   {
-    "id": "52e8b415",
+    "id": "a3e16ffd",
     "kanji": "一喜一憂",
     "reading": "いっきいちゆう",
     "meaning": "状況が変わるたびに喜んだり心配したりすること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "一",
       "喜",
@@ -3360,11 +3360,11 @@
     "sentence": "株価の変動に{{target}}する毎日だ。"
   },
   {
-    "id": "8afdcd32",
+    "id": "5e1790bd",
     "kanji": "感慨無量",
     "reading": "かんがいむりょう",
     "meaning": "胸がいっぱいになるほど深く感動すること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "感",
       "慨",
@@ -3374,11 +3374,11 @@
     "sentence": "教え子の成長した姿を見て、{{target}}だ。"
   },
   {
-    "id": "4aa69f1a",
+    "id": "a8eda1bf",
     "kanji": "自暴自棄",
     "reading": "じぼうじき",
     "meaning": "失望して自分などどうなってもいいと思うこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "自",
       "暴",
@@ -3388,11 +3388,11 @@
     "sentence": "失敗が続いたからといって、{{target}}になってはいけない。"
   },
   {
-    "id": "7b5addf9",
+    "id": "2fbdda6c",
     "kanji": "料理",
     "reading": "りょうり",
     "meaning": "食材を加工して食事を作ること",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "料",
       "理"
@@ -3400,11 +3400,11 @@
     "sentence": "母の手作り{{target}}が一番の好物だ。"
   },
   {
-    "id": "95fe47c2",
+    "id": "dd9e8873",
     "kanji": "野菜",
     "reading": "やさい",
     "meaning": "食用の草本植物",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "野",
       "菜"
@@ -3412,11 +3412,11 @@
     "sentence": "健康のために毎日{{target}}をたっぷり食べる。"
   },
   {
-    "id": "a00e1bfb",
+    "id": "7ead73bf",
     "kanji": "果物",
     "reading": "くだもの",
     "meaning": "食用の果実",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "果",
       "物"
@@ -3424,11 +3424,11 @@
     "sentence": "食後のデザートに季節の{{target}}を剥く。"
   },
   {
-    "id": "d0a3b79f",
+    "id": "f202fed0",
     "kanji": "朝食",
     "reading": "ちょうしょく",
     "meaning": "朝に食べる食事",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "朝",
       "食"
@@ -3436,11 +3436,11 @@
     "sentence": "{{target}}をしっかり食べてエネルギーを充填する。"
   },
   {
-    "id": "8781f555",
+    "id": "e602721e",
     "kanji": "掃除",
     "reading": "そうじ",
     "meaning": "ゴミやほこりを取り除くこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "掃",
       "除"
@@ -3448,11 +3448,11 @@
     "sentence": "年末の大{{target}}で家をピカピカにする。"
   },
   {
-    "id": "6dfef050",
+    "id": "9b68aaf1",
     "kanji": "洗濯",
     "reading": "せんたく",
     "meaning": "衣類などを洗うこと",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "洗",
       "濯"
@@ -3460,11 +3460,11 @@
     "sentence": "晴れた日は{{target}}物がよく乾くので気持ちがいい。"
   },
   {
-    "id": "fa64ca49",
+    "id": "5c223730",
     "kanji": "玄関",
     "reading": "げんかん",
     "meaning": "建物の出入り口",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "玄",
       "関"
@@ -3472,11 +3472,11 @@
     "sentence": "{{target}}で靴を揃えてから家に入るのがマナーだ。"
   },
   {
-    "id": "a2d13fa6",
+    "id": "a64180c1",
     "kanji": "筋肉",
     "reading": "きんにく",
     "meaning": "体を動かす組織",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "筋",
       "肉"
@@ -3484,11 +3484,11 @@
     "sentence": "毎日のトレーニングで強靭な{{target}}を鍛え上げる。"
   },
   {
-    "id": "b6c50ca9",
+    "id": "d04666d0",
     "kanji": "病院",
     "reading": "びょういん",
     "meaning": "病気や怪我を治療する場所",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "病",
       "院"
@@ -3496,11 +3496,11 @@
     "sentence": "風邪をひいたので、近所の{{target}}で診察を受ける。"
   },
   {
-    "id": "9ff6ce9d",
+    "id": "db35dd88",
     "kanji": "安心",
     "reading": "あんしん",
     "meaning": "心が安らぐこと",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "安",
       "心"
@@ -3508,11 +3508,11 @@
     "sentence": "君の元気な顔を見て、ようやく{{target}}したよ。"
   },
   {
-    "id": "352e2e1f",
+    "id": "81d7095f",
     "kanji": "記憶",
     "reading": "きおく",
     "meaning": "過去の経験を覚えていること",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "記",
       "憶"
@@ -3520,11 +3520,11 @@
     "sentence": "この古い写真を見ると、幼い頃の{{target}}が鮮明に蘇る。"
   },
   {
-    "id": "b53e65e5",
+    "id": "6b32659a",
     "kanji": "約束",
     "reading": "やくそく",
     "meaning": "将来のことを決めておくこと",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "約",
       "束"
@@ -3532,11 +3532,11 @@
     "sentence": "指切りげんまんで、また会う{{target}}を交わした。"
   },
   {
-    "id": "033fc875",
+    "id": "8397b064",
     "kanji": "時計",
     "reading": "とけい",
     "meaning": "時間を計る道具",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "時",
       "計"
@@ -3544,22 +3544,22 @@
     "sentence": "壁の{{target}}の針が、深夜の12時を回った。"
   },
   {
-    "id": "50559dbe",
+    "id": "a5fd02c6",
     "kanji": "鏡",
     "reading": "かがみ",
     "meaning": "姿を映す道具",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "鏡"
     ],
     "sentence": "出かける前に{{target}}の前で身だしなみを整える。"
   },
   {
-    "id": "996ca64d",
+    "id": "b6f33b57",
     "kanji": "帽子",
     "reading": "ぼうし",
     "meaning": "頭にかぶるもの",
-    "difficulty": 1,
+    "difficulty": 3,
     "components": [
       "帽",
       "子"
@@ -3567,11 +3567,11 @@
     "sentence": "日差しが強いので、お気に入りの麦わら{{target}}をかぶる。"
   },
   {
-    "id": "c6642452",
+    "id": "e3880584",
     "kanji": "眼鏡",
     "reading": "めがね",
     "meaning": "視力を補正する道具",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "眼",
       "鏡"
@@ -3579,11 +3579,11 @@
     "sentence": "{{target}}をかけ忘れて、黒板の文字がよく見えない。"
   },
   {
-    "id": "50d0c7ba",
+    "id": "158fd39f",
     "kanji": "辞書",
     "reading": "じしょ",
     "meaning": "言葉の意味を調べる本",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "辞",
       "書"
@@ -3591,11 +3591,11 @@
     "sentence": "分からない単語があったら、すぐに{{target}}を引く癖をつける。"
   },
   {
-    "id": "3c0ee0a8",
+    "id": "da2b7e2a",
     "kanji": "万年筆",
     "reading": "まんねんひつ",
     "meaning": "インクを補充して使うペン",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "万",
       "年",
@@ -3604,11 +3604,11 @@
     "sentence": "祖父の形見である{{target}}を使って、心を込めて手紙を書く。"
   },
   {
-    "id": "40004356",
+    "id": "c587d5aa",
     "kanji": "飛行機",
     "reading": "ひこうき",
     "meaning": "空を飛ぶ乗り物",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "飛",
       "行",
@@ -3617,11 +3617,11 @@
     "sentence": "{{target}}の窓から見下ろす雲海は、息をのむほど美しかった。"
   },
   {
-    "id": "a347b2f1",
+    "id": "9299a11a",
     "kanji": "自転車",
     "reading": "じてんしゃ",
     "meaning": "ペダルを漕いで進む二輪車",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "自",
       "転",
@@ -3630,11 +3630,11 @@
     "sentence": "坂道を{{target}}で一気に駆け下りる爽快感。"
   },
   {
-    "id": "7811d65b",
+    "id": "53c3943a",
     "kanji": "冒険者",
     "reading": "ぼうけんしゃ",
     "meaning": "危険を冒して旅をする人",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "冒",
       "険",
@@ -3643,11 +3643,11 @@
     "sentence": "かつてこのダンジョンに挑んだ{{target}}の日記を見つけた。"
   },
   {
-    "id": "ef817158",
+    "id": "702f277d",
     "kanji": "魔法",
     "reading": "まほう",
     "meaning": "不思議な力",
-    "difficulty": 2,
+    "difficulty": 5,
     "components": [
       "魔",
       "法"
@@ -3655,11 +3655,11 @@
     "sentence": "もしも一つだけ{{target}}が使えるなら、空を飛んでみたい。"
   },
   {
-    "id": "7196f65c",
+    "id": "34a119ff",
     "kanji": "勇者",
     "reading": "ゆうしゃ",
     "meaning": "勇気ある者",
-    "difficulty": 1,
+    "difficulty": 2,
     "components": [
       "勇",
       "者"
@@ -3667,11 +3667,11 @@
     "sentence": "伝説の剣を抜き、魔王を倒す{{target}}の旅が始まる。"
   },
   {
-    "id": "77ef9c7b",
+    "id": "5e1a8340",
     "kanji": "迷宮",
     "reading": "めいきゅう",
     "meaning": "入り組んで迷いやすい場所",
-    "difficulty": 2,
+    "difficulty": 4,
     "components": [
       "迷",
       "宮"
@@ -3679,15 +3679,500 @@
     "sentence": "この地下遺跡はまるで巨大な{{target}}のようだ。"
   },
   {
-    "id": "b749f51d",
+    "id": "80fe8e92",
     "kanji": "宝箱",
     "reading": "たからばこ",
     "meaning": "宝物を入れる箱",
-    "difficulty": 3,
+    "difficulty": 6,
     "components": [
       "宝",
       "箱"
     ],
     "sentence": "部屋の隅に置かれた古い{{target}}を開けると、中から光が溢れ出した。"
+  },
+  {
+    "id": "ed8873b7",
+    "kanji": "冷蔵庫",
+    "reading": "れいぞうこ",
+    "meaning": "食品を冷やす家電",
+    "difficulty": 6,
+    "components": [
+      "冷",
+      "蔵",
+      "庫"
+    ],
+    "sentence": "新しい{{target}}に買い替える"
+  },
+  {
+    "id": "413a684a",
+    "kanji": "洗濯機",
+    "reading": "せんたくき",
+    "meaning": "服を洗う家電",
+    "difficulty": 7,
+    "components": [
+      "洗",
+      "濯",
+      "機"
+    ],
+    "sentence": "全自動{{target}}を回す"
+  },
+  {
+    "id": "f1aca058",
+    "kanji": "掃除機",
+    "reading": "そうじき",
+    "meaning": "ゴミを吸う家電",
+    "difficulty": 7,
+    "components": [
+      "掃",
+      "除",
+      "機"
+    ],
+    "sentence": "ロボット{{target}}が部屋を動く"
+  },
+  {
+    "id": "dd3c743c",
+    "kanji": "扇風機",
+    "reading": "せんぷうき",
+    "meaning": "風を送る家電",
+    "difficulty": 5,
+    "components": [
+      "扇",
+      "風",
+      "機"
+    ],
+    "sentence": "夏の夜に{{target}}にあたる"
+  },
+  {
+    "id": "31b7f6ee",
+    "kanji": "顕微鏡",
+    "reading": "けんびきょう",
+    "meaning": "微小なものを見る機器",
+    "difficulty": 5,
+    "components": [
+      "顕",
+      "微",
+      "鏡"
+    ],
+    "sentence": "理科室で{{target}}を覗く"
+  },
+  {
+    "id": "3998117f",
+    "kanji": "望遠鏡",
+    "reading": "ぼうえんきょう",
+    "meaning": "遠くを見る機器",
+    "difficulty": 5,
+    "components": [
+      "望",
+      "遠",
+      "鏡"
+    ],
+    "sentence": "天体{{target}}で星を観察する"
+  },
+  {
+    "id": "b174ac48",
+    "kanji": "新幹線",
+    "reading": "しんかんせん",
+    "meaning": "高速鉄道",
+    "difficulty": 6,
+    "components": [
+      "新",
+      "幹",
+      "線"
+    ],
+    "sentence": "{{target}}で東京へ向かう"
+  },
+  {
+    "id": "af2ad2d8",
+    "kanji": "消防車",
+    "reading": "しょうぼうしゃ",
+    "meaning": "火を消す車",
+    "difficulty": 5,
+    "components": [
+      "消",
+      "防",
+      "車"
+    ],
+    "sentence": "サイレンを鳴らして{{target}}が走る"
+  },
+  {
+    "id": "72bb5c5f",
+    "kanji": "救急車",
+    "reading": "きゅうきゅうしゃ",
+    "meaning": "病人を運ぶ車",
+    "difficulty": 5,
+    "components": [
+      "救",
+      "急",
+      "車"
+    ],
+    "sentence": "{{target}}の道を譲る"
+  },
+  {
+    "id": "3f19e73c",
+    "kanji": "警察署",
+    "reading": "けいさつしょ",
+    "meaning": "警察の拠点",
+    "difficulty": 6,
+    "components": [
+      "警",
+      "察",
+      "署"
+    ],
+    "sentence": "落とし物を{{target}}に届ける"
+  },
+  {
+    "id": "231b37f3",
+    "kanji": "市役所",
+    "reading": "しやくしょ",
+    "meaning": "市の行政機関",
+    "difficulty": 4,
+    "components": [
+      "市",
+      "役",
+      "所"
+    ],
+    "sentence": "{{target}}で手続きをする"
+  },
+  {
+    "id": "1312d91a",
+    "kanji": "図書館",
+    "reading": "としょかん",
+    "meaning": "本がある施設",
+    "difficulty": 3,
+    "components": [
+      "図",
+      "書",
+      "館"
+    ],
+    "sentence": "休日は{{target}}で静かに過ごす"
+  },
+  {
+    "id": "f849d1ad",
+    "kanji": "映画館",
+    "reading": "えいがかん",
+    "meaning": "映画を見る施設",
+    "difficulty": 4,
+    "components": [
+      "映",
+      "画",
+      "館"
+    ],
+    "sentence": "{{target}}でポップコーンを食べる"
+  },
+  {
+    "id": "209b9acc",
+    "kanji": "水族館",
+    "reading": "すいぞくかん",
+    "meaning": "魚を見る施設",
+    "difficulty": 3,
+    "components": [
+      "水",
+      "族",
+      "館"
+    ],
+    "sentence": "{{target}}のイルカショーに感動する"
+  },
+  {
+    "id": "83cde37c",
+    "kanji": "美術館",
+    "reading": "びじゅつかん",
+    "meaning": "アートを展示する施設",
+    "difficulty": 5,
+    "components": [
+      "美",
+      "術",
+      "館"
+    ],
+    "sentence": "{{target}}で名画を鑑賞する"
+  },
+  {
+    "id": "bf8ecd53",
+    "kanji": "博物館",
+    "reading": "はくぶつかん",
+    "meaning": "歴史などを展示する施設",
+    "difficulty": 3,
+    "components": [
+      "博",
+      "物",
+      "館"
+    ],
+    "sentence": "{{target}}で恐竜の化石を見る"
+  },
+  {
+    "id": "5520823c",
+    "kanji": "体育館",
+    "reading": "たいいくかん",
+    "meaning": "運動する施設",
+    "difficulty": 4,
+    "components": [
+      "体",
+      "育",
+      "館"
+    ],
+    "sentence": "放課後の{{target}}でバスケをする"
+  },
+  {
+    "id": "f4599846",
+    "kanji": "運動会",
+    "reading": "うんどうかい",
+    "meaning": "スポーツの行事",
+    "difficulty": 7,
+    "components": [
+      "運",
+      "動",
+      "会"
+    ],
+    "sentence": "秋晴れの下で{{target}}が開かれる"
+  },
+  {
+    "id": "6e04da9c",
+    "kanji": "文化祭",
+    "reading": "ぶんかさい",
+    "meaning": "学校の行事",
+    "difficulty": 4,
+    "components": [
+      "文",
+      "化",
+      "祭"
+    ],
+    "sentence": "{{target}}でお化け屋敷を作る"
+  },
+  {
+    "id": "a66d5710",
+    "kanji": "修学旅行",
+    "reading": "しゅうがくりょこう",
+    "meaning": "学校の宿泊行事",
+    "difficulty": 5,
+    "components": [
+      "修",
+      "学",
+      "旅",
+      "行"
+    ],
+    "sentence": "{{target}}で京都を訪れる"
+  },
+  {
+    "id": "6e48c591",
+    "kanji": "誕生日",
+    "reading": "たんじょうび",
+    "meaning": "生まれた日",
+    "difficulty": 4,
+    "components": [
+      "誕",
+      "生",
+      "日"
+    ],
+    "sentence": "サプライズで{{target}}を祝う"
+  },
+  {
+    "id": "d88e9c78",
+    "kanji": "日曜日",
+    "reading": "にちようび",
+    "meaning": "週の休日",
+    "difficulty": 4,
+    "components": [
+      "日",
+      "曜",
+      "日"
+    ],
+    "sentence": "{{target}}の朝はゆっくり寝る"
+  },
+  {
+    "id": "67d1d662",
+    "kanji": "月曜日",
+    "reading": "げつようび",
+    "meaning": "週の始まり",
+    "difficulty": 4,
+    "components": [
+      "月",
+      "曜",
+      "日"
+    ],
+    "sentence": "憂鬱な{{target}}の朝"
+  },
+  {
+    "id": "0c25871f",
+    "kanji": "雰囲気",
+    "reading": "ふんいき",
+    "meaning": "その場の空気",
+    "difficulty": 7,
+    "components": [
+      "雰",
+      "囲",
+      "気"
+    ],
+    "sentence": "とても良い{{target}}のお店だ"
+  },
+  {
+    "id": "e44b9090",
+    "kanji": "無意識",
+    "reading": "むいしき",
+    "meaning": "意識していないこと",
+    "difficulty": 6,
+    "components": [
+      "無",
+      "意",
+      "識"
+    ],
+    "sentence": "{{target}}のうちに口ずさんでいた"
+  },
+  {
+    "id": "d50df5d1",
+    "kanji": "不自然",
+    "reading": "ふしぜん",
+    "meaning": "自然ではないこと",
+    "difficulty": 4,
+    "components": [
+      "不",
+      "自",
+      "然"
+    ],
+    "sentence": "彼の態度はどこか{{target}}だった"
+  },
+  {
+    "id": "da2e0317",
+    "kanji": "未完成",
+    "reading": "みかんせい",
+    "meaning": "まだ出来ていないこと",
+    "difficulty": 6,
+    "components": [
+      "未",
+      "完",
+      "成"
+    ],
+    "sentence": "この作品はまだ{{target}}だ"
+  },
+  {
+    "id": "aa4ef17b",
+    "kanji": "好対照",
+    "reading": "こうたいしょう",
+    "meaning": "対比が際立つこと",
+    "difficulty": 8,
+    "components": [
+      "好",
+      "対",
+      "照"
+    ],
+    "sentence": "性格が正反対の{{target}}な二人"
+  },
+  {
+    "id": "8d2693fe",
+    "kanji": "確認",
+    "reading": "かくにん",
+    "meaning": "確かめること",
+    "difficulty": 5,
+    "components": [
+      "確",
+      "認"
+    ],
+    "sentence": "安全を{{target}}して出発する"
+  },
+  {
+    "id": "7ed1190e",
+    "kanji": "説明",
+    "reading": "せつめい",
+    "meaning": "解き明かすこと",
+    "difficulty": 4,
+    "components": [
+      "説",
+      "明"
+    ],
+    "sentence": "詳しく事情を{{target}}する"
+  },
+  {
+    "id": "d6cded19",
+    "kanji": "理解",
+    "reading": "りかい",
+    "meaning": "わかること",
+    "difficulty": 4,
+    "components": [
+      "理",
+      "解"
+    ],
+    "sentence": "お互いの立場を{{target}}し合う"
+  },
+  {
+    "id": "c52b67f7",
+    "kanji": "協力",
+    "reading": "きょうりょく",
+    "meaning": "力を合わせること",
+    "difficulty": 3,
+    "components": [
+      "協",
+      "力"
+    ],
+    "sentence": "全員で{{target}}して壁を乗り越える"
+  },
+  {
+    "id": "d9fbed68",
+    "kanji": "成功",
+    "reading": "せいこう",
+    "meaning": "うまくいくこと",
+    "difficulty": 4,
+    "components": [
+      "成",
+      "功"
+    ],
+    "sentence": "実験の{{target}}を祝う"
+  },
+  {
+    "id": "c8bc0340",
+    "kanji": "失敗",
+    "reading": "しっぱい",
+    "meaning": "やりそこなうこと",
+    "difficulty": 5,
+    "components": [
+      "失",
+      "敗"
+    ],
+    "sentence": "{{target}}は成功のもと"
+  },
+  {
+    "id": "518c8d70",
+    "kanji": "危険",
+    "reading": "きけん",
+    "meaning": "あぶないこと",
+    "difficulty": 4,
+    "components": [
+      "危",
+      "険"
+    ],
+    "sentence": "この先は{{target}}なエリアだ"
+  },
+  {
+    "id": "67698818",
+    "kanji": "安全",
+    "reading": "あんぜん",
+    "meaning": "あぶなくないこと",
+    "difficulty": 3,
+    "components": [
+      "安",
+      "全"
+    ],
+    "sentence": "交通{{target}}を心がける"
+  },
+  {
+    "id": "363921f3",
+    "kanji": "幸福",
+    "reading": "こうふく",
+    "meaning": "しあわせ",
+    "difficulty": 3,
+    "components": [
+      "幸",
+      "福"
+    ],
+    "sentence": "ささやかな{{target}}を感じる"
+  },
+  {
+    "id": "46ee4bdd",
+    "kanji": "孤独",
+    "reading": "こどく",
+    "meaning": "ひとりぼっち",
+    "difficulty": 4,
+    "components": [
+      "孤",
+      "独"
+    ],
+    "sentence": "都会の片隅で{{target}}を感じる"
   }
 ]

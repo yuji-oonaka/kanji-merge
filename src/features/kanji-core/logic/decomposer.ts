@@ -1,8 +1,7 @@
-import { GamePart, JukugoDefinition, IdsMap, DifficultyMode } from '../types'; // ★修正: typesから読み込む
+import { GamePart, JukugoDefinition, IdsMap, DifficultyMode } from '../types';
 import idsMapData from '../data/ids-map-auto.json';
 import { getDistractorParts } from './generator';
 
-// 安全に型アサーション
 const IDS_MAP: IdsMap = idsMapData as unknown as IdsMap;
 
 const generateId = () => Math.random().toString(36).substring(2, 9);
@@ -23,7 +22,6 @@ function decomposeKanji(char: string): string[] {
   return [char];
 }
 
-// 構成要素の取得（1段階だけ分解）
 export function getConstituents(char: string): [string, string] | null {
   if (ATOMIC_PARTS.has(char)) return null;
   const parts = IDS_MAP[char];
@@ -35,24 +33,20 @@ export function getConstituents(char: string): [string, string] | null {
 
 /**
  * ステージ生成
- * mode: 'NORMAL' なら完全分解
- * mode: 'EASY' なら一部の漢字を分解せずにそのまま出す + ダミーなし
  */
 export function generateStageParts(
   jukugo: JukugoDefinition, 
   currentStageIndex: number = 0,
-  mode: DifficultyMode = 'NORMAL' // 引数に追加
+  mode: DifficultyMode = 'NORMAL'
 ): GamePart[] {
   const kanjis = jukugo.components;
   let rawParts: string[] = [];
 
   if (mode === 'NORMAL') {
-    // ノーマル: 全てを容赦なく分解
     rawParts = kanjis.flatMap(k => decomposeKanji(k));
   } else {
-    // イージー: 最後の1文字だけは分解せずに残す（難易度緩和）
+    // EASY
     rawParts = kanjis.flatMap((k, index) => {
-      // 最後の1文字、かつ原子パーツでなければ、そのまま返す
       if (index === kanjis.length - 1 && !ATOMIC_PARTS.has(k)) {
         return [k];
       }
@@ -60,27 +54,35 @@ export function generateStageParts(
     });
   }
   
-  // ★修正: ダミーパーツの計算ロジック
+  // --- ダミーパーツ数の計算 ---
   let distractorCount = 0;
+  const gridSize = 16; // 4x4
 
   if (mode === 'EASY') {
-    // 初級モード: ダミーなし (0個固定)
     distractorCount = 0;
   } else {
-    // 標準モード: ステージ進行に合わせて増やす
-    if (currentStageIndex >= 3) distractorCount = 1;
-    if (currentStageIndex >= 8) distractorCount = 2;
-    if (currentStageIndex >= 15) distractorCount = 3;
+    // 【標準モード】
+    // 難易度Lv5以上の「ボス問題」または ステージ20以降の偶数回などは
+    // グリッドをダミーで埋め尽くす
+    // (Lv5以上 = 4文字熟語などが多いため、盤面が埋まるとかなり難しくなる)
+    const isHighDifficulty = jukugo.difficulty >= 5;
+    const isLateGame = currentStageIndex >= 19; // 20ステージ目以降(indexは0始まり)
+
+    if (isHighDifficulty || (isLateGame && currentStageIndex % 2 === 0)) {
+      // 16マス - 正解パーツ数 = 必要なダミー数
+      // ※ 正解パーツだけで16を超えることはほぼない想定だが、Math.maxで0以上を保証
+      distractorCount = Math.max(0, gridSize - rawParts.length);
+    } else {
+      // 通常時は少しだけ混ぜる (既存ロジックを少し緩和)
+      if (currentStageIndex >= 3) distractorCount = 1;
+      if (currentStageIndex >= 10) distractorCount = 3;
+      if (currentStageIndex >= 20) distractorCount = 5;
+    }
   }
 
   const distractors = getDistractorParts(distractorCount, rawParts);
   const allPartsChars = [...rawParts, ...distractors];
 
-  // ★注意: ここは元のコードが「x, y (浮動小数点)」を使っていたか「gridIndex」を使っていたかによります。
-  // ご提示いただいたコードは「gridIndex」を使っているので、そちらのロジックを採用して返します。
-  // (もし StageView 側が x,y を期待している場合は修正が必要です)
-
-  const gridSize = 16; // 固定または引数化
   const indices = Array.from({ length: gridSize }, (_, i) => i);
   // シャッフル
   for (let i = indices.length - 1; i > 0; i--) {
@@ -89,10 +91,11 @@ export function generateStageParts(
   }
 
   return allPartsChars.map((char, i) => {
-    // グリッド位置、もしくはランダム配置
+    // 16個を超えた分はグリッド外(-1)になるが、実質表示されないかエラーになるため
+    // jukugo-db 側で構成パーツが多すぎる熟語（16個超）は作らない前提
     const gridIndex = indices[i] !== undefined ? indices[i] : -1;
     
-    // 画面全体に散らす用の座標 (StageViewが x,y を使う場合への互換性)
+    // 画面全体に散らす用の座標 (互換性)
     const relativeX = 0.1 + Math.random() * 0.8;
     const relativeY = 0.25 + Math.random() * 0.55;
 
@@ -102,9 +105,9 @@ export function generateStageParts(
       id: generateId(),
       char: char,
       type: isAtom ? 'RADICAL' : 'KANJI',
-      x: relativeX, // 互換性のため追加
-      y: relativeY, // 互換性のため追加
-      gridIndex: gridIndex, // ご提示コードの仕様
+      x: relativeX,
+      y: relativeY,
+      gridIndex: gridIndex,
     } as any;
   });
 }

@@ -1,4 +1,3 @@
-// src/features/dictionary/views/KanjiListView.tsx
 "use client";
 
 import { useGameStore } from "@/features/game-board/stores/store";
@@ -6,20 +5,19 @@ import jukugoData from "@/features/kanji-core/data/jukugo-db-auto.json";
 import { JukugoDefinition } from "@/features/kanji-core/types";
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getDisplayChar } from "@/features/game-board/utils/charDisplay";
 
 export function KanjiListView() {
-  const unlockedIds = useGameStore((state) => state.unlockedIds); // 単純な発見ID
+  const unlockedIds = useGameStore((state) => state.unlockedIds);
   const unlockedJukugos = useGameStore((state) => state.unlockedJukugos);
   const data = jukugoData as JukugoDefinition[];
 
-  // ゲーム内で収集対象となる漢字リスト（熟語から逆算）
   const validKanjiList = useMemo(() => {
     const usedChars = new Set<string>();
     data.forEach((jukugo) => {
       jukugo.components.forEach((char) => usedChars.add(char));
     });
 
-    // ▼ 修正: 漢字(一-龠)、々、〆、ヵ、ヶ 以外（③などの記号）を除外してソート
     return Array.from(usedChars)
       .filter((char) => char.match(/^[一-龠々〆ヵヶ]+$/))
       .sort();
@@ -30,7 +28,7 @@ export function KanjiListView() {
   return (
     <>
       <div className="pb-20">
-        <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 gap-3">
+        <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 lg:grid-cols-10 xl:grid-cols-12 gap-2 md:gap-3">
           {validKanjiList.map((char) => {
             const isUnlocked = unlockedIds.includes(char);
             return (
@@ -42,7 +40,7 @@ export function KanjiListView() {
                 onClick={() => isUnlocked && setSelectedKanji(char)}
                 className={`
                   aspect-square rounded-lg flex items-center justify-center 
-                  text-xl md:text-2xl font-serif font-bold shadow-sm border
+                  text-xl md:text-2xl lg:text-3xl font-serif font-bold shadow-sm border
                   transition-colors duration-300
                   ${
                     isUnlocked
@@ -51,14 +49,13 @@ export function KanjiListView() {
                   }
                 `}
               >
-                {isUnlocked ? char : "?"}
+                {isUnlocked ? getDisplayChar(char) : "?"}
               </motion.button>
             );
           })}
         </div>
       </div>
 
-      {/* 逆引きモーダル */}
       <AnimatePresence>
         {selectedKanji && (
           <KanjiDetailModal
@@ -84,13 +81,12 @@ function KanjiDetailModal({
   unlockedIds: string[];
   onClose: () => void;
 }) {
-  // この漢字を含む熟語を検索
   const relatedJukugos = useMemo(() => {
     return allData.filter((item) => item.components.includes(kanji));
   }, [kanji, allData]);
 
   return (
-    // ▼ 修正: z-100 -> z-[100] (Tailwindの任意値記法)
+    // ★修正: z-[100] -> z-100
     <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0 }}
@@ -103,50 +99,51 @@ function KanjiDetailModal({
         initial={{ scale: 0.9, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 20 }}
-        className="relative w-full max-w-md bg-[#fdfcf8] rounded-xl shadow-2xl overflow-hidden border border-[#3d3330]/10"
+        className="relative w-[90%] max-w-md bg-[#fdfcf8] rounded-xl shadow-2xl overflow-hidden border border-[#3d3330]/10 flex flex-col max-h-[80vh]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-[#f5f2eb] p-6 text-center border-b border-[#3d3330]/10">
+        <div className="bg-[#f5f2eb] p-6 text-center border-b border-[#3d3330]/10 flex-none">
           <div className="text-xs text-stone-500 font-bold tracking-widest mb-2">
             SELECTED KANJI
           </div>
-          <div className="text-6xl font-serif font-bold text-[#3d3330]">
-            {kanji}
+          <div className="text-6xl md:text-7xl font-serif font-bold text-[#3d3330]">
+            {getDisplayChar(kanji)}
           </div>
         </div>
-        <div className="p-6 max-h-[50vh] overflow-y-auto">
-          <h3 className="text-sm font-bold text-stone-400 mb-4 flex items-center gap-2">
+
+        <div className="p-4 md:p-6 overflow-y-auto flex-1">
+          <h3 className="text-xs md:text-sm font-bold text-stone-400 mb-4 flex items-center gap-2">
             <span>使用されている熟語</span>
             <span className="bg-stone-200 text-stone-600 px-2 rounded-full text-[10px]">
               {relatedJukugos.length}
             </span>
           </h3>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2 md:gap-3">
             {relatedJukugos.map((jukugo) => {
               const isUnlocked = unlockedIds.includes(jukugo.id);
               return (
                 <div
                   key={jukugo.id}
-                  className={`flex items-center gap-3 p-3 rounded border ${
+                  className={`flex items-center gap-3 p-2 md:p-3 rounded border ${
                     isUnlocked
                       ? "bg-white border-[#3d3330]/10"
                       : "bg-stone-100 border-dashed border-stone-300 opacity-60"
                   }`}
                 >
                   <div
-                    className={`w-10 h-10 flex items-center justify-center rounded text-lg font-serif font-bold ${
+                    className={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded text-base md:text-lg font-serif font-bold shrink-0 ${
                       isUnlocked
                         ? "bg-[#d94a38] text-white"
                         : "bg-stone-300 text-stone-500"
                     }`}
                   >
-                    {isUnlocked ? jukugo.kanji[0] : "?"}
+                    {isUnlocked ? getDisplayChar(jukugo.kanji[0]) : "?"}
                   </div>
                   <div>
-                    <div className="font-serif font-bold text-[#3d3330]">
+                    <div className="font-serif font-bold text-[#3d3330] text-sm md:text-base">
                       {isUnlocked ? jukugo.kanji : "???"}
                     </div>
-                    <div className="text-xs text-stone-500">
+                    <div className="text-[10px] md:text-xs text-stone-500">
                       {isUnlocked ? jukugo.reading : "未発見"}
                     </div>
                   </div>
@@ -155,7 +152,7 @@ function KanjiDetailModal({
             })}
           </div>
         </div>
-        <div className="p-4 bg-[#f5f2eb] text-center border-t border-[#3d3330]/10">
+        <div className="p-4 bg-[#f5f2eb] text-center border-t border-[#3d3330]/10 flex-none">
           <button
             onClick={onClose}
             className="text-stone-500 hover:text-[#3d3330] text-sm font-bold transition-colors"

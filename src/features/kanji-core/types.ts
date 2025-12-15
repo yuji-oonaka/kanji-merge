@@ -29,10 +29,9 @@ export interface JukugoDefinition {
   difficulty: number;
   components: string[];
   meaning?: string;
-  // ▼ 追加: 穴埋め用の例文
-  // ターゲットとなる熟語部分は "{{target}}" というプレースホルダーで表現
-  // 例: "夏の夜空に{{target}}が上がる"
-  sentence?: string;
+  // ▼ 追加: 穴埋め用の文章
+  // 例: "明暗"の場合 -> "勝敗の{target}が分かれる"
+  sentence?: string; 
 }
 
 // 分解辞書型

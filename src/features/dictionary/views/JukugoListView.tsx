@@ -1,4 +1,3 @@
-// src/features/dictionary/views/JukugoListView.tsx
 "use client";
 
 import { useGameStore } from "@/features/game-board/stores/store";
@@ -7,7 +6,6 @@ import { JukugoDefinition } from "@/features/kanji-core/types";
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// 五十音インデックス
 const SYLLABARY_ROWS = [
   { label: "全", value: "all" },
   { label: "あ", value: "a" },
@@ -25,13 +23,11 @@ const SYLLABARY_ROWS = [
 export function JukugoListView() {
   const unlockedJukugos = useGameStore((state) => state.unlockedJukugos);
   const data = jukugoData as JukugoDefinition[];
-
   const [filterRow, setFilterRow] = useState<string>("all");
   const [selectedJukugo, setSelectedJukugo] = useState<JukugoDefinition | null>(
     null
   );
 
-  // フィルタリング処理
   const filteredJukugos = useMemo(() => {
     if (filterRow === "all") return data;
 
@@ -52,23 +48,24 @@ export function JukugoListView() {
     return data.filter((j) => checkRow(j.reading, filterRow));
   }, [data, filterRow]);
 
-  // 現在表示中のリストでの収集済みカウント
   const currentUnlockedCount = filteredJukugos.filter((item) =>
     unlockedJukugos.includes(item.id)
   ).length;
 
   return (
     <>
-      {/* --- あかさたなフィルター (追従ヘッダー) --- */}
-      <div className="sticky top-0 z-30 bg-[#f5f2eb]/95 backdrop-blur pt-2 pb-4 mb-4 border-b border-[#3d3330]/10">
-        <div className="overflow-x-auto pb-2 scrollbar-hide">
+      {/* --- フィルター (sticky) --- */}
+      {/* ★修正: レイアウト構造を整理し、十分な余白を確保 */}
+      <div className="sticky top-0 z-30 bg-[#f5f2eb]/95 backdrop-blur border-b border-[#3d3330]/10 -mx-4 px-4 mb-4">
+        {/* 水平スクロールエリア: py-3 で上下に余裕を持たせ、ボタン切れを防ぐ */}
+        <div className="overflow-x-auto scrollbar-hide py-3">
           <div className="flex gap-2 min-w-max px-1">
             {SYLLABARY_ROWS.map((row) => (
               <button
                 key={row.value}
                 onClick={() => setFilterRow(row.value)}
                 className={`
-                    w-10 h-10 rounded-full font-serif font-bold text-sm transition-all border shrink-0
+                    w-8 h-8 md:w-10 md:h-10 rounded-full font-serif font-bold text-xs md:text-sm transition-all border shrink-0
                     ${
                       filterRow === row.value
                         ? "bg-[#d94a38] text-white border-[#d94a38] shadow-md scale-110"
@@ -81,14 +78,15 @@ export function JukugoListView() {
             ))}
           </div>
         </div>
-        {/* 件数表示 */}
-        <div className="text-right text-xs font-serif text-stone-500 px-2 mt-1">
+
+        {/* 件数表示: ネガティブマージンを削除し、スクロールエリアの下に配置 */}
+        <div className="text-right text-[10px] md:text-xs font-serif text-stone-500 px-2 pb-2">
           {currentUnlockedCount} / {filteredJukugos.length} 件 表示中
         </div>
       </div>
 
       {/* --- リスト本体 --- */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 pb-20">
         <AnimatePresence mode="popLayout">
           {filteredJukugos.map((jukugo) => {
             const isUnlocked = unlockedJukugos.includes(jukugo.id);
@@ -102,7 +100,7 @@ export function JukugoListView() {
                 transition={{ duration: 0.2 }}
                 onClick={() => isUnlocked && setSelectedJukugo(jukugo)}
                 className={`
-                  relative p-4 rounded-lg border-2 transition-all flex items-center justify-between
+                  relative p-3 md:p-4 rounded-lg border-2 transition-all flex items-center justify-between
                   ${
                     isUnlocked
                       ? "bg-white border-[#3d3330]/10 shadow-sm cursor-pointer hover:border-[#d94a38]/50 hover:shadow-md hover:-translate-y-0.5"
@@ -111,10 +109,10 @@ export function JukugoListView() {
                 `}
               >
                 <div>
-                  <div className="text-2xl font-serif font-bold text-[#3d3330] mb-1">
+                  <div className="text-xl md:text-2xl font-serif font-bold text-[#3d3330] mb-1">
                     {isUnlocked ? jukugo.kanji : "???"}
                   </div>
-                  <div className="text-xs text-[#d94a38] font-bold tracking-widest">
+                  <div className="text-[10px] md:text-xs text-[#d94a38] font-bold tracking-widest">
                     {isUnlocked ? jukugo.reading : "???"}
                   </div>
                 </div>
@@ -130,13 +128,12 @@ export function JukugoListView() {
         </AnimatePresence>
 
         {filteredJukugos.length === 0 && (
-          <div className="col-span-full text-center py-20 text-stone-400 font-serif">
+          <div className="col-span-full text-center py-20 text-stone-400 font-serif text-sm">
             該当する熟語はありません
           </div>
         )}
       </div>
 
-      {/* --- 詳細モーダル (共通) --- */}
       <AnimatePresence>
         {selectedJukugo && (
           <JukugoDetailModal
@@ -149,7 +146,6 @@ export function JukugoListView() {
   );
 }
 
-// モーダル (前回の最強z-index版と同じもの)
 function JukugoDetailModal({
   item,
   onClose,
@@ -189,29 +185,29 @@ function JukugoDetailModal({
         initial={{ scale: 0.9, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 20 }}
-        className="relative w-full max-w-lg bg-[#fdfcf8] rounded-xl shadow-2xl overflow-hidden border border-[#3d3330]/10"
+        className="relative w-[95%] max-w-lg bg-[#fdfcf8] rounded-xl shadow-2xl overflow-hidden border border-[#3d3330]/10 max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="h-2 w-full bg-[#d94a38]" />
-        <div className="p-8 flex flex-col items-center text-center">
-          <div className="text-sm text-stone-500 tracking-[0.2em] font-serif mb-2">
+        <div className="h-2 w-full bg-[#d94a38] flex-none" />
+        <div className="p-6 md:p-8 flex flex-col items-center text-center overflow-y-auto flex-1">
+          <div className="text-xs md:text-sm text-stone-500 tracking-[0.2em] font-serif mb-2">
             {item.reading}
           </div>
           <div className="text-5xl md:text-6xl font-serif font-bold text-[#3d3330] mb-6">
             {item.kanji}
           </div>
-          <div className="w-12 h-px bg-[#3d3330]/20 mb-6" />
+          <div className="w-12 h-px bg-[#3d3330]/20 mb-6 flex-none" />
           {item.meaning && (
-            <div className="text-[#3d3330] font-serif leading-relaxed mb-8 text-lg">
+            <div className="text-[#3d3330] font-serif leading-relaxed mb-8 text-base md:text-lg">
               {item.meaning}
             </div>
           )}
           {formattedSentence ? (
-            <div className="bg-[#f5f2eb] rounded-lg p-5 w-full text-left border border-[#3d3330]/5 relative">
+            <div className="bg-[#f5f2eb] rounded-lg p-4 md:p-5 w-full text-left border border-[#3d3330]/5 relative">
               <div className="absolute top-0 right-0 transform -translate-y-1/2 translate-x-2 bg-white px-2 text-[10px] text-[#d94a38] font-bold tracking-widest border border-[#d94a38]/20 rounded-full">
                 USAGE
               </div>
-              <div className="text-stone-700 font-serif text-lg leading-loose">
+              <div className="text-stone-700 font-serif text-base md:text-lg leading-loose">
                 “ {formattedSentence} ”
               </div>
             </div>
@@ -221,7 +217,7 @@ function JukugoDetailModal({
             </div>
           )}
         </div>
-        <div className="bg-[#f5f2eb] p-4 flex justify-center border-t border-[#3d3330]/10">
+        <div className="bg-[#f5f2eb] p-4 flex justify-center border-t border-[#3d3330]/10 flex-none">
           <button
             onClick={onClose}
             className="px-8 py-2 rounded-full bg-[#3d3330] text-[#fdfcf8] text-sm font-bold hover:bg-[#594a46] transition-colors shadow-md"

@@ -31,43 +31,50 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
   }, [isCleared]);
 
   return (
-    // h-screen で高さを画面いっぱいに固定
     <div
-      className={`relative w-full h-screen overflow-hidden flex flex-col transition-colors duration-500 ${theme.colors.background}`}
+      className={`fixed inset-0 w-full h-dvh overflow-hidden flex flex-col transition-colors duration-500 ${theme.colors.background}`}
     >
-      {/* --- ヘッダーエリア (固定高さ) --- */}
-      <div className="w-full p-4 flex justify-between items-start z-30 shrink-0">
+      {/* --- ヘッダーエリア --- */}
+      <div className="w-full p-4 flex justify-between items-start z-30 shrink-0 h-16">
         <div className="flex flex-col gap-1">
           <Link
             href="/"
             className={`
-              backdrop-blur border px-4 py-1.5 rounded-full text-sm font-bold shadow-sm transition-colors flex items-center gap-1 w-fit
+              backdrop-blur border px-4 py-1.5 rounded-full text-xs font-bold shadow-sm transition-colors flex items-center gap-1 w-fit
               ${theme.colors.partBg} ${theme.colors.partBorder} ${theme.colors.sub}
             `}
           >
             <span>🏠</span> 戻る
           </Link>
           <div
-            className={`font-bold tracking-widest text-xs pl-1 ${theme.colors.sub} opacity-70`}
+            className={`font-bold tracking-widest text-[10px] pl-1 ${theme.colors.sub} opacity-70`}
           >
             STAGE {levelDisplay}
           </div>
         </div>
-
         <div>
           <ThemeSwitcher />
         </div>
       </div>
 
-      {/* --- ゴールエリア (固定高さ・内容は可変だがshrinkさせない) --- */}
-      <div className="w-full flex justify-center z-10 shrink-0">
-        <GoalSlot target={currentJukugo} />
-      </div>
+      {/* --- メインエリア (レスポンシブレイアウト分岐) --- */}
+      {/* 縦画面 (Portrait): 上下に配置 (flex-col)
+          横画面 (Landscape): 左右に配置 (landscape:flex-row) 
+      */}
+      <div className="flex-1 flex flex-col landscape:flex-row w-full min-h-0 relative">
+        {/* エリア1: お題 (上部 or 左側) */}
+        <div className="flex-1 flex items-center justify-center w-full landscape:w-1/2 landscape:h-full px-2 overflow-y-auto min-h-0">
+          <div className="w-full py-4 landscape:py-0">
+            <GoalSlot target={currentJukugo} />
+          </div>
+        </div>
 
-      {/* --- メイン盤面 (残りの高さを埋める) --- */}
-      <div className="flex-1 flex items-center justify-center z-20 pb-4 min-h-0">
-        {/* GameBoard内でスクロールが必要な場合はそこで対応 */}
-        <GameBoard />
+        {/* エリア2: ゲーム盤面 (下部固定 or 右側) */}
+        <div className="flex-none landscape:flex-1 w-full landscape:w-1/2 landscape:h-full px-4 pb-8 pt-2 landscape:pb-4 landscape:pt-4 z-20 flex justify-center items-end landscape:items-center bg-linear-to-t from-black/10 to-transparent landscape:from-transparent landscape:bg-none">
+          <div className="w-full max-w-md md:max-w-xl lg:max-w-2xl landscape:max-w-lg landscape:aspect-square">
+            <GameBoard />
+          </div>
+        </div>
       </div>
 
       {/* --- クリア画面 --- */}

@@ -104,24 +104,32 @@ export default function Home() {
                 </div>
               </button>
 
-              {/* 3. 冒険モード */}
-              <div className="w-full relative">
+              {/* 3. 冒険モード（準備中） */}
+              {/* ★修正: 無効化して「開発中」の見た目に戻す */}
+              <div className="w-full relative opacity-60 cursor-not-allowed">
                 <button
-                  onClick={() => router.push("/adventure")}
-                  className="group w-full py-4 md:py-6 bg-[#d94a38] text-white rounded-xl shadow-md hover:bg-[#b93a28] transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
+                  disabled // ボタンを無効化
+                  className="group w-full py-4 md:py-6 bg-[#d94a38] text-white rounded-xl shadow-inner flex items-center justify-center gap-3 md:gap-5"
                 >
-                  <div className="relative z-10 flex items-center justify-center gap-3 md:gap-5">
-                    <span className="text-2xl md:text-4xl">🗺️</span>
-                    <div className="text-left">
-                      <div className="font-bold font-serif text-lg md:text-2xl tracking-widest">
-                        冒険の旅
-                      </div>
-                      <div className="text-[10px] md:text-sm opacity-80 font-sans tracking-wider">
-                        ADVENTURE
-                      </div>
+                  <span className="text-2xl md:text-4xl">🗺️</span>
+                  <div className="text-left">
+                    <div className="font-bold font-serif text-lg md:text-2xl tracking-widest flex items-center gap-2">
+                      冒険の旅
+                      {/* 開発中バッジ */}
+                      <span className="text-[10px] md:text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">
+                        開発中
+                      </span>
+                    </div>
+                    <div className="text-[10px] md:text-sm opacity-80 font-sans tracking-wider">
+                      ADVENTURE
                     </div>
                   </div>
                 </button>
+
+                {/* ロックアイコン */}
+                <div className="absolute top-2 right-3 text-white/70 text-sm md:text-base">
+                  🔒
+                </div>
               </div>
 
               {/* 4. 図鑑 */}

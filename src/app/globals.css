@@ -1,13 +1,12 @@
-/* src/app/globals.css */
-
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;800&display=swap');
 
+/* Tailwind v4 の読み込み */
 @import "tailwindcss";
 
+/* テーマ変数の定義（@theme を使わず :root に直接置く） */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  /* カスタムプロパティをここに移動 (以前は @theme 内にありました) */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-serif: "Shippori Mincho", serif;
@@ -22,8 +21,28 @@
   }
 }
 
+/* ベーススタイルの適用 */
 body {
   background: var(--background);
   color: var(--foreground);
-  /* font-family の指定は不要（クラスで制御するため） */
+  font-family: var(--font-serif);
+  /* フォントを全体に適用 */
+
+  /* ▼ 追加: スマホでの「引っぱり更新」やバウンススクロールを防止 */
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+/* ▼ 追加: ゲーム画面をデバイス領域に完全固定するクラス */
+@layer components {
+  .game-screen {
+    /* @apply を展開（エディタの未知の at-rule 警告を避けるため） */
+    width: 100vw;
+    overflow: hidden;
+    background-color: #f5f2eb;
+    height: 100dvh;
+    /* アドレスバーの伸縮に対応した動的高さ */
+    touch-action: none;
+    /* 盤面操作中のスクロールを完全無効化 */
+  }
 }

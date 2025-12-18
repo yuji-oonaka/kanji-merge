@@ -28,7 +28,6 @@ export default function Home() {
   };
 
   return (
-    // ★修正: h-dvh で高さを確保しつつ、内部でスクロールできるように構造を変更
     <main className="relative w-full h-dvh bg-[#f5f2eb] text-[#3d3330] overflow-hidden">
       {/* 背景 (固定配置) */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -37,12 +36,11 @@ export default function Home() {
 
       {/* スクロール可能エリア (z-10で手前に) */}
       <div className="relative z-10 w-full h-full overflow-y-auto overflow-x-hidden">
-        {/* コンテンツラッパー: 最小高さを画面いっぱいにし、中央寄せ */}
-        <div className="min-h-full flex flex-col items-center justify-center p-4 py-8 md:py-12">
-          {/* メインカラム: 幅制限をレスポンシブに拡大 (sm -> lg -> xl) */}
-          <div className="flex flex-col items-center w-full max-w-sm md:max-w-lg lg:max-w-xl transition-all duration-300">
-            {/* --- ロゴエリア --- */}
-            <div className="mb-8 md:mb-12 lg:mb-16 text-center">
+        {/* コンテンツラッパー: 縦画面は縦積み、横画面(landscape)は横並びに変更 */}
+        <div className="min-h-full flex flex-col landscape:flex-row items-center justify-center p-4 py-8 md:py-12 gap-8 landscape:gap-16">
+          {/* --- ロゴエリア (横画面時は左側) --- */}
+          <div className="flex flex-col items-center shrink-0 landscape:mb-0">
+            <div className="text-center">
               <div className="inline-block border-4 border-[#3d3330] p-6 md:p-10 lg:p-12 mb-4 bg-white shadow-xl transform -rotate-2 relative transition-all">
                 {/* ハンコ */}
                 <div className="absolute -top-3 -right-3 md:-top-5 md:-right-5 w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-[#d94a38] rounded-full flex items-center justify-center text-white font-bold text-xs md:text-base lg:text-lg shadow-md border-2 border-white transform rotate-12">
@@ -64,21 +62,24 @@ export default function Home() {
                 Kanji Merge Puzzle
               </p>
             </div>
+          </div>
 
-            {/* --- ボタンエリア --- */}
-            <div className="flex flex-col gap-4 md:gap-6 w-full">
+          {/* --- ボタンエリア (横画面時は右側) --- */}
+          {/* 幅制限をかけつつ、横画面ではスクロールせずに収まるように調整 */}
+          <div className="flex flex-col items-center w-full max-w-sm md:max-w-md landscape:max-w-sm transition-all duration-300">
+            <div className="flex flex-col gap-3 md:gap-5 w-full">
               {/* 1. 初級モード */}
               <button
                 onClick={() => handleStart("EASY")}
-                className="group w-full py-4 md:py-6 bg-emerald-600 text-white rounded-xl shadow-md hover:bg-emerald-500 transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
+                className="group w-full py-3 md:py-5 bg-emerald-600 text-white rounded-xl shadow-md hover:bg-emerald-500 transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
               >
                 <div className="relative z-10 flex items-center justify-center gap-3 md:gap-5">
-                  <span className="text-2xl md:text-4xl">🌱</span>
+                  <span className="text-2xl md:text-3xl">🌱</span>
                   <div className="text-left">
-                    <div className="font-bold font-serif text-lg md:text-2xl tracking-widest">
+                    <div className="font-bold font-serif text-lg md:text-xl tracking-widest">
                       初級
                     </div>
-                    <div className="text-[10px] md:text-sm opacity-80 font-sans tracking-wider">
+                    <div className="text-[10px] md:text-xs opacity-80 font-sans tracking-wider">
                       EASY MODE
                     </div>
                   </div>
@@ -89,15 +90,15 @@ export default function Home() {
               {/* 2. 通常モード */}
               <button
                 onClick={() => handleStart("NORMAL")}
-                className="group w-full py-4 md:py-6 bg-[#3d3330] text-white rounded-xl shadow-md hover:bg-[#2a2320] transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
+                className="group w-full py-3 md:py-5 bg-[#3d3330] text-white rounded-xl shadow-md hover:bg-[#2a2320] transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
               >
                 <div className="relative z-10 flex items-center justify-center gap-3 md:gap-5">
-                  <span className="text-2xl md:text-4xl">🔥</span>
+                  <span className="text-2xl md:text-3xl">🔥</span>
                   <div className="text-left">
-                    <div className="font-bold font-serif text-lg md:text-2xl tracking-widest">
+                    <div className="font-bold font-serif text-lg md:text-xl tracking-widest">
                       標準
                     </div>
-                    <div className="text-[10px] md:text-sm opacity-80 font-sans tracking-wider">
+                    <div className="text-[10px] md:text-xs opacity-80 font-sans tracking-wider">
                       NORMAL MODE
                     </div>
                   </div>
@@ -105,28 +106,24 @@ export default function Home() {
               </button>
 
               {/* 3. 冒険モード（準備中） */}
-              {/* ★修正: 無効化して「開発中」の見た目に戻す */}
               <div className="w-full relative opacity-60 cursor-not-allowed">
                 <button
-                  disabled // ボタンを無効化
-                  className="group w-full py-4 md:py-6 bg-[#d94a38] text-white rounded-xl shadow-inner flex items-center justify-center gap-3 md:gap-5"
+                  disabled
+                  className="group w-full py-3 md:py-5 bg-[#d94a38] text-white rounded-xl shadow-inner flex items-center justify-center gap-3 md:gap-5"
                 >
-                  <span className="text-2xl md:text-4xl">🗺️</span>
+                  <span className="text-2xl md:text-3xl">🗺️</span>
                   <div className="text-left">
-                    <div className="font-bold font-serif text-lg md:text-2xl tracking-widest flex items-center gap-2">
+                    <div className="font-bold font-serif text-lg md:text-xl tracking-widest flex items-center gap-2">
                       冒険の旅
-                      {/* 開発中バッジ */}
                       <span className="text-[10px] md:text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">
                         開発中
                       </span>
                     </div>
-                    <div className="text-[10px] md:text-sm opacity-80 font-sans tracking-wider">
+                    <div className="text-[10px] md:text-xs opacity-80 font-sans tracking-wider">
                       ADVENTURE
                     </div>
                   </div>
                 </button>
-
-                {/* ロックアイコン */}
                 <div className="absolute top-2 right-3 text-white/70 text-sm md:text-base">
                   🔒
                 </div>
@@ -135,40 +132,35 @@ export default function Home() {
               {/* 4. 図鑑 */}
               <button
                 onClick={() => router.push("/collection")}
-                className="w-full py-3 md:py-4 mt-2 bg-[#fcfaf5] text-[#3d3330] border-2 border-[#3d3330]/10 rounded-xl shadow-sm hover:bg-white hover:border-[#3d3330]/30 transition-all font-bold font-serif tracking-widest text-sm md:text-lg"
+                className="w-full py-2 md:py-3 mt-1 bg-[#fcfaf5] text-[#3d3330] border-2 border-[#3d3330]/10 rounded-xl shadow-sm hover:bg-white hover:border-[#3d3330]/30 transition-all font-bold font-serif tracking-widest text-sm md:text-base"
               >
                 収集図鑑
               </button>
             </div>
 
             {/* --- 注釈エリア --- */}
-            <div className="mt-8 px-4 py-3 bg-[#3d3330]/5 rounded-lg border border-[#3d3330]/10 text-center w-full">
-              <p className="text-[10px] md:text-sm text-stone-500 font-serif leading-relaxed">
-                ※ 環境により表示できない一部の漢字パーツは、
+            <div className="mt-6 landscape:mt-4 px-4 py-2 bg-[#3d3330]/5 rounded-lg border border-[#3d3330]/10 text-center w-full">
+              <p className="text-[10px] text-stone-500 font-serif leading-relaxed">
+                ※ 一部の漢字パーツは視認性を優先し
                 <br />
-                視認性を優先し
-                <span className="font-bold text-[#3d3330]">
-                  一般的な字体（新字体等）
-                </span>
-                に
-                <br />
-                置き換えて表示しています。（例: 穏→急）
+                <span className="font-bold text-[#3d3330]">一般的な字体</span>
+                に置き換えています。
               </p>
             </div>
 
-            {/* データ初期化ボタン */}
-            <button
-              onClick={handleReset}
-              className="mt-8 text-[10px] md:text-xs text-stone-400 underline hover:text-[#d94a38] transition-colors font-serif pb-4"
-            >
-              データを初期化する (Reset Data)
-            </button>
+            {/* データ初期化 & バージョン */}
+            <div className="mt-4 flex flex-col items-center gap-1">
+              <button
+                onClick={handleReset}
+                className="text-[10px] text-stone-400 underline hover:text-[#d94a38] transition-colors font-serif"
+              >
+                データを初期化する
+              </button>
+              <div className="text-[10px] text-stone-300 font-serif tracking-wider">
+                Ver 1.0.0
+              </div>
+            </div>
           </div>
-        </div>
-
-        {/* バージョン表記 (スクロールエリアの一番下に配置) */}
-        <div className="w-full text-center pb-4 text-[10px] text-stone-400 font-serif tracking-wider">
-          Ver 1.0.0
         </div>
       </div>
     </main>

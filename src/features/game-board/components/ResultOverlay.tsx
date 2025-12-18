@@ -6,6 +6,7 @@ import { useGameStore } from "@/features/game-board/stores/store";
 import { soundEngine } from "@/lib/sounds/SoundEngine";
 import { JukugoDefinition } from "@/features/kanji-core/types";
 import { getSentenceParts } from "@/features/kanji-core/logic/sentenceHelper";
+import { cn } from "@/lib/utils/tw-merge";
 
 interface ResultOverlayProps {
   onNextLevel?: () => void;
@@ -19,8 +20,9 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
     const timer = setTimeout(() => {
       setStampVisible(true);
       if (soundEngine) {
-        if (typeof (soundEngine as any).playStamp === "function") {
-          (soundEngine as any).playStamp();
+        const engine = soundEngine as any;
+        if (typeof engine.playStamp === "function") {
+          engine.playStamp();
         } else {
           soundEngine.playMerge();
         }
@@ -34,7 +36,6 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
   const meaning = (currentJukugo as JukugoDefinition & { meaning?: string })
     .meaning;
   const charCount = currentJukugo.kanji.length;
-  // 文章パーツを取得（例文表示用）
   const sentenceParts = getSentenceParts(currentJukugo);
   const hasSentenceData = !!currentJukugo.sentence;
 
@@ -64,8 +65,23 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
         initial={{ scale: 0.8, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        // ▼ 修正: aspect-[3/4] -> aspect-3/4
-        className="relative bg-[#fcfaf5] w-full max-w-sm aspect-3/4 rounded-sm shadow-2xl flex flex-col items-center p-8 overflow-hidden"
+        className={cn(
+          "relative bg-[#fcfaf5]",
+          "flex flex-col items-center p-8",
+          "rounded-sm shadow-2xl overflow-hidden",
+
+          /* --- PC修正: レスポンシブ対応の刷新 --- */
+          /* モバイル縦: 幅基準でアスペクト比固定 (従来の短冊型) */
+          "w-full max-w-sm aspect-3/5",
+
+          /* PC/横画面: 
+             - 間延び防止のため、高さ基準(h-auto)に変更。
+             - aspect制限を緩め、コンテンツに合わせて伸縮させる。
+             - ただし最大高さ(max-h)を設けて画面からはみ出さないようにする。
+          */
+          "landscape:w-auto landscape:h-auto landscape:max-h-[85vh] landscape:aspect-3/4 lg:landscape:aspect-4/5",
+          "landscape:max-w-xl" // 横に広がりすぎないように制限
+        )}
         style={{
           boxShadow:
             "0 20px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(0,0,0,0.05)",
@@ -81,7 +97,7 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
         <div className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-stone-300" />
 
         {/* --- メインコンテンツ --- */}
-        <div className="flex-1 flex flex-col items-center justify-center w-full relative">
+        <div className="flex-1 flex flex-col items-center justify-center w-full relative min-h-0">
           <div
             className={`flex flex-row-reverse items-center justify-center ${gapClass} mr-2`}
           >
@@ -100,7 +116,6 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
                 writingMode: "vertical-rl",
                 textOrientation: "upright",
                 fontSize: getDynamicFontSize(charCount),
-                height: "auto",
                 whiteSpace: "nowrap",
                 marginLeft: "-0.1em",
               }}
@@ -118,14 +133,15 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
                 height: "auto",
-                maxHeight: charCount >= 4 ? "320px" : "260px",
+                // PC修正: 縦書きの最大高さを少し緩和
+                maxHeight: charCount >= 4 ? "340px" : "280px",
               }}
             >
               {currentJukugo.reading}
             </motion.div>
           </div>
 
-          {/* ハンコ (スタンプ) */}
+          {/* --- ハンコ (スタンプ) --- */}
           <motion.div
             initial={{ scale: 3, opacity: 0, rotate: 20 }}
             animate={
@@ -139,15 +155,17 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
               damping: 15,
               mass: 1.5,
             }}
-            className="absolute -top-4 -right-4 md:-right-2 w-28 h-28 flex items-center justify-center mix-blend-multiply pointer-events-none"
-            style={{ zIndex: 10 }}
+            className={cn(
+              "absolute flex items-center justify-center mix-blend-multiply pointer-events-none z-10",
+              "-top-2 -right-2 md:-top-4 md:-right-4 w-24 h-24 md:w-28 md:h-28"
+            )}
           >
             <div
               className="w-full h-full border-4 border-red-600 rounded-lg flex items-center justify-center"
               style={{ backgroundColor: "rgba(220, 38, 38, 0.05)" }}
             >
               <div className="w-[88%] h-[88%] border-2 border-red-600 rounded flex items-center justify-center">
-                <div className="text-red-600 font-serif font-bold text-4xl tracking-widest select-none transform rotate-0">
+                <div className="text-red-600 font-serif font-bold text-3xl md:text-4xl tracking-widest select-none transform rotate-0">
                   天晴
                 </div>
               </div>
@@ -156,11 +174,12 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
         </div>
 
         {/* 意味 & 例文 (下に横書き) */}
+        {/* PC修正: mt-2 -> mt-6 余白を調整して窮屈さを緩和 */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="w-full max-w-[95%] pt-4 mb-4 mt-2 border-t border-stone-300 flex flex-col items-center gap-2"
+          className="w-full max-w-[95%] pt-4 mb-4 mt-4 border-t border-stone-300 flex flex-col items-center gap-2 shrink-0"
         >
           {/* 意味 */}
           {meaning && (
@@ -169,7 +188,7 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
             </div>
           )}
 
-          {/* 例文 (データがある場合のみ、少し小さく表示) */}
+          {/* 例文 */}
           {hasSentenceData && (
             <div className="text-xs md:text-sm text-stone-500 font-serif text-center mt-1 bg-stone-100 px-3 py-1 rounded-full">
               {sentenceParts
@@ -184,7 +203,7 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.0 }}
-          className="w-full"
+          className="w-full shrink-0"
         >
           <button
             onClick={onNextLevel}

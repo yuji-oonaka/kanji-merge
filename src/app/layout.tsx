@@ -1,8 +1,5 @@
-import type { Metadata } from "next";
-// ❌ 削除: import { Shippori_Mincho } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-
-// ❌ 削除: const shippori = Shippori_Mincho({ ... });
 
 export const metadata: Metadata = {
   title: "漢字合体 (Kanji Merge)",
@@ -12,6 +9,15 @@ export const metadata: Metadata = {
   },
 };
 
+// ▼ 追加: これがないとスマホでレイアウトが崩れます
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false, // ズーム操作を禁止してアプリライクにする
+  themeColor: "#f5f2eb",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,10 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" suppressHydrationWarning>
-      {/* ▼ 修正: shippori.variable を削除。
-        "font-serif" クラスをつけるだけで、globals.css で設定したフォントが適用されます。
-      */}
-      <body className="font-serif bg-[#f5f2eb] text-[#3d3330]">{children}</body>
+      <body className="font-serif bg-[#f5f2eb] text-[#3d3330] antialiased">
+        {children}
+      </body>
     </html>
   );
 }

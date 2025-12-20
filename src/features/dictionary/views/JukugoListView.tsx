@@ -1,10 +1,13 @@
 "use client";
 
-import { useGameStore } from "@/features/game-board/stores/store";
-import jukugoData from "@/features/kanji-core/data/jukugo-db-auto.json";
+// ★修正1: useGameStore ではなく、図鑑専用の useDictionaryStore を使う
+import { useDictionaryStore } from "@/features/dictionary/stores/dictionarySlice";
+import jukugoDataRaw from "@/features/kanji-core/data/jukugo-db-auto.json";
 import { JukugoDefinition } from "@/features/kanji-core/types";
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const jukugoData = jukugoDataRaw as JukugoDefinition[];
 
 const SYLLABARY_ROWS = [
   { label: "全", value: "all" },
@@ -21,8 +24,11 @@ const SYLLABARY_ROWS = [
 ];
 
 export function JukugoListView() {
-  const unlockedJukugos = useGameStore((state) => state.unlockedJukugos);
-  const data = jukugoData as JukugoDefinition[];
+  // ★修正2: 正しいストアから取得し、undefinedの場合は空配列 [] を返す安全策を追加
+  const unlockedJukugos =
+    useDictionaryStore((state) => state.unlockedJukugos) || [];
+
+  const data = jukugoData;
   const [filterRow, setFilterRow] = useState<string>("all");
   const [selectedJukugo, setSelectedJukugo] = useState<JukugoDefinition | null>(
     null
@@ -48,6 +54,7 @@ export function JukugoListView() {
     return data.filter((j) => checkRow(j.reading, filterRow));
   }, [data, filterRow]);
 
+  // ★これでエラーは起きなくなります
   const currentUnlockedCount = filteredJukugos.filter((item) =>
     unlockedJukugos.includes(item.id)
   ).length;

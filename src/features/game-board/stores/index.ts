@@ -2,31 +2,30 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { PartsSlice, createPartsSlice } from './slices/partsSlice';
 import { StageSlice, createStageSlice } from './slices/stageSlice';
-import { DictionarySlice, createDictionarySlice } from '@/features/dictionary/stores/dictionarySlice';
-// ▼ 追加
+// ★削除: DictionarySlice は独立したので、ここでのインポートは不要です
+// import { DictionarySlice, createDictionarySlice } from '@/features/dictionary/stores/dictionarySlice';
 import { ThemeSlice, createThemeSlice } from './slices/themeSlice';
 
-// ▼ 追加
-type GameStore = PartsSlice & StageSlice & DictionarySlice & ThemeSlice;
+// ▼ 修正: DictionarySlice を型から削除
+type GameStore = PartsSlice & StageSlice & ThemeSlice;
 
 export const useGameStore = create<GameStore>()(
   persist(
     (...a) => ({
       ...createPartsSlice(...a),
       ...createStageSlice(...a),
-      ...createDictionarySlice(...a),
-      // ▼ 追加
+      // ★削除: createDictionarySlice(...a) も削除
       ...createThemeSlice(...a),
     }),
     {
       name: 'kanji-merge-storage',
       partialize: (state) => ({ 
-        unlockedIds: state.unlockedIds,
-        unlockedJukugos: state.unlockedJukugos,
+        // ★修正: ここにあった unlockedIds, unlockedJukugos を削除
+        // (これらは独立した dictionarySlice 側で保存されるようになりました)
+        
         levelIndex: state.levelIndex,
         maxReachedLevel: state.maxReachedLevel,
         historyIds: state.historyIds,
-        // ▼ 追加
         currentTheme: state.currentTheme,
       }),
     }

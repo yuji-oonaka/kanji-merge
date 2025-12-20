@@ -1,9 +1,13 @@
 import { JukugoDefinition } from "../types";
 
+export type SentencePart = 
+  | { type: 'TEXT'; text: string }
+  | { type: 'SLOT'; text: null };
+
 /**
  * 熟語データから表示用の文章パーツを生成する
  */
-export function getSentenceParts(jukugo: JukugoDefinition) {
+export function getSentenceParts(jukugo: JukugoDefinition): SentencePart[] {
   // 1. sentenceデータがある場合
   let rawSentence = jukugo.sentence;
 
@@ -15,6 +19,7 @@ export function getSentenceParts(jukugo: JukugoDefinition) {
   }
 
   // 3. {{target}} で分割して、前後のテキストとターゲット位置を特定
+  // ()で囲むことで、セパレータ自体({{target}})も配列の結果に残ります
   const parts = rawSentence.split(/({{target}})/g);
 
   return parts.map((part) => {

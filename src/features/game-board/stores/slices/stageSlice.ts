@@ -1,8 +1,6 @@
 import { StateCreator } from 'zustand';
-import { JukugoDefinition } from '@/features/kanji-core/types';
-
-// ▼ 追加
-export type DifficultyMode = 'EASY' | 'NORMAL';
+// ★修正: types.ts から DifficultyMode も一緒にインポート
+import { JukugoDefinition, DifficultyMode } from '@/features/kanji-core/types';
 
 export interface StageSlice {
   levelIndex: number;
@@ -11,14 +9,18 @@ export interface StageSlice {
   isCleared: boolean;
   filledIndices: number[];
   historyIds: string[];
-  difficultyMode: DifficultyMode; // ▼ 追加
+  
+  // ★追加
+  difficultyMode: DifficultyMode;
 
   setLevelIndex: (index: number) => void;
   setStage: (jukugo: JukugoDefinition) => void;
   setCleared: (cleared: boolean) => void;
   checkAndFillSlot: (char: string) => boolean;
   resetStage: () => void;
-  setDifficultyMode: (mode: DifficultyMode) => void; // ▼ 追加
+  
+  // ★追加
+  setDifficultyMode: (mode: DifficultyMode) => void;
 }
 
 export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
@@ -28,13 +30,15 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
   isCleared: false,
   filledIndices: [],
   historyIds: [],
-  difficultyMode: 'NORMAL', // ▼ 初期値はNORMALにしておきます
+  
+  // ★追加: デフォルトは NORMAL
+  difficultyMode: 'NORMAL',
 
   setLevelIndex: (index) => set({ levelIndex: index }),
 
-  // ... (setStage, setCleared, checkAndFillSlot は変更なし) ...
   setStage: (jukugo) => {
     const { historyIds } = get();
+    // 履歴は最新50件まで保持
     const newHistory = [...historyIds, jukugo.id].slice(-50);
     set({ 
       currentJukugo: jukugo, 
@@ -59,6 +63,7 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
     const state = get();
     if (!state.currentJukugo) return false;
 
+    // まだ埋まっていないスロットの中で、文字が一致する場所を探す
     const targetIndex = state.currentJukugo.components.findIndex(
       (c, idx) => c === char && !state.filledIndices.includes(idx)
     );
@@ -66,6 +71,8 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
     if (targetIndex !== -1) {
       const newFilled = [...state.filledIndices, targetIndex];
       set({ filledIndices: newFilled });
+      
+      // 全て埋まったらクリア判定
       if (newFilled.length === state.currentJukugo.components.length) {
         get().setCleared(true);
       }
@@ -76,6 +83,6 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
 
   resetStage: () => set({ isCleared: false, filledIndices: [] }),
 
-  // ▼ 追加
+  // ★追加: 難易度変更の実装
   setDifficultyMode: (mode) => set({ difficultyMode: mode }),
 });

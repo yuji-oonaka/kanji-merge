@@ -3,10 +3,11 @@
 import { TitleBackground } from "../components/ui/TitleBackground";
 import { useRouter } from "next/navigation";
 import { useGameStore } from "@/features/game-board/stores/store";
-// 上記で修正したストアをインポート（これでエラーが消えます）
 import { useDictionaryStore } from "@/features/dictionary/stores/dictionarySlice";
 import { DifficultyMode } from "@/features/game-board/stores/slices/stageSlice";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+// 冒険用のストアを追加
+import { useAdventureStore } from "@/features/adventure/stores/adventureStore";
 
 export default function Home() {
   const router = useRouter();
@@ -14,20 +15,34 @@ export default function Home() {
   const resetStage = useGameStore((state) => state.resetStage);
   const resetDictionary = useDictionaryStore((state) => state.resetCollection);
 
+  // 冒険の進行度を確認（ハイドレーションエラー回避のためuseEffectで取得推奨ですが、一旦シンプルに実装）
+  const adventureIndex = useAdventureStore((state) => state.currentStageIndex);
+  const [hasAdventureData, setHasAdventureData] = useState(false);
+
+  useEffect(() => {
+    setHasAdventureData(adventureIndex > 0);
+  }, [adventureIndex]);
+
   const handleStart = (mode: DifficultyMode) => {
     setDifficultyMode(mode);
     resetStage();
     router.push("/play");
   };
 
+  const handleStartAdventure = () => {
+    router.push("/adventure");
+  };
+
   const handleReset = useCallback(() => {
     if (
       confirm(
-        "【警告】\nこれまでの収集データやクリア状況がすべて消えます。\n本当にリセットしてよろしいですか？"
+        "【警告】\nこれまでの収集データや冒険の記録がすべて消えます。\n本当にリセットしてよろしいですか？"
       )
     ) {
       localStorage.clear();
       resetDictionary();
+      // 冒険データもリセット
+      useAdventureStore.getState().resetProgress();
       window.location.reload();
     }
   }, [resetDictionary]);
@@ -70,7 +85,6 @@ export default function Home() {
           </div>
 
           {/* --- ボタンエリア --- */}
-          {/* Linter Fix: duration-300 を削除し、animate-in用の duration-700 に統一 */}
           <div className="flex flex-col items-center w-full max-w-sm md:max-w-md landscape:max-w-sm transition-all animate-in slide-in-from-bottom-8 fade-in duration-700 delay-150">
             <div className="flex flex-col gap-3 md:gap-5 w-full">
               {/* 1. 初級モード */}
@@ -94,7 +108,7 @@ export default function Home() {
                 <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-white/10 rounded-full blur-xl group-hover:scale-150 transition-transform" />
               </button>
 
-              {/* 2. 通常モード */}
+              {/* 2. 標準モード */}
               <button
                 onClick={() => handleStart("NORMAL")}
                 className="group w-full py-3 md:py-5 bg-[#3d3330] text-white rounded-xl shadow-md hover:bg-[#2a2320] transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
@@ -114,29 +128,27 @@ export default function Home() {
                 </div>
               </button>
 
-              {/* 3. 冒険モード（準備中） */}
-              <div className="w-full relative opacity-60 cursor-not-allowed">
-                <button
-                  disabled
-                  className="group w-full py-3 md:py-5 bg-[#d94a38] text-white rounded-xl shadow-inner flex items-center justify-center gap-3 md:gap-5 grayscale-[0.3]"
-                >
-                  <span className="text-2xl md:text-3xl">🗺️</span>
+              {/* 3. 冒険モード（有効化・デザイン統一） */}
+              <button
+                onClick={handleStartAdventure}
+                className="group w-full py-3 md:py-5 bg-[#d94a38] text-white rounded-xl shadow-md hover:bg-[#b93a28] transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
+              >
+                <div className="relative z-10 flex items-center justify-center gap-3 md:gap-5">
+                  <span className="text-2xl md:text-3xl group-hover:rotate-12 transition-transform">
+                    🗺️
+                  </span>
                   <div className="text-left">
                     <div className="font-bold font-serif text-lg md:text-xl tracking-widest flex items-center gap-2">
-                      冒険の旅
-                      <span className="text-[10px] md:text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">
-                        開発中
-                      </span>
+                      {hasAdventureData ? "旅のつづき" : "冒険の旅"}
                     </div>
                     <div className="text-[10px] md:text-xs opacity-80 font-sans tracking-wider">
-                      ADVENTURE
+                      ADVENTURE MODE
                     </div>
                   </div>
-                </button>
-                <div className="absolute top-2 right-3 text-white/70 text-sm md:text-base">
-                  🔒
                 </div>
-              </div>
+                {/* 統一感を出すための背景エフェクト */}
+                <div className="absolute -left-6 -bottom-6 w-20 h-20 bg-white/10 rounded-full blur-xl group-hover:scale-150 transition-transform" />
+              </button>
 
               {/* 4. 図鑑 */}
               <button
@@ -170,7 +182,7 @@ export default function Home() {
                 全データを初期化する
               </button>
               <div className="text-[10px] text-stone-300 font-serif tracking-wider">
-                Ver 1.1.0
+                Ver 1.2.0
               </div>
             </div>
           </div>
@@ -180,7 +192,7 @@ export default function Home() {
       {/* フッターコピーライト */}
       <div className="absolute bottom-2 w-full text-center pointer-events-none">
         <span className="text-[10px] text-[#8c7a70]/30 font-serif">
-          © 2024 Kanji Merge Project
+          © 2025 Kanji Merge Project
         </span>
       </div>
     </main>

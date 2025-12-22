@@ -1,5 +1,7 @@
+"use client";
+
 import { WorldMap } from "@/features/adventure/components/WorldMap";
 
-export default function AdventurePage() {
+export default function AdventureMapPage() {
   return <WorldMap />;
 }

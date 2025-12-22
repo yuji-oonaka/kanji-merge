@@ -1,18 +1,25 @@
-export interface LevelConfig {
-  id: string;
-  jukugoId: string; // jukugo-db.json の ID と紐づく
+// ステージの構成設定
+export const LEVEL_SETTINGS = {
+  TOTAL_STAGES: 100, // 仮の上限（無限にするなら不要ですが、マップ表示用などで使用）
+  TUTORIAL_COUNT: 3, // チュートリアルの数（generator.tsのロジックと合わせる）
+};
+
+export interface StageConfig {
+  levelIndex: number;
+  displayId: string;
 }
 
-// ステージの順番リスト (全10ステージ)
-export const LEVEL_LIST: LevelConfig[] = [
-  { id: 'stage-1', jukugoId: 'tutorial-01' }, // 明 (2パーツ)
-  { id: 'stage-2', jukugoId: 'level-03' },    // 花火 (3パーツ)
-  { id: 'stage-3', jukugoId: 'level-04' },    // 休日 (4パーツ: イ+木+日)
-  { id: 'stage-4', jukugoId: 'level-02' },    // 岩石 (3パーツ)
-  { id: 'stage-5', jukugoId: 'level-01' },    // 森林 (5パーツ: 木x3...ではなく森定義による)
-  { id: 'stage-6', jukugoId: 'level-05' },    // 青空 (青=主+月, 空=ウ+工 -> 4パーツ)
-  { id: 'stage-7', jukugoId: 'level-06' },    // 天気 (天=一+大, 気=そのまま -> 3パーツ)
-  { id: 'stage-8', jukugoId: 'level-10' },    // 多々 (タx4 -> 4パーツ)
-  { id: 'stage-9', jukugoId: 'level-09' },    // 名前 (名=夕+口, 前=そのまま -> 3パーツ)
-  { id: 'stage-10', jukugoId: 'level-08' },   // 暗室 (暗=日+音(立+日), 室=そのまま -> 4-5パーツ)
-];
+// UI表示用（マップ画面などで使う場合）に、IDを固定せずインデックスだけ定義します
+// ここで jukugoId を指定するのは廃止します
+export const STAGE_LIST: StageConfig[] = Array.from({ length: 10 }, (_, i) => ({
+  levelIndex: i,
+  displayId: `STAGE ${i + 1}`,
+}));
+
+// 旧コードとの互換性のために残す場合（もし他のファイルで LEVEL_LIST を使っているなら）
+// ただし jukugoId はもう使わないので削除または無視されるようにします
+export const LEVEL_LIST = STAGE_LIST.map(s => ({
+  id: `stage-${s.levelIndex + 1}`,
+  // jukugoId は generator が決めるので、ここは空にするか削除してください
+  // jukugoId: 'REMOVED', 
+}));

@@ -20,6 +20,9 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
   const currentTheme = useGameStore((state) => state.currentTheme);
   const pendingMerge = useGameStore((state) => state.pendingMerge);
 
+  // ★追加: 震えるパーツのリストを取得
+  const shakingPartIds = useGameStore((state) => state.shakingPartIds);
+
   // ★修正: idsMapStoreからデータを取得
   const idsMap = useIdsMapStore((state) => state.idsMap);
 
@@ -27,6 +30,9 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
   const isSelected = part && selectedPartId === part.id;
   const isPendingSource = pendingMerge?.sourceId === part?.id;
   const isPendingTarget = pendingMerge?.targetId === part?.id;
+
+  // ★追加: 自分が震える対象かどうか判定
+  const isShaking = part && shakingPartIds.includes(part.id);
 
   // 表示する文字の決定
   const rawChar = isPendingTarget ? pendingMerge?.previewChar : part?.char;
@@ -65,12 +71,27 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
         <motion.div
           layoutId={isPendingTarget ? undefined : `part-${part?.id}`}
           initial={{ scale: 0, opacity: 0 }}
-          animate={{
-            scale: 1,
-            opacity: isPendingSource ? 0 : 1,
-          }}
+          // ★修正: アニメーション定義を分岐
+          animate={
+            isShaking
+              ? {
+                  x: [0, -5, 5, -5, 5, 0], // 左右にブルブル震える
+                  scale: 1,
+                  opacity: 1,
+                }
+              : {
+                  scale: 1,
+                  opacity: isPendingSource ? 0 : 1,
+                  x: 0, // 通常時は位置リセット
+                }
+          }
           whileTap={{ scale: 0.9 }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          // ★修正: 震えるときはキビキビと、通常はバネのような動き
+          transition={
+            isShaking
+              ? { duration: 0.4, ease: "easeInOut" }
+              : { type: "spring", stiffness: 300, damping: 25 }
+          }
           className={cn(
             "flex items-center justify-center rounded-full shadow-sm select-none",
             "w-[92%] h-[92%] border",
@@ -83,6 +104,9 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
 
             isPendingTarget &&
               "animate-pulse border-dashed border-[#d94a38] text-[#d94a38] bg-[#d94a38]/10",
+
+            // ★追加: 震えるときのエラー表現（少し赤くする）
+            isShaking && "border-red-400 bg-red-50",
 
             // 通常のフォントサイズ設定 (中間パーツのときは無効化)
             !isIntermediate &&

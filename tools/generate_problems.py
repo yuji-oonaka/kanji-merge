@@ -64,27 +64,30 @@ def process_file(filepath, ids_map, jukugo_list):
     
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()
-        # 改行コードの揺らぎを吸収
         lines = content.replace("\r\n", "\n").replace("\r", "\n").split("\n")
 
     count = 0
     for line in lines:
         line = line.strip()
+        
+        # --- ▼ 判定ロジック強化 ---
+        # 空行、コメント、見出し行、カンマがない行を無視
         if not line: continue
         if line.startswith("#"): continue
+        if line.startswith("-") or line.startswith("["): continue
+        if "," not in line: continue  # ★重要: カンマがない行はデータではないのでスキップ
+        # ------------------------
 
-        if line.startswith("[") or line.startswith("-"): continue
         parts = line.split(",")
-        if len(parts) < 1: continue
-
         kanji = parts[0].strip()
+        
+        # 漢字部分が空ならスキップ
         if not kanji: continue
 
-        # 重複チェック（既にリストにある熟語はスキップ）
+        # 重複チェック
         if any(j["kanji"] == kanji for j in jukugo_list):
             continue
 
-        # 読み・意味がない場合のフォールバック
         reading = parts[1].strip() if len(parts) > 1 else "???"
         meaning = parts[2].strip() if len(parts) > 2 else ""
         sentence = parts[3].strip() if len(parts) > 3 else ""

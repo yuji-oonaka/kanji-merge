@@ -4,7 +4,7 @@ import { TitleBackground } from "../components/ui/TitleBackground";
 import { useRouter } from "next/navigation";
 import { useGameStore } from "@/features/game-board/stores/store";
 import { useDictionaryStore } from "@/features/dictionary/stores/dictionarySlice";
-import { DifficultyMode } from "@/features/game-board/stores/slices/stageSlice";
+import { DifficultyMode } from "@/features/kanji-core/types";
 import { useCallback, useEffect, useState } from "react";
 // 冒険用のストアを追加
 import { useAdventureStore } from "@/features/adventure/stores/adventureStore";

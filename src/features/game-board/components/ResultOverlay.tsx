@@ -40,47 +40,46 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
   const hasSentenceData = !!currentJukugo.sentence;
 
   // --- 動的スタイルの決定 ---
-  let gapClass = "gap-3 md:gap-5";
-  let readingPT = "pt-6";
+  let gapClass = "gap-4 md:gap-8";
+  let readingPT = "pt-2";
 
   if (charCount <= 2) {
     // 2文字
   } else if (charCount === 3) {
-    gapClass = "gap-2 md:gap-4";
-    readingPT = "pt-4";
+    gapClass = "gap-3 md:gap-6";
+    readingPT = "pt-1";
   } else {
-    gapClass = "gap-2 md:gap-3";
-    readingPT = "pt-2";
+    gapClass = "gap-2 md:gap-4";
+    readingPT = "pt-0";
   }
 
+  // ★修正1: iPhone向けにフォントサイズを全体的に大きくしました
+  // vminの値を上げ、remの上限も引き上げています
   const getDynamicFontSize = (count: number) => {
-    if (count <= 2) return "min(8rem, 25vw)";
-    if (count === 3) return "min(6rem, 18vw)";
-    return "min(4.5rem, 13vw)";
+    if (count <= 2) return "min(10rem, 28vmin)"; // 20vmin -> 28vmin
+    if (count === 3) return "min(7.5rem, 20vmin)"; // 15vmin -> 20vmin
+    return "min(5.5rem, 15vmin)"; // 11vmin -> 15vmin
   };
 
   return (
-    <div className="absolute inset-0 z-50 flex items-center justify-center bg-stone-900/60 backdrop-blur-sm p-4">
+    <div className="absolute inset-0 z-50 flex items-center justify-center bg-stone-900/70 backdrop-blur-md p-4">
       <motion.div
         initial={{ scale: 0.8, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className={cn(
           "relative bg-[#fcfaf5]",
-          "flex flex-col items-center p-8",
+          "flex flex-col items-center p-8 md:p-12",
           "rounded-sm shadow-2xl overflow-hidden",
 
-          /* --- PC修正: レスポンシブ対応の刷新 --- */
-          /* モバイル縦: 幅基準でアスペクト比固定 (従来の短冊型) */
-          "w-full max-w-sm aspect-3/5",
+          /* ★修正2: iPad(縦)で小さすぎる問題を解消 */
+          /* max-w-sm (スマホ幅) -> md:max-w-xl (タブレット幅) に拡張 */
+          "w-full max-w-sm md:max-w-xl aspect-3/5",
 
-          /* PC/横画面: 
-             - 間延び防止のため、高さ基準(h-auto)に変更。
-             - aspect制限を緩め、コンテンツに合わせて伸縮させる。
-             - ただし最大高さ(max-h)を設けて画面からはみ出さないようにする。
-          */
-          "landscape:w-auto landscape:h-auto landscape:max-h-[85vh] landscape:aspect-3/4 lg:landscape:aspect-4/5",
-          "landscape:max-w-xl" // 横に広がりすぎないように制限
+          /* PC/横画面: 幅固定戦略 */
+          /* 少し幅を広げて (480->520) ゆったりさせました */
+          "landscape:w-[520px] landscape:h-auto landscape:min-h-[600px] landscape:max-h-[90vh] landscape:aspect-auto",
+          "landscape:max-w-none"
         )}
         style={{
           boxShadow:
@@ -100,6 +99,7 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
         <div className="flex-1 flex flex-col items-center justify-center w-full relative min-h-0">
           <div
             className={`flex flex-row-reverse items-center justify-center ${gapClass} mr-2`}
+            style={{ minHeight: "200px" }}
           >
             {/* 1. 熟語 (メイン・右側) */}
             <motion.div
@@ -128,13 +128,12 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className={`text-lg md:text-xl text-stone-500 font-serif tracking-widest leading-none ${readingPT} select-none`}
+              className={`text-lg md:text-2xl text-stone-500 font-serif tracking-widest leading-none ${readingPT} select-none`}
               style={{
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
                 height: "auto",
-                // PC修正: 縦書きの最大高さを少し緩和
-                maxHeight: charCount >= 4 ? "340px" : "280px",
+                maxHeight: "40vh",
               }}
             >
               {currentJukugo.reading}
@@ -157,7 +156,10 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
             }}
             className={cn(
               "absolute flex items-center justify-center mix-blend-multiply pointer-events-none z-10",
-              "-top-2 -right-2 md:-top-4 md:-right-4 w-24 h-24 md:w-28 md:h-28"
+              /* ★修正3: スタンプの位置調整 */
+              /* -top-2 (スマホ) はそのまま */
+              /* md:top-2 md:right-2 (PC/iPad): 以前の top-8 から数値を小さくし、右上隅に寄せました */
+              "-top-2 -right-2 md:top-2 md:right-2 w-24 h-24 md:w-32 md:h-32"
             )}
           >
             <div
@@ -165,7 +167,10 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
               style={{ backgroundColor: "rgba(220, 38, 38, 0.05)" }}
             >
               <div className="w-[88%] h-[88%] border-2 border-red-600 rounded flex items-center justify-center">
-                <div className="text-red-600 font-serif font-bold text-3xl md:text-4xl tracking-widest select-none transform rotate-0">
+                <div
+                  className="text-red-600 font-serif font-bold text-3xl md:text-5xl tracking-widest select-none transform rotate-0"
+                  style={{ marginRight: "-0.1em" }}
+                >
                   天晴
                 </div>
               </div>
@@ -174,23 +179,22 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
         </div>
 
         {/* 意味 & 例文 (下に横書き) */}
-        {/* PC修正: mt-2 -> mt-6 余白を調整して窮屈さを緩和 */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="w-full max-w-[95%] pt-4 mb-4 mt-4 border-t border-stone-300 flex flex-col items-center gap-2 shrink-0"
+          className="w-full max-w-[95%] pt-6 mb-6 mt-4 border-t border-stone-300 flex flex-col items-center gap-3 shrink-0"
         >
           {/* 意味 */}
           {meaning && (
-            <div className="text-sm md:text-base text-stone-700 font-serif text-center font-bold">
+            <div className="text-base md:text-xl text-stone-700 font-serif text-center font-bold">
               {meaning}
             </div>
           )}
 
           {/* 例文 */}
           {hasSentenceData && (
-            <div className="text-xs md:text-sm text-stone-500 font-serif text-center mt-1 bg-stone-100 px-3 py-1 rounded-full">
+            <div className="text-sm md:text-lg text-stone-500 font-serif text-center mt-1 bg-stone-100 px-4 py-2 rounded-full">
               {sentenceParts
                 .map((p) => (p.type === "SLOT" ? currentJukugo.kanji : p.text))
                 .join("")}
@@ -207,7 +211,7 @@ export function ResultOverlay({ onNextLevel }: ResultOverlayProps) {
         >
           <button
             onClick={onNextLevel}
-            className="w-full py-3 bg-[#d94a38] text-white font-bold text-lg rounded shadow-md hover:bg-[#b93a28] transition-all tracking-widest transform hover:scale-[1.02] active:scale-[0.98]"
+            className="w-full py-4 bg-[#d94a38] text-white font-bold text-xl md:text-2xl rounded shadow-md hover:bg-[#b93a28] transition-all tracking-widest transform hover:scale-[1.02] active:scale-[0.98]"
           >
             次の刻へ
           </button>

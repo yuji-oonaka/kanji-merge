@@ -4,99 +4,141 @@ import os
 # ==========================================
 # 設定
 # ==========================================
-# ファイルの場所を指定
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_IDS_FILE = os.path.join(CURRENT_DIR, "ids.txt")
 INPUT_JOYO_FILE = os.path.join(CURRENT_DIR, "joyo.txt")
+# ▼ 設定ファイルのパス
+CONFIG_FILE = os.path.join(CURRENT_DIR, "dictionary_config.json")
+# ▼ 出力先
 OUTPUT_JSON_FILE = os.path.join(CURRENT_DIR, "../src/features/kanji-core/data/ids-map-auto.json")
 
-# これ以上分解しない「原子パーツ(部首)」
-# ゲームバランスのため、これらは分解ルールを作りません
-ATOMIC_PARTS = {
-    "日", "月", "木", "山", "石", "田", "土", "火", "水", "金", 
-    "力", "目", "口", "人", "イ", "女", "子", "言", "糸", "車", 
-    "門", "雨", "貝", "馬", "魚", "鳥", "虫", "王", "弓", "矢",
-    "刀", "牛", "手", "心", "尸", "广", "厂", "辶", "亠", "宀", "艹", "竹"
-}
+def load_config():
+    """設定ファイル(JSON)を読み込む"""
+    try:
+        with open(CONFIG_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            # atomic_parts は検索を早くするために set型 に変換
+            atomic = set(data.get("atomic_parts", []))
+            overrides = data.get("manual_overrides", {})
+            return atomic, overrides
+    except FileNotFoundError:
+        print(f"❌ 設定ファイルが見つかりません: {CONFIG_FILE}")
+        return set(), {}
 
-# IDS演算子（これらを除去して純粋なパーツだけ抽出する）
-IDS_OPERATORS = r"[⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻]"
-
-def load_joyo_kanji():
-    """常用漢字セットを読み込む"""
-    joyo_set = set()
-    print(f"📄 読み込み中: {INPUT_JOYO_FILE}")
+def load_joyo_kanji(atomic_parts):
+    """「知っている漢字」リストを作成"""
+    allowed_set = set(atomic_parts)
     try:
         with open(INPUT_JOYO_FILE, "r", encoding="utf-8") as f:
-            content = f.read()
-            for char in content:
-                # 漢字の範囲(U+4E00〜)だけを抽出
-                if "\u4e00" <= char <= "\u9fff":
-                    joyo_set.add(char)
-        print(f"✅ 常用漢字リストを読み込みました: {len(joyo_set)}文字")
+            for char in f.read():
+                if char.strip(): allowed_set.add(char)
     except FileNotFoundError:
-        print("⚠️ joyo.txt が見つかりません。フィルタリングなしで実行します。")
-    return joyo_set
+        pass
+    
+    for i in range(0x30A0, 0x30FF):
+        allowed_set.add(chr(i))
+    allowed_set.add("〆")
+    allowed_set.add("々")
+    
+    return allowed_set
 
-def parse_ids_line(line):
-    """IDSファイルの1行をパースする"""
-    # 形式例: U+660E	明	⿰日月
-    parts = line.strip().split("\t")
-    if len(parts) < 3:
+def parse_ids_file(filepath):
+    """IDSファイルを全読み込み"""
+    ids_db = {}
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            for line in f:
+                if line.startswith(";;"): continue
+                parts = line.strip().split("\t")
+                if len(parts) < 3: continue
+                
+                kanji = parts[1]
+                structure = parts[2]
+                components = [c for c in structure if c not in "⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻" and c != kanji]
+                ids_db[kanji] = components
+    except FileNotFoundError:
+        print("❌ ids.txt がありません")
+        return {}
+    return ids_db
+
+def smart_decompose(kanji, ids_db, allowed_set, atomic_parts, depth=0):
+    """スマート分解ロジック"""
+    if depth > 4: return None 
+
+    # 原子パーツ or 定義なし -> そのまま
+    if kanji in atomic_parts or kanji not in ids_db:
+        return [kanji]
+
+    components = ids_db[kanji]
+    all_known = all(c in allowed_set for c in components)
+
+    if all_known and len(components) <= 2:
+        return components
+
+    refined_components = []
+    for comp in components:
+        if comp in allowed_set:
+            refined_components.append(comp)
+        else:
+            sub_comps = smart_decompose(comp, ids_db, allowed_set, atomic_parts, depth + 1)
+            if sub_comps:
+                refined_components.extend(sub_comps)
+            else:
+                return None
+
+    if len(refined_components) > 4:
         return None
-    
-    kanji = parts[1]
-    structure = parts[2]
-    
-    # 構成要素のみを抽出 (演算子を除去)
-    components = [c for c in structure if c not in IDS_OPERATORS and c != kanji]
-    
-    return kanji, components
+
+    return refined_components
 
 def main():
-    joyo_set = load_joyo_kanji()
-    dictionary = {}
+    print("🔄 辞書を自動生成中（設定分離モード）...")
     
-    print(f"🔄 IDSデータ({INPUT_IDS_FILE})を解析中...")
+    # 1. 設定ファイル読み込み
+    atomic_parts, manual_overrides = load_config()
+    if not atomic_parts:
+        print("⚠️ atomic_parts が空です。設定ファイルを確認してください。")
+
+    allowed_set = load_joyo_kanji(atomic_parts)
+    ids_db = parse_ids_file(INPUT_IDS_FILE)
+    final_dictionary = {}
     
-    try:
-        with open(INPUT_IDS_FILE, "r", encoding="utf-8") as f:
-            for line in f:
-                if line.startswith(";;"): continue # コメントスキップ
-                
-                result = parse_ids_line(line)
-                if not result: continue
-                
-                kanji, components = result
-                
-                # フィルタリング条件:
-                # 1. 常用漢字リストにある場合
-                # 2. 構成要素がちょうど2つであること (ゲームの仕様)
-                
-                if joyo_set and kanji not in joyo_set:
-                    continue
-                
-                if len(components) == 2:
-                    # 原子パーツに含まれる漢字は、分解ルールを登録しない
-                    if kanji in ATOMIC_PARTS:
-                        continue
-                        
-                    dictionary[kanji] = components
+    # 2. 手動オーバーライドを適用
+    for k, v in manual_overrides.items():
+        final_dictionary[k] = v
 
-    except FileNotFoundError:
-        print(f"❌ エラー: {INPUT_IDS_FILE} が見つかりません。toolsフォルダに保存しましたか？")
-        return
+    # 3. 自動分解
+    count = 0
+    skipped_count = 0
+    target_kanjis = [k for k in allowed_set if k not in atomic_parts and k not in final_dictionary]
 
-    # 結果の保存
-    print(f"📦 {len(dictionary)} 件の合体ルールを生成しました。")
-    
-    # ディレクトリがなければ作る
-    os.makedirs(os.path.dirname(OUTPUT_JSON_FILE), exist_ok=True)
-
-    with open(OUTPUT_JSON_FILE, "w", encoding="utf-8") as f:
-        json.dump(dictionary, f, ensure_ascii=False, indent=2)
+    for kanji in target_kanjis:
+        clean_parts = smart_decompose(kanji, ids_db, allowed_set, atomic_parts)
         
-    print(f"✅ 保存完了: {OUTPUT_JSON_FILE}")
+        if clean_parts and 2 <= len(clean_parts) <= 4:
+            if len(clean_parts) == 2:
+                final_dictionary[kanji] = clean_parts
+            else:
+                current_parts = clean_parts[:]
+                intermediate_base = f"&{kanji}"
+                step = 0
+                while len(current_parts) > 2:
+                    p1 = current_parts.pop(0)
+                    p2 = current_parts.pop(0)
+                    inter_id = f"{intermediate_base}_{step}"
+                    step += 1
+                    final_dictionary[inter_id] = [p1, p2]
+                    current_parts.insert(0, inter_id)
+                final_dictionary[kanji] = current_parts
+            count += 1
+        else:
+            skipped_count += 1
+
+    print(f"📦 生成完了: {len(final_dictionary)} 漢字 (対象外: {skipped_count})")
+    
+    os.makedirs(os.path.dirname(OUTPUT_JSON_FILE), exist_ok=True)
+    with open(OUTPUT_JSON_FILE, "w", encoding="utf-8") as f:
+        json.dump(final_dictionary, f, ensure_ascii=False, indent=2)
 
 if __name__ == "__main__":
     main()

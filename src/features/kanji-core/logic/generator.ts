@@ -6,10 +6,27 @@ const BLACKLIST_KANJI = [
   "穏", "隠", "勉", 
 ];
 
+// 紛らわしいパーツの定義
+const CONFUSING_PAIRS: Record<string, string[]> = {
+  "日": ["目", "田", "白", "旧", "旦"],
+  "月": ["円", "用", "且", "目"],
+  "木": ["禾", "本", "未", "末", "米"],
+  "土": ["士", "工", "干"],
+  "王": ["玉", "主", "五"],
+  "力": ["刀", "九", "カ"],
+  "口": ["回"],
+  "人": ["入", "八", "久"],
+  "大": ["犬", "太", "天"],
+  "小": ["少"],
+  "牛": ["午", "手"],
+  "石": ["右"],
+  "右": ["石", "左"],
+  "左": ["右", "在"],
+};
+const DEFAULT_DISTRACTORS = ["日", "月", "木", "山", "石", "田", "力", "口", "イ", "シ", "女", "王", "糸", "金", "土", "寸"];
+
 /**
  * 難易度調整＆ステージ生成
- * * 変更点: レベルが上がっても常に難しい問題ばかり出すのではなく、
- * 緩急（波）をつけて、基本は気持ちよく解ける問題を出すように調整。
  */
 export function generateRandomStage(
   levelIndex: number, 
@@ -26,45 +43,48 @@ export function generateRandomStage(
     return !hasBlacklistedChar;
   });
 
+  // 現在のステージ数(1始まり)
+  const currentStage = levelIndex + 1;
+
   if (mode === 'EASY') {
     // 【初級】常に簡単
     candidates = validData.filter(j => 
       j.components.length <= 2 && j.difficulty <= 3
     );
   } else {
-    // 【標準】メリハリ型ロジックに変更
+    // 【標準】
     
-    // 現在のステージ数(1始まり)
-    const currentStage = levelIndex + 1;
-    
-    // 5ステージごとに「ボス（難しめ）」、それ以外は「通常（ランダム）」
-    const isBossLevel = currentStage % 5 === 0;
+    // ★変更点: ステージ10以降は完全ランダム（全難易度開放）
+    if (currentStage >= 10) {
+       // minDiff=1, maxDiff=10 で全範囲から抽選
+       candidates = validData.filter(j => j.difficulty >= 1 && j.difficulty <= 10);
+    } 
+    else {
+      // ステージ1〜9: メリハリ型ロジック (既存維持)
+      const isBossLevel = currentStage % 5 === 0;
+      let minDiff = 1;
+      let maxDiff = 10;
 
-    let minDiff = 1;
-    let maxDiff = 10;
-
-    if (currentStage <= 5) {
-      // 序盤: Lv1〜3 (2文字メイン)
-      minDiff = 1; 
-      maxDiff = 3;
-    } else if (isBossLevel) {
-      // ★ボス回: Lv4〜10 (3文字・4文字熟語など歯ごたえあり)
-      // レベルが進むほどボスの下限も上がる
-      minDiff = currentStage > 20 ? 5 : 4;
-      maxDiff = 10;
-    } else {
-      // ★通常回: Lv1〜5 (高レベル帯でも、息抜きできる2文字熟語を混ぜる)
-      // どんなに進んでも、簡単な問題(Lv2程度)は候補に残す
-      minDiff = 1;
-      maxDiff = currentStage > 30 ? 6 : 5;
+      if (currentStage <= 5) {
+        // 序盤: Lv1〜3 (2文字メイン)
+        minDiff = 1; 
+        maxDiff = 3;
+      } else if (isBossLevel) {
+        // ボス回: Lv4〜 (少し歯ごたえあり)
+        minDiff = 4;
+        maxDiff = 10;
+      } else {
+        // 通常回: Lv1〜5
+        minDiff = 1;
+        maxDiff = 5;
+      }
+      
+      candidates = validData.filter(j => j.difficulty >= minDiff && j.difficulty <= maxDiff);
     }
-    
-    // 候補をフィルタリング
-    candidates = validData.filter(j => j.difficulty >= minDiff && j.difficulty <= maxDiff);
 
-    // もし候補が少なすぎたら、難易度幅を広げて再検索 (詰み防止)
+    // 候補不足時のセーフティ
     if (candidates.length === 0) {
-      candidates = validData.filter(j => j.difficulty >= 1 && j.difficulty <= 10);
+      candidates = validData; 
     }
   }
 
@@ -73,10 +93,11 @@ export function generateRandomStage(
   if (freshCandidates.length > 0) {
     candidates = freshCandidates;
   } else if (candidates.length === 0) {
-    // フォールバック
+    // フォールバック: どうしても無ければ2文字熟語から選ぶ
     candidates = validData.filter(j => j.components.length === 2);
   }
   
+  // 最終セーフティ
   if (candidates.length === 0) {
     return {
       id: "fallback",
@@ -92,25 +113,6 @@ export function generateRandomStage(
   const randomIndex = Math.floor(Math.random() * candidates.length);
   return candidates[randomIndex];
 }
-
-// ... (getDistractorPartsなどは変更なし) ...
-const CONFUSING_PAIRS: Record<string, string[]> = {
-  "日": ["目", "田", "白", "旧", "旦"],
-  "月": ["円", "用", "且", "目"],
-  "木": ["禾", "本", "未", "末", "米"],
-  "土": ["士", "工", "干"],
-  "王": ["玉", "主", "五"],
-  "力": ["刀", "九", "カ"],
-  "口": ["ロ", "回"],
-  "人": ["入", "八", "久"],
-  "大": ["犬", "太", "天"],
-  "小": ["少"],
-  "牛": ["午", "手"],
-  "石": ["右"],
-  "右": ["石", "左"],
-  "左": ["右", "在"],
-};
-const DEFAULT_DISTRACTORS = ["日", "月", "木", "山", "石", "田", "力", "口", "イ", "シ", "女", "王", "糸", "金", "土", "寸"];
 
 export function getDistractorParts(count: number, correctParts: string[]): string[] {
   const candidates = new Set<string>();

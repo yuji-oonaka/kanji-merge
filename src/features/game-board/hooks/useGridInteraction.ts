@@ -1,6 +1,8 @@
 import { useGameStore } from "../stores/store";
+// ★修正1: 辞書ストアをインポート
+import { useDictionaryStore } from "@/features/dictionary/stores/dictionarySlice";
 import { judgeMerge } from "@/features/kanji-core/logic/merger";
-import { getConstituents } from "@/features/kanji-core/logic/decomposer"; // 追加
+import { getConstituents } from "@/features/kanji-core/logic/decomposer";
 import { soundEngine } from "@/lib/sounds/SoundEngine";
 
 export function useGridInteraction() {
@@ -15,8 +17,12 @@ export function useGridInteraction() {
   const removePart = useGameStore((state) => state.removePart);
   const addPart = useGameStore((state) => state.addPart);
   const checkAndFillSlot = useGameStore((state) => state.checkAndFillSlot);
-  const unlockKanji = useGameStore((state) => state.unlockKanji);
-  const unlockJukugo = useGameStore((state) => state.unlockJukugo);
+  
+  // ★修正2: useGameStore ではなく useDictionaryStore から関数を取得
+  // これで "is not a function" エラーは確実に消えます
+  const unlockKanji = useDictionaryStore((state) => state.unlockKanji);
+  const unlockJukugo = useDictionaryStore((state) => state.unlockJukugo);
+  
   const currentJukugo = useGameStore((state) => state.currentJukugo);
 
   // 確定処理（合体）

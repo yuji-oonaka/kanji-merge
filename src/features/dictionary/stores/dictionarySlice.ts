@@ -1,40 +1,56 @@
-import { StateCreator } from 'zustand';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export interface DictionarySlice {
-  unlockedIds: string[];      // 発見済みの漢字 (例: "日", "明")
-  unlockedJukugos: string[];  // ★追加: 発見済みの熟語ID (例: "jukugo-001")
+export interface DictionaryState {
+  unlockedIds: string[];
+  unlockedJukugos: string[];
   
   unlockKanji: (char: string) => void;
-  unlockJukugo: (id: string) => void; // ★追加
-  
+  unlockJukugo: (id: string) => void;
   isUnlocked: (char: string) => boolean;
-  isJukugoUnlocked: (id: string) => boolean; // ★追加
-  
+  isJukugoUnlocked: (id: string) => boolean;
   resetCollection: () => void;
 }
 
-export const createDictionarySlice: StateCreator<DictionarySlice> = (set, get) => ({
-  unlockedIds: ["日", "月", "木", "山", "石", "田", "力", "艹", "化", "工", "ウ", "イ"], 
-  unlockedJukugos: [], // 初期値
+export const useDictionaryStore = create<DictionaryState>()(
+  persist(
+    (set, get) => ({
+      // ★重要: 必ず空配列で初期化
+      unlockedIds: ["日", "月", "木", "山", "石", "田", "力", "艹", "化", "工", "ウ", "イ"], 
+      unlockedJukugos: [],
 
-  unlockKanji: (char) => {
-    const { unlockedIds } = get();
-    if (!unlockedIds.includes(char)) {
-      console.log(`🎉 New Kanji Discovered: ${char}`);
-      set({ unlockedIds: [...unlockedIds, char] });
+      unlockKanji: (char) => {
+        if (char.startsWith('&')) return;
+        const { unlockedIds } = get();
+        // ★安全策
+        const safeIds = Array.isArray(unlockedIds) ? unlockedIds : [];
+        if (!safeIds.includes(char)) {
+          set({ unlockedIds: [...safeIds, char] });
+        }
+      },
+
+      unlockJukugo: (id) => {
+        const { unlockedJukugos } = get();
+        // ★安全策
+        const safeJukugos = Array.isArray(unlockedJukugos) ? unlockedJukugos : [];
+        if (!safeJukugos.includes(id)) {
+          set({ unlockedJukugos: [...safeJukugos, id] });
+        }
+      },
+
+      isUnlocked: (char) => {
+        const ids = get().unlockedIds;
+        return Array.isArray(ids) && ids.includes(char);
+      },
+      isJukugoUnlocked: (id) => {
+        const jukugos = get().unlockedJukugos;
+        return Array.isArray(jukugos) && jukugos.includes(id);
+      },
+
+      resetCollection: () => set({ unlockedIds: [], unlockedJukugos: [] }),
+    }),
+    {
+      name: 'kanji-merge-collection',
     }
-  },
-
-  unlockJukugo: (id) => {
-    const { unlockedJukugos } = get();
-    if (!unlockedJukugos.includes(id)) {
-      console.log(`🎉 New Jukugo Completed: ${id}`);
-      set({ unlockedJukugos: [...unlockedJukugos, id] });
-    }
-  },
-
-  isUnlocked: (char) => get().unlockedIds.includes(char),
-  isJukugoUnlocked: (id) => get().unlockedJukugos.includes(id),
-
-  resetCollection: () => set({ unlockedIds: [], unlockedJukugos: [] }),
-});
+  )
+);

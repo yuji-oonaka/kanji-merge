@@ -1,34 +1,58 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useMemo } from "react";
-import { useGameStore } from "@/features/game-board/stores/store";
+import { useState, useMemo, useEffect } from "react";
+// ★修正1: useGameStore ではなく、図鑑専用の useDictionaryStore を使う
+import { useDictionaryStore } from "@/features/dictionary/stores/dictionarySlice";
+// ★修正2: 熟語データだけでなく、合体レシピデータも使う
 import idsMapData from "@/features/kanji-core/data/ids-map-auto.json";
-import jukugoData from "@/features/kanji-core/data/jukugo-db-auto.json";
+import jukugoDataRaw from "@/features/kanji-core/data/jukugo-db-auto.json";
 import { JukugoDefinition } from "@/features/kanji-core/types";
 import { JukugoListView } from "./JukugoListView";
 import { KanjiListView } from "./KanjiListView";
 
+const jukugoData = jukugoDataRaw as JukugoDefinition[];
+// JSONを適切な型として扱う
+const idsMap = idsMapData as Record<string, string[]>;
+
 export function DictionaryView() {
   const [activeTab, setActiveTab] = useState<"kanji" | "jukugo">("kanji");
 
-  const unlockedIds = useGameStore((state) => state.unlockedIds);
-  const unlockedJukugos = useGameStore((state) => state.unlockedJukugos);
+  // マウント確認用（ハイドレーションエラー防止）
+  const [isMounted, setIsMounted] = useState(false);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // ★修正3: ストアからデータを取得し、未ロード時は空配列 [] を返す安全策を追加
+  const unlockedIds = useDictionaryStore((state) => state.unlockedIds) || [];
+  const unlockedJukugos =
+    useDictionaryStore((state) => state.unlockedJukugos) || [];
+
+  // ★修正4: 分母の計算ロジックを KanjiListView と統一
+  // 「熟語に使われている漢字」ではなく「辞書(ids-map)に載っている全漢字」を対象にする
   const validKanjiList = useMemo(() => {
     const usedChars = new Set<string>();
-    const data = jukugoData as JukugoDefinition[];
 
-    data.forEach((jukugo) => {
-      jukugo.components.forEach((char) => usedChars.add(char));
+    // 1. レシピの「成果物」を追加 (例: 意, 恵...)
+    Object.keys(idsMap).forEach((key) => usedChars.add(key));
+
+    // 2. レシピの「素材」も追加 (例: 日, 月, 田...)
+    // これを含めないと、原子パーツが分母から漏れてしまう
+    Object.values(idsMap).forEach((parts) => {
+      parts.forEach((char) => usedChars.add(char));
     });
 
-    return Object.keys(idsMapData)
-      .filter((key) => usedChars.has(key))
-      .filter((key) => key.match(/^[一-龠々〆ヵヶ]+$/));
+    // 3. フィルタリング (中間パーツや記号を除外)
+    return Array.from(usedChars)
+      .filter((char) => char.match(/^[一-龠々〆ヵヶ]+$/))
+      .sort();
   }, []);
 
   const totalKanji = validKanjiList.length;
+
+  // ★これで includes エラーは消えます
   const collectedKanji = validKanjiList.filter((k) =>
     unlockedIds.includes(k)
   ).length;
@@ -45,6 +69,16 @@ export function DictionaryView() {
       ? ((currentCollected / currentTotal) * 100).toFixed(1)
       : "0.0";
 
+  // マウント前はレイアウト崩れを防ぐためローディングなどを出すか、
+  // あるいは枠だけ表示する（ここでは元のUIを崩さないようそのまま描画します）
+  if (!isMounted) {
+    return (
+      <div className="fixed inset-0 w-full h-dvh bg-[#f5f2eb] flex items-center justify-center text-[#3d3330]">
+        読み込み中...
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 w-full h-dvh bg-[#f5f2eb] text-[#3d3330] flex flex-col overflow-hidden">
       {/* --- ヘッダーエリア (固定) --- */}
@@ -59,7 +93,7 @@ export function DictionaryView() {
               <span className="text-xl md:text-2xl font-bold text-[#d94a38]">
                 {percentage}%
               </span>{" "}
-              <span className="text-[10px] md:text-sm opacity-80">
+              <span className="text-10px md:text-sm opacity-80">
                 ({currentCollected}/{currentTotal})
               </span>
             </p>

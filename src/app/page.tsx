@@ -3,13 +3,25 @@
 import { TitleBackground } from "../components/ui/TitleBackground";
 import { useRouter } from "next/navigation";
 import { useGameStore } from "@/features/game-board/stores/store";
+import { useDictionaryStore } from "@/features/dictionary/stores/dictionarySlice";
 import { DifficultyMode } from "@/features/game-board/stores/slices/stageSlice";
+import { useCallback, useEffect, useState } from "react";
+// 冒険用のストアを追加
+import { useAdventureStore } from "@/features/adventure/stores/adventureStore";
 
 export default function Home() {
   const router = useRouter();
   const setDifficultyMode = useGameStore((state) => state.setDifficultyMode);
   const resetStage = useGameStore((state) => state.resetStage);
-  const resetSaveData = useGameStore((state) => state.resetSaveData);
+  const resetDictionary = useDictionaryStore((state) => state.resetCollection);
+
+  // 冒険の進行度を確認（ハイドレーションエラー回避のためuseEffectで取得推奨ですが、一旦シンプルに実装）
+  const adventureIndex = useAdventureStore((state) => state.currentStageIndex);
+  const [hasAdventureData, setHasAdventureData] = useState(false);
+
+  useEffect(() => {
+    setHasAdventureData(adventureIndex > 0);
+  }, [adventureIndex]);
 
   const handleStart = (mode: DifficultyMode) => {
     setDifficultyMode(mode);
@@ -17,15 +29,23 @@ export default function Home() {
     router.push("/play");
   };
 
-  const handleReset = () => {
+  const handleStartAdventure = () => {
+    router.push("/adventure");
+  };
+
+  const handleReset = useCallback(() => {
     if (
       confirm(
-        "【警告】\nこれまでの収集データやクリア状況がすべて消えます。\n本当にリセットしますか？"
+        "【警告】\nこれまでの収集データや冒険の記録がすべて消えます。\n本当にリセットしてよろしいですか？"
       )
     ) {
-      resetSaveData();
+      localStorage.clear();
+      resetDictionary();
+      // 冒険データもリセット
+      useAdventureStore.getState().resetProgress();
+      window.location.reload();
     }
-  };
+  }, [resetDictionary]);
 
   return (
     <main className="relative w-full h-dvh bg-[#f5f2eb] text-[#3d3330] overflow-hidden">
@@ -36,26 +56,26 @@ export default function Home() {
 
       {/* スクロール可能エリア (z-10で手前に) */}
       <div className="relative z-10 w-full h-full overflow-y-auto overflow-x-hidden">
-        {/* コンテンツラッパー: 縦画面は縦積み、横画面(landscape)は横並びに変更 */}
+        {/* コンテンツラッパー */}
         <div className="min-h-full flex flex-col landscape:flex-row items-center justify-center p-4 py-8 md:py-12 gap-8 landscape:gap-16">
-          {/* --- ロゴエリア (横画面時は左側) --- */}
-          <div className="flex flex-col items-center shrink-0 landscape:mb-0">
+          {/* --- ロゴエリア --- */}
+          <div className="flex flex-col items-center shrink-0 landscape:mb-0 animate-in fade-in zoom-in duration-700">
             <div className="text-center">
-              <div className="inline-block border-4 border-[#3d3330] p-6 md:p-10 lg:p-12 mb-4 bg-white shadow-xl transform -rotate-2 relative transition-all">
+              <div className="inline-block border-4 border-[#3d3330] p-6 md:p-10 lg:p-12 mb-4 bg-white shadow-xl transform -rotate-2 relative transition-all hover:rotate-0 duration-500">
                 {/* ハンコ */}
                 <div className="absolute -top-3 -right-3 md:-top-5 md:-right-5 w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-[#d94a38] rounded-full flex items-center justify-center text-white font-bold text-xs md:text-base lg:text-lg shadow-md border-2 border-white transform rotate-12">
                   文脈
                 </div>
 
-                {/* タイトル文字 (縦書き) */}
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-[0.2em] leading-tight text-center writing-vertical-rl text-upright mx-auto">
+                {/* タイトル文字 */}
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-[0.2em] leading-tight text-center writing-vertical-rl text-upright mx-auto text-[#3d3330]">
                   漢字
                   <br />
                   合体
                 </h1>
               </div>
 
-              <p className="text-[#d94a38] font-bold tracking-widest text-sm md:text-lg lg:text-xl mb-2">
+              <p className="text-[#d94a38] font-bold tracking-widest text-sm md:text-lg lg:text-xl mb-2 drop-shadow-sm">
                 ピースをつなぎ、言葉を紡ぐ
               </p>
               <p className="text-stone-400 tracking-[0.4em] text-xs md:text-sm font-bold uppercase">
@@ -64,9 +84,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* --- ボタンエリア (横画面時は右側) --- */}
-          {/* 幅制限をかけつつ、横画面ではスクロールせずに収まるように調整 */}
-          <div className="flex flex-col items-center w-full max-w-sm md:max-w-md landscape:max-w-sm transition-all duration-300">
+          {/* --- ボタンエリア --- */}
+          <div className="flex flex-col items-center w-full max-w-sm md:max-w-md landscape:max-w-sm transition-all animate-in slide-in-from-bottom-8 fade-in duration-700 delay-150">
             <div className="flex flex-col gap-3 md:gap-5 w-full">
               {/* 1. 初級モード */}
               <button
@@ -74,7 +93,9 @@ export default function Home() {
                 className="group w-full py-3 md:py-5 bg-emerald-600 text-white rounded-xl shadow-md hover:bg-emerald-500 transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
               >
                 <div className="relative z-10 flex items-center justify-center gap-3 md:gap-5">
-                  <span className="text-2xl md:text-3xl">🌱</span>
+                  <span className="text-2xl md:text-3xl group-hover:rotate-12 transition-transform">
+                    🌱
+                  </span>
                   <div className="text-left">
                     <div className="font-bold font-serif text-lg md:text-xl tracking-widest">
                       初級
@@ -87,13 +108,15 @@ export default function Home() {
                 <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-white/10 rounded-full blur-xl group-hover:scale-150 transition-transform" />
               </button>
 
-              {/* 2. 通常モード */}
+              {/* 2. 標準モード */}
               <button
                 onClick={() => handleStart("NORMAL")}
                 className="group w-full py-3 md:py-5 bg-[#3d3330] text-white rounded-xl shadow-md hover:bg-[#2a2320] transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
               >
                 <div className="relative z-10 flex items-center justify-center gap-3 md:gap-5">
-                  <span className="text-2xl md:text-3xl">🔥</span>
+                  <span className="text-2xl md:text-3xl group-hover:scale-110 transition-transform">
+                    🔥
+                  </span>
                   <div className="text-left">
                     <div className="font-bold font-serif text-lg md:text-xl tracking-widest">
                       標準
@@ -105,29 +128,27 @@ export default function Home() {
                 </div>
               </button>
 
-              {/* 3. 冒険モード（準備中） */}
-              <div className="w-full relative opacity-60 cursor-not-allowed">
-                <button
-                  disabled
-                  className="group w-full py-3 md:py-5 bg-[#d94a38] text-white rounded-xl shadow-inner flex items-center justify-center gap-3 md:gap-5"
-                >
-                  <span className="text-2xl md:text-3xl">🗺️</span>
+              {/* 3. 冒険モード（有効化・デザイン統一） */}
+              <button
+                onClick={handleStartAdventure}
+                className="group w-full py-3 md:py-5 bg-[#d94a38] text-white rounded-xl shadow-md hover:bg-[#b93a28] transition-all transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
+              >
+                <div className="relative z-10 flex items-center justify-center gap-3 md:gap-5">
+                  <span className="text-2xl md:text-3xl group-hover:rotate-12 transition-transform">
+                    🗺️
+                  </span>
                   <div className="text-left">
                     <div className="font-bold font-serif text-lg md:text-xl tracking-widest flex items-center gap-2">
-                      冒険の旅
-                      <span className="text-[10px] md:text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">
-                        開発中
-                      </span>
+                      {hasAdventureData ? "旅のつづき" : "冒険の旅"}
                     </div>
                     <div className="text-[10px] md:text-xs opacity-80 font-sans tracking-wider">
-                      ADVENTURE
+                      ADVENTURE MODE
                     </div>
                   </div>
-                </button>
-                <div className="absolute top-2 right-3 text-white/70 text-sm md:text-base">
-                  🔒
                 </div>
-              </div>
+                {/* 統一感を出すための背景エフェクト */}
+                <div className="absolute -left-6 -bottom-6 w-20 h-20 bg-white/10 rounded-full blur-xl group-hover:scale-150 transition-transform" />
+              </button>
 
               {/* 4. 図鑑 */}
               <button
@@ -139,29 +160,40 @@ export default function Home() {
             </div>
 
             {/* --- 注釈エリア --- */}
-            <div className="mt-6 landscape:mt-4 px-4 py-2 bg-[#3d3330]/5 rounded-lg border border-[#3d3330]/10 text-center w-full">
+            <div className="mt-6 landscape:mt-4 px-4 py-3 bg-[#3d3330]/5 rounded-lg border border-[#3d3330]/10 text-center w-full">
               <p className="text-[10px] text-stone-500 font-serif leading-relaxed">
-                ※ 一部の漢字パーツは視認性を優先し
+                <span className="inline-block mb-1 font-bold text-[#3d3330]">
+                  ※ 字体について
+                </span>
                 <br />
-                <span className="font-bold text-[#3d3330]">一般的な字体</span>
+                視認性を優先し、一部のパーツを
+                <br className="hidden sm:block" />
+                <span className="border-b border-stone-400">一般的な字形</span>
                 に置き換えています。
               </p>
             </div>
 
             {/* データ初期化 & バージョン */}
-            <div className="mt-4 flex flex-col items-center gap-1">
+            <div className="mt-6 flex flex-col items-center gap-2">
               <button
                 onClick={handleReset}
                 className="text-[10px] text-stone-400 underline hover:text-[#d94a38] transition-colors font-serif"
               >
-                データを初期化する
+                全データを初期化する
               </button>
               <div className="text-[10px] text-stone-300 font-serif tracking-wider">
-                Ver 1.0.0
+                Ver 1.2.0
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* フッターコピーライト */}
+      <div className="absolute bottom-2 w-full text-center pointer-events-none">
+        <span className="text-[10px] text-[#8c7a70]/30 font-serif">
+          © 2025 Kanji Merge Project
+        </span>
       </div>
     </main>
   );

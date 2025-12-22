@@ -1,26 +1,48 @@
 "use client";
 
-import { useGameStore } from "@/features/game-board/stores/store";
-import jukugoData from "@/features/kanji-core/data/jukugo-db-auto.json";
+// ★修正1: useGameStore ではなく、図鑑専用の useDictionaryStore を使う
+import { useDictionaryStore } from "@/features/dictionary/stores/dictionarySlice";
+// ★修正2: 熟語データ(jukugo-db)ではなく、合体辞書データ(ids-map)を読み込む
+import idsMapData from "@/features/kanji-core/data/ids-map-auto.json";
+import jukugoDataRaw from "@/features/kanji-core/data/jukugo-db-auto.json";
 import { JukugoDefinition } from "@/features/kanji-core/types";
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getDisplayChar } from "@/features/game-board/utils/charDisplay";
 
-export function KanjiListView() {
-  const unlockedIds = useGameStore((state) => state.unlockedIds);
-  const unlockedJukugos = useGameStore((state) => state.unlockedJukugos);
-  const data = jukugoData as JukugoDefinition[];
+const jukugoData = jukugoDataRaw as JukugoDefinition[];
+// 型アサーション (JSONを型に合わせる)
+const idsMap = idsMapData as Record<string, string[]>;
 
+export function KanjiListView() {
+  // ★修正3: undefined対策の安全策
+  const unlockedIds = useDictionaryStore((state) => state.unlockedIds) || [];
+  const unlockedJukugos =
+    useDictionaryStore((state) => state.unlockedJukugos) || [];
+
+  const data = jukugoData;
+
+  // ★修正4: 有効な漢字リストの生成ロジックを「辞書データ」ベースに変更
   const validKanjiList = useMemo(() => {
     const usedChars = new Set<string>();
-    data.forEach((jukugo) => {
-      jukugo.components.forEach((char) => usedChars.add(char));
+
+    // 1. 辞書の「キー（作れる漢字）」を全て追加 (例: 意, 恵...)
+    // これが generate_dictionary.py のログに出ていた "841" 個です
+    Object.keys(idsMap).forEach((key) => usedChars.add(key));
+
+    // 2. 辞書の「値（素材パーツ）」も全て追加 (例: 日, 月, 田...)
+    // これを入れないと、レシピを持たない「原子パーツ」が図鑑から消えてしまいます
+    Object.values(idsMap).forEach((parts) => {
+      parts.forEach((char) => usedChars.add(char));
     });
 
-    return Array.from(usedChars)
-      .filter((char) => char.match(/^[一-龠々〆ヵヶ]+$/))
-      .sort();
+    // 3. フィルタリング & ソート
+    return (
+      Array.from(usedChars)
+        // 中間パーツ("&..."など)や、記号を除外して、純粋な漢字だけにする
+        .filter((char) => char.match(/^[一-龠々〆ヵヶ]+$/))
+        .sort()
+    );
   }, []);
 
   const [selectedKanji, setSelectedKanji] = useState<string | null>(null);
@@ -28,6 +50,7 @@ export function KanjiListView() {
   return (
     <>
       <div className="pb-20">
+        {/* グリッド表示部分 */}
         <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 lg:grid-cols-10 xl:grid-cols-12 gap-2 md:gap-3">
           {validKanjiList.map((char) => {
             const isUnlocked = unlockedIds.includes(char);
@@ -53,6 +76,11 @@ export function KanjiListView() {
               </motion.button>
             );
           })}
+        </div>
+
+        {/* 取得率の表示 (デバッグ用にも便利) */}
+        <div className="mt-8 text-center text-xs text-stone-400 font-bold tracking-widest">
+          COLLECTED: {unlockedIds.length} / {validKanjiList.length}
         </div>
       </div>
 
@@ -86,7 +114,6 @@ function KanjiDetailModal({
   }, [kanji, allData]);
 
   return (
-    // ★修正: z-[100] -> z-100
     <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0 }}
@@ -119,37 +146,43 @@ function KanjiDetailModal({
             </span>
           </h3>
           <div className="flex flex-col gap-2 md:gap-3">
-            {relatedJukugos.map((jukugo) => {
-              const isUnlocked = unlockedIds.includes(jukugo.id);
-              return (
-                <div
-                  key={jukugo.id}
-                  className={`flex items-center gap-3 p-2 md:p-3 rounded border ${
-                    isUnlocked
-                      ? "bg-white border-[#3d3330]/10"
-                      : "bg-stone-100 border-dashed border-stone-300 opacity-60"
-                  }`}
-                >
+            {relatedJukugos.length > 0 ? (
+              relatedJukugos.map((jukugo) => {
+                const isUnlocked = unlockedIds.includes(jukugo.id);
+                return (
                   <div
-                    className={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded text-base md:text-lg font-serif font-bold shrink-0 ${
+                    key={jukugo.id}
+                    className={`flex items-center gap-3 p-2 md:p-3 rounded border ${
                       isUnlocked
-                        ? "bg-[#d94a38] text-white"
-                        : "bg-stone-300 text-stone-500"
+                        ? "bg-white border-[#3d3330]/10"
+                        : "bg-stone-100 border-dashed border-stone-300 opacity-60"
                     }`}
                   >
-                    {isUnlocked ? getDisplayChar(jukugo.kanji[0]) : "?"}
-                  </div>
-                  <div>
-                    <div className="font-serif font-bold text-[#3d3330] text-sm md:text-base">
-                      {isUnlocked ? jukugo.kanji : "???"}
+                    <div
+                      className={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded text-base md:text-lg font-serif font-bold shrink-0 ${
+                        isUnlocked
+                          ? "bg-[#d94a38] text-white"
+                          : "bg-stone-300 text-stone-500"
+                      }`}
+                    >
+                      {isUnlocked ? getDisplayChar(jukugo.kanji[0]) : "?"}
                     </div>
-                    <div className="text-[10px] md:text-xs text-stone-500">
-                      {isUnlocked ? jukugo.reading : "未発見"}
+                    <div>
+                      <div className="font-serif font-bold text-[#3d3330] text-sm md:text-base">
+                        {isUnlocked ? jukugo.kanji : "???"}
+                      </div>
+                      <div className="text-[10px] md:text-xs text-stone-500">
+                        {isUnlocked ? jukugo.reading : "未発見"}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            ) : (
+              <div className="text-center text-xs text-stone-400 py-4">
+                この漢字を使う熟語はまだありません
+              </div>
+            )}
           </div>
         </div>
         <div className="p-4 bg-[#f5f2eb] text-center border-t border-[#3d3330]/10 flex-none">

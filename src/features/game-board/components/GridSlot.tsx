@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { GamePart } from "@/features/kanji-core/types";
 import { useGameStore } from "../stores/store";
+// ★修正: 新しく作った辞書専用ストアからインポート
+import { useIdsMapStore } from "@/features/dictionary/stores/idsMapStore";
 import { THEMES } from "../constants/themes";
 import { cn } from "@/lib/utils/tw-merge";
 import { getDisplayChar } from "@/features/game-board/utils/charDisplay";
@@ -18,19 +20,30 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
   const currentTheme = useGameStore((state) => state.currentTheme);
   const pendingMerge = useGameStore((state) => state.pendingMerge);
 
+  // ★修正: idsMapStoreからデータを取得
+  const idsMap = useIdsMapStore((state) => state.idsMap);
+
   const theme = THEMES[currentTheme];
   const isSelected = part && selectedPartId === part.id;
   const isPendingSource = pendingMerge?.sourceId === part?.id;
   const isPendingTarget = pendingMerge?.targetId === part?.id;
 
+  // 表示する文字の決定
   const rawChar = isPendingTarget ? pendingMerge?.previewChar : part?.char;
   const displayChar = rawChar ? getDisplayChar(rawChar) : null;
+
+  // 中間パーツかどうか判定 ("&"で始まる場合)
+  const isIntermediate = rawChar?.startsWith("&");
+
+  // 中間パーツの構成要素を取得
+  const intermediateParts =
+    isIntermediate && rawChar ? idsMap[rawChar] || ["?", "?"] : null;
 
   return (
     <div
       onClick={onClick}
       className={cn(
-        "relative aspect-square rounded-lg md:rounded-xl flex items-center justify-center cursor-pointer transition-all duration-200",
+        "relative aspect-square w-full rounded-lg md:rounded-xl flex items-center justify-center cursor-pointer transition-all duration-200",
         theme.colors.slotBg,
         theme.colors.slotBorder,
         "border md:border-2",
@@ -60,33 +73,40 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
           className={cn(
             "flex items-center justify-center rounded-full shadow-sm select-none",
-
-            // 修正1: 画像に合わせて円を少し小さくし、スロット枠との間に明確な「隙間」を作ります。
-            // 94% -> 88%
             "w-[92%] h-[92%] border",
-
-            /* 修正2: フォントサイズを「円に収まる範囲」に厳格化
-               Min: 1.75rem (28px) -> スマホ小画面用
-               Val: 10vmin         -> 画面連動率を少し下げて余白確保
-               Max: 4.5rem (72px)  -> PCでこれ以上大きくならないリミッター (前回6remは大きすぎました)
-            */
-            "text-[clamp(1.75rem,10vmin,4.5rem)]",
-
-            "font-serif font-bold pb-1 leading-none",
-
             theme.colors.partBg,
             theme.colors.partBorder,
             theme.colors.text,
 
-            // 配色は元のまま維持
             part?.type === "KANJI" &&
               "bg-amber-50 text-amber-900 border-amber-200",
 
             isPendingTarget &&
-              "animate-pulse border-dashed border-[#d94a38] text-[#d94a38] bg-[#d94a38]/10"
+              "animate-pulse border-dashed border-[#d94a38] text-[#d94a38] bg-[#d94a38]/10",
+
+            // 通常のフォントサイズ設定 (中間パーツのときは無効化)
+            !isIntermediate &&
+              "text-[clamp(1.5rem,8vmin,4rem)] font-serif font-bold pb-1 leading-none"
           )}
         >
-          {displayChar}
+          {isIntermediate && intermediateParts ? (
+            <div className="flex flex-col w-full h-full items-center justify-center p-[15%] gap-[2%]">
+              {/* 上半分 */}
+              <div className="flex-1 w-full flex items-end justify-center border-b border-black/10">
+                <span className="text-[clamp(0.6rem,3vmin,1.5rem)] font-bold leading-none mb-0.5">
+                  {getDisplayChar(intermediateParts[0])}
+                </span>
+              </div>
+              {/* 下半分 */}
+              <div className="flex-1 w-full flex items-start justify-center">
+                <span className="text-[clamp(0.6rem,3vmin,1.5rem)] font-bold leading-none mt-0.5">
+                  {getDisplayChar(intermediateParts[1])}
+                </span>
+              </div>
+            </div>
+          ) : (
+            displayChar
+          )}
         </motion.div>
       )}
     </div>

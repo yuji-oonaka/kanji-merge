@@ -192,7 +192,7 @@ class SoundEngine {
     }
   }
 
-  // --- SEプリセット (既存維持) ---
+  // --- SEプリセット ---
 
   public playMerge() {
     this.init();
@@ -225,6 +225,16 @@ class SoundEngine {
   // 既存の互換性のため残すが中身はplayNatureAmbienceへ誘導
   public playRiverAmbience() {
     this.playNatureAmbience();
+  }
+
+  // ▼▼▼ 追加: これで標準モードのビルドエラーが消えます ▼▼▼
+  public playClear() {
+    this.init();
+    // 標準モードのクリア音 (ド・ミ・ソ・ド♪)
+    this.playTone(523.25, 'triangle', 0.1, 0, 0.3);       // C
+    this.playTone(659.25, 'triangle', 0.1, 0.08, 0.3);    // E
+    this.playTone(783.99, 'triangle', 0.1, 0.16, 0.3);    // G
+    this.playTone(1046.50, 'sine', 0.4, 0.24, 0.4);       // High C
   }
 }
 

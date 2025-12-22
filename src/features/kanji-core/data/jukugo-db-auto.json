@@ -1,6 +1,6 @@
 [
   {
-    "id": "d2b34aca",
+    "id": "7b1b63e3",
     "kanji": "﻿--- Lv1: はじめての熟語 (超基本) ---",
     "reading": "???",
     "meaning": "",
@@ -37,7 +37,7 @@
     "sentence": ""
   },
   {
-    "id": "3ced5ca4",
+    "id": "23257f28",
     "kanji": "青空",
     "reading": "あおぞら",
     "meaning": "晴れ渡った空",
@@ -49,7 +49,7 @@
     "sentence": "台風が過ぎ去り、気持ちのいい{{target}}が広がっている。"
   },
   {
-    "id": "c5453053",
+    "id": "6bff33ad",
     "kanji": "朝日",
     "reading": "あさひ",
     "meaning": "朝昇る太陽",
@@ -61,7 +61,7 @@
     "sentence": "{{target}}を浴びて、新しい一日が始まる。"
   },
   {
-    "id": "307197cd",
+    "id": "65470e10",
     "kanji": "夕日",
     "reading": "ゆうひ",
     "meaning": "夕方沈む太陽",
@@ -73,7 +73,7 @@
     "sentence": "海に沈んでいく{{target}}がとても綺麗だ。"
   },
   {
-    "id": "07eaf883",
+    "id": "5f4f74db",
     "kanji": "星空",
     "reading": "ほしぞら",
     "meaning": "星が出ている夜空",
@@ -85,7 +85,7 @@
     "sentence": "山の上から見上げた{{target}}は天然のプラネタリウムのようだ。"
   },
   {
-    "id": "1527e5cb",
+    "id": "14fad079",
     "kanji": "天気",
     "reading": "てんき",
     "meaning": "空の様子",
@@ -97,7 +97,7 @@
     "sentence": "明日の{{target}}は晴れ時々曇りの予報です。"
   },
   {
-    "id": "aebe9cdc",
+    "id": "e0549263",
     "kanji": "雨雲",
     "reading": "あまぐも",
     "meaning": "雨を降らせる雲",
@@ -109,7 +109,7 @@
     "sentence": "西の空から黒い{{target}}が近づいてきた。"
   },
   {
-    "id": "1cfa9b91",
+    "id": "027215e9",
     "kanji": "大雨",
     "reading": "おおあめ",
     "meaning": "激しく降る雨",
@@ -121,7 +121,7 @@
     "sentence": "昨夜の{{target}}で川の水位が上がっている。"
   },
   {
-    "id": "28f99d15",
+    "id": "5377c367",
     "kanji": "小雨",
     "reading": "こさめ",
     "meaning": "弱く降る雨",
@@ -133,7 +133,7 @@
     "sentence": "{{target}}が降ってきたので、傘をさして歩いた。"
   },
   {
-    "id": "8ebfc1dd",
+    "id": "5871b2d7",
     "kanji": "雷雨",
     "reading": "らいう",
     "meaning": "雷と雨",
@@ -145,7 +145,7 @@
     "sentence": "突然の激しい{{target}}に見舞われた。"
   },
   {
-    "id": "e70e9843",
+    "id": "0d054e5f",
     "kanji": "雪国",
     "reading": "ゆきぐに",
     "meaning": "雪の多い地方",
@@ -157,7 +157,7 @@
     "sentence": "トンネルを抜けると、そこは一面の{{target}}だった。"
   },
   {
-    "id": "57ecabd1",
+    "id": "56f25b4b",
     "kanji": "空気",
     "reading": "くうき",
     "meaning": "地球を包む気体",
@@ -169,7 +169,7 @@
     "sentence": "山の上の{{target}}は澄んでいて美味しい。"
   },
   {
-    "id": "df80e88f",
+    "id": "ada9215a",
     "kanji": "電気",
     "reading": "でんき",
     "meaning": "エネルギー",
@@ -181,7 +181,7 @@
     "sentence": "こまめに{{target}}を消して節電する。"
   },
   {
-    "id": "5740dd5f",
+    "id": "1b1e537c",
     "kanji": "電話",
     "reading": "でんわ",
     "meaning": "通話する機械",
@@ -193,7 +193,7 @@
     "sentence": "遠く離れた友人と{{target}}で話す。"
   },
   {
-    "id": "b1cf6339",
+    "id": "f8fc07b0",
     "kanji": "会話",
     "reading": "かいわ",
     "meaning": "話をすること",
@@ -205,7 +205,7 @@
     "sentence": "家族との楽しい{{target}}が弾む。"
   },
   {
-    "id": "c0849cac",
+    "id": "089bcf90",
     "kanji": "読書",
     "reading": "どくしょ",
     "meaning": "本を読むこと",
@@ -217,7 +217,7 @@
     "sentence": "秋の夜長に{{target}}を楽しむ。"
   },
   {
-    "id": "4d804603",
+    "id": "d4a6ad87",
     "kanji": "書店",
     "reading": "しょてん",
     "meaning": "本屋",
@@ -229,7 +229,7 @@
     "sentence": "駅前の{{target}}で新刊を買う。"
   },
   {
-    "id": "2cedc1b9",
+    "id": "43e56e1f",
     "kanji": "売店",
     "reading": "ばいてん",
     "meaning": "小さな店",
@@ -241,7 +241,7 @@
     "sentence": "駅の{{target}}で新聞とガムを買う。"
   },
   {
-    "id": "aaf3277c",
+    "id": "45e32e36",
     "kanji": "花火",
     "reading": "はなび",
     "meaning": "空に咲く火",
@@ -253,7 +253,7 @@
     "sentence": "夏の夜空に大きな{{target}}が打ち上がった。"
   },
   {
-    "id": "e72287f4",
+    "id": "29fd4a4e",
     "kanji": "花見",
     "reading": "はなみ",
     "meaning": "桜を見ること",
@@ -265,7 +265,7 @@
     "sentence": "満開の桜の下で{{target}}をする。"
   },
   {
-    "id": "0f4f40e3",
+    "id": "7d00579d",
     "kanji": "見学",
     "reading": "けんがく",
     "meaning": "見て学ぶこと",
@@ -277,7 +277,7 @@
     "sentence": "社会科の授業で工場{{target}}に行く。"
   },
   {
-    "id": "16b1513c",
+    "id": "6a0ed3f8",
     "kanji": "学校",
     "reading": "がっこう",
     "meaning": "学ぶ場所",
@@ -289,7 +289,7 @@
     "sentence": "毎日元気に{{target}}へ通う。"
   },
   {
-    "id": "37d30de8",
+    "id": "6fe33129",
     "kanji": "校歌",
     "reading": "こうか",
     "meaning": "学校の歌",
@@ -301,7 +301,7 @@
     "sentence": "卒業式で全員で{{target}}を斉唱する。"
   },
   {
-    "id": "84da13d3",
+    "id": "333bdf05",
     "kanji": "歌手",
     "reading": "かしゅ",
     "meaning": "歌う人",
@@ -313,7 +313,7 @@
     "sentence": "将来の夢は有名な{{target}}になることだ。"
   },
   {
-    "id": "916f3e5d",
+    "id": "bb0625cf",
     "kanji": "手足",
     "reading": "てあし",
     "meaning": "手と足",
@@ -325,7 +325,7 @@
     "sentence": "準備運動で{{target}}をぶらぶらさせる。"
   },
   {
-    "id": "4f1a1483",
+    "id": "fe397578",
     "kanji": "不足",
     "reading": "ふそく",
     "meaning": "足りないこと",
@@ -337,7 +337,7 @@
     "sentence": "睡眠{{target}}で頭がぼんやりする。"
   },
   {
-    "id": "8e56220c",
+    "id": "5ec1e4c4",
     "kanji": "遠足",
     "reading": "えんそく",
     "meaning": "歩いて行く行事",
@@ -349,7 +349,7 @@
     "sentence": "明日は待ちに待った{{target}}の日だ。"
   },
   {
-    "id": "58b0dc00",
+    "id": "cf793c67",
     "kanji": "海水",
     "reading": "かいすい",
     "meaning": "海の水",
@@ -361,7 +361,7 @@
     "sentence": "{{target}}浴を楽しんだあと、シャワーを浴びる。"
   },
   {
-    "id": "71cf4411",
+    "id": "69159e9c",
     "kanji": "砂浜",
     "reading": "すなはま",
     "meaning": "海辺の砂地",
@@ -373,7 +373,7 @@
     "sentence": "白い{{target}}に足跡を残して歩く。"
   },
   {
-    "id": "ab118393",
+    "id": "a7157a2e",
     "kanji": "草花",
     "reading": "くさばな",
     "meaning": "草と花",
@@ -385,7 +385,7 @@
     "sentence": "春になると、野原いっぱいに{{target}}が咲き乱れる。"
   },
   {
-    "id": "b85a1b35",
+    "id": "9094fa9a",
     "kanji": "森林",
     "reading": "しんりん",
     "meaning": "木々が茂る場所",
@@ -397,7 +397,7 @@
     "sentence": "{{target}}浴をしてリラックスする。"
   },
   {
-    "id": "f7524d93",
+    "id": "77e1ab1b",
     "kanji": "岩石",
     "reading": "がんせき",
     "meaning": "岩と石",
@@ -409,7 +409,7 @@
     "sentence": "火山の噴火で飛んできた{{target}}を調査する。"
   },
   {
-    "id": "cdc1aad9",
+    "id": "f551c5a0",
     "kanji": "火山",
     "reading": "かざん",
     "meaning": "火を噴く山",
@@ -421,7 +421,7 @@
     "sentence": "{{target}}が噴火し、警戒レベルが引き上げられた。"
   },
   {
-    "id": "17d823d3",
+    "id": "0388f92d",
     "kanji": "日本",
     "reading": "にほん",
     "meaning": "私たちの国",
@@ -433,7 +433,7 @@
     "sentence": "{{target}}の首都は東京だ。"
   },
   {
-    "id": "22b518f7",
+    "id": "75a2760c",
     "kanji": "教室",
     "reading": "きょうしつ",
     "meaning": "授業を受ける部屋",
@@ -445,7 +445,7 @@
     "sentence": "休み時間の{{target}}は生徒たちの笑い声で賑やかだ。"
   },
   {
-    "id": "3f9e09bb",
+    "id": "df09ecbd",
     "kanji": "先生",
     "reading": "せんせい",
     "meaning": "教える人",
@@ -457,7 +457,7 @@
     "sentence": "分からないところを{{target}}に質問する。"
   },
   {
-    "id": "f5fabf91",
+    "id": "be75d6e0",
     "kanji": "生徒",
     "reading": "せいと",
     "meaning": "学ぶ人",
@@ -469,7 +469,7 @@
     "sentence": "その学校の{{target}}数は全校で500人だ。"
   },
   {
-    "id": "74c84593",
+    "id": "384f763e",
     "kanji": "作文",
     "reading": "さくぶん",
     "meaning": "文章を書くこと",
@@ -481,7 +481,7 @@
     "sentence": "夏休みの思い出について{{target}}を書く。"
   },
   {
-    "id": "1b89cab5",
+    "id": "0908e637",
     "kanji": "日記",
     "reading": "にっき",
     "meaning": "毎日の記録",
@@ -493,7 +493,7 @@
     "sentence": "寝る前に今日あったことを{{target}}につける。"
   },
   {
-    "id": "7e12d770",
+    "id": "d8b39194",
     "kanji": "図画",
     "reading": "ずが",
     "meaning": "絵を描くこと",
@@ -505,7 +505,7 @@
     "sentence": "{{target}}工作の授業で水彩画を描いた。"
   },
   {
-    "id": "c27624d0",
+    "id": "37e9fa81",
     "kanji": "算数",
     "reading": "さんすう",
     "meaning": "数の計算",
@@ -517,7 +517,7 @@
     "sentence": "{{target}}のテストで100点を取った。"
   },
   {
-    "id": "ec9dc8cc",
+    "id": "94abc25f",
     "kanji": "理科",
     "reading": "りか",
     "meaning": "自然科学の勉強",
@@ -529,7 +529,7 @@
     "sentence": "{{target}}の実験で顕微鏡を使う。"
   },
   {
-    "id": "af89e9a2",
+    "id": "847d6f20",
     "kanji": "社会",
     "reading": "しゃかい",
     "meaning": "世の中の仕組み",
@@ -541,7 +541,7 @@
     "sentence": "{{target}}の授業で地図記号を覚える。"
   },
   {
-    "id": "a33c4df8",
+    "id": "65053c36",
     "kanji": "体育",
     "reading": "たいいく",
     "meaning": "体を動かす授業",
@@ -553,7 +553,7 @@
     "sentence": "{{target}}の時間にドッジボールをした。"
   },
   {
-    "id": "dc864af4",
+    "id": "e2e9866a",
     "kanji": "音楽",
     "reading": "おんがく",
     "meaning": "音を楽しむこと",
@@ -565,7 +565,7 @@
     "sentence": "{{target}}室からピアノの音が聞こえてくる。"
   },
   {
-    "id": "bdc209ff",
+    "id": "a5a89d81",
     "kanji": "親子",
     "reading": "おやこ",
     "meaning": "親と子",
@@ -577,7 +577,7 @@
     "sentence": "休日に公園で{{target}}仲良くキャッチボールをする。"
   },
   {
-    "id": "bd528f13",
+    "id": "8c0e3a32",
     "kanji": "兄弟",
     "reading": "きょうだい",
     "meaning": "兄と弟",
@@ -589,7 +589,7 @@
     "sentence": "彼らは顔がそっくりな{{target}}だ。"
   },
   {
-    "id": "15805bef",
+    "id": "e7598b3d",
     "kanji": "姉妹",
     "reading": "しまい",
     "meaning": "姉と妹",
@@ -601,7 +601,7 @@
     "sentence": "彼女たちは{{target}}でお揃いの服を着ている。"
   },
   {
-    "id": "07b28145",
+    "id": "7c874e45",
     "kanji": "家族",
     "reading": "かぞく",
     "meaning": "暮らす人々",
@@ -613,7 +613,7 @@
     "sentence": "週末は{{target}}みんなで旅行に出かける。"
   },
   {
-    "id": "203c3606",
+    "id": "4b74c06b",
     "kanji": "友人",
     "reading": "ゆうじん",
     "meaning": "友達",
@@ -625,7 +625,7 @@
     "sentence": "古い{{target}}と久しぶりに会って食事をした。"
   },
   {
-    "id": "69a8a535",
+    "id": "23d98595",
     "kanji": "知人",
     "reading": "ちじん",
     "meaning": "知り合い",
@@ -637,7 +637,7 @@
     "sentence": "街で偶然、昔の{{target}}に見かけられた。"
   },
   {
-    "id": "f00c1753",
+    "id": "10ecfcb4",
     "kanji": "大人",
     "reading": "おとな",
     "meaning": "成人した人",
@@ -649,7 +649,7 @@
     "sentence": "子供料金は半額だが、{{target}}は通常料金だ。"
   },
   {
-    "id": "b685e49b",
+    "id": "858cba03",
     "kanji": "子供",
     "reading": "こども",
     "meaning": "幼い人",
@@ -661,7 +661,7 @@
     "sentence": "公園で{{target}}たちが元気に走り回っている。"
   },
   {
-    "id": "001ef635",
+    "id": "2b70d363",
     "kanji": "元気",
     "reading": "げんき",
     "meaning": "活発な様子",
@@ -673,7 +673,7 @@
     "sentence": "ご飯をたくさん食べて{{target}}いっぱいに育つ。"
   },
   {
-    "id": "4226eaa3",
+    "id": "9bd71452",
     "kanji": "病気",
     "reading": "びょうき",
     "meaning": "体調不良",
@@ -685,7 +685,7 @@
     "sentence": "{{target}}にならないように手洗いうがいをする。"
   },
   {
-    "id": "47b1469a",
+    "id": "87e6ad15",
     "kanji": "勇気",
     "reading": "ゆうき",
     "meaning": "立ち向かう心",
@@ -697,7 +697,7 @@
     "sentence": "{{target}}を出して初めてのことに挑戦する。"
   },
   {
-    "id": "e8621f8f",
+    "id": "67716a03",
     "kanji": "本気",
     "reading": "ほんき",
     "meaning": "真剣な気持ち",
@@ -709,7 +709,7 @@
     "sentence": "彼は冗談ではなく{{target}}で怒っているようだ。"
   },
   {
-    "id": "d403068b",
+    "id": "322c23d0",
     "kanji": "食事",
     "reading": "しょくじ",
     "meaning": "ご飯を食べること",
@@ -721,7 +721,7 @@
     "sentence": "バランスの良い{{target}}を心がける。"
   },
   {
-    "id": "771332c7",
+    "id": "62236166",
     "kanji": "朝食",
     "reading": "ちょうしょく",
     "meaning": "朝ごはん",
@@ -733,7 +733,7 @@
     "sentence": "忙しくても{{target}}はしっかり食べるべきだ。"
   },
   {
-    "id": "b033f2f4",
+    "id": "464bb7ff",
     "kanji": "昼食",
     "reading": "ちゅうしょく",
     "meaning": "昼ごはん",
@@ -745,7 +745,7 @@
     "sentence": "会社の近くの定食屋で{{target}}をとる。"
   },
   {
-    "id": "5dd85711",
+    "id": "5067a197",
     "kanji": "夕食",
     "reading": "ゆうしょく",
     "meaning": "晩ごはん",
@@ -757,7 +757,7 @@
     "sentence": "今日の{{target}}はカレーライスだ。"
   },
   {
-    "id": "624486b8",
+    "id": "c9473e4e",
     "kanji": "時計",
     "reading": "とけい",
     "meaning": "時間を計る道具",
@@ -769,7 +769,7 @@
     "sentence": "壁にかかっている{{target}}が正午を知らせた。"
   },
   {
-    "id": "069ee887",
+    "id": "c86418fe",
     "kanji": "時間",
     "reading": "じかん",
     "meaning": "時の流れ",
@@ -781,7 +781,7 @@
     "sentence": "楽しい{{target}}はあっという間に過ぎてしまう。"
   },
   {
-    "id": "12674704",
+    "id": "247f46a0",
     "kanji": "半日",
     "reading": "はんにち",
     "meaning": "一日の半分",
@@ -793,7 +793,7 @@
     "sentence": "午前中だけで仕事が終わり、{{target}}休暇をもらった。"
   },
   {
-    "id": "cc05f58c",
+    "id": "525954f7",
     "kanji": "毎日",
     "reading": "まいにち",
     "meaning": "日々",
@@ -805,7 +805,7 @@
     "sentence": "健康のために{{target}}ジョギングをしている。"
   },
   {
-    "id": "24d185c1",
+    "id": "12692c21",
     "kanji": "来年",
     "reading": "らいねん",
     "meaning": "次の年",
@@ -817,7 +817,7 @@
     "sentence": "{{target}}こそは海外旅行に行きたい。"
   },
   {
-    "id": "0c82b24f",
+    "id": "437c8a48",
     "kanji": "今年",
     "reading": "ことし",
     "meaning": "今の年",
@@ -829,7 +829,7 @@
     "sentence": "{{target}}の夏は例年になく暑い。"
   },
   {
-    "id": "23a73aa1",
+    "id": "63be481f",
     "kanji": "去年",
     "reading": "きょねん",
     "meaning": "前の年",
@@ -841,7 +841,7 @@
     "sentence": "{{target}}着ていた服がもう小さくなってしまった。"
   },
   {
-    "id": "ab70d9f2",
+    "id": "ccfe296d",
     "kanji": "上下",
     "reading": "じょうげ",
     "meaning": "上と下",
@@ -853,7 +853,7 @@
     "sentence": "エレベーターで{{target}}に移動する。"
   },
   {
-    "id": "7c6cb600",
+    "id": "7842e578",
     "kanji": "左右",
     "reading": "さゆう",
     "meaning": "左と右",
@@ -865,7 +865,7 @@
     "sentence": "道路を渡る時は{{target}}をよく確認しよう。"
   },
   {
-    "id": "349d2603",
+    "id": "66d62574",
     "kanji": "前後",
     "reading": "ぜんご",
     "meaning": "前と後ろ",
@@ -877,7 +877,7 @@
     "sentence": "列の{{target}}の人と間隔を空けて並ぶ。"
   },
   {
-    "id": "10fea3df",
+    "id": "f22604d5",
     "kanji": "大小",
     "reading": "だいしょう",
     "meaning": "大きさと小ささ",
@@ -889,7 +889,7 @@
     "sentence": "{{target}}様々な大きさの箱が積まれている。"
   },
   {
-    "id": "2462d864",
+    "id": "776c0cb3",
     "kanji": "強弱",
     "reading": "きょうじゃく",
     "meaning": "強さと弱さ",
@@ -901,7 +901,7 @@
     "sentence": "ピアノの演奏に{{target}}をつけて表現豊かに弾く。"
   },
   {
-    "id": "33e7862f",
+    "id": "d7d62a01",
     "kanji": "高低",
     "reading": "こうてい",
     "meaning": "高さと低さ",
@@ -913,7 +913,7 @@
     "sentence": "この土地は{{target}}差が激しく坂が多い。"
   },
   {
-    "id": "f2c148db",
+    "id": "d640c815",
     "kanji": "明暗",
     "reading": "めいあん",
     "meaning": "明るさと暗さ",
@@ -925,7 +925,7 @@
     "sentence": "その一瞬の判断が、勝負の{{target}}を分けた。"
   },
   {
-    "id": "d945bcef",
+    "id": "46fac566",
     "kanji": "開閉",
     "reading": "かいへい",
     "meaning": "開け閉め",
@@ -937,7 +937,7 @@
     "sentence": "このドアはボタン一つで自動的に{{target}}する。"
   },
   {
-    "id": "ae1761c6",
+    "id": "6acee7f5",
     "kanji": "入出",
     "reading": "にゅうしゅつ",
     "meaning": "入り出し",
@@ -949,7 +949,7 @@
     "sentence": "建物の入り口で{{target}}の管理を行う。"
   },
   {
-    "id": "571e2490",
+    "id": "14b719bd",
     "kanji": "入口",
     "reading": "いりぐち",
     "meaning": "入る場所",
@@ -961,7 +961,7 @@
     "sentence": "建物の{{target}}で警備員が立っている。"
   },
   {
-    "id": "89ec4132",
+    "id": "e1c4735e",
     "kanji": "出口",
     "reading": "でぐち",
     "meaning": "出る場所",
@@ -973,7 +973,7 @@
     "sentence": "迷路の{{target}}をやっと見つけた。"
   },
   {
-    "id": "eae37ee7",
+    "id": "ff8b2ba0",
     "kanji": "安心",
     "reading": "あんしん",
     "meaning": "心が落ち着く",
@@ -985,7 +985,7 @@
     "sentence": "親の声を聞いて{{target}}した。"
   },
   {
-    "id": "b1dead1a",
+    "id": "9d0975d7",
     "kanji": "安全",
     "reading": "あんぜん",
     "meaning": "危険がない",
@@ -997,7 +997,7 @@
     "sentence": "工事現場で{{target}}を確認する。"
   },
   {
-    "id": "45e76744",
+    "id": "05b608c7",
     "kanji": "一番",
     "reading": "いちばん",
     "meaning": "最も優れている",
@@ -1009,7 +1009,7 @@
     "sentence": "かけっこで{{target}}になった。"
   },
   {
-    "id": "40907d8b",
+    "id": "2875fbb3",
     "kanji": "右折",
     "reading": "うせつ",
     "meaning": "右に曲がる",
@@ -1021,7 +1021,7 @@
     "sentence": "交差点を{{target}}する。"
   },
   {
-    "id": "11df5b99",
+    "id": "78411055",
     "kanji": "左折",
     "reading": "させつ",
     "meaning": "左に曲がる",
@@ -1033,7 +1033,7 @@
     "sentence": "次の角を{{target}}してください。"
   },
   {
-    "id": "f88b485e",
+    "id": "04c841fe",
     "kanji": "王様",
     "reading": "おうさま",
     "meaning": "国を治める人",
@@ -1045,7 +1045,7 @@
     "sentence": "絵本に出てくる{{target}}。"
   },
   {
-    "id": "3aef7f44",
+    "id": "333f04f2",
     "kanji": "音色",
     "reading": "ねいろ",
     "meaning": "音の響き",
@@ -1057,7 +1057,7 @@
     "sentence": "ピアノの美しい{{target}}に聞き惚れる。"
   },
   {
-    "id": "2a96a58d",
+    "id": "6cded8fa",
     "kanji": "円高",
     "reading": "えんだか",
     "meaning": "円の価値が上がる",
@@ -1069,7 +1069,7 @@
     "sentence": "急激な{{target}}で輸入品が安くなる。"
   },
   {
-    "id": "af6fa152",
+    "id": "4e07d92c",
     "kanji": "友情",
     "reading": "ゆうじょう",
     "meaning": "友達を思う心",
@@ -1081,7 +1081,7 @@
     "sentence": "困難を共に乗り越えて{{target}}が深まった。"
   },
   {
-    "id": "26927ef3",
+    "id": "c317629f",
     "kanji": "希望",
     "reading": "きぼう",
     "meaning": "未来への願い",
@@ -1093,7 +1093,7 @@
     "sentence": "どんなに辛くても{{target}}を捨ててはいけない。"
   },
   {
-    "id": "b33c95e7",
+    "id": "472e1a4c",
     "kanji": "未来",
     "reading": "みらい",
     "meaning": "これから来る時",
@@ -1105,7 +1105,7 @@
     "sentence": "子供たちの輝かしい{{target}}のために努力する。"
   },
   {
-    "id": "dac0b6f3",
+    "id": "59ae37f0",
     "kanji": "幸福",
     "reading": "こうふく",
     "meaning": "幸せなこと",
@@ -1117,7 +1117,7 @@
     "sentence": "家族みんなで過ごす時間に{{target}}を感じる。"
   },
   {
-    "id": "a28f6b83",
+    "id": "d054b513",
     "kanji": "平和",
     "reading": "へいわ",
     "meaning": "争いがないこと",
@@ -1129,7 +1129,7 @@
     "sentence": "世界の{{target}}を心から祈る。"
   },
   {
-    "id": "d48fa2da",
+    "id": "27b4ea6e",
     "kanji": "自由",
     "reading": "じゆう",
     "meaning": "束縛がないこと",
@@ -1141,7 +1141,7 @@
     "sentence": "鳥のように大空を{{target}}に飛び回りたい。"
   },
   {
-    "id": "59018681",
+    "id": "5cd3fc14",
     "kanji": "正解",
     "reading": "せいかい",
     "meaning": "正しい答え",
@@ -1153,7 +1153,7 @@
     "sentence": "クイズの{{target}}が分かってスッキリした。"
   },
   {
-    "id": "2484dcae",
+    "id": "07490c5f",
     "kanji": "失敗",
     "reading": "しっぱい",
     "meaning": "やり損なうこと",
@@ -1165,7 +1165,7 @@
     "sentence": "{{target}}は成功のもとと言うし、気にせず次に行こう。"
   },
   {
-    "id": "8edd0595",
+    "id": "57972b11",
     "kanji": "成功",
     "reading": "せいこう",
     "meaning": "うまくいくこと",
@@ -1177,7 +1177,7 @@
     "sentence": "長年の努力が実り、ついに実験に{{target}}した。"
   },
   {
-    "id": "ac484c64",
+    "id": "23ff3490",
     "kanji": "約束",
     "reading": "やくそく",
     "meaning": "取り決め",
@@ -1189,7 +1189,7 @@
     "sentence": "友達と遊ぶ{{target}}をして指切りをした。"
   },
   {
-    "id": "785be299",
+    "id": "78fc310c",
     "kanji": "秘密",
     "reading": "ひみつ",
     "meaning": "隠しておくこと",
@@ -1201,7 +1201,7 @@
     "sentence": "これは二人だけの{{target}}だよ。"
   },
   {
-    "id": "5f3b372d",
+    "id": "e4076bd3",
     "kanji": "発見",
     "reading": "はっけん",
     "meaning": "見つけること",
@@ -1213,7 +1213,7 @@
     "sentence": "新種の昆虫を{{target}}してニュースになった。"
   },
   {
-    "id": "bb367236",
+    "id": "798ce208",
     "kanji": "発明",
     "reading": "はつめい",
     "meaning": "新しく作ること",
@@ -1225,7 +1225,7 @@
     "sentence": "エジソンは電球を{{target}}した偉人だ。"
   },
   {
-    "id": "733d9302",
+    "id": "1656ce00",
     "kanji": "救助",
     "reading": "きゅうじょ",
     "meaning": "助けること",
@@ -1237,7 +1237,7 @@
     "sentence": "山で遭難した人をヘリコプターで{{target}}する。"
   },
   {
-    "id": "7402f22e",
+    "id": "fa5ad123",
     "kanji": "協力",
     "reading": "きょうりょく",
     "meaning": "力を合わせる",
@@ -1249,7 +1249,7 @@
     "sentence": "みんなで{{target}}して教室を掃除する。"
   },
   {
-    "id": "71672ff6",
+    "id": "144ad7fd",
     "kanji": "参加",
     "reading": "さんか",
     "meaning": "加わること",
@@ -1261,7 +1261,7 @@
     "sentence": "地域の夏祭りにボランティアとして{{target}}する。"
   },
   {
-    "id": "f4bedf3a",
+    "id": "076f6df9",
     "kanji": "反対",
     "reading": "はんたい",
     "meaning": "逆のこと",
@@ -1273,7 +1273,7 @@
     "sentence": "彼の意見には賛成できず、{{target}}の手を挙げた。"
   },
   {
-    "id": "c9b441bf",
+    "id": "fa2a2f0c",
     "kanji": "賛成",
     "reading": "さんせい",
     "meaning": "同意すること",
@@ -1285,7 +1285,7 @@
     "sentence": "クラス全員がその提案に{{target}}した。"
   },
   {
-    "id": "71737d2e",
+    "id": "16ac63c4",
     "kanji": "注意",
     "reading": "ちゅうい",
     "meaning": "気をつけること",
@@ -1297,7 +1297,7 @@
     "sentence": "足元に{{target}}して歩いてください。"
   },
   {
-    "id": "6d4860ae",
+    "id": "88704e8d",
     "kanji": "準備",
     "reading": "じゅんび",
     "meaning": "用意すること",
@@ -1309,7 +1309,7 @@
     "sentence": "明日の遠足の{{target}}をしてから寝る。"
   },
   {
-    "id": "fa8d1774",
+    "id": "1f220a3e",
     "kanji": "整理",
     "reading": "せいり",
     "meaning": "片付けること",
@@ -1321,7 +1321,7 @@
     "sentence": "机の上を綺麗に{{target}}整頓する。"
   },
   {
-    "id": "8fc03134",
+    "id": "98131995",
     "kanji": "整頓",
     "reading": "せいとん",
     "meaning": "整えること",
@@ -1333,7 +1333,7 @@
     "sentence": "整理{{target}}が行き届いた部屋は気持ちがいい。"
   },
   {
-    "id": "a1e597e1",
+    "id": "36447694",
     "kanji": "理解",
     "reading": "りかい",
     "meaning": "分かること",
@@ -1345,7 +1345,7 @@
     "sentence": "難しい説明だったが、なんとか{{target}}できた。"
   },
   {
-    "id": "a5e709af",
+    "id": "7dafda53",
     "kanji": "解決",
     "reading": "かいけつ",
     "meaning": "問題が片付く",
@@ -1357,7 +1357,7 @@
     "sentence": "話し合いによってトラブルが無事に{{target}}した。"
   },
   {
-    "id": "49beea45",
+    "id": "ec686ab1",
     "kanji": "決定",
     "reading": "けってい",
     "meaning": "決まること",
@@ -1369,7 +1369,7 @@
     "sentence": "次の生徒会長選挙の日程が{{target}}した。"
   },
   {
-    "id": "e935d9eb",
+    "id": "67b028ed",
     "kanji": "予定",
     "reading": "よてい",
     "meaning": "あらかじめ決める",
@@ -1381,7 +1381,7 @@
     "sentence": "来週の週末はまだ何も{{target}}が入っていない。"
   },
   {
-    "id": "e62fca8f",
+    "id": "13194f60",
     "kanji": "予想",
     "reading": "よそう",
     "meaning": "推測すること",
@@ -1393,7 +1393,7 @@
     "sentence": "試合の結果は誰にも{{target}}できない。"
   },
   {
-    "id": "a6d5af81",
+    "id": "e6444191",
     "kanji": "予習",
     "reading": "よしゅう",
     "meaning": "前もって学ぶ",
@@ -1405,7 +1405,7 @@
     "sentence": "次の授業の範囲を教科書で{{target}}しておく。"
   },
   {
-    "id": "f5a6fec6",
+    "id": "8e4410b7",
     "kanji": "復習",
     "reading": "ふくしゅう",
     "meaning": "おさらいする",
@@ -1417,7 +1417,7 @@
     "sentence": "家に帰ってから今日の授業の{{target}}をする。"
   },
   {
-    "id": "57a37d65",
+    "id": "45932f29",
     "kanji": "学習",
     "reading": "がくしゅう",
     "meaning": "学ぶこと",
@@ -1429,7 +1429,7 @@
     "sentence": "ＡＩが過去のデータを{{target}}して賢くなる。"
   },
   {
-    "id": "accf6faf",
+    "id": "61c51f0d",
     "kanji": "練習",
     "reading": "れんしゅう",
     "meaning": "繰り返して習う",
@@ -1441,7 +1441,7 @@
     "sentence": "ピアノの発表会に向けて毎日{{target}}する。"
   },
   {
-    "id": "f715d9c1",
+    "id": "0dce35b7",
     "kanji": "試合",
     "reading": "しあい",
     "meaning": "スポーツで競う",
@@ -1453,7 +1453,7 @@
     "sentence": "サッカーの{{target}}でゴールを決めた。"
   },
   {
-    "id": "f74b40d1",
+    "id": "ca17e033",
     "kanji": "勝負",
     "reading": "しょうぶ",
     "meaning": "勝ち負け",
@@ -1465,7 +1465,7 @@
     "sentence": "正々堂々と{{target}}しよう。"
   },
   {
-    "id": "21f33fdb",
+    "id": "d18b1ac8",
     "kanji": "優勝",
     "reading": "ゆうしょう",
     "meaning": "１位になる",
@@ -1477,7 +1477,7 @@
     "sentence": "チーム一丸となって大会で{{target}}した。"
   },
   {
-    "id": "250e8386",
+    "id": "a4e16f20",
     "kanji": "選手",
     "reading": "せんしゅ",
     "meaning": "競技をする人",
@@ -1489,7 +1489,7 @@
     "sentence": "オリンピックの代表{{target}}に選ばれる。"
   },
   {
-    "id": "584345f2",
+    "id": "43f57c1b",
     "kanji": "監督",
     "reading": "かんとく",
     "meaning": "指揮する人",
@@ -1501,7 +1501,7 @@
     "sentence": "映画{{target}}の指示で演技をする。"
   },
   {
-    "id": "961a5b15",
+    "id": "152579a9",
     "kanji": "野球",
     "reading": "やきゅう",
     "meaning": "球技の一つ",
@@ -1513,7 +1513,7 @@
     "sentence": "甲子園で高校{{target}}を観戦する。"
   },
   {
-    "id": "973e9923",
+    "id": "2b322590",
     "kanji": "水泳",
     "reading": "すいえい",
     "meaning": "泳ぐこと",
@@ -1525,7 +1525,7 @@
     "sentence": "夏休みにプールで{{target}}の練習をする。"
   },
   {
-    "id": "fb894f24",
+    "id": "321473c1",
     "kanji": "大金",
     "reading": "たいきん",
     "meaning": "たくさんのお金",
@@ -1537,7 +1537,7 @@
     "sentence": "宝くじが当たって{{target}}を手にした。"
   },
   {
-    "id": "0447191e",
+    "id": "be57948a",
     "kanji": "金魚",
     "reading": "きんぎょ",
     "meaning": "観賞魚",
@@ -1549,7 +1549,7 @@
     "sentence": "夏祭りの{{target}}すくいで三匹とった。"
   },
   {
-    "id": "5fb3bb6e",
+    "id": "21dc965a",
     "kanji": "人魚",
     "reading": "にんぎょ",
     "meaning": "伝説の生き物",
@@ -1561,7 +1561,7 @@
     "sentence": "美しい声で歌う{{target}}姫の物語。"
   },
   {
-    "id": "24f34cc2",
+    "id": "44627ae7",
     "kanji": "休日",
     "reading": "きゅうじつ",
     "meaning": "休みの日",
@@ -1573,7 +1573,7 @@
     "sentence": "今度の{{target}}は遊園地に行く予定だ。"
   },
   {
-    "id": "8d1b9f10",
+    "id": "2fed9f39",
     "kanji": "祝日",
     "reading": "しゅくじつ",
     "meaning": "お祝いの日",
@@ -1585,7 +1585,7 @@
     "sentence": "明日は国民の{{target}}で学校が休みだ。"
   },
   {
-    "id": "43d8562f",
+    "id": "8a2c68b9",
     "kanji": "平日",
     "reading": "へいじつ",
     "meaning": "通常の日",
@@ -1597,7 +1597,7 @@
     "sentence": "{{target}}の昼間なら映画館は空いているだろう。"
   },
   {
-    "id": "cf60e8e9",
+    "id": "85ca3862",
     "kanji": "年号",
     "reading": "ねんごう",
     "meaning": "時代の名",
@@ -1609,7 +1609,7 @@
     "sentence": "令和という新しい{{target}}になった。"
   },
   {
-    "id": "efdcf381",
+    "id": "26626967",
     "kanji": "元号",
     "reading": "げんごう",
     "meaning": "年の称号",
@@ -1621,7 +1621,7 @@
     "sentence": "昭和、平成、令和と{{target}}が変わる。"
   },
   {
-    "id": "13792f57",
+    "id": "604a170d",
     "kanji": "平成",
     "reading": "へいせい",
     "meaning": "昭和の次",
@@ -1633,7 +1633,7 @@
     "sentence": "私は{{target}}生まれです。"
   },
   {
-    "id": "a8956920",
+    "id": "a37d6ddc",
     "kanji": "昭和",
     "reading": "しょうわ",
     "meaning": "大正の次",
@@ -1645,7 +1645,7 @@
     "sentence": "{{target}}レトロな雰囲気が漂う喫茶店。"
   },
   {
-    "id": "2f527029",
+    "id": "868459e1",
     "kanji": "大正",
     "reading": "たいしょう",
     "meaning": "明治の次",
@@ -1657,7 +1657,7 @@
     "sentence": "{{target}}ロマンを感じる着物の柄。"
   },
   {
-    "id": "04012355",
+    "id": "42cffb9e",
     "kanji": "明治",
     "reading": "めいじ",
     "meaning": "江戸の次",
@@ -1669,7 +1669,7 @@
     "sentence": "{{target}}維新によって日本は近代化した。"
   },
   {
-    "id": "f926a403",
+    "id": "923e8645",
     "kanji": "江戸",
     "reading": "えど",
     "meaning": "東京の昔の名",
@@ -1681,7 +1681,7 @@
     "sentence": "{{target}}時代は260年以上続いた。"
   },
   {
-    "id": "ae8f0e3e",
+    "id": "932900ce",
     "kanji": "東京",
     "reading": "とうきょう",
     "meaning": "日本の首都",
@@ -1693,7 +1693,7 @@
     "sentence": "{{target}}タワーから夜景を見る。"
   },
   {
-    "id": "5fef51d5",
+    "id": "e9ec5e6b",
     "kanji": "京都",
     "reading": "きょうと",
     "meaning": "古都",
@@ -1705,7 +1705,7 @@
     "sentence": "{{target}}のお寺を巡る修学旅行。"
   },
   {
-    "id": "89ca17f8",
+    "id": "c7bcb5bf",
     "kanji": "大阪",
     "reading": "おおさか",
     "meaning": "西の大都市",
@@ -1717,7 +1717,7 @@
     "sentence": "{{target}}でお好み焼きを食べる。"
   },
   {
-    "id": "a3e383bc",
+    "id": "d0f29ad1",
     "kanji": "地方",
     "reading": "ちほう",
     "meaning": "地域",
@@ -1729,7 +1729,7 @@
     "sentence": "{{target}}によって言葉のアクセントが違う。"
   },
   {
-    "id": "e7dad77d",
+    "id": "b18750ed",
     "kanji": "都市",
     "reading": "とし",
     "meaning": "栄えた町",
@@ -1741,7 +1741,7 @@
     "sentence": "人口が集中する大{{target}}で暮らす。"
   },
   {
-    "id": "10243445",
+    "id": "119ee4a1",
     "kanji": "田舎",
     "reading": "いなか",
     "meaning": "静かな場所",
@@ -1753,7 +1753,7 @@
     "sentence": "夏休みにおばあちゃんの住む{{target}}へ帰省する。"
   },
   {
-    "id": "8829710b",
+    "id": "e6fb8123",
     "kanji": "故郷",
     "reading": "こきょう",
     "meaning": "生まれ故郷",
@@ -1765,7 +1765,7 @@
     "sentence": "{{target}}を離れて10年が経つ。"
   },
   {
-    "id": "f27ca7e2",
+    "id": "c764639e",
     "kanji": "帰省",
     "reading": "きせい",
     "meaning": "実家に帰る",
@@ -1777,7 +1777,7 @@
     "sentence": "お盆休みに実家へ{{target}}する。"
   },
   {
-    "id": "2c85c5a2",
+    "id": "8f76cf0c",
     "kanji": "旅行",
     "reading": "りょこう",
     "meaning": "旅をすること",
@@ -1789,7 +1789,7 @@
     "sentence": "次の連休は温泉{{target}}に行く計画だ。"
   },
   {
-    "id": "9d42211e",
+    "id": "20c3e408",
     "kanji": "観光",
     "reading": "かんこう",
     "meaning": "名所を見る",
@@ -1801,7 +1801,7 @@
     "sentence": "京都の{{target}}名所をバスで回る。"
   },
   {
-    "id": "6d5d4758",
+    "id": "b45e5349",
     "kanji": "名所",
     "reading": "めいしょ",
     "meaning": "有名な場所",
@@ -1813,7 +1813,7 @@
     "sentence": "ここは桜の{{target}}として知られている。"
   },
   {
-    "id": "8c3b65ab",
+    "id": "ae5be175",
     "kanji": "名物",
     "reading": "めいぶつ",
     "meaning": "有名なもの",
@@ -1825,7 +1825,7 @@
     "sentence": "この土地の{{target}}料理を味わう。"
   },
   {
-    "id": "f3c1a124",
+    "id": "f4c6f08f",
     "kanji": "特産",
     "reading": "とくさん",
     "meaning": "その土地の産物",
@@ -1837,7 +1837,7 @@
     "sentence": "りんごはこの県の{{target}}品だ。"
   },
   {
-    "id": "1fac2a0b",
+    "id": "40c0ddf0",
     "kanji": "農業",
     "reading": "のうぎょう",
     "meaning": "作物を育てる",
@@ -1849,7 +1849,7 @@
     "sentence": "祖父は{{target}}を営んでいる。"
   },
   {
-    "id": "bf9bf84e",
+    "id": "199723da",
     "kanji": "工業",
     "reading": "こうぎょう",
     "meaning": "物を作る産業",
@@ -1861,7 +1861,7 @@
     "sentence": "この地域は{{target}}地帯として発展した。"
   },
   {
-    "id": "5b05d241",
+    "id": "4b2ab2d6",
     "kanji": "商業",
     "reading": "しょうぎょう",
     "meaning": "物を売る産業",
@@ -1873,7 +1873,7 @@
     "sentence": "駅前には大きな{{target}}施設がある。"
   },
   {
-    "id": "3c10ae48",
+    "id": "4a51fe12",
     "kanji": "林業",
     "reading": "りんぎょう",
     "meaning": "木を育てる",
@@ -1885,7 +1885,7 @@
     "sentence": "山を守り育てる{{target}}の仕事。"
   },
   {
-    "id": "0786837b",
+    "id": "fd3da459",
     "kanji": "漁業",
     "reading": "ぎょぎょう",
     "meaning": "魚を獲る",
@@ -1897,7 +1897,7 @@
     "sentence": "港町では{{target}}が盛んだ。"
   },
   {
-    "id": "de6404c3",
+    "id": "eb6eec11",
     "kanji": "産業",
     "reading": "さんぎょう",
     "meaning": "生産活動",
@@ -1909,7 +1909,7 @@
     "sentence": "観光はこの国の主要な{{target}}だ。"
   },
   {
-    "id": "17de68d2",
+    "id": "7cfc2abe",
     "kanji": "生産",
     "reading": "せいさん",
     "meaning": "物を作ること",
@@ -1921,7 +1921,7 @@
     "sentence": "この工場では自動車を{{target}}している。"
   },
   {
-    "id": "14f88ca4",
+    "id": "0bdf8239",
     "kanji": "消費",
     "reading": "しょうひ",
     "meaning": "使うこと",
@@ -1933,7 +1933,7 @@
     "sentence": "エネルギーの{{target}}を抑える工夫をする。"
   },
   {
-    "id": "69d40c4c",
+    "id": "af923e04",
     "kanji": "輸入",
     "reading": "ゆにゅう",
     "meaning": "外国から買う",
@@ -1945,7 +1945,7 @@
     "sentence": "海外から原材料を{{target}}する。"
   },
   {
-    "id": "faea76c5",
+    "id": "ea8d5751",
     "kanji": "輸出",
     "reading": "ゆしゅつ",
     "meaning": "外国へ売る",
@@ -1957,7 +1957,7 @@
     "sentence": "日本車は世界中に{{target}}されている。"
   },
   {
-    "id": "d9081291",
+    "id": "6ab9175f",
     "kanji": "貿易",
     "reading": "ぼうえき",
     "meaning": "国同士の取引",
@@ -1969,7 +1969,7 @@
     "sentence": "海外との{{target}}摩擦が問題になる。"
   },
   {
-    "id": "da865ee8",
+    "id": "2ae50597",
     "kanji": "経済",
     "reading": "けいざい",
     "meaning": "お金の動き",
@@ -1981,7 +1981,7 @@
     "sentence": "国の{{target}}が成長する。"
   },
   {
-    "id": "60ea6b7b",
+    "id": "3c06c8f6",
     "kanji": "政治",
     "reading": "せいじ",
     "meaning": "国を治める",
@@ -1993,7 +1993,7 @@
     "sentence": "選挙に行って{{target}}に参加する。"
   },
   {
-    "id": "ee222b03",
+    "id": "6c587d28",
     "kanji": "法律",
     "reading": "ほうりつ",
     "meaning": "国のルール",
@@ -2005,7 +2005,7 @@
     "sentence": "社会の秩序を守るために{{target}}がある。"
   },
   {
-    "id": "e7c9e570",
+    "id": "edd8857f",
     "kanji": "選挙",
     "reading": "せんきょ",
     "meaning": "代表を選ぶ",
@@ -2017,7 +2017,7 @@
     "sentence": "投票所に行って{{target}}の投票をする。"
   },
   {
-    "id": "3bc340a8",
+    "id": "c9c9debb",
     "kanji": "投票",
     "reading": "とうひょう",
     "meaning": "票を入れる",
@@ -2029,7 +2029,7 @@
     "sentence": "清き一票を{{target}}する。"
   },
   {
-    "id": "d9e75920",
+    "id": "02d0310b",
     "kanji": "代表",
     "reading": "だいひょう",
     "meaning": "代わりの人",
@@ -2041,7 +2041,7 @@
     "sentence": "クラスの{{target}}として会議に出席する。"
   },
   {
-    "id": "493ba57b",
+    "id": "da8ab003",
     "kanji": "会議",
     "reading": "かいぎ",
     "meaning": "話し合い",
@@ -2053,7 +2053,7 @@
     "sentence": "重要なプロジェクトについての{{target}}を開く。"
   },
   {
-    "id": "99b880ac",
+    "id": "f26f24d3",
     "kanji": "社長",
     "reading": "しゃちょう",
     "meaning": "会社のトップ",
@@ -2065,7 +2065,7 @@
     "sentence": "会社の経営方針を{{target}}が発表する。"
   },
   {
-    "id": "7ab6ff97",
+    "id": "6f084b67",
     "kanji": "社員",
     "reading": "しゃいん",
     "meaning": "会社の人",
@@ -2077,7 +2077,7 @@
     "sentence": "新入{{target}}の研修が始まる。"
   },
   {
-    "id": "5b31ded0",
+    "id": "b7a49a76",
     "kanji": "会社",
     "reading": "かいしゃ",
     "meaning": "企業",
@@ -2089,7 +2089,7 @@
     "sentence": "父は毎日電車で{{target}}に通っている。"
   },
   {
-    "id": "f9103b1e",
+    "id": "f7c15664",
     "kanji": "職場",
     "reading": "しょくば",
     "meaning": "働く場所",
@@ -2101,7 +2101,7 @@
     "sentence": "明るく働きやすい{{target}}環境を作る。"
   },
   {
-    "id": "f40e8cc2",
+    "id": "e09185cb",
     "kanji": "仕事",
     "reading": "しごと",
     "meaning": "業務",
@@ -2113,7 +2113,7 @@
     "sentence": "今日の{{target}}は早めに終わらせる。"
   },
   {
-    "id": "32587a49",
+    "id": "31b9df35",
     "kanji": "作業",
     "reading": "さぎょう",
     "meaning": "手仕事など",
@@ -2125,7 +2125,7 @@
     "sentence": "工場のラインで組み立て{{target}}を行う。"
   },
   {
-    "id": "0df74cd1",
+    "id": "9dfe50b5",
     "kanji": "労働",
     "reading": "ろうどう",
     "meaning": "働くこと",
@@ -2137,7 +2137,7 @@
     "sentence": "適度な休息は{{target}}の効率を高める。"
   },
   {
-    "id": "5bed07df",
+    "id": "83bcacfb",
     "kanji": "休憩",
     "reading": "きゅうけい",
     "meaning": "休むこと",
@@ -2149,7 +2149,7 @@
     "sentence": "一時間ごとに10分の{{target}}を取る。"
   },
   {
-    "id": "1aa78260",
+    "id": "b842020a",
     "kanji": "衣食住",
     "reading": "いしょくじゅう",
     "meaning": "生活の基本",
@@ -2162,7 +2162,7 @@
     "sentence": "人間が生活していく上で{{target}}は欠かせない。"
   },
   {
-    "id": "aab38566",
+    "id": "c6590e93",
     "kanji": "松竹梅",
     "reading": "しょうちくばい",
     "meaning": "祝いのランク",
@@ -2175,7 +2175,7 @@
     "sentence": "お祝いの席で{{target}}の飾りが飾られている。"
   },
   {
-    "id": "f82b2fd6",
+    "id": "4e955589",
     "kanji": "雪月花",
     "reading": "せつげつか",
     "meaning": "四季の美",
@@ -2188,7 +2188,7 @@
     "sentence": "日本の四季の美しさを{{target}}という言葉で表現する。"
   },
   {
-    "id": "bb7ce82c",
+    "id": "0f0b12e3",
     "kanji": "心技体",
     "reading": "しんぎたい",
     "meaning": "武道の精神",
@@ -2201,7 +2201,7 @@
     "sentence": "武道では{{target}}のバランスが重要視される。"
   },
   {
-    "id": "307d1fae",
+    "id": "abe49098",
     "kanji": "真善美",
     "reading": "しんぜんび",
     "meaning": "理想的価値",
@@ -2214,7 +2214,7 @@
     "sentence": "芸術家は作品を通して{{target}}を追求する。"
   },
   {
-    "id": "da96f6e4",
+    "id": "654ec24f",
     "kanji": "安近短",
     "reading": "あんきんたん",
     "meaning": "手軽なレジャー",
@@ -2227,7 +2227,7 @@
     "sentence": "今年の連休は{{target}}の旅行で済ませる。"
   },
   {
-    "id": "b380114c",
+    "id": "e6d1694d",
     "kanji": "無造作",
     "reading": "むぞうさ",
     "meaning": "気取らない",
@@ -2240,7 +2240,7 @@
     "sentence": "彼はポケットから{{target}}に小銭を取り出した。"
   },
   {
-    "id": "f4e01a9f",
+    "id": "83fcd457",
     "kanji": "無意識",
     "reading": "むいしき",
     "meaning": "意識しない",
@@ -2253,7 +2253,7 @@
     "sentence": "考え事をしていたら、{{target}}のうちに家に着いていた。"
   },
   {
-    "id": "7c3ecf5a",
+    "id": "d4598e6b",
     "kanji": "非常識",
     "reading": "ひじょうしき",
     "meaning": "常識がない",
@@ -2266,7 +2266,7 @@
     "sentence": "夜中に大騒ぎするのは{{target}}な行動だ。"
   },
   {
-    "id": "1b8eeb15",
+    "id": "7d340114",
     "kanji": "未解決",
     "reading": "みかいけつ",
     "meaning": "終わっていない",
@@ -2279,7 +2279,7 @@
     "sentence": "その事件は３０年経った今も{{target}}のままだ。"
   },
   {
-    "id": "b9559d77",
+    "id": "7ae8a7f5",
     "kanji": "未完成",
     "reading": "みかんせい",
     "meaning": "出来ていない",
@@ -2292,7 +2292,7 @@
     "sentence": "このサグラダ・ファミリアは長年{{target}}のままだ。"
   },
   {
-    "id": "a4f0e2fa",
+    "id": "f963700d",
     "kanji": "不自然",
     "reading": "ふしぜん",
     "meaning": "自然でない",
@@ -2305,7 +2305,7 @@
     "sentence": "彼の態度はどこか{{target}}で、何か隠しているようだ。"
   },
   {
-    "id": "830533e0",
+    "id": "dc8dc644",
     "kanji": "不自由",
     "reading": "ふじゆう",
     "meaning": "自由でない",
@@ -2318,7 +2318,7 @@
     "sentence": "怪我をして足が{{target}}な生活を送る。"
   },
   {
-    "id": "ea3a169b",
+    "id": "eec5718a",
     "kanji": "不機嫌",
     "reading": "ふきげん",
     "meaning": "機嫌が悪い",
@@ -2331,7 +2331,7 @@
     "sentence": "朝から雨が降っていて、彼は少し{{target}}だ。"
   },
   {
-    "id": "88c443cd",
+    "id": "6026b829",
     "kanji": "不器用",
     "reading": "ぶきよう",
     "meaning": "下手なこと",
@@ -2344,7 +2344,7 @@
     "sentence": "手先が{{target}}で、折り紙がきれいに折れない。"
   },
   {
-    "id": "c538290f",
+    "id": "9ee3d7ec",
     "kanji": "新幹線",
     "reading": "しんかんせん",
     "meaning": "高速列車",
@@ -2357,7 +2357,7 @@
     "sentence": "{{target}}に乗って東京から大阪まで移動する。"
   },
   {
-    "id": "c1267ff6",
+    "id": "49b072c3",
     "kanji": "消防車",
     "reading": "しょうぼうしゃ",
     "meaning": "火を消す車",
@@ -2370,7 +2370,7 @@
     "sentence": "サイレンを鳴らして{{target}}が現場へ急行する。"
   },
   {
-    "id": "4770b0e3",
+    "id": "cff78270",
     "kanji": "救急車",
     "reading": "きゅうきゅうしゃ",
     "meaning": "患者を運ぶ車",
@@ -2383,7 +2383,7 @@
     "sentence": "体調が悪くなり{{target}}で運ばれた。"
   },
   {
-    "id": "50ad33e8",
+    "id": "7b8fcc7d",
     "kanji": "警察署",
     "reading": "けいさつしょ",
     "meaning": "警察の建物",
@@ -2396,7 +2396,7 @@
     "sentence": "拾った財布を近くの{{target}}に届ける。"
   },
   {
-    "id": "a2c4971c",
+    "id": "379e49a6",
     "kanji": "市役所",
     "reading": "しやくしょ",
     "meaning": "市の機関",
@@ -2409,7 +2409,7 @@
     "sentence": "引越しの手続きをするために{{target}}へ行く。"
   },
   {
-    "id": "f49c2e69",
+    "id": "081ab825",
     "kanji": "図書館",
     "reading": "としょかん",
     "meaning": "本がある所",
@@ -2422,7 +2422,7 @@
     "sentence": "休日は{{target}}で静かに読書を楽しむ。"
   },
   {
-    "id": "5dfe530d",
+    "id": "1f81b834",
     "kanji": "映画館",
     "reading": "えいがかん",
     "meaning": "映画を見る所",
@@ -2435,7 +2435,7 @@
     "sentence": "大きなスクリーンがある{{target}}で新作を見る。"
   },
   {
-    "id": "96d660df",
+    "id": "6cc5ed5c",
     "kanji": "水族館",
     "reading": "すいぞくかん",
     "meaning": "魚がいる所",
@@ -2448,7 +2448,7 @@
     "sentence": "{{target}}でイルカのショーに感動する。"
   },
   {
-    "id": "e79e8c9f",
+    "id": "0ea22fae",
     "kanji": "美術館",
     "reading": "びじゅつかん",
     "meaning": "絵がある所",
@@ -2461,7 +2461,7 @@
     "sentence": "{{target}}でゴッホの名画を鑑賞する。"
   },
   {
-    "id": "4665870f",
+    "id": "82ea04fe",
     "kanji": "博物館",
     "reading": "はくぶつかん",
     "meaning": "展示施設",
@@ -2474,7 +2474,7 @@
     "sentence": "{{target}}で恐竜の化石を見学する。"
   },
   {
-    "id": "13f3abb3",
+    "id": "0754a9c6",
     "kanji": "冷蔵庫",
     "reading": "れいぞうこ",
     "meaning": "冷やす家電",
@@ -2487,7 +2487,7 @@
     "sentence": "アイスクリームが溶けないように{{target}}に入れる。"
   },
   {
-    "id": "d628ad58",
+    "id": "a57affbb",
     "kanji": "洗濯機",
     "reading": "せんたくき",
     "meaning": "洗う家電",
@@ -2500,7 +2500,7 @@
     "sentence": "ボタン一つで洗える全自動{{target}}は便利だ。"
   },
   {
-    "id": "33328ebf",
+    "id": "5a73bf5a",
     "kanji": "掃除機",
     "reading": "そうじき",
     "meaning": "吸う家電",
@@ -2513,7 +2513,7 @@
     "sentence": "ロボット{{target}}が留守の間に部屋をきれいにする。"
   },
   {
-    "id": "301bd8cc",
+    "id": "cf88734c",
     "kanji": "扇風機",
     "reading": "せんぷうき",
     "meaning": "風を送る家電",
@@ -2526,7 +2526,7 @@
     "sentence": "エアコンだけでなく{{target}}も使って涼む。"
   },
   {
-    "id": "74c6e28a",
+    "id": "1702a21f",
     "kanji": "顕微鏡",
     "reading": "けんびきょう",
     "meaning": "拡大する道具",
@@ -2539,7 +2539,7 @@
     "sentence": "理科の実験で{{target}}を使って細胞を見る。"
   },
   {
-    "id": "12a927d6",
+    "id": "83539ee3",
     "kanji": "望遠鏡",
     "reading": "ぼうえんきょう",
     "meaning": "遠くを見る道具",
@@ -2552,7 +2552,7 @@
     "sentence": "天体{{target}}で月のクレーターを観察する。"
   },
   {
-    "id": "6da5c6d8",
+    "id": "e4d9d3a4",
     "kanji": "一期一会",
     "reading": "いちごいちえ",
     "meaning": "一度きりの縁",
@@ -2566,7 +2566,7 @@
     "sentence": "この出会いはまさに{{target}}だと思って大切にする。"
   },
   {
-    "id": "3358286b",
+    "id": "bf7cb68f",
     "kanji": "一石二鳥",
     "reading": "いっせきにちょう",
     "meaning": "二つの利益",
@@ -2580,7 +2580,7 @@
     "sentence": "運動不足も解消できて節約にもなる、まさに{{target}}だ。"
   },
   {
-    "id": "de99710f",
+    "id": "a0bcbed5",
     "kanji": "一心不乱",
     "reading": "いっしんふらん",
     "meaning": "集中する",
@@ -2594,7 +2594,7 @@
     "sentence": "彼は周りの雑音も気にせず、{{target}}に勉強している。"
   },
   {
-    "id": "e9bdb900",
+    "id": "050f2851",
     "kanji": "一生懸命",
     "reading": "いっしょうけんめい",
     "meaning": "全力でやる",
@@ -2608,7 +2608,7 @@
     "sentence": "合格を目指して{{target}}努力する。"
   },
   {
-    "id": "b9c0ec45",
+    "id": "9e61fedc",
     "kanji": "一長一短",
     "reading": "いっちょういったん",
     "meaning": "長所と短所",
@@ -2622,7 +2622,7 @@
     "sentence": "どの案も{{target}}で、なかなか決められない。"
   },
   {
-    "id": "da472d0b",
+    "id": "449afe2c",
     "kanji": "右往左往",
     "reading": "うおうさおう",
     "meaning": "混乱する",
@@ -2636,7 +2636,7 @@
     "sentence": "突然の停電で、人々は{{target}}していた。"
   },
   {
-    "id": "5f3660bf",
+    "id": "ba122de4",
     "kanji": "花鳥風月",
     "reading": "かちょうふうげつ",
     "meaning": "自然の美",
@@ -2650,7 +2650,7 @@
     "sentence": "{{target}}を愛でる風流な心を持つ。"
   },
   {
-    "id": "746c91c6",
+    "id": "cc0e644c",
     "kanji": "起死回生",
     "reading": "きしかいせい",
     "meaning": "逆転する",
@@ -2664,7 +2664,7 @@
     "sentence": "9回裏のホームランで{{target}}の逆転勝利を収めた。"
   },
   {
-    "id": "f8ad94f4",
+    "id": "2c681ef4",
     "kanji": "喜怒哀楽",
     "reading": "きどあいらく",
     "meaning": "感情の変化",
@@ -2678,7 +2678,7 @@
     "sentence": "彼は{{target}}が激しく、表情がころころ変わる。"
   },
   {
-    "id": "8ed7af0c",
+    "id": "ae95477a",
     "kanji": "興味津々",
     "reading": "きょうみしんしん",
     "meaning": "関心が強い",
@@ -2692,7 +2692,7 @@
     "sentence": "子供たちは新しいおもちゃに{{target}}だ。"
   },
   {
-    "id": "97afa4e9",
+    "id": "30f4050f",
     "kanji": "空前絶後",
     "reading": "くうぜんぜつご",
     "meaning": "記録的",
@@ -2706,7 +2706,7 @@
     "sentence": "この記録的な大ヒットは{{target}}の出来事だ。"
   },
   {
-    "id": "86022fda",
+    "id": "26c21438",
     "kanji": "五里霧中",
     "reading": "ごりむちゅう",
     "meaning": "迷うこと",
@@ -2720,7 +2720,7 @@
     "sentence": "手がかりが全くなく、捜査は{{target}}の状態だ。"
   },
   {
-    "id": "e98c5c40",
+    "id": "ab681277",
     "kanji": "言語道断",
     "reading": "ごんごどうだん",
     "meaning": "ひどすぎる",
@@ -2734,7 +2734,7 @@
     "sentence": "お客様に対してそんな態度をとるとは{{target}}だ。"
   },
   {
-    "id": "8d137be3",
+    "id": "c1e48c09",
     "kanji": "才色兼備",
     "reading": "さいしょくけんび",
     "meaning": "才知と美貌",
@@ -2748,7 +2748,7 @@
     "sentence": "彼女は頭も良くて美しい、まさに{{target}}だ。"
   },
   {
-    "id": "d4d56e06",
+    "id": "48b83a9c",
     "kanji": "三日坊主",
     "reading": "みっかぼうず",
     "meaning": "続かない",
@@ -2762,7 +2762,7 @@
     "sentence": "日記を書こうと思ったが、結局{{target}}で終わった。"
   },
   {
-    "id": "f636cc08",
+    "id": "9d68c6b4",
     "kanji": "自画自賛",
     "reading": "じがじさん",
     "meaning": "自分で褒める",
@@ -2776,7 +2776,7 @@
     "sentence": "自分の描いた絵を見て「天才だ」と{{target}}する。"
   },
   {
-    "id": "81bab651",
+    "id": "8373ee9a",
     "kanji": "四苦八苦",
     "reading": "しくはっく",
     "meaning": "苦労する",
@@ -2790,7 +2790,7 @@
     "sentence": "慣れないパソコン操作に{{target}}しながら資料を作った。"
   },
   {
-    "id": "d48becf4",
+    "id": "537b61fd",
     "kanji": "七転八起",
     "reading": "ななころびやおき",
     "meaning": "くじけない",
@@ -2804,7 +2804,7 @@
     "sentence": "{{target}}の精神で、失敗を恐れずに挑戦し続ける。"
   },
   {
-    "id": "ae5d4573",
+    "id": "cbc2adf7",
     "kanji": "十人十色",
     "reading": "じゅうにんといろ",
     "meaning": "人それぞれ",
@@ -2818,7 +2818,7 @@
     "sentence": "好きな食べ物は{{target}}で、みんな違う。"
   },
   {
-    "id": "06661574",
+    "id": "e9dd4d4a",
     "kanji": "心機一転",
     "reading": "しんきいってん",
     "meaning": "気持ちを変える",
@@ -2832,7 +2832,7 @@
     "sentence": "引越しを機に、{{target}}して新しい生活を始める。"
   },
   {
-    "id": "4914cb91",
+    "id": "fa46db62",
     "kanji": "誠心誠意",
     "reading": "せいしんせいい",
     "meaning": "心を込める",
@@ -2846,7 +2846,7 @@
     "sentence": "ミスをしてしまったので、{{target}}謝罪した。"
   },
   {
-    "id": "20ad09f6",
+    "id": "6e9ffe42",
     "kanji": "絶体絶命",
     "reading": "ぜったいぜつめい",
     "meaning": "大ピンチ",
@@ -2860,7 +2860,7 @@
     "sentence": "崖っぷちに追い詰められ、まさに{{target}}の状況だ。"
   },
   {
-    "id": "85525616",
+    "id": "382d0da8",
     "kanji": "千差万別",
     "reading": "せんさばんべつ",
     "meaning": "様々に違う",
@@ -2874,7 +2874,7 @@
     "sentence": "人の性格は{{target}}で、同じ人は一人もいない。"
   },
   {
-    "id": "f8f2cdc9",
+    "id": "91aec96c",
     "kanji": "大器晩成",
     "reading": "たいきばんせい",
     "meaning": "遅咲き",
@@ -2888,7 +2888,7 @@
     "sentence": "彼は若い頃は目立たなかったが、典型的な{{target}}型だ。"
   },
   {
-    "id": "3a9705fa",
+    "id": "6a906e32",
     "kanji": "単刀直入",
     "reading": "たんとうちょくにゅう",
     "meaning": "率直に言う",
@@ -2902,7 +2902,7 @@
     "sentence": "回りくどい言い方はやめて、{{target}}に要点を話そう。"
   },
   {
-    "id": "b4cb14ac",
+    "id": "203996bb",
     "kanji": "朝三暮四",
     "reading": "ちょうさんぼし",
     "meaning": "目先のごまかし",
@@ -2916,7 +2916,7 @@
     "sentence": "そんな提案は{{target}}で、誰も納得しないよ。"
   },
   {
-    "id": "d0c4f7b9",
+    "id": "0f700ed4",
     "kanji": "電光石火",
     "reading": "でんこうせっか",
     "meaning": "素早い動き",
@@ -2930,7 +2930,7 @@
     "sentence": "彼は{{target}}の早業でボールを奪い取った。"
   },
   {
-    "id": "80947fb5",
+    "id": "99111b6e",
     "kanji": "東奔西走",
     "reading": "とうほんせいそう",
     "meaning": "駆け回る",
@@ -2944,7 +2944,7 @@
     "sentence": "彼はプロジェクトの成功のために{{target}}している。"
   },
   {
-    "id": "77856921",
+    "id": "591d2428",
     "kanji": "日進月歩",
     "reading": "にっしんげっぽ",
     "meaning": "急速な進歩",
@@ -2958,7 +2958,7 @@
     "sentence": "科学技術は{{target}}の勢いで進化している。"
   },
   {
-    "id": "3da9a0e5",
+    "id": "46b1c487",
     "kanji": "二束三文",
     "reading": "にそくさんもん",
     "meaning": "安値",
@@ -2972,7 +2972,7 @@
     "sentence": "古本を売りに行ったら、{{target}}で買い叩かれた。"
   },
   {
-    "id": "09e741ed",
+    "id": "042eed92",
     "kanji": "馬耳東風",
     "reading": "ばじとうふう",
     "meaning": "聞き流す",
@@ -2986,7 +2986,7 @@
     "sentence": "いくら注意しても、彼は{{target}}で全く反省していない。"
   },
   {
-    "id": "203cc0fe",
+    "id": "b6b137b2",
     "kanji": "半面教師",
     "reading": "はんめんきょうし",
     "meaning": "悪い見本",
@@ -3000,7 +3000,7 @@
     "sentence": "彼のだらしない態度を{{target}}にして、自分は気をつけよう。"
   },
   {
-    "id": "deaccf95",
+    "id": "2088a050",
     "kanji": "風光明媚",
     "reading": "ふうこうめいび",
     "meaning": "景色が良い",
@@ -3014,7 +3014,7 @@
     "sentence": "京都には{{target}}な観光スポットがたくさんある。"
   },
   {
-    "id": "9072c79c",
+    "id": "3bb50d32",
     "kanji": "不眠不休",
     "reading": "ふみんふきゅう",
     "meaning": "寝ずにやる",
@@ -3028,7 +3028,7 @@
     "sentence": "彼は{{target}}で復旧作業にあたった。"
   },
   {
-    "id": "d6d76fef",
+    "id": "fe89720b",
     "kanji": "平穏無事",
     "reading": "へいおんぶじ",
     "meaning": "穏やか",
@@ -3042,7 +3042,7 @@
     "sentence": "家族みんなが{{target}}に暮らせることが一番の幸せだ。"
   },
   {
-    "id": "fad3eaf2",
+    "id": "1cf67e85",
     "kanji": "抱腹絶倒",
     "reading": "ほうふくぜっとう",
     "meaning": "大笑い",
@@ -3056,7 +3056,7 @@
     "sentence": "その芸人のコントがあまりに面白く、会場は{{target}}だった。"
   },
   {
-    "id": "1f47a35b",
+    "id": "421f87e7",
     "kanji": "無味乾燥",
     "reading": "むみかんそう",
     "meaning": "つまらない",
@@ -3070,7 +3070,7 @@
     "sentence": "数字ばかり並んだ{{target}}な資料を読むのは退屈だ。"
   },
   {
-    "id": "27c0fa82",
+    "id": "dc993135",
     "kanji": "明鏡止水",
     "reading": "めいきょうしすい",
     "meaning": "静かな心",
@@ -3084,7 +3084,7 @@
     "sentence": "試合前、彼は{{target}}の心境で静かに集中していた。"
   },
   {
-    "id": "a861bc89",
+    "id": "af329901",
     "kanji": "有名無実",
     "reading": "ゆうめいむじつ",
     "meaning": "名ばかり",
@@ -3098,7 +3098,7 @@
     "sentence": "そのルールは誰も守っておらず、もはや{{target}}だ。"
   },
   {
-    "id": "7833004e",
+    "id": "519e7f44",
     "kanji": "用意周到",
     "reading": "よういしゅうとう",
     "meaning": "準備万端",
@@ -3112,7 +3112,7 @@
     "sentence": "彼は{{target}}な計画を立てて、旅行に出発した。"
   },
   {
-    "id": "18071429",
+    "id": "e4c9de93",
     "kanji": "利害関係",
     "reading": "りがいかんけい",
     "meaning": "損得",
@@ -3126,7 +3126,7 @@
     "sentence": "ビジネスにおいて{{target}}の調整は難しい問題だ。"
   },
   {
-    "id": "fbd09387",
+    "id": "a2bd0773",
     "kanji": "竜頭蛇尾",
     "reading": "りゅうとうだび",
     "meaning": "尻すぼみ",
@@ -3140,7 +3140,7 @@
     "sentence": "素晴らしい書き出しだったのに、結末が適当で{{target}}な小説だった。"
   },
   {
-    "id": "00e17666",
+    "id": "8b149da7",
     "kanji": "危機一髪",
     "reading": "ききいっぱつ",
     "meaning": "間一髪",
@@ -3154,7 +3154,7 @@
     "sentence": "ブレーキが間に合い、{{target}}で事故を回避した。"
   },
   {
-    "id": "679da166",
+    "id": "4c5d66fe",
     "kanji": "完全燃焼",
     "reading": "かんぜんねんしょう",
     "meaning": "出し切る",
@@ -3168,7 +3168,7 @@
     "sentence": "最後の試合で負けたが、{{target}}できたので悔いはない。"
   },
   {
-    "id": "6c598cc7",
+    "id": "d2ed538c",
     "kanji": "公明正大",
     "reading": "こうめいせいだい",
     "meaning": "公平で正しい",
@@ -3182,7 +3182,7 @@
     "sentence": "選挙は{{target}}に行われなければならない。"
   },
   {
-    "id": "cad5acf2",
+    "id": "86739d10",
     "kanji": "支離滅裂",
     "reading": "しりめつれつ",
     "meaning": "めちゃくちゃ",
@@ -3196,7 +3196,7 @@
     "sentence": "興奮していて、彼の言っていることは{{target}}だ。"
   },
   {
-    "id": "fd842e28",
+    "id": "e7444724",
     "kanji": "森羅万象",
     "reading": "しんらばんしょう",
     "meaning": "宇宙の全て",
@@ -3210,7 +3210,7 @@
     "sentence": "この図鑑には{{target}}の不思議が記されている。"
   },
   {
-    "id": "23282202",
+    "id": "4a1ac962",
     "kanji": "前代未聞",
     "reading": "ぜんだいみもん",
     "meaning": "初めてのこと",
@@ -3224,7 +3224,7 @@
     "sentence": "夏に雪が降るなんて、{{target}}の珍事だ。"
   },
   {
-    "id": "e2ea3d83",
+    "id": "cff65515",
     "kanji": "大同小異",
     "reading": "だいどうしょうい",
     "meaning": "ほぼ同じ",
@@ -3238,7 +3238,7 @@
     "sentence": "二つの案は{{target}}で、どちらを選んでも大差ない。"
   },
   {
-    "id": "d3facf8f",
+    "id": "62811305",
     "kanji": "適材適所",
     "reading": "てきざいてきしょ",
     "meaning": "配置の最適化",
@@ -3252,7 +3252,7 @@
     "sentence": "彼の才能を見抜き、{{target}}の仕事を任せる。"
   },
   {
-    "id": "f0de741c",
+    "id": "4a6bcd6b",
     "kanji": "半信半疑",
     "reading": "はんしんはんぎ",
     "meaning": "疑う気持ち",
@@ -3266,7 +3266,7 @@
     "sentence": "宇宙人を見たという話を、みんな{{target}}で聞いている。"
   },
   {
-    "id": "0b223b21",
+    "id": "5ab03392",
     "kanji": "品行方正",
     "reading": "ひんこうほうせい",
     "meaning": "行いが良い",
@@ -3280,7 +3280,7 @@
     "sentence": "彼は成績優秀で{{target}}な模範生徒だ。"
   },
   {
-    "id": "89076818",
+    "id": "0002e392",
     "kanji": "無我夢中",
     "reading": "むがむちゅう",
     "meaning": "夢中になる",
@@ -3294,7 +3294,7 @@
     "sentence": "大好きなゲームに{{target}}になっていて、時間を忘れていた。"
   },
   {
-    "id": "ec514666",
+    "id": "09580c26",
     "kanji": "油断大敵",
     "reading": "ゆだんたいてき",
     "meaning": "油断は禁物",
@@ -3308,7 +3308,7 @@
     "sentence": "勝っているからといって気を抜くな、{{target}}だぞ。"
   },
   {
-    "id": "6203df1a",
+    "id": "3e0ecd12",
     "kanji": "臨機応変",
     "reading": "りんきおうへん",
     "meaning": "柔軟な対応",
@@ -3322,7 +3322,7 @@
     "sentence": "マニュアル通りではなく、その場の状況を見て{{target}}に行動しよう。"
   },
   {
-    "id": "008f847a",
+    "id": "c0369136",
     "kanji": "老若男女",
     "reading": "ろうにゃくなんにょ",
     "meaning": "全ての人",
@@ -3336,7 +3336,7 @@
     "sentence": "このお祭りは{{target}}問わず誰でも楽しめる。"
   },
   {
-    "id": "6d4b12eb",
+    "id": "2341d5e5",
     "kanji": "和洋折衷",
     "reading": "わようせっちゅう",
     "meaning": "和と洋を混ぜる",
@@ -3350,7 +3350,7 @@
     "sentence": "この部屋は畳にベッドを置いた{{target}}のスタイルだ。"
   },
   {
-    "id": "3cb63f71",
+    "id": "f84ca9fb",
     "kanji": "﻿--- 日常・生活・食べ物 ---",
     "reading": "???",
     "meaning": "",
@@ -3378,7 +3378,7 @@
     "sentence": ""
   },
   {
-    "id": "d9efc7aa",
+    "id": "65926d30",
     "kanji": "料理",
     "reading": "りょうり",
     "meaning": "食事を作る",
@@ -3390,7 +3390,7 @@
     "sentence": "休日は父が手作りの{{target}}を振る舞ってくれる。"
   },
   {
-    "id": "e5b9c808",
+    "id": "ba5399fe",
     "kanji": "野菜",
     "reading": "やさい",
     "meaning": "畑の作物",
@@ -3402,7 +3402,7 @@
     "sentence": "健康のために毎日たっぷりと{{target}}を食べる。"
   },
   {
-    "id": "a4b4502b",
+    "id": "66cea230",
     "kanji": "果物",
     "reading": "くだもの",
     "meaning": "甘い実",
@@ -3414,7 +3414,7 @@
     "sentence": "食後のデザートに季節の{{target}}をいただく。"
   },
   {
-    "id": "02009b04",
+    "id": "1d95402d",
     "kanji": "弁当",
     "reading": "べんとう",
     "meaning": "携帯食",
@@ -3426,7 +3426,7 @@
     "sentence": "天気がいいので公園で{{target}}を広げよう。"
   },
   {
-    "id": "15a8fb2e",
+    "id": "654f27ed",
     "kanji": "茶碗",
     "reading": "ちゃわん",
     "meaning": "ご飯の器",
@@ -3438,7 +3438,7 @@
     "sentence": "お気に入りの{{target}}で食べるとご飯が美味しい。"
   },
   {
-    "id": "da99472b",
+    "id": "b754afa5",
     "kanji": "牛乳",
     "reading": "ぎゅうにゅう",
     "meaning": "ミルク",
@@ -3450,7 +3450,7 @@
     "sentence": "カルシウムを摂るために{{target}}を飲む。"
   },
   {
-    "id": "a0892d12",
+    "id": "e10076be",
     "kanji": "砂糖",
     "reading": "さとう",
     "meaning": "甘味料",
@@ -3462,7 +3462,7 @@
     "sentence": "コーヒーに{{target}}とミルクを入れる。"
   },
   {
-    "id": "69725618",
+    "id": "9c4bc1e5",
     "kanji": "醤油",
     "reading": "しょうゆ",
     "meaning": "調味料",
@@ -3474,7 +3474,7 @@
     "sentence": "刺身に{{target}}をつけて食べる。"
   },
   {
-    "id": "f7157e40",
+    "id": "8fa4aff3",
     "kanji": "封筒",
     "reading": "ふうとう",
     "meaning": "手紙の袋",
@@ -3486,7 +3486,7 @@
     "sentence": "書類を茶色の{{target}}に入れて郵送する。"
   },
   {
-    "id": "1742e9b6",
+    "id": "91961bb2",
     "kanji": "鉛筆",
     "reading": "えんぴつ",
     "meaning": "筆記具",
@@ -3498,7 +3498,7 @@
     "sentence": "削りたての{{target}}でノートに字を書く。"
   },
   {
-    "id": "63546f62",
+    "id": "c1a09456",
     "kanji": "黒板",
     "reading": "こくばん",
     "meaning": "教室の板",
@@ -3510,7 +3510,7 @@
     "sentence": "日直が授業の後に{{target}}をきれいに消す。"
   },
   {
-    "id": "12fde75d",
+    "id": "4ea35d61",
     "kanji": "宿題",
     "reading": "しゅくだい",
     "meaning": "家での課題",
@@ -3522,7 +3522,7 @@
     "sentence": "夏休みの{{target}}を早めに終わらせる。"
   },
   {
-    "id": "a33319d8",
+    "id": "99fd80c1",
     "kanji": "制服",
     "reading": "せいふく",
     "meaning": "学校の服",
@@ -3534,7 +3534,7 @@
     "sentence": "新しい{{target}}に袖を通して登校する。"
   },
   {
-    "id": "094a020e",
+    "id": "abb6b246",
     "kanji": "廊下",
     "reading": "ろうか",
     "meaning": "通路",
@@ -3546,7 +3546,7 @@
     "sentence": "学校の{{target}}を走ってはいけません。"
   },
   {
-    "id": "29f8153e",
+    "id": "aefbd839",
     "kanji": "階段",
     "reading": "かいだん",
     "meaning": "段差の道",
@@ -3558,7 +3558,7 @@
     "sentence": "エレベーターを使わずに{{target}}で上がる。"
   },
   {
-    "id": "c9ef6887",
+    "id": "97f105cb",
     "kanji": "屋上",
     "reading": "おくじょう",
     "meaning": "屋根の上",
@@ -3570,7 +3570,7 @@
     "sentence": "{{target}}から街の景色を一望する。"
   },
   {
-    "id": "b9b701da",
+    "id": "98837b3d",
     "kanji": "玄関",
     "reading": "げんかん",
     "meaning": "入り口",
@@ -3582,7 +3582,7 @@
     "sentence": "{{target}}に靴をきれいに揃えて脱ぐ。"
   },
   {
-    "id": "bfd2b175",
+    "id": "dbefa066",
     "kanji": "庭園",
     "reading": "ていえん",
     "meaning": "庭",
@@ -3594,7 +3594,7 @@
     "sentence": "日本{{target}}の静けさに心が洗われる。"
   },
   {
-    "id": "b0e29090",
+    "id": "f9d57850",
     "kanji": "公園",
     "reading": "こうえん",
     "meaning": "広場",
@@ -3606,7 +3606,7 @@
     "sentence": "休日の{{target}}は家族連れで賑わっている。"
   },
   {
-    "id": "e2a08fe2",
+    "id": "f8145da0",
     "kanji": "病院",
     "reading": "びょういん",
     "meaning": "医療機関",
@@ -3618,7 +3618,7 @@
     "sentence": "風邪を引いたので近くの{{target}}に行く。"
   },
   {
-    "id": "e54f1bd9",
+    "id": "0d7d6d3f",
     "kanji": "道路",
     "reading": "どうろ",
     "meaning": "道",
@@ -3630,7 +3630,7 @@
     "sentence": "この{{target}}は交通量が多いので注意が必要だ。"
   },
   {
-    "id": "49019d86",
+    "id": "373a5971",
     "kanji": "信号",
     "reading": "しんごう",
     "meaning": "交通の光",
@@ -3642,7 +3642,7 @@
     "sentence": "横断歩道の{{target}}が青に変わるのを待つ。"
   },
   {
-    "id": "d271e235",
+    "id": "b3c77b00",
     "kanji": "電車",
     "reading": "でんしゃ",
     "meaning": "列車",
@@ -3654,7 +3654,7 @@
     "sentence": "満員の{{target}}に揺られて通勤する。"
   },
   {
-    "id": "5b126f87",
+    "id": "a2531a1a",
     "kanji": "切符",
     "reading": "きっぷ",
     "meaning": "乗車券",
@@ -3666,7 +3666,7 @@
     "sentence": "改札口に{{target}}を通してホームに入る。"
   },
   {
-    "id": "9b117787",
+    "id": "5a67771a",
     "kanji": "空港",
     "reading": "くうこう",
     "meaning": "飛行場のターミナル",
@@ -3678,7 +3678,7 @@
     "sentence": "国際{{target}}で海外からの客を出迎える。"
   },
   {
-    "id": "5c7a1c65",
+    "id": "9f4adfc3",
     "kanji": "港町",
     "reading": "みなとまち",
     "meaning": "港のある町",
@@ -3690,7 +3690,7 @@
     "sentence": "{{target}}の市場で新鮮な魚を買う。"
   },
   {
-    "id": "cab26fe1",
+    "id": "b4d08939",
     "kanji": "温泉",
     "reading": "おんせん",
     "meaning": "湧き出る湯",
@@ -3702,7 +3702,7 @@
     "sentence": "露天風呂のある{{target}}で旅の疲れを癒やす。"
   },
   {
-    "id": "1a2afdb0",
+    "id": "3891d4de",
     "kanji": "筋肉",
     "reading": "きんにく",
     "meaning": "体の肉",
@@ -3714,7 +3714,7 @@
     "sentence": "ジムでトレーニングをして{{target}}を鍛える。"
   },
   {
-    "id": "f1198189",
+    "id": "8c1ad00b",
     "kanji": "心臓",
     "reading": "しんぞう",
     "meaning": "鼓動する臓器",
@@ -3726,7 +3726,7 @@
     "sentence": "緊張して{{target}}がドキドキと高鳴る。"
   },
   {
-    "id": "bfdac5f4",
+    "id": "ce2296b0",
     "kanji": "睡眠",
     "reading": "すいみん",
     "meaning": "眠り",
@@ -3738,7 +3738,7 @@
     "sentence": "健康のためには十分な{{target}}が必要だ。"
   },
   {
-    "id": "4396315b",
+    "id": "5cccbe04",
     "kanji": "呼吸",
     "reading": "こきゅう",
     "meaning": "息遣い",
@@ -3750,7 +3750,7 @@
     "sentence": "深{{target}}をして心を落ち着かせる。"
   },
   {
-    "id": "7b6c0d46",
+    "id": "96c1fa5e",
     "kanji": "表情",
     "reading": "ひょうじょう",
     "meaning": "顔つき",
@@ -3762,7 +3762,7 @@
     "sentence": "彼女はとても豊かな{{target}}で話をする。"
   },
   {
-    "id": "26603352",
+    "id": "5b6c1ba3",
     "kanji": "笑顔",
     "reading": "えがお",
     "meaning": "笑い顔",
@@ -3774,7 +3774,7 @@
     "sentence": "赤ちゃんの無邪気な{{target}}に癒やされる。"
   },
   {
-    "id": "a345c57d",
+    "id": "8d639d82",
     "kanji": "涙声",
     "reading": "なみだごえ",
     "meaning": "泣く声",
@@ -3786,7 +3786,7 @@
     "sentence": "別れの時、彼女は{{target}}で「さようなら」と言った。"
   },
   {
-    "id": "dfdb4cbf",
+    "id": "204251c0",
     "kanji": "握手",
     "reading": "あくしゅ",
     "meaning": "手を握る",
@@ -3798,7 +3798,7 @@
     "sentence": "試合後にお互いの健闘を称えて{{target}}を交わす。"
   },
   {
-    "id": "7f794086",
+    "id": "ab835ab5",
     "kanji": "拍手",
     "reading": "はくしゅ",
     "meaning": "手を叩く",
@@ -3810,7 +3810,7 @@
     "sentence": "素晴らしい演奏に会場から盛大な{{target}}が送られた。"
   },
   {
-    "id": "477f16ae",
+    "id": "04610d22",
     "kanji": "銀行",
     "reading": "ぎんこう",
     "meaning": "お金を預ける所",
@@ -3822,7 +3822,7 @@
     "sentence": "駅前の{{target}}でお金を下ろす。"
   },
   {
-    "id": "8204a336",
+    "id": "f77f21e0",
     "kanji": "郵便",
     "reading": "ゆうびん",
     "meaning": "手紙を送る",
@@ -3834,7 +3834,7 @@
     "sentence": "近くの{{target}}局から小包を送る。"
   },
   {
-    "id": "3bd24421",
+    "id": "7a238827",
     "kanji": "住所",
     "reading": "じゅうしょ",
     "meaning": "住んでいる所",
@@ -3846,7 +3846,7 @@
     "sentence": "年賀状を送るために友人の{{target}}を聞く。"
   },
   {
-    "id": "8ec5587b",
+    "id": "34a75701",
     "kanji": "氏名",
     "reading": "しめい",
     "meaning": "名前",
@@ -3858,7 +3858,7 @@
     "sentence": "テスト用紙に{{target}}を記入する。"
   },
   {
-    "id": "e0616606",
+    "id": "aefe0ea8",
     "kanji": "年齢",
     "reading": "ねんれい",
     "meaning": "年の数",
@@ -3870,7 +3870,7 @@
     "sentence": "アンケートに性別と{{target}}を回答する。"
   },
   {
-    "id": "f71dcfd3",
+    "id": "37e3d3ae",
     "kanji": "性別",
     "reading": "せいべつ",
     "meaning": "男女の別",
@@ -3882,7 +3882,7 @@
     "sentence": "このトイレは{{target}}に関係なく誰でも使える。"
   },
   {
-    "id": "a84ecc4d",
+    "id": "13d9d71a",
     "kanji": "職業",
     "reading": "しょくぎょう",
     "meaning": "仕事",
@@ -3894,7 +3894,7 @@
     "sentence": "将来つきたい{{target}}について考える。"
   },
   {
-    "id": "df997ac4",
+    "id": "057f2ff5",
     "kanji": "趣味",
     "reading": "しゅみ",
     "meaning": "楽しみ",
@@ -3906,7 +3906,7 @@
     "sentence": "私の{{target}}は映画鑑賞と読書です。"
   },
   {
-    "id": "7ab2c4d4",
+    "id": "51ac5ad0",
     "kanji": "特技",
     "reading": "とくぎ",
     "meaning": "得意なこと",
@@ -3918,7 +3918,7 @@
     "sentence": "履歴書の{{target}}欄に「英会話」と書く。"
   },
   {
-    "id": "e36b6699",
+    "id": "ce0ac062",
     "kanji": "性格",
     "reading": "せいかく",
     "meaning": "人柄",
@@ -3930,7 +3930,7 @@
     "sentence": "彼は明るく前向きな{{target}}の持ち主だ。"
   },
   {
-    "id": "68b45c51",
+    "id": "7ba1ea43",
     "kanji": "感情",
     "reading": "かんじょう",
     "meaning": "心の動き",
@@ -3942,7 +3942,7 @@
     "sentence": "怒りの{{target}}を抑えて冷静に話す。"
   },
   {
-    "id": "753ead27",
+    "id": "396a50c6",
     "kanji": "感動",
     "reading": "かんどう",
     "meaning": "心を動かされる",
@@ -3954,7 +3954,7 @@
     "sentence": "映画のラストシーンに深く{{target}}した。"
   },
   {
-    "id": "325cfbfb",
+    "id": "8d62c9cd",
     "kanji": "感心",
     "reading": "かんしん",
     "meaning": "感銘を受ける",
@@ -3966,7 +3966,7 @@
     "sentence": "彼の真面目な働きぶりには{{target}}する。"
   },
   {
-    "id": "32e3a378",
+    "id": "e3fcdd7b",
     "kanji": "感謝",
     "reading": "かんしゃ",
     "meaning": "ありがとうの心",
@@ -3978,7 +3978,7 @@
     "sentence": "日頃の{{target}}を込めてプレゼントを贈る。"
   },
   {
-    "id": "10dfc480",
+    "id": "df6fa1f6",
     "kanji": "反省",
     "reading": "はんせい",
     "meaning": "振り返る",
@@ -3990,7 +3990,7 @@
     "sentence": "失敗を{{target}}して次は同じミスをしない。"
   },
   {
-    "id": "280bca65",
+    "id": "bbce3c8e",
     "kanji": "後悔",
     "reading": "こうかい",
     "meaning": "悔やむ",
@@ -4002,7 +4002,7 @@
     "sentence": "あの時もっと勉強しておけばよかったと{{target}}する。"
   },
   {
-    "id": "a4c74f51",
+    "id": "072e9cc2",
     "kanji": "満足",
     "reading": "まんぞく",
     "meaning": "満ち足りる",
@@ -4014,7 +4014,7 @@
     "sentence": "美味しい料理を食べてお腹いっぱいになり{{target}}した。"
   },
   {
-    "id": "ba44e192",
+    "id": "309fcbe5",
     "kanji": "納得",
     "reading": "なっとく",
     "meaning": "理解して認める",
@@ -4026,7 +4026,7 @@
     "sentence": "先生の説明を聞いてようやく{{target}}がいった。"
   },
   {
-    "id": "11dc4fe8",
+    "id": "5a018bbd",
     "kanji": "期待",
     "reading": "きたい",
     "meaning": "当てにする",
@@ -4038,7 +4038,7 @@
     "sentence": "彼の活躍にみんなが{{target}}している。"
   },
   {
-    "id": "56d25ebe",
+    "id": "0a38cac6",
     "kanji": "失望",
     "reading": "しつぼう",
     "meaning": "がっかりする",
@@ -4050,7 +4050,7 @@
     "sentence": "結果が出せなくて周りを{{target}}させてしまった。"
   },
   {
-    "id": "f9f45204",
+    "id": "845b7b91",
     "kanji": "絶望",
     "reading": "ぜつぼう",
     "meaning": "希望を失う",
@@ -4062,7 +4062,7 @@
     "sentence": "試験に落ちて{{target}}の淵に立たされた。"
   },
   {
-    "id": "f70279f7",
+    "id": "56ccab3c",
     "kanji": "緊張",
     "reading": "きんちょう",
     "meaning": "張り詰める",
@@ -4074,7 +4074,7 @@
     "sentence": "発表会の前で{{target}}して手が震える。"
   },
   {
-    "id": "5ef67dd8",
+    "id": "98c246f6",
     "kanji": "興奮",
     "reading": "こうふん",
     "meaning": "高ぶる",
@@ -4086,7 +4086,7 @@
     "sentence": "試合の劇的な展開に観客は{{target}}した。"
   },
   {
-    "id": "d816655e",
+    "id": "a5ad8f65",
     "kanji": "熱中",
     "reading": "ねっちゅう",
     "meaning": "夢中になる",
@@ -4098,7 +4098,7 @@
     "sentence": "時間を忘れてゲームに{{target}}する。"
   },
   {
-    "id": "85198474",
+    "id": "f643af0d",
     "kanji": "集中",
     "reading": "しゅうちゅう",
     "meaning": "一点に集める",
@@ -4110,7 +4110,7 @@
     "sentence": "周りの音を遮断して勉強に{{target}}する。"
   },
   {
-    "id": "c3ee753d",
+    "id": "59b92c03",
     "kanji": "意識",
     "reading": "いしき",
     "meaning": "自覚する",
@@ -4122,7 +4122,7 @@
     "sentence": "健康を{{target}}して野菜を多く摂る。"
   },
   {
-    "id": "88d451c8",
+    "id": "04c92fc7",
     "kanji": "感覚",
     "reading": "かんかく",
     "meaning": "感じ方",
@@ -4134,7 +4134,7 @@
     "sentence": "久しぶりに運動して体の{{target}}を取り戻す。"
   },
   {
-    "id": "bc9a7ea9",
+    "id": "5282e4d8",
     "kanji": "記憶",
     "reading": "きおく",
     "meaning": "覚えていること",
@@ -4146,7 +4146,7 @@
     "sentence": "幼い頃の{{target}}が鮮明に蘇る。"
   },
   {
-    "id": "c8edd68b",
+    "id": "9ea1af85",
     "kanji": "想像",
     "reading": "そうぞう",
     "meaning": "思い描く",
@@ -4158,7 +4158,7 @@
     "sentence": "小説を読みながら登場人物の姿を{{target}}する。"
   },
   {
-    "id": "769ca1e5",
+    "id": "07de9ec9",
     "kanji": "理想",
     "reading": "りそう",
     "meaning": "最高の状態",
@@ -4170,7 +4170,7 @@
     "sentence": "現実は厳しく、{{target}}通りにはいかない。"
   },
   {
-    "id": "e436fa88",
+    "id": "e42f00f8",
     "kanji": "現実",
     "reading": "げんじつ",
     "meaning": "実際の事柄",
@@ -4182,7 +4182,7 @@
     "sentence": "夢ばかり見ていないで{{target}}を見なさい。"
   },
   {
-    "id": "1de0a665",
+    "id": "bcdce126",
     "kanji": "目標",
     "reading": "もくひょう",
     "meaning": "目指すもの",
@@ -4194,7 +4194,7 @@
     "sentence": "今年の{{target}}は漢字検定に合格することだ。"
   },
   {
-    "id": "0ad88165",
+    "id": "90d520d3",
     "kanji": "目的",
     "reading": "もくてき",
     "meaning": "目指す事柄",
@@ -4206,7 +4206,7 @@
     "sentence": "この旅行の主な{{target}}は温泉に入ることだ。"
   },
   {
-    "id": "740af904",
+    "id": "2d8433e3",
     "kanji": "手段",
     "reading": "しゅだん",
     "meaning": "方法",
@@ -4218,7 +4218,7 @@
     "sentence": "目的のためなら{{target}}を選ばない。"
   },
   {
-    "id": "9abdf197",
+    "id": "a3994138",
     "kanji": "方法",
     "reading": "ほうほう",
     "meaning": "やり方",
@@ -4230,7 +4230,7 @@
     "sentence": "問題を解決するための良い{{target}}を考える。"
   },
   {
-    "id": "ebd43a3e",
+    "id": "30fa1e9d",
     "kanji": "理由",
     "reading": "りゆう",
     "meaning": "わけ",
@@ -4242,7 +4242,7 @@
     "sentence": "遅刻した{{target}}を先生に説明する。"
   },
   {
-    "id": "e2e1c92b",
+    "id": "3648ac63",
     "kanji": "原因",
     "reading": "げんいん",
     "meaning": "元になる事柄",
@@ -4254,7 +4254,7 @@
     "sentence": "事故の{{target}}を詳しく調査する。"
   },
   {
-    "id": "ecb9cd2d",
+    "id": "fd5f6e40",
     "kanji": "結果",
     "reading": "けっか",
     "meaning": "結末",
@@ -4266,7 +4266,7 @@
     "sentence": "努力の{{target}}が実って合格できた。"
   },
   {
-    "id": "cc325781",
+    "id": "a9e8b20d",
     "kanji": "結論",
     "reading": "けつろん",
     "meaning": "最終的な判断",
@@ -4278,7 +4278,7 @@
     "sentence": "長い議論の末、ようやく{{target}}が出た。"
   },
   {
-    "id": "1731b9ab",
+    "id": "ea3cb8a4",
     "kanji": "議論",
     "reading": "ぎろん",
     "meaning": "話し合う",
@@ -4290,7 +4290,7 @@
     "sentence": "環境問題について活発に{{target}}する。"
   },
   {
-    "id": "298be409",
+    "id": "1d7d8f0a",
     "kanji": "話題",
     "reading": "わだい",
     "meaning": "話のネタ",
@@ -4302,7 +4302,7 @@
     "sentence": "最近ニュースで{{target}}になっている事件。"
   },
   {
-    "id": "7b3ca7a5",
+    "id": "4c6cbefe",
     "kanji": "情報",
     "reading": "じょうほう",
     "meaning": "知らせ",
@@ -4314,7 +4314,7 @@
     "sentence": "インターネットで最新の{{target}}を集める。"
   },
   {
-    "id": "0eb4d80b",
+    "id": "6562533a",
     "kanji": "知識",
     "reading": "ちしき",
     "meaning": "知っていること",
@@ -4326,7 +4326,7 @@
     "sentence": "本を読んで幅広い{{target}}を身につける。"
   },
   {
-    "id": "e3acb089",
+    "id": "1fe5967f",
     "kanji": "知恵",
     "reading": "ちえ",
     "meaning": "役立つ考え",
@@ -4338,7 +4338,7 @@
     "sentence": "おばあちゃんの生活の{{target}}を教わる。"
   },
   {
-    "id": "250ac42a",
+    "id": "5a105e40",
     "kanji": "常識",
     "reading": "じょうしき",
     "meaning": "当たり前のこと",
@@ -4350,7 +4350,7 @@
     "sentence": "社会人としての最低限の{{target}}を身につける。"
   },
   {
-    "id": "8982ba49",
+    "id": "5592c889",
     "kanji": "文化",
     "reading": "ぶんか",
     "meaning": "生活様式など",
@@ -4362,7 +4362,7 @@
     "sentence": "日本の伝統的な{{target}}を海外に紹介する。"
   },
   {
-    "id": "0b54b777",
+    "id": "94ca52b6",
     "kanji": "文明",
     "reading": "ぶんめい",
     "meaning": "進んだ技術",
@@ -4374,7 +4374,7 @@
     "sentence": "古代エジプト{{target}}の遺跡を発掘する。"
   },
   {
-    "id": "295d0375",
+    "id": "415455b6",
     "kanji": "戦争",
     "reading": "せんそう",
     "meaning": "戦い",
@@ -4386,7 +4386,7 @@
     "sentence": "二度と悲惨な{{target}}を繰り返してはならない。"
   },
   {
-    "id": "e20afeb4",
+    "id": "58230a76",
     "kanji": "歴史",
     "reading": "れきし",
     "meaning": "過去の経緯",
@@ -4398,7 +4398,7 @@
     "sentence": "この町には古い{{target}}がある。"
   },
   {
-    "id": "a430681d",
+    "id": "6fc68c20",
     "kanji": "時代",
     "reading": "じだい",
     "meaning": "時の区分",
@@ -4410,7 +4410,7 @@
     "sentence": "スマートフォンの登場で新しい{{target}}が来た。"
   },
   {
-    "id": "af9bba19",
+    "id": "018b7a25",
     "kanji": "世紀",
     "reading": "せいき",
     "meaning": "百年の単位",
@@ -4422,7 +4422,7 @@
     "sentence": "21{{target}}は宇宙開発が進むだろう。"
   },
   {
-    "id": "81e818f1",
+    "id": "f7406f22",
     "kanji": "世界",
     "reading": "せかい",
     "meaning": "地球全体",
@@ -4434,7 +4434,7 @@
     "sentence": "{{target}}中を旅して回りたい。"
   },
   {
-    "id": "08a34577",
+    "id": "7c4fa153",
     "kanji": "国際",
     "reading": "こくさい",
     "meaning": "国と国の間",
@@ -4446,7 +4446,7 @@
     "sentence": "{{target}}的な交流イベントに参加する。"
   },
   {
-    "id": "e167b96a",
+    "id": "de7bc45a",
     "kanji": "地球",
     "reading": "ちきゅう",
     "meaning": "私たちの星",
@@ -4458,7 +4458,7 @@
     "sentence": "美しい{{target}}の環境を守ろう。"
   },
   {
-    "id": "459132ee",
+    "id": "eecdb7ee",
     "kanji": "環境",
     "reading": "かんきょう",
     "meaning": "取り巻く状況",
@@ -4470,7 +4470,7 @@
     "sentence": "自然{{target}}を保護する活動に参加する。"
   },
   {
-    "id": "294a9d02",
+    "id": "1aaced91",
     "kanji": "自然",
     "reading": "しぜん",
     "meaning": "あるがまま",
@@ -4482,7 +4482,7 @@
     "sentence": "休日は豊かな{{target}}の中でリフレッシュする。"
   },
   {
-    "id": "3eb34733",
+    "id": "eb88a62c",
     "kanji": "植物",
     "reading": "しょくぶつ",
     "meaning": "草木",
@@ -4494,7 +4494,7 @@
     "sentence": "ベランダで観葉{{target}}を育てる。"
   },
   {
-    "id": "0d58b3ad",
+    "id": "efa746e0",
     "kanji": "動物",
     "reading": "どうぶつ",
     "meaning": "生き物",
@@ -4506,7 +4506,7 @@
     "sentence": "{{target}}園でライオンを見る。"
   },
   {
-    "id": "8b733988",
+    "id": "ae605c7b",
     "kanji": "生物",
     "reading": "せいぶつ",
     "meaning": "生きているもの",
@@ -4518,7 +4518,7 @@
     "sentence": "海洋{{target}}の生態を研究する。"
   },
   {
-    "id": "f27e217a",
+    "id": "807b22b5",
     "kanji": "生命",
     "reading": "せいめい",
     "meaning": "命",
@@ -4530,7 +4530,7 @@
     "sentence": "すべての{{target}}は尊いものだ。"
   },
   {
-    "id": "0b9a44c9",
+    "id": "22ec2e5d",
     "kanji": "人生",
     "reading": "じんせい",
     "meaning": "人の一生",
@@ -4542,7 +4542,7 @@
     "sentence": "一度きりの{{target}}を悔いなく生きたい。"
   },
   {
-    "id": "133c7827",
+    "id": "da48c000",
     "kanji": "人間",
     "reading": "にんげん",
     "meaning": "人",
@@ -4554,7 +4554,7 @@
     "sentence": "{{target}}は考える葦である。"
   },
   {
-    "id": "701c04f7",
+    "id": "734c188a",
     "kanji": "組織",
     "reading": "そしき",
     "meaning": "組み立て",
@@ -4566,7 +4566,7 @@
     "sentence": "会社の{{target}}図を見て部署を確認する。"
   },
   {
-    "id": "5a329d9b",
+    "id": "d8cc4e65",
     "kanji": "集団",
     "reading": "しゅうだん",
     "meaning": "集まり",
@@ -4578,7 +4578,7 @@
     "sentence": "渡り鳥が{{target}}で空を飛んでいく。"
   },
   {
-    "id": "85d60b32",
+    "id": "cfbf313b",
     "kanji": "個人",
     "reading": "こじん",
     "meaning": "一人一人",
@@ -4590,7 +4590,7 @@
     "sentence": "{{target}}の尊重が大切だ。"
   },
   {
-    "id": "79eab837",
+    "id": "a9a362b7",
     "kanji": "権利",
     "reading": "けんり",
     "meaning": "正当な要求",
@@ -4602,7 +4602,7 @@
     "sentence": "国民には教育を受ける{{target}}がある。"
   },
   {
-    "id": "a49b718b",
+    "id": "5ef08a92",
     "kanji": "義務",
     "reading": "ぎむ",
     "meaning": "果たすべきこと",
@@ -4614,7 +4614,7 @@
     "sentence": "納税は国民の{{target}}だ。"
   },
   {
-    "id": "f530cdd8",
+    "id": "76226718",
     "kanji": "責任",
     "reading": "せきにん",
     "meaning": "引き受けること",
@@ -4626,7 +4626,7 @@
     "sentence": "自分の行動に{{target}}を持つ。"
   },
   {
-    "id": "2c4e943b",
+    "id": "b6d70e18",
     "kanji": "挨拶",
     "reading": "あいさつ",
     "meaning": "礼儀",
@@ -4638,7 +4638,7 @@
     "sentence": "大きな声で「おはよう」と{{target}}をする。"
   },
   {
-    "id": "143e6212",
+    "id": "12a1c080",
     "kanji": "綺麗",
     "reading": "きれい",
     "meaning": "美しい",
@@ -4650,7 +4650,7 @@
     "sentence": "夜空に{{target}}な花火が打ち上がった。"
   },
   {
-    "id": "7136f132",
+    "id": "807456b9",
     "kanji": "完璧",
     "reading": "かんぺき",
     "meaning": "欠点なし",
@@ -4662,7 +4662,7 @@
     "sentence": "彼のリハーサルはミス一つない{{target}}なものだった。"
   },
   {
-    "id": "0cb7d4c7",
+    "id": "b40c83b6",
     "kanji": "繊細",
     "reading": "せんさい",
     "meaning": "細やか",
@@ -4674,7 +4674,7 @@
     "sentence": "このガラス細工はとても{{target}}な作りをしている。"
   },
   {
-    "id": "27b771be",
+    "id": "ec392e50",
     "kanji": "憂鬱",
     "reading": "ゆううつ",
     "meaning": "晴れない気分",
@@ -4686,7 +4686,7 @@
     "sentence": "雨が続くと気分が{{target}}になる。"
   },
   {
-    "id": "674f18d0",
+    "id": "07a11641",
     "kanji": "躊躇",
     "reading": "ちゅうちょ",
     "meaning": "ためらう",
@@ -4698,7 +4698,7 @@
     "sentence": "彼は一瞬{{target}}したが、意を決して扉を開けた。"
   },
   {
-    "id": "c9e842a2",
+    "id": "2ac64d74",
     "kanji": "冒険",
     "reading": "ぼうけん",
     "meaning": "危険を冒す",
@@ -4710,7 +4710,7 @@
     "sentence": "地図を片手に未知の世界へ{{target}}に出かける。"
   },
   {
-    "id": "7739e871",
+    "id": "7926ae9a",
     "kanji": "魔法",
     "reading": "まほう",
     "meaning": "不思議な術",
@@ -4722,7 +4722,7 @@
     "sentence": "まるで{{target}}にかかったような不思議な体験をした。"
   },
   {
-    "id": "11bce10f",
+    "id": "ba4a7bc0",
     "kanji": "奇跡",
     "reading": "きせき",
     "meaning": "不思議な出来事",
@@ -4734,7 +4734,7 @@
     "sentence": "最後まで諦めなかった結果、逆転勝利の{{target}}が起きた。"
   },
   {
-    "id": "96c80abf",
+    "id": "71d13453",
     "kanji": "英雄",
     "reading": "えいゆう",
     "meaning": "優れた人",
@@ -4746,7 +4746,7 @@
     "sentence": "国を救った彼は{{target}}として称えられた。"
   },
   {
-    "id": "5d7e7dcd",
+    "id": "f52e95c2",
     "kanji": "伝説",
     "reading": "でんせつ",
     "meaning": "言い伝え",
@@ -4758,7 +4758,7 @@
     "sentence": "この湖には古くからの龍の{{target}}がある。"
   },
   {
-    "id": "172f8106",
+    "id": "02e2f752",
     "kanji": "神話",
     "reading": "しんわ",
     "meaning": "神々の話",
@@ -4770,7 +4770,7 @@
     "sentence": "ギリシャ{{target}}の神々について本で読む。"
   },
   {
-    "id": "cdcd84be",
+    "id": "109d3098",
     "kanji": "宇宙",
     "reading": "うちゅう",
     "meaning": "天体の空間",
@@ -4782,7 +4782,7 @@
     "sentence": "ロケットに乗って広大な{{target}}へ旅立つ。"
   },
   {
-    "id": "881e9b2e",
+    "id": "96d9d254",
     "kanji": "惑星",
     "reading": "わくせい",
     "meaning": "回る星",
@@ -4794,7 +4794,7 @@
     "sentence": "地球は太陽系の第三{{target}}だ。"
   },
   {
-    "id": "7c9497e3",
+    "id": "b1ec45e7",
     "kanji": "衛星",
     "reading": "えいせい",
     "meaning": "惑星を回る星",
@@ -4806,7 +4806,7 @@
     "sentence": "月は地球の周りを回る{{target}}だ。"
   },
   {
-    "id": "f9e76b54",
+    "id": "d2bd5e02",
     "kanji": "彗星",
     "reading": "すいせい",
     "meaning": "ほうき星",
@@ -4818,7 +4818,7 @@
     "sentence": "夜空に現れた{{target}}を望遠鏡で観察する。"
   },
   {
-    "id": "3eaf3ff9",
+    "id": "3e16a28d",
     "kanji": "流星",
     "reading": "りゅうせい",
     "meaning": "流れ星",
@@ -4830,7 +4830,7 @@
     "sentence": "{{target}}に願い事を3回唱える。"
   },
   {
-    "id": "cc8cfd07",
+    "id": "fb9b2d90",
     "kanji": "深海",
     "reading": "しんかい",
     "meaning": "深い海",
@@ -4842,7 +4842,7 @@
     "sentence": "{{target}}にはまだ知られていない生物がたくさんいる。"
   },
   {
-    "id": "29dff28c",
+    "id": "de2a57f2",
     "kanji": "暗黒",
     "reading": "あんこく",
     "meaning": "真っ暗闇",
@@ -4854,7 +4854,7 @@
     "sentence": "光の届かない{{target}}の世界を探検する。"
   },
   {
-    "id": "12476473",
+    "id": "971ddc62",
     "kanji": "透明",
     "reading": "とうめい",
     "meaning": "透き通る",
@@ -4866,7 +4866,7 @@
     "sentence": "{{target}}な水底に小魚が泳いでいるのが見える。"
   },
   {
-    "id": "07335b8f",
+    "id": "849aafea",
     "kanji": "瞬間",
     "reading": "しゅんかん",
     "meaning": "ごく短い時",
@@ -4878,7 +4878,7 @@
     "sentence": "シャッターチャンスの{{target}}を逃さない。"
   },
   {
-    "id": "edaf3d0c",
+    "id": "408b3495",
     "kanji": "永遠",
     "reading": "えいえん",
     "meaning": "いつまでも",
@@ -4890,7 +4890,7 @@
     "sentence": "この幸せな時間が{{target}}に続けばいいのに。"
   },
   {
-    "id": "338a0bfb",
+    "id": "b0fde048",
     "kanji": "無限",
     "reading": "むげん",
     "meaning": "限りない",
@@ -4902,7 +4902,7 @@
     "sentence": "子供の可能性は{{target}}に広がっている。"
   },
   {
-    "id": "0fa50022",
+    "id": "3d0b8e38",
     "kanji": "幻想",
     "reading": "げんそう",
     "meaning": "まぼろし",
@@ -4914,7 +4914,7 @@
     "sentence": "霧に包まれた森は{{target}}的な雰囲気が漂っている。"
   },
   {
-    "id": "4018af5d",
+    "id": "e978d37e",
     "kanji": "情熱",
     "reading": "じょうねつ",
     "meaning": "熱い心",
@@ -4926,7 +4926,7 @@
     "sentence": "彼は音楽に対して並々ならぬ{{target}}を注いでいる。"
   },
   {
-    "id": "d160445a",
+    "id": "ab096b1f",
     "kanji": "覚醒",
     "reading": "かくせい",
     "meaning": "目覚める",
@@ -4938,7 +4938,7 @@
     "sentence": "ピンチの瞬間に彼の眠っていた才能が{{target}}した。"
   },
   {
-    "id": "74701091",
+    "id": "45830137",
     "kanji": "鼓動",
     "reading": "こどう",
     "meaning": "胸の響き",
@@ -4950,7 +4950,7 @@
     "sentence": "走った直後で胸の{{target}}が早くなっている。"
   },
   {
-    "id": "0c7174d5",
+    "id": "0ddda513",
     "kanji": "衝撃",
     "reading": "しょうげき",
     "meaning": "強いショック",
@@ -4962,7 +4962,7 @@
     "sentence": "そのニュースは世界中に大きな{{target}}を与えた。"
   },
   {
-    "id": "8bdf6225",
+    "id": "9727f5bf",
     "kanji": "運命",
     "reading": "うんめい",
     "meaning": "定め",
@@ -4974,7 +4974,7 @@
     "sentence": "二人が出会ったのは偶然ではなく{{target}}だったのかもしれない。"
   },
   {
-    "id": "83b900c6",
+    "id": "3c9b0400",
     "kanji": "革命",
     "reading": "かくめい",
     "meaning": "変革",
@@ -4986,7 +4986,7 @@
     "sentence": "インターネットの登場は情報の{{target}}だった。"
   },
   {
-    "id": "df4a8764",
+    "id": "e5a05dac",
     "kanji": "伝統",
     "reading": "でんとう",
     "meaning": "受け継ぐもの",
@@ -4998,7 +4998,7 @@
     "sentence": "この祭りは数百年続く地元の{{target}}行事だ。"
   },
   {
-    "id": "5d2572cb",
+    "id": "519351bb",
     "kanji": "芸術",
     "reading": "げいじゅつ",
     "meaning": "アート",
@@ -5010,7 +5010,7 @@
     "sentence": "秋は{{target}}を楽しむのに最適な季節だ。"
   },
   {
-    "id": "3f34ae5f",
+    "id": "b90899da",
     "kanji": "哲学",
     "reading": "てつがく",
     "meaning": "真理の探究",
@@ -5022,7 +5022,7 @@
     "sentence": "人生とは何かについて深く{{target}}する。"
   },
   {
-    "id": "910b81c0",
+    "id": "5fc4d341",
     "kanji": "論理",
     "reading": "ろんり",
     "meaning": "筋道",
@@ -5034,7 +5034,7 @@
     "sentence": "彼の説明は{{target}}的でとても分かりやすい。"
   },
   {
-    "id": "bcdf12fe",
+    "id": "cd59f3f6",
     "kanji": "構造",
     "reading": "こうぞう",
     "meaning": "仕組み",
@@ -5046,7 +5046,7 @@
     "sentence": "この建物は地震に強い{{target}}で作られている。"
   },
   {
-    "id": "a96da825",
+    "id": "0f7312ff",
     "kanji": "分析",
     "reading": "ぶんせき",
     "meaning": "解き明かす",
@@ -5058,7 +5058,7 @@
     "sentence": "失敗の原因を{{target}}して次に活かす。"
   },
   {
-    "id": "a2d8ee30",
+    "id": "95b7270e",
     "kanji": "総合",
     "reading": "そうごう",
     "meaning": "まとめ",

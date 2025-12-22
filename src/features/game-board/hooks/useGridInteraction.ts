@@ -17,7 +17,7 @@ export function useGridInteraction() {
   const checkAndFillSlot = useGameStore((state) => state.checkAndFillSlot);
   
   // ★追加: シェイク関数を取得
-  const triggerShake = useGameStore((state) => state.triggerShake);
+  const triggerShake = useGameStore((state) => state.shakeParts);
   
   const unlockKanji = useDictionaryStore((state) => state.unlockKanji);
   const unlockJukugo = useDictionaryStore((state) => state.unlockJukugo);

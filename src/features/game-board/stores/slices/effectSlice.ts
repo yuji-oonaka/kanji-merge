@@ -6,12 +6,11 @@ export interface EffectData {
   x: number;
   y: number;
   type: 'MERGE' | 'GOAL';
-  char?: string; // ★追加: 表示する文字情報
+  char?: string; // 表示する文字情報
 }
 
 export interface EffectSlice {
   effects: EffectData[];
-  // 引数に char を追加
   triggerEffect: (x: number, y: number, type: 'MERGE' | 'GOAL', char?: string) => void;
   removeEffect: (id: string) => void;
 }

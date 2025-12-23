@@ -182,7 +182,7 @@ export default function Home() {
                 全データを初期化する
               </button>
               <div className="text-[10px] text-stone-300 font-serif tracking-wider">
-                Ver 1.2.0
+                Ver 1.5.0
               </div>
             </div>
           </div>

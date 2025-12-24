@@ -3,6 +3,7 @@ import { useDictionaryStore } from "@/features/dictionary/stores/dictionarySlice
 import { judgeMerge } from "@/features/kanji-core/logic/merger";
 import { getConstituents } from "@/features/kanji-core/logic/decomposer";
 import { soundEngine } from "@/lib/sounds/SoundEngine";
+import React from "react";
 
 export function useGridInteraction() {
   const parts = useGameStore((state) => state.parts);
@@ -16,8 +17,8 @@ export function useGridInteraction() {
   const addPart = useGameStore((state) => state.addPart);
   const checkAndFillSlot = useGameStore((state) => state.checkAndFillSlot);
   
-  // ★追加: シェイク関数を取得
   const triggerShake = useGameStore((state) => state.shakeParts);
+  const triggerEffect = useGameStore((state) => state.triggerEffect);
   
   const unlockKanji = useDictionaryStore((state) => state.unlockKanji);
   const unlockJukugo = useDictionaryStore((state) => state.unlockJukugo);
@@ -25,18 +26,22 @@ export function useGridInteraction() {
   const currentJukugo = useGameStore((state) => state.currentJukugo);
 
   // 確定処理（合体）
-  const confirmMerge = () => {
+  const confirmMerge = (x: number, y: number) => {
     if (!pendingMerge) return;
 
-    soundEngine.playGoal();
+    soundEngine.playGoal(); // ここは成功音でOK（あとでplayMergeに変えても良い）
     unlockKanji(pendingMerge.previewChar);
     removePart(pendingMerge.sourceId);
     removePart(pendingMerge.targetId);
+
+    triggerEffect(x, y, "MERGE", pendingMerge.previewChar);
 
     // 1. ゴール判定
     const isGoal = checkAndFillSlot(pendingMerge.previewChar);
     if (isGoal) {
       soundEngine.playGoal();
+      triggerEffect(x, y, "GOAL"); 
+      
       if (useGameStore.getState().isCleared && currentJukugo) {
         unlockJukugo(currentJukugo.id);
       }
@@ -62,16 +67,15 @@ export function useGridInteraction() {
     const targetPart = parts.find(p => p.id === partId);
     if (!targetPart) return;
 
-    // 構成パーツを取得
     const constituents = getConstituents(targetPart.char);
     
-    // ★修正: 分解できない場合は震わせる
+    // ★追加: 分解できない場合（原子パーツ）
     if (!constituents) {
+      soundEngine.playInvalid(); // 失敗音
       triggerShake([partId]);
       return;
     }
 
-    // 空きマスを探す
     const occupiedIndices = parts.map(p => p.gridIndex);
     const gridSize = 16;
     let emptyIndex = -1;
@@ -82,19 +86,20 @@ export function useGridInteraction() {
       }
     }
 
-    // ★修正: 空きがない場合も震わせる
+    // ★追加: 空きマスがない場合
     if (emptyIndex === -1) {
+      soundEngine.playInvalid(); // 失敗音
       triggerShake([partId]);
       return;
     }
 
-    // 分解実行
-    soundEngine.playSelect();
+    // 成功時
+    soundEngine.playSelect(); // または playSplit 的な音
     removePart(targetPart.id);
     addPart({
       id: Math.random().toString(36).substring(2, 9),
       char: constituents[0],
-      type: "RADICAL", // 便宜上RADICAL
+      type: "RADICAL",
       gridIndex: targetPart.gridIndex,
     });
     addPart({
@@ -106,14 +111,17 @@ export function useGridInteraction() {
     selectPart(null);
   };
 
-  const handleSlotClick = (index: number) => {
+  const handleSlotClick = (index: number, e: React.MouseEvent) => {
+    const x = e.clientX;
+    const y = e.clientY;
+
     soundEngine.init();
 
-    // --- A. 仮合体中（プレビュー中） ---
+    // --- A. 仮合体中 ---
     if (pendingMerge) {
       const targetPart = parts.find(p => p.id === pendingMerge.targetId);
       if (targetPart && targetPart.gridIndex === index) {
-        confirmMerge();
+        confirmMerge(x, y);
         return;
       }
       setPendingMerge(null);
@@ -128,6 +136,8 @@ export function useGridInteraction() {
         const isGoal = checkAndFillSlot(clickedPart.char);
         if (isGoal) {
           soundEngine.playGoal();
+          triggerEffect(x, y, "GOAL");
+          
           removePart(clickedPart.id);
           selectPart(null);
           if (useGameStore.getState().isCleared && currentJukugo) {
@@ -152,8 +162,9 @@ export function useGridInteraction() {
       if (constituents) {
         handleSplit(clickedPart.id);
       } else {
-        // ★修正: 分解できないなら選択解除して震わせる
+        // ★追加: 分解不可（原子パーツ）
         selectPart(null);
+        soundEngine.playInvalid(); // 失敗音
         triggerShake([clickedPart.id]);
       }
       return;
@@ -168,6 +179,7 @@ export function useGridInteraction() {
     // 3. 空きマスへ移動
     if (!clickedPart) {
       movePart(sourcePart.id, index);
+      soundEngine.playSelect(); // 移動音
       selectPart(null);
       return;
     }
@@ -181,10 +193,11 @@ export function useGridInteraction() {
           targetId: clickedPart.id,
           previewChar: result.newChar,
         });
-        soundEngine.playMerge();
+        soundEngine.playMerge(); // 合体準備音
       } else {
-        // ★修正: 合体失敗時は両方を震わせる！
-        selectPart(null); // 選択状態を解除
+        // ★追加: 合体不成立
+        selectPart(null); 
+        soundEngine.playInvalid(); // 失敗音
         triggerShake([sourcePart.id, clickedPart.id]); 
       }
     }

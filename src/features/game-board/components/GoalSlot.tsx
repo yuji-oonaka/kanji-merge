@@ -57,8 +57,8 @@ export function GoalSlot({ target }: GoalSlotProps) {
   return (
     <motion.div
       layout
-      // PC修正: h-full を削除。flex-colのみにして、コンテンツの高さに合わせる。
-      className="w-full flex flex-col relative overflow-visible"
+      // ★修正: justify-centerを追加し、内容が少ない時も中央寄せ
+      className="w-full flex flex-col items-center justify-center relative overflow-visible h-full max-h-full"
     >
       {/* ラベル */}
       <div className="hidden md:block absolute -top-8 left-0 opacity-50 pointer-events-none z-10">
@@ -70,12 +70,14 @@ export function GoalSlot({ target }: GoalSlotProps) {
       </div>
 
       {/* --- メインエリア (文章・スロット) --- */}
-      {/* PC修正: flex-1, overflow-y-auto を削除。スクロールさせず、全部見せるスタイルへ */}
-      <div className="w-full flex flex-col items-center justify-center py-2 min-h-[120px]">
+      {/* ★修正: min-hを削除し、flex-1で高さを確保しすぎないようにする */}
+      <div className="w-full flex flex-col items-center justify-center shrink-0">
         {!hasSentence ? (
-          <div className="text-center my-auto">
+          // 文章がない場合
+          <div className="text-center my-auto py-2">
             <h2
-              className={`font-serif text-4xl md:text-6xl font-bold ${theme.colors.text} mb-4 leading-snug`}
+              // ★修正: サイズを調整 (3xlスタート)
+              className={`font-serif text-4xl md:text-7xl font-bold ${theme.colors.text} mb-2 leading-snug`}
             >
               {target.meaning || "???"}
             </h2>
@@ -89,18 +91,20 @@ export function GoalSlot({ target }: GoalSlotProps) {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center my-auto w-full">
+          // 文章がある場合
+          <div className="flex flex-col items-center justify-center w-full">
             {/* 文章表示 */}
-            <div className="flex flex-wrap items-center justify-center content-center w-full gap-x-1 gap-y-3 leading-relaxed text-center px-1">
+            <div className="flex flex-wrap items-center justify-center content-center w-full gap-x-1 gap-y-1 leading-normal text-center px-1">
               {sentenceParts.map((part, pIndex) => {
                 if (part.type === "TEXT") {
                   return (
                     <span
                       key={`text-${pIndex}`}
                       className={cn(
-                        "font-serif font-bold opacity-95 mx-0.5",
+                        "font-serif font-bold opacity-95 mx-0.5 align-middle",
                         theme.colors.text,
-                        "text-[clamp(1.2rem,4vmin,3rem)]"
+                        // ★修正: 下限を1.1remに下げ、小画面で溢れないように
+                        "text-[clamp(1.1rem,4.5vmin,3rem)]"
                       )}
                     >
                       {part.text}
@@ -119,21 +123,23 @@ export function GoalSlot({ target }: GoalSlotProps) {
               })}
             </div>
 
-            {/* ★ 第1ヒント: 意味の表示エリア */}
+            {/* 意味の表示エリア */}
             <AnimatePresence>
               {showMeaning && (
                 <motion.div
+                  // ★修正: マージンを削減 (marginTop: 8)
                   initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                  animate={{ opacity: 1, height: "auto", marginTop: 16 }}
+                  animate={{ opacity: 1, height: "auto", marginTop: 8 }}
                   exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                  className="w-full max-w-lg px-4"
+                  className="w-full max-w-lg px-2"
                 >
-                  <div className="bg-white/40 border border-stone-200/50 rounded-lg p-3 text-center shadow-sm backdrop-blur-sm">
-                    <span className="text-xs text-stone-500 font-bold block mb-1">
+                  {/* ★修正: パディングを削減 (p-2) */}
+                  <div className="bg-white/40 border border-stone-200/50 rounded-lg p-2 text-center shadow-sm backdrop-blur-sm">
+                    <span className="text-[10px] text-stone-500 font-bold block mb-0.5">
                       意味
                     </span>
                     <span
-                      className={`text-sm md:text-base font-serif font-bold ${theme.colors.text}`}
+                      className={`text-sm md:text-lg font-serif font-bold ${theme.colors.text} leading-tight`}
                     >
                       {target.meaning}
                     </span>
@@ -146,17 +152,16 @@ export function GoalSlot({ target }: GoalSlotProps) {
       </div>
 
       {/* --- ヒント / 読み表示エリア --- */}
-      {/* PC修正: mt-2 -> mt-6。少し間隔を空けつつ、離れすぎないように固定 */}
-      <div className="shrink-0 flex flex-col items-center justify-center z-10 pb-2 gap-2 mt-6">
-        {/* ★ 第2ヒント: 読み (答え) */}
+      {/* ★修正: マージンを大幅削減 (mt-2) */}
+      <div className="shrink-0 flex flex-col items-center justify-center z-10 gap-1 mt-3 min-h-10">
         <AnimatePresence mode="wait">
           {showReading ? (
             <motion.div
-              initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
+              initial={{ opacity: 0, filter: "blur(4px)", y: 5 }}
               animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
               className={`font-serif tracking-[0.2em] font-bold ${
                 isCompleted ? "text-amber-600" : theme.colors.sub
-              } text-lg md:text-2xl`}
+              } text-xl md:text-3xl`}
             >
               {target.reading}
             </motion.div>
@@ -176,7 +181,7 @@ export function GoalSlot({ target }: GoalSlotProps) {
               <span className="text-sm">
                 {effectiveHintLevel === 0 ? "💡" : "👁️"}
               </span>
-              <span className="font-bold">
+              <span className="font-bold text-xs md:text-sm">
                 {effectiveHintLevel === 0 ? "ヒント(意味)を見る" : "読みを見る"}
               </span>
             </motion.button>
@@ -188,7 +193,6 @@ export function GoalSlot({ target }: GoalSlotProps) {
 }
 
 function SlotGroup({ target, filledIndices, theme, isCompleted }: any) {
-  // ... (ここは変更なし)
   return (
     <div className="inline-flex items-center gap-1 mx-0.5 align-middle">
       {target.components.map((char: string, cIndex: number) => {
@@ -220,8 +224,9 @@ function SingleSlot({
     <div
       className={cn(
         "relative flex items-center justify-center transition-all duration-300",
-        // PC修正: スロットサイズを少し大きく調整
-        "w-[clamp(2.5rem,8vmin,5.5rem)] h-[clamp(2.5rem,8vmin,5.5rem)]"
+        // ★修正: 最小サイズを少し小さく戻す (2.75rem approx 44px)
+        // これでSEでも圧迫感が減るが、PCでは大きくなる
+        "w-[clamp(2.75rem,9vmin,5.5rem)] h-[clamp(2.75rem,9vmin,5.5rem)]"
       )}
     >
       <div
@@ -241,7 +246,8 @@ function SingleSlot({
             animate={{ scale: 1, opacity: 1 }}
             className={cn(
               "z-10 font-serif font-bold select-none",
-              "text-[clamp(1.5rem,5vmin,3.5rem)]",
+              // ★修正: 漢字サイズ調整
+              "text-[clamp(1.5rem,5.5vmin,3.5rem)]",
               isCompleted ? "text-amber-700" : "text-stone-800"
             )}
           >

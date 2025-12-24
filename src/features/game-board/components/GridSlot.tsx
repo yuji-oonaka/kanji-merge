@@ -8,7 +8,7 @@ import { THEMES } from "../constants/themes";
 import { cn } from "@/lib/utils/tw-merge";
 import { getDisplayChar } from "@/features/game-board/utils/charDisplay";
 
-// ★追加: 縦積み判定ロジック (他コンポーネントと統一)
+// 縦積み判定ロジック
 const VERTICAL_TOPS = new Set([
   "艹",
   "宀",
@@ -51,10 +51,33 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
   const rawChar = isPendingTarget ? pendingMerge?.previewChar : part?.char;
   const displayChar = rawChar ? getDisplayChar(rawChar) : null;
   const isIntermediate = rawChar?.startsWith("&");
-  const intermediateParts =
-    isIntermediate && rawChar ? idsMap[rawChar] || ["?", "?"] : null;
 
-  // ★追加: レイアウト方向の決定
+  // ★修正: 中間パーツの解決ロジックを強化
+  // idsMapに定義がなくても、IDの文字列からパーツを推測して表示する
+  let intermediateParts: string[] | null = null;
+
+  if (isIntermediate && rawChar) {
+    // 1. まず辞書を引く
+    if (idsMap[rawChar]) {
+      intermediateParts = idsMap[rawChar];
+    } else {
+      // 2. 辞書になければ、IDから推測する (例: "&美土_0" -> "美"と"土")
+      // "&" と末尾の "_数字" を除去
+      const cleanStr = rawChar.replace(/^&/, "").replace(/_\d+$/, "");
+      // サロゲートペア対応で文字配列に変換
+      const chars = Array.from(cleanStr);
+
+      // ちょうど2文字なら、それをパーツとして扱う
+      if (chars.length === 2) {
+        intermediateParts = [chars[0], chars[1]];
+      } else {
+        // 解析不能なら?を表示
+        intermediateParts = ["?", "?"];
+      }
+    }
+  }
+
+  // レイアウト方向の決定
   const isVertical = intermediateParts
     ? isVerticalLayout(intermediateParts[0], intermediateParts[1])
     : true;
@@ -123,19 +146,17 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
           )}
         >
           {isIntermediate && intermediateParts ? (
-            // ★修正: 縦横判定に基づいてレイアウトを切り替え
             <div
               className={cn(
                 "flex w-full h-full items-center justify-center p-1 font-serif",
-                isVertical ? "flex-col gap-0" : "flex-row gap-0" // 隙間をなくす
+                isVertical ? "flex-col gap-0" : "flex-row gap-0"
               )}
             >
               {/* --- 1つ目のパーツ --- */}
               <div
                 className={cn(
                   "flex-1 w-full h-full flex items-center justify-center",
-                  // 縦なら「下揃え」、横なら「右揃え」にして、中央に寄せる
-                  isVertical ? "items-end -mb-1" : "justify-end -ml-0.5"
+                  isVertical ? "items-end -mb-1" : "justify-end -mr-0.5"
                 )}
               >
                 <span className="text-[clamp(1.2rem,5vmin,2.4rem)] font-bold leading-none">
@@ -147,8 +168,7 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
               <div
                 className={cn(
                   "flex-1 w-full h-full flex items-center justify-center",
-                  // 縦なら「上揃え」、横なら「左揃え」にして、中央に寄せる
-                  isVertical ? "items-start -mt-1" : "justify-start -ml-0.5"
+                  isVertical ? "items-start -mt-1" : "justify-start -mr-0.5"
                 )}
               >
                 <span className="text-[clamp(1.2rem,5vmin,2.4rem)] font-bold leading-none">

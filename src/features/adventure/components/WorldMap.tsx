@@ -5,15 +5,12 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
-import {
-  useAdventureStore,
-  AdventureTheme,
-} from "@/features/adventure/stores/adventureStore";
+import { useAdventureStore } from "@/features/adventure/stores/adventureStore";
 import { soundEngine } from "@/lib/sounds/SoundEngine";
 import { AREA1_STAGES } from "../data/stages_area1";
 import { StoryModal } from "./StoryModal";
 
-// テーマごとのスタイル定義（PlayPageと統一）
+// テーマごとのスタイル定義
 const MAP_THEME_STYLES = {
   paper: {
     bg: "bg-[#f5f2eb]",
@@ -24,6 +21,7 @@ const MAP_THEME_STYLES = {
     card: {
       border: "border-[#3d3330]/10",
       shadow: "shadow-lg",
+      // ★元に戻しました: Linterの指示通り bg-linear-to-br を使用
       bgGradient: "from-[#e8e6e1] to-[#d6d3cc]",
       text: "text-[#3d3330]",
       subText: "text-[#3d3330]/70",
@@ -43,6 +41,7 @@ const MAP_THEME_STYLES = {
     card: {
       border: "border-white/10",
       shadow: "shadow-white/5",
+      // ★元に戻しました
       bgGradient: "from-[#2c2c2e] to-[#1c1c1e]",
       text: "text-[#e5e5e5]",
       subText: "text-[#e5e5e5]/60",
@@ -63,12 +62,15 @@ export function WorldMap() {
 
   const [isMounted, setIsMounted] = useState(false);
   const [isStoryOpen, setIsStoryOpen] = useState(false);
-  const [isMuted, setIsMuted] = useState(soundEngine.isMuted);
+  const [isMuted, setIsMuted] = useState(false);
 
   // 現在のテーマスタイル
   const currentStyles = MAP_THEME_STYLES[theme];
 
-  useEffect(() => setIsMounted(true), []);
+  useEffect(() => {
+    setIsMounted(true);
+    setIsMuted(soundEngine.isMuted);
+  }, []);
 
   const AREA_INFO = {
     id: "area-1",
@@ -87,9 +89,8 @@ export function WorldMap() {
   useEffect(() => {
     // マウント時: 音を鳴らす
     soundEngine.playNatureAmbience();
-    setIsMuted(soundEngine.isMuted);
 
-    // アンマウント時: 音を止める (これでトップに戻った時に音が消えます)
+    // アンマウント時: 音を止める
     return () => {
       soundEngine.stopAmbience();
     };
@@ -123,7 +124,7 @@ export function WorldMap() {
     setIsStoryOpen(true);
   };
 
-  // ★追加: 最初からやり直す（リプレイ）
+  // 最初からやり直す（リプレイ）
   const handleReplayClick = (e: React.MouseEvent) => {
     e.stopPropagation(); // カードクリックの暴発防止
     if (
@@ -183,7 +184,7 @@ export function WorldMap() {
               className={`px-6 py-2 rounded-full transition-colors font-serif text-sm tracking-widest shadow-sm ${currentStyles.headerBtn
                 .replace("text-[#3d3330]", "bg-[#3d3330] text-[#f5f2eb]")
                 .replace("hover:bg-[#3d3330]", "hover:bg-[#594a46]")}`}
-              // ※注: HeaderBtnのクラス流用だと色が合わないため、戻るボタンだけ個別に調整
+              // HeaderBtnのクラス流用調整
               style={{
                 backgroundColor: theme === "dark" ? "#2c2c2e" : "#3d3330",
                 color: theme === "dark" ? "#e5e5e5" : "#f5f2eb",
@@ -304,6 +305,7 @@ export function WorldMap() {
                   flex items-center justify-center gap-3
                   font-serif font-bold tracking-widest text-lg
                   hover:shadow-md hover:scale-[1.02] transition-all duration-300 group
+                  bg-linear-to-br
                   ${currentStyles.card.bgGradient} ${currentStyles.card.border} ${currentStyles.card.accent}
                 `}
               >
@@ -333,7 +335,7 @@ export function WorldMap() {
         {isStoryOpen && (
           <StoryModal
             stages={AREA1_STAGES}
-            theme={theme} // テーマを渡してモーダルも色を変える
+            theme={theme}
             onClose={() => setIsStoryOpen(false)}
           />
         )}

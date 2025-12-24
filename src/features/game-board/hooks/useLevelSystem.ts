@@ -34,7 +34,6 @@ export function useLevelSystem() {
 
     const jukugoDef = generateRandomStage(index, currentHistoryIds, mode);
 
-    console.log(`📥 Loading Level ${index + 1} [${mode}]: ${jukugoDef.kanji} (Diff: ${jukugoDef.difficulty})`);
 
     resetStage();
     setStage(jukugoDef);

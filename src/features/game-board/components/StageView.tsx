@@ -13,13 +13,15 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 import { getDisplayChar } from "../utils/charDisplay";
 import { useIdsMapStore } from "@/features/dictionary/stores/idsMapStore";
 import { ExperienceGauge } from "./ExperienceGauge";
+import { TOTAL_STAGES } from "../stores/slices/stageSlice";
+import { LoopTransition } from "./LoopTransition";
 
 interface StageViewProps {
   levelDisplay?: number;
   onNextLevel?: () => void;
 }
 
-// --- 縦積み判定ロジック ---
+// ... (縦積み判定ロジックなどは変更なし) ...
 const VERTICAL_TOPS = new Set([
   "艹",
   "宀",
@@ -44,10 +46,14 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
   const isCleared = useGameStore((state) => state.isCleared);
   const currentTheme = useGameStore((state) => state.currentTheme);
   const storeHintLevel = useGameStore((state) => state.hintLevel);
+  const filledIndices = useGameStore((state) => state.filledIndices);
   const idsMap = useIdsMapStore((state) => state.idsMap);
+  const incrementLoop = useGameStore((state) => state.incrementLoop);
+  const internalLevelIndex = useGameStore((state) => state.levelIndex);
 
   const [showHintModal, setShowHintModal] = useState(false);
   const [viewStep, setViewStep] = useState(0);
+  const [isLooping, setIsLooping] = useState(false);
 
   const theme = THEMES[currentTheme];
 
@@ -64,11 +70,33 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
     setShowHintModal(true);
   };
 
+  const handleNextLevel = () => {
+    if (internalLevelIndex >= TOTAL_STAGES - 1) {
+      setIsLooping(true);
+    } else {
+      if (onNextLevel) onNextLevel();
+    }
+  };
+
+  const handleLoopComplete = () => {
+    incrementLoop();
+    setIsLooping(false);
+    if (onNextLevel) onNextLevel();
+  };
+
+  // ★ヒントに表示するべきパーツがあるか事前にチェック（全パーツ原子or埋まってる場合のメッセージ用）
+  const hasVisibleRecipes = currentJukugo?.components.some((char, idx) => {
+    const isFilled = filledIndices.includes(idx);
+    const isAtomic = !idsMap[char];
+    return !isFilled && !isAtomic;
+  });
+
   return (
     <div
       className={`fixed inset-0 w-full h-dvh overflow-hidden flex flex-col touch-none overscroll-none ${theme.colors.background}`}
     >
-      {/* ヘッダー */}
+      {/* ... (ヘッダー〜メインコンテンツ〜リザルト〜ループ演出は変更なし) ... */}
+
       <div className="w-full h-14 shrink-0 flex justify-between items-center px-4 z-30 relative">
         <div className="flex gap-2 items-center pointer-events-auto">
           <Link
@@ -87,7 +115,7 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
           </div>
         </div>
 
-        <div className="flex gap-2 items-center pointer-events-auto">
+        <div className="flex gap-3 items-center pointer-events-auto">
           <ExperienceGauge />
           {storeHintLevel > 0 && (
             <button
@@ -105,7 +133,6 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
         </div>
       </div>
 
-      {/* メインコンテンツ */}
       <div className="flex-1 w-full max-w-7xl mx-auto min-h-0 flex flex-col landscape:flex-row items-center justify-center p-2 pb-safe-offset gap-4 landscape:gap-12 lg:gap-20">
         <div className="flex-1 w-full flex items-center justify-center p-2 landscape:p-0 landscape:justify-end">
           <div className="w-full max-w-2xl landscape:max-w-lg lg:landscape:max-w-xl flex flex-col justify-center">
@@ -123,7 +150,13 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
       <div className="absolute inset-0 pointer-events-none z-0 bg-linear-to-t from-black/5 to-transparent landscape:hidden" />
 
       <AnimatePresence>
-        {isCleared && <ResultOverlay onNextLevel={onNextLevel} />}
+        {isCleared && !isLooping && (
+          <ResultOverlay onNextLevel={handleNextLevel} />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isLooping && <LoopTransition onComplete={handleLoopComplete} />}
       </AnimatePresence>
 
       {/* --- ヒントモーダル --- */}
@@ -158,28 +191,43 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
                     </div>
 
                     <div className="flex flex-col gap-8 w-full">
-                      {currentJukugo.components.map((targetChar, idx) => (
-                        <div
-                          key={idx}
-                          className="flex flex-col items-center gap-2 w-full"
-                        >
-                          {/* 構造図を表示 */}
-                          <div className="w-full flex justify-center">
-                            <RecursiveRecipe
-                              char={targetChar}
-                              idsMap={idsMap}
-                              depth={0}
-                            />
-                          </div>
+                      {currentJukugo.components.map((targetChar, idx) => {
+                        // 1. 既に埋まっているなら表示しない
+                        if (filledIndices.includes(idx)) return null;
 
-                          {/* ★削除: ここにあった矢印(↓)と完成後の文字表示を削除 */}
+                        // 2. ★追加: 合体レシピがない（原子パーツ）なら表示しない
+                        if (!idsMap[targetChar]) return null;
+
+                        return (
+                          <div
+                            key={idx}
+                            className="flex flex-col items-center gap-2 w-full"
+                          >
+                            <div className="w-full flex justify-center">
+                              <RecursiveRecipe
+                                char={targetChar}
+                                idsMap={idsMap}
+                                depth={0}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+
+                      {/* すべてのパーツが原子パーツ or 埋まっている場合 */}
+                      {!hasVisibleRecipes && (
+                        <div className="py-8 text-stone-400 text-sm">
+                          <p>合体が必要なパーツはありません。</p>
+                          <p className="text-xs mt-2 opacity-70">
+                            そのままの形のパーツを探してみましょう
+                          </p>
                         </div>
-                      ))}
+                      )}
                     </div>
                   </div>
 
                   <p className="text-xs text-stone-500 mt-2">
-                    色のついた箱の通りにパーツを組み立てましょう
+                    色のついた箱ごとにパーツをくっつけましょう
                   </p>
 
                   <div className="w-full h-px bg-stone-200 my-2" />
@@ -193,7 +241,7 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
                 </>
               )}
 
-              {/* --- Step 1: 答え & 読み --- */}
+              {/* Step 1: 答え */}
               {viewStep === 1 && (
                 <>
                   <div className="text-4xl">🔑</div>
@@ -219,7 +267,6 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
                       </div>
                     </div>
                   </div>
-
                   <p className="mt-6 text-xs text-stone-500">
                     答えを参考に、パズルを完成させてください
                   </p>
@@ -240,7 +287,7 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
   );
 }
 
-// 再帰表示コンポーネント (変更なし)
+// ... (RecursiveRecipe は変更なし) ...
 function RecursiveRecipe({
   char,
   idsMap,
@@ -251,8 +298,6 @@ function RecursiveRecipe({
   depth: number;
 }) {
   const parts = idsMap[char];
-
-  // 原子パーツ（ここに出る文字は「素材」なので表示してOK）
   if (!parts) {
     return (
       <div className="w-10 h-10 flex items-center justify-center bg-white rounded border-2 border-stone-300 shadow-sm relative z-10">
@@ -262,7 +307,6 @@ function RecursiveRecipe({
       </div>
     );
   }
-
   const getGroupStyle = (d: number) => {
     const styles = [
       "bg-stone-100/80 border-stone-300",
@@ -272,10 +316,8 @@ function RecursiveRecipe({
     ];
     return styles[d % styles.length];
   };
-
   const isVertical = isVerticalLayout(parts[0], parts[1]);
   const groupStyle = getGroupStyle(depth);
-
   return (
     <div
       className={`
@@ -285,7 +327,6 @@ function RecursiveRecipe({
     `}
     >
       <RecursiveRecipe char={parts[0]} idsMap={idsMap} depth={depth + 1} />
-      {/* 結合記号 */}
       <span className="text-stone-400 font-bold text-xs select-none opacity-60">
         +
       </span>

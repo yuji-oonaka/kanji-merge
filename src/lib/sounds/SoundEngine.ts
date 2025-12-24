@@ -1,5 +1,3 @@
-// src/lib/sounds/SoundEngine.ts
-
 class SoundEngine {
   private ctx: AudioContext | null = null;
   private _isMuted: boolean = false;
@@ -56,7 +54,7 @@ class SoundEngine {
     osc.stop(this.ctx.currentTime + startTime + duration);
   }
 
-  // --- ノイズ生成 (摩擦音や打撃音用) ---
+  // --- ノイズ生成 ---
   private playNoise(duration: number, vol: number = 0.3) {
     if (!this.ctx || this._isMuted) return;
 
@@ -72,7 +70,6 @@ class SoundEngine {
     noise.buffer = buffer;
     
     const gain = this.ctx.createGain();
-    // フィルタで少しこもらせる（柔らかい音に）
     const filter = this.ctx.createBiquadFilter();
     filter.type = 'lowpass';
     filter.frequency.value = 800;
@@ -87,6 +84,62 @@ class SoundEngine {
     noise.start();
   }
 
+  // --- アンビエンス制御 ---
+  public stopAmbience() {
+    this.currentAmbienceNodes.forEach(node => {
+      try {
+        if (node instanceof AudioScheduledSourceNode) {
+          node.stop();
+        }
+        node.disconnect();
+      } catch (e) {}
+    });
+    this.currentAmbienceNodes = [];
+    if (this.birdInterval) {
+      clearInterval(this.birdInterval);
+      this.birdInterval = null;
+    }
+  }
+
+  public playRiverAmbience() {
+    this.init();
+    if (!this.ctx || this._isMuted) return;
+
+    this.stopAmbience();
+
+    // 川の音
+    const bufferSize = this.ctx.sampleRate * 2;
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+
+    const noise = this.ctx.createBufferSource();
+    noise.buffer = buffer;
+    noise.loop = true;
+
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 300;
+
+    const gain = this.ctx.createGain();
+    gain.gain.value = 0.05;
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    noise.start();
+    this.currentAmbienceNodes = [noise, filter, gain];
+  }
+
+  // ★追加: playRiverAmbience のエイリアス（エラー回避用）
+  public playNatureAmbience() {
+    this.playRiverAmbience();
+  }
+
   // --- SEプリセット ---
 
   public playMerge() {
@@ -97,44 +150,35 @@ class SoundEngine {
 
   public playGoal() {
     this.init();
-    this.playTone(523.25, 'sine', 0.6, 0, 0.2); // Do
-    this.playTone(659.25, 'sine', 0.6, 0.1, 0.2); // Mi
-    this.playTone(783.99, 'sine', 0.8, 0.2, 0.2); // So
+    this.playTone(523.25, 'sine', 0.6, 0, 0.2); 
+    this.playTone(659.25, 'sine', 0.6, 0.1, 0.2); 
+    this.playTone(783.99, 'sine', 0.8, 0.2, 0.2); 
   }
 
   public playStamp() {
     this.init();
-    // 低いドンッ
     this.playTone(120, 'triangle', 0.1, 0, 0.6);
     this.playTone(800, 'square', 0.05, 0, 0.05);
   }
 
   public playSelect() {
     this.init();
-    // コッ (木のような音)
     this.playTone(800, 'sine', 0.05, 0, 0.3);
     this.playNoise(0.02, 0.2);
   }
 
-  // ★追加: 無効操作音（不快感のない「カッ」という乾いた音）
   public playInvalid() {
     this.init();
-    // 短く、少しピッチのあるクリック音
     this.playTone(300, 'square', 0.05, 0, 0.2);
     this.playTone(150, 'sawtooth', 0.05, 0, 0.2);
   }
 
   public playClear() {
     this.init();
-    const now = this.ctx?.currentTime || 0;
-    
-    // アルペジオ
-    const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C Major
+    const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; 
     notes.forEach((freq, i) => {
       this.playTone(freq, 'sine', 0.4, i * 0.08, 0.4);
     });
-
-    // 仕上げの和音
     setTimeout(() => {
       this.playTone(523.25, 'triangle', 0.8, 0, 0.2);
       this.playTone(1046.50, 'sine', 0.8, 0, 0.2);

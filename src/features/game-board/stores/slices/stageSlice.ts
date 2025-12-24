@@ -2,6 +2,9 @@ import { StateCreator } from 'zustand';
 import { JukugoDefinition, DifficultyMode } from '@/features/kanji-core/types';
 import { BADGES, STAGES_PER_BADGE } from '@/features/collection/data/badges';
 
+// ★修正: 熟語総数に合わせて 405 に設定
+export const TOTAL_STAGES = 405; 
+
 export interface StageSlice {
   levelIndex: number;
   maxReachedLevel: number;
@@ -17,6 +20,9 @@ export interface StageSlice {
   gaugeCurrent: number;
   unlockedBadgeCount: number;
 
+  // ★追加: ループ（周回）管理
+  loopCount: number;
+
   setLevelIndex: (index: number) => void;
   setStage: (jukugo: JukugoDefinition) => void;
   setCleared: (cleared: boolean) => void;
@@ -25,10 +31,11 @@ export interface StageSlice {
   setDifficultyMode: (mode: DifficultyMode) => void;
   updateLastActionTime: () => void;
   incrementHintLevel: () => void;
-  
   addGaugeProgress: () => void;
-  // ★追加: ゲージを消費してバッジを確定させるアクション
   resolveBadge: () => void;
+
+  // ★追加
+  incrementLoop: () => void;
 }
 
 export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
@@ -41,14 +48,17 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
   difficultyMode: 'NORMAL',
   hintLevel: 0,
   lastActionTime: Date.now(),
-
   gaugeCurrent: 0,
   unlockedBadgeCount: 0,
+  
+  // ★追加: 1周目からスタート
+  loopCount: 1,
 
   setLevelIndex: (index) => set({ levelIndex: index }),
 
   setStage: (jukugo) => {
     const { historyIds } = get();
+    // 履歴管理（直近50件）
     const newHistory = [...historyIds, jukugo.id].slice(-50);
     set({ 
       currentJukugo: jukugo, 
@@ -63,8 +73,10 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
   setCleared: (cleared) => {
     const state = get();
     if (cleared && !state.isCleared) {
+      // 現在の到達度を超えてクリアした場合のみ進行
       if (state.levelIndex >= state.maxReachedLevel) {
         set({ isCleared: cleared, maxReachedLevel: state.levelIndex + 1 });
+        // 新規クリアなのでゲージ加算
         get().addGaugeProgress();
         return;
       }
@@ -108,15 +120,13 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
 
   addGaugeProgress: () => {
     const state = get();
+    // ※バッジコンプ後もゲージ演出を楽しみたい場合は、このif文を外してもOKです
     if (state.unlockedBadgeCount >= BADGES.length) return;
 
-    // ★修正: ここではリセットせず、上限(10)で止める
-    // リセット(resolveBadge)はUI側のアニメーション後に行う
     const nextGauge = Math.min(state.gaugeCurrent + 1, STAGES_PER_BADGE);
     set({ gaugeCurrent: nextGauge });
   },
 
-  // ★追加: 満タン時の確定処理
   resolveBadge: () => {
     const state = get();
     if (state.gaugeCurrent >= STAGES_PER_BADGE) {
@@ -125,5 +135,16 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
         unlockedBadgeCount: Math.min(state.unlockedBadgeCount + 1, BADGES.length)
       });
     }
-  }
+  },
+
+  // ★追加: ループ処理
+  incrementLoop: () => {
+    set((state) => ({
+      loopCount: state.loopCount + 1, // 周回数を増やす
+      levelIndex: 0,      // 最初のステージに戻す
+      maxReachedLevel: 0, // 進行度もリセット（これで2周目もゲージが溜まるようになる）
+      isCleared: false,   // クリア状態解除
+      // historyIds は保持（直前の問題と被らないようにするため）
+    }));
+  },
 });

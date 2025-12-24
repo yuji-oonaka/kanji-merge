@@ -21,7 +21,7 @@ const MAP_THEME_STYLES = {
     card: {
       border: "border-[#3d3330]/10",
       shadow: "shadow-lg",
-      // ★元に戻しました: Linterの指示通り bg-linear-to-br を使用
+      // Linter対応: bg-linear-to-br
       bgGradient: "from-[#e8e6e1] to-[#d6d3cc]",
       text: "text-[#3d3330]",
       subText: "text-[#3d3330]/70",
@@ -41,7 +41,7 @@ const MAP_THEME_STYLES = {
     card: {
       border: "border-white/10",
       shadow: "shadow-white/5",
-      // ★元に戻しました
+      // Linter対応: bg-linear-to-br
       bgGradient: "from-[#2c2c2e] to-[#1c1c1e]",
       text: "text-[#e5e5e5]",
       subText: "text-[#e5e5e5]/60",
@@ -147,10 +147,17 @@ export function WorldMap() {
       <div
         className={`min-h-screen p-6 pb-20 overflow-x-hidden flex flex-col transition-colors duration-500 ${currentStyles.bg} ${currentStyles.text}`}
       >
-        {/* ヘッダー */}
-        <header className="flex justify-between items-center mb-10 z-10">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-serif font-bold tracking-widest">
+        {/* ★ヘッダー修正箇所 
+          - flex-col: スマホでは縦並び
+          - md:flex-row: PCでは横並び (元通り)
+          - gap-4: 縦並びの時の隙間
+          - items-center: 中央揃え
+          - mb-6: スマホでの下の余白を少し狭く
+        */}
+        <header className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 mb-6 md:mb-10 z-10">
+          <div className="text-center md:text-left">
+            {/* タイトル: スマホはtext-2xl、PCはtext-4xl */}
+            <h1 className="text-2xl md:text-4xl font-serif font-bold tracking-widest">
               冒険の地図
             </h1>
             <p

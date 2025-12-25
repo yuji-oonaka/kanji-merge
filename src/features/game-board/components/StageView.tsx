@@ -291,7 +291,6 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
           </motion.div>
         )}
       </AnimatePresence>
-      {process.env.NODE_ENV === "development" && (
         <button
           onClick={handleDebugSkip}
           // ヘッダー(h-14=56px)のすぐ下に配置します
@@ -301,7 +300,6 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
           <span>🚧</span>
           <span>開発用: 次へ進む ▶</span>
         </button>
-      )}
     </div>
   );
 }

@@ -5,8 +5,7 @@ import { StageSlice, createStageSlice } from './slices/stageSlice';
 import { EffectSlice, createEffectSlice } from './slices/effectSlice';
 import { ThemeSlice, createThemeSlice } from './slices/themeSlice';
 
-// GameStore型は各スライス（StageSliceなど）の合体なので、
-// StageSliceにある gaugeCurrent は自動的にここに含まれます。
+// GameStore型
 type GameStore = PartsSlice & StageSlice & EffectSlice & ThemeSlice & {
   resetSaveData: () => void;
 };
@@ -19,7 +18,7 @@ export const useGameStore = create<GameStore>()(
       ...createEffectSlice(...a),
       ...createThemeSlice(...a),
 
-      // ▼ リセット機能
+      // リセット機能
       resetSaveData: () => {
         localStorage.removeItem('kanji-merge-storage');
         localStorage.removeItem('kanji-merge-collection');
@@ -29,7 +28,6 @@ export const useGameStore = create<GameStore>()(
     {
       name: 'kanji-merge-storage', // ローカルストレージのキー名
       
-      // ★修正: 正しい変数名 (gaugeCurrent) に変更しました
       partialize: (state) => ({ 
         // --- StageSliceの保存対象 ---
         levelIndex: state.levelIndex, 
@@ -37,10 +35,13 @@ export const useGameStore = create<GameStore>()(
         historyIds: state.historyIds,
         difficultyMode: state.difficultyMode,
         
-        // ★修正ポイント: experience ではなく gaugeCurrent が正解でした
         gaugeCurrent: state.gaugeCurrent,       // ゲージの現在値
         unlockedBadgeCount: state.unlockedBadgeCount, // 足跡バッジ数
         loopCount: state.loopCount,             // 周回数
+
+        // ★追加: プレイリストも保存する
+        // これがないとリロードで出題順がリセットされてしまいます
+        playlist: state.playlist,
         
         // --- ThemeSliceの保存対象 ---
         currentTheme: state.currentTheme,

@@ -50,6 +50,7 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
   const idsMap = useIdsMapStore((state) => state.idsMap);
   const incrementLoop = useGameStore((state) => state.incrementLoop);
   const internalLevelIndex = useGameStore((state) => state.levelIndex);
+  const setLevelIndex = useGameStore((state) => state.setLevelIndex);
 
   const [showHintModal, setShowHintModal] = useState(false);
   const [viewStep, setViewStep] = useState(0);
@@ -82,6 +83,13 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
     incrementLoop();
     setIsLooping(false);
     if (onNextLevel) onNextLevel();
+  };
+
+  const handleDebugSkip = () => {
+    // 現在のインデックス + 1 に強制セット
+    setLevelIndex(internalLevelIndex + 1);
+    // ループフラグをリセット（念のため）
+    setIsLooping(false);
   };
 
   // ★ヒントに表示するべきパーツがあるか事前にチェック（全パーツ原子or埋まってる場合のメッセージ用）
@@ -283,6 +291,17 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
           </motion.div>
         )}
       </AnimatePresence>
+      {process.env.NODE_ENV === "development" && (
+        <button
+          onClick={handleDebugSkip}
+          // ヘッダー(h-14=56px)のすぐ下に配置します
+          className="fixed top-16 right-4 z-50 font-bold text-xs px-4 py-2 rounded-full shadow-md border border-white/50 backdrop-blur-sm bg-orange-500/90 text-white hover:bg-orange-600 transition-all active:scale-95 pointer-events-auto flex items-center gap-1"
+          title="開発用機能: 現在の問題を強制的にスキップして次の問題へ進みます"
+        >
+          <span>🚧</span>
+          <span>開発用: 次へ進む ▶</span>
+        </button>
+      )}
     </div>
   );
 }

@@ -1,8 +1,13 @@
 import { StateCreator } from 'zustand';
 import { JukugoDefinition, DifficultyMode } from '@/features/kanji-core/types';
 import { BADGES, STAGES_PER_BADGE } from '@/features/collection/data/badges';
+// ★追加: 自動生成された問題データをインポート
+import jukugoDataRaw from '@/features/kanji-core/data/jukugo-db-auto.json';
 
-// ★修正: 熟語総数に合わせて 405 に設定
+// 型アサーション（jsonインポート用）
+const jukugoData = jukugoDataRaw as JukugoDefinition[];
+
+// ステージ総数
 export const TOTAL_STAGES = 405; 
 
 export interface StageSlice {
@@ -20,8 +25,10 @@ export interface StageSlice {
   gaugeCurrent: number;
   unlockedBadgeCount: number;
 
-  // ★追加: ループ（周回）管理
   loopCount: number;
+
+  // ★追加: 出題順リスト（IDの配列）
+  playlist: string[];
 
   setLevelIndex: (index: number) => void;
   setStage: (jukugo: JukugoDefinition) => void;
@@ -34,8 +41,10 @@ export interface StageSlice {
   addGaugeProgress: () => void;
   resolveBadge: () => void;
 
-  // ★追加
   incrementLoop: () => void;
+
+  // ★追加: プレイリスト生成アクション
+  generatePlaylist: () => void;
 }
 
 export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
@@ -50,15 +59,16 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
   lastActionTime: Date.now(),
   gaugeCurrent: 0,
   unlockedBadgeCount: 0,
-  
-  // ★追加: 1周目からスタート
   loopCount: 1,
+  
+  // ★初期値は空
+  playlist: [],
 
   setLevelIndex: (index) => set({ levelIndex: index }),
 
   setStage: (jukugo) => {
     const { historyIds } = get();
-    // 履歴管理（直近50件）
+    // 履歴は直近50件を残すが、playlistがあれば重複は防げるため補助的な役割になる
     const newHistory = [...historyIds, jukugo.id].slice(-50);
     set({ 
       currentJukugo: jukugo, 
@@ -73,10 +83,8 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
   setCleared: (cleared) => {
     const state = get();
     if (cleared && !state.isCleared) {
-      // 現在の到達度を超えてクリアした場合のみ進行
       if (state.levelIndex >= state.maxReachedLevel) {
         set({ isCleared: cleared, maxReachedLevel: state.levelIndex + 1 });
-        // 新規クリアなのでゲージ加算
         get().addGaugeProgress();
         return;
       }
@@ -114,15 +122,12 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
   }),
 
   setDifficultyMode: (mode) => set({ difficultyMode: mode }),
-
   updateLastActionTime: () => set({ lastActionTime: Date.now() }),
   incrementHintLevel: () => set((state) => ({ hintLevel: Math.min(state.hintLevel + 1, 3) })),
 
   addGaugeProgress: () => {
     const state = get();
-    // ※バッジコンプ後もゲージ演出を楽しみたい場合は、このif文を外してもOKです
     if (state.unlockedBadgeCount >= BADGES.length) return;
-
     const nextGauge = Math.min(state.gaugeCurrent + 1, STAGES_PER_BADGE);
     set({ gaugeCurrent: nextGauge });
   },
@@ -137,14 +142,104 @@ export const createStageSlice: StateCreator<StageSlice> = (set, get) => ({
     }
   },
 
-  // ★追加: ループ処理
   incrementLoop: () => {
     set((state) => ({
-      loopCount: state.loopCount + 1, // 周回数を増やす
-      levelIndex: 0,      // 最初のステージに戻す
-      maxReachedLevel: 0, // 進行度もリセット（これで2周目もゲージが溜まるようになる）
-      isCleared: false,   // クリア状態解除
-      // historyIds は保持（直前の問題と被らないようにするため）
+      loopCount: state.loopCount + 1,
+      levelIndex: 0,
+      maxReachedLevel: 0,
+      isCleared: false,
     }));
+    // ★周回時にプレイリストも再構築（新しいシャッフルで遊べるように）
+    get().generatePlaylist();
+  },
+
+  // ★追加: プレイリスト生成ロジック（難易度曲線と波を適用）
+  generatePlaylist: () => {
+    // 1. 全データを難易度別にバケット分け (Deep Copyしてプールとして使う)
+    const poolByDiff: Record<number, JukugoDefinition[]> = {};
+    for (let d = 1; d <= 10; d++) {
+      poolByDiff[d] = [];
+    }
+
+    // データの振り分け
+    jukugoData.forEach(item => {
+      // 念のため難易度範囲を1-10に収める
+      const diff = Math.min(10, Math.max(1, item.difficulty));
+      poolByDiff[diff].push(item);
+    });
+
+    // 配列をシャッフルするヘルパー
+    const shuffle = <T>(array: T[]) => {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    };
+
+    // 各バケットをシャッフル
+    Object.values(poolByDiff).forEach(list => shuffle(list));
+
+    const newPlaylist: string[] = [];
+    
+    // ヘルパー: 指定された難易度に近い問題を取り出す
+    const popProblem = (targetDiff: number): string | null => {
+      // 優先順位: target -> target+1 -> target-1 -> target+2 ...
+      const searchOrder = [
+        0, 1, -1, 2, -2, 3, -3, 4, -4, 5, -5, 6, -6, 7, -7, 8, -8
+      ];
+      
+      for (const offset of searchOrder) {
+        const d = targetDiff + offset;
+        if (d >= 1 && d <= 10 && poolByDiff[d].length > 0) {
+          // 見つかったら取り出してIDを返す
+          return poolByDiff[d].pop()!.id;
+        }
+      }
+      return null; // 在庫切れ（通常ありえないが念のため）
+    };
+
+    // 2. ステージごとに問題を割り当て
+    for (let i = 0; i < TOTAL_STAGES; i++) {
+      let targetDiff = 1;
+
+      // --- 難易度曲線の定義 ---
+      
+      if (i < 5) {
+        // チュートリアル: 最も簡単
+        targetDiff = 1;
+      } else if (i < 30) {
+        // 序盤: 2〜3
+        targetDiff = 2 + Math.floor((i - 5) / 12); 
+      } else {
+        // 本編 (30〜404)
+        // 基本カーブ: ステージ進行度(0.0〜1.0) に応じて 3 → 10 まで上昇
+        const progress = (i - 30) / (TOTAL_STAGES - 30);
+        // 線形補間でベース難易度を決定 (3.5 スタート、最後は 10.0)
+        const baseDiff = 3.5 + (progress * 6.5);
+        
+        // --- 波（Wave）の適用 ---
+        // 20ステージ周期でサイン波を適用し、±1.5程度の揺らぎを作る
+        // これにより「ずっと難しい」を防ぎ、定期的に「少し簡単な問題」が混ざる
+        const wave = Math.sin(i * (Math.PI / 10)) * 1.5;
+        
+        targetDiff = Math.round(baseDiff + wave);
+      }
+
+      // 範囲制限 (1〜10)
+      targetDiff = Math.max(1, Math.min(10, targetDiff));
+
+      // 問題を取得してリストに追加
+      const id = popProblem(targetDiff);
+      
+      // 万が一在庫切れの場合は、既存のデータからランダムに埋める(ID重複許容の最終手段)
+      if (!id) {
+        const randomFallback = jukugoData[Math.floor(Math.random() * jukugoData.length)].id;
+        newPlaylist.push(randomFallback);
+      } else {
+        newPlaylist.push(id);
+      }
+    }
+
+    set({ playlist: newPlaylist });
   },
 });

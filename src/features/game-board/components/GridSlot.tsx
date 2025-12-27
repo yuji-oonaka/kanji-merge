@@ -19,6 +19,8 @@ const VERTICAL_TOPS = new Set([
   "亠",
   "立",
   "尸",
+  "三",
+  "十", // ★「三」や「十」も縦積みの上がいいので追加
 ]);
 
 const isVerticalLayout = (p1: string, p2: string): boolean => {
@@ -49,31 +51,30 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
   const isShaking = part && shakingPartIds.includes(part.id);
 
   const rawChar = isPendingTarget ? pendingMerge?.previewChar : part?.char;
-  const displayChar = rawChar ? getDisplayChar(rawChar) : null;
-  const isIntermediate = rawChar?.startsWith("&");
 
-  // ★修正: 中間パーツの解決ロジックを強化
-  // idsMapに定義がなくても、IDの文字列からパーツを推測して表示する
+  // ★ここが重要: 先に変換後の文字を取得する
+  const displayChar = rawChar ? getDisplayChar(rawChar) : null;
+
+  // 中間パーツ判定 ("&"で始まる、もしくは displayChar が2文字以上の場合)
+  const isIntermediate =
+    rawChar?.startsWith("&") || (displayChar && displayChar.length > 1);
+
+  // ★修正: 表示用パーツの決定ロジック
   let intermediateParts: string[] | null = null;
 
-  if (isIntermediate && rawChar) {
-    // 1. まず辞書を引く
+  if (isIntermediate && rawChar && displayChar) {
+    // 1. まず辞書(idsMap)を引く（正規の合体データがある場合）
     if (idsMap[rawChar]) {
       intermediateParts = idsMap[rawChar];
-    } else {
-      // 2. 辞書になければ、IDから推測する (例: "&美土_0" -> "美"と"土")
-      // "&" と末尾の "_数字" を除去
-      const cleanStr = rawChar.replace(/^&/, "").replace(/_\d+$/, "");
-      // サロゲートペア対応で文字配列に変換
-      const chars = Array.from(cleanStr);
-
-      // ちょうど2文字なら、それをパーツとして扱う
-      if (chars.length === 2) {
-        intermediateParts = [chars[0], chars[1]];
-      } else {
-        // 解析不能なら?を表示
-        intermediateParts = ["?", "?"];
-      }
+    }
+    // 2. 辞書にない場合、getDisplayCharの結果が「2文字」ならそれをパーツとして使う
+    // 例: "&春_上" -> "三人" -> ["三", "人"]
+    else if (displayChar.length === 2) {
+      intermediateParts = [displayChar[0], displayChar[1]];
+    }
+    // 3. それ以外（解析不能）
+    else {
+      intermediateParts = ["?", "?"];
     }
   }
 
@@ -141,6 +142,7 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
 
             isShaking && "border-red-400 bg-red-50",
 
+            // 中間パーツの場合はフォントサイズ調整を外す（個別で指定するため）
             !isIntermediate &&
               "text-[clamp(1.5rem,8vmin,4rem)] font-serif font-bold pb-1 leading-none"
           )}
@@ -149,6 +151,7 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
             <div
               className={cn(
                 "flex w-full h-full items-center justify-center p-1 font-serif",
+                // 縦並びか横並びかでスタイル切り替え
                 isVertical ? "flex-col gap-0" : "flex-row gap-0"
               )}
             >
@@ -156,10 +159,12 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
               <div
                 className={cn(
                   "flex-1 w-full h-full flex items-center justify-center",
+                  // 縦なら下揃え、横なら右揃えで寄せる
                   isVertical ? "items-end -mb-1" : "justify-end -mr-0.5"
                 )}
               >
                 <span className="text-[clamp(1.2rem,5vmin,2.4rem)] font-bold leading-none">
+                  {/* ここでは再帰せずそのまま表示 */}
                   {getDisplayChar(intermediateParts[0])}
                 </span>
               </div>
@@ -168,6 +173,7 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
               <div
                 className={cn(
                   "flex-1 w-full h-full flex items-center justify-center",
+                  // 縦なら上揃え、横なら左揃えで寄せる
                   isVertical ? "items-start -mt-1" : "justify-start -mr-0.5"
                 )}
               >
@@ -177,6 +183,7 @@ export function GridSlot({ index, part, onClick }: GridSlotProps) {
               </div>
             </div>
           ) : (
+            // 通常表示
             displayChar
           )}
         </motion.div>

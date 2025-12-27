@@ -1,10 +1,17 @@
-// src/features/game-board/utils/charDisplay.ts
-
 /**
  * データ上の特殊記号や異体字を、ユーザーが納得できる一般的な文字に変換して表示する。
  */
 export function getDisplayChar(char: string): string {
   const charMap: Record<string, string> = {
+    // --- ★追加: 特殊な合体用パーツの表示定義 ---
+    "&春_上": "三人",  // 「春」の上
+    "&朝_左": "十早",  // 「朝」の左
+    "&備_右": "艹厂用", // 「備」の右（※文字数が多いので小さくなりますが一旦定義）
+    
+    // ▼▼▼ 今回の追加分 ▼▼▼
+    "&急_上": "クヨ",  // 「急」の上（ク + ヨ）
+    "&夜_下": "イ夕",  // 「夜」の下（イ + 夕）
+
     // --- データ生成エラー記号の救済 ---
     "③": "才", // 在、存
     "④": "小", // 赤
@@ -13,10 +20,10 @@ export function getDisplayChar(char: string): string {
     "⑦": "鳥", // 島
 
     // --- 異体字・特殊文字の「新字体」への置き換え ---
-    "𢚩": "急", // 穏、隠の右側（★ここを追加）
+    "𢚩": "急", // 穏、隠の右側
     "𤴓": "疋", // 定、是の下部
     "𠂒": "牛", // 先、告の上部
-    "冗": "売", // 売の上部
+    "冗": "売", // 売の上部
     "𠃜": "眉", // 声の上部
     "𠮷": "吉", // 舎などの一部
     "𫩠": "堂", // 常、賞の上部
@@ -24,8 +31,8 @@ export function getDisplayChar(char: string): string {
     "𠩵": "暦", 
     "𭕄": "巣", 
     "𦍌": "羊", 
-    "𡗗": "春", 
-    "𠦝": "幹", 
+    "𡗗": "春", // これ自体が出た場合も「春」と表示
+    "𠦝": "十早", // 文字化け回避
     "𫢉": "干", 
     "𭷔": "牛", // 解の右下
     "𭔰": "豆", // 闘の中身
@@ -46,5 +53,17 @@ export function getDisplayChar(char: string): string {
     "⻖": "阝",
   };
 
-  return charMap[char] || char;
+  // 1. マッピングにあればそれを返す（最優先）
+  if (charMap[char]) {
+    return charMap[char];
+  }
+
+  // 2. 定義されていない "&" 始まりのIDが来た場合の緊急処理
+  // 例: "&Test_Data" -> "TestData"
+  if (char.startsWith("&")) {
+    return char.replace(/[&_a-zA-Z]/g, ""); 
+  }
+
+  // 3. それ以外はそのまま返す
+  return char;
 }

@@ -12,7 +12,6 @@ export function useLevelSystem() {
   const currentLevelIndex = useGameStore((state) => state.levelIndex);
   const difficultyMode = useGameStore((state) => state.difficultyMode);
   const playlist = useGameStore((state) => state.playlist);
-  const generatePlaylist = useGameStore((state) => state.generatePlaylist);
   
   const hintLevel = useGameStore((state) => state.hintLevel);
   const isCleared = useGameStore((state) => state.isCleared);
@@ -35,27 +34,82 @@ export function useLevelSystem() {
       currentPlaylist = useGameStore.getState().playlist;
     }
 
-    // 2. IDを取得して検索
+    // 2. IDを取得
     let targetId = currentPlaylist[index % currentPlaylist.length];
+
+    // ★★★ チュートリアル対応 (ここに追加！) ★★★
+    // JSONには含まれていないデータなので、ここで手動定義してセットします
+    if (targetId === "tutorial-01") {
+      const t1: JukugoDefinition = {
+        id: "tutorial-01",
+        kanji: "二",
+        reading: "に",
+        difficulty: 1,
+        components: ["二"], 
+        meaning: "数字の2",
+        sentence: "一に一を足すと{{target}}になる。"
+      };
+      resetStage();
+      setStage(t1);
+      // decomposerは index=0 を見て ["一","一"] を出してくれます
+      const parts = generateStageParts(t1, 0, state.difficultyMode);
+      setParts(parts as any);
+      loadedLevelRef.current = index;
+      return;
+    }
+
+    if (targetId === "tutorial-02") {
+      const t2: JukugoDefinition = {
+        id: "tutorial-02",
+        kanji: "三",
+        reading: "さん",
+        difficulty: 1,
+        components: ["三"],
+        meaning: "数字の3",
+        sentence: "二本の線にもう一本加えて{{target}}にする。"
+      };
+      resetStage();
+      setStage(t2);
+      // decomposerは index=1 を見て ["二","一"] を出してくれます
+      const parts = generateStageParts(t2, 1, state.difficultyMode);
+      setParts(parts as any);
+      loadedLevelRef.current = index;
+      return;
+    }
+
+    if (targetId === "tutorial-03") {
+      const t3: JukugoDefinition = {
+        id: "tutorial-03",
+        kanji: "三",
+        reading: "さん",
+        difficulty: 2,
+        components: ["三"],
+        meaning: "数字の3",
+        sentence: "まず二を作り、それに一を足して{{target}}にする。"
+      };
+      resetStage();
+      setStage(t3);
+      // decomposerは index=2 を見て ["一","一","一"] を出してくれます
+      const parts = generateStageParts(t3, 2, state.difficultyMode);
+      setParts(parts as any);
+      loadedLevelRef.current = index;
+      return;
+    }
+    // ★★★★★★★★★★★★★★★★★★★★★★★★★★★
+
+    // 3. 通常の検索 (JSONから探す)
     let targetJukugo = jukugoData.find(j => j.id === targetId);
 
-    // ★★★ 修正箇所: データが見つからない場合の自動修復ロジック ★★★
+    // データが見つからない場合の自動修復
     if (!targetJukugo) {
       console.warn(`Old data detected (${targetId}). Regenerating playlist...`);
-      
-      // (1) 強制的にプレイリストを作り直す
       state.generatePlaylist();
-      
-      // (2) 新しいリストを取り直す
       currentPlaylist = useGameStore.getState().playlist;
       targetId = currentPlaylist[index % currentPlaylist.length];
-      
-      // (3) もう一度検索する
       targetJukugo = jukugoData.find(j => j.id === targetId);
     }
-    // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 
-    // それでも見つからない場合（最終手段：フリーズ回避）
+    // それでも見つからない場合（最終手段）
     if (!targetJukugo) {
       console.error(`Problem ID not found: ${targetId}`);
       const fallback = jukugoData[0] || jukugoData[Math.floor(Math.random() * jukugoData.length)];

@@ -291,15 +291,18 @@ export function StageView({ levelDisplay = 1, onNextLevel }: StageViewProps) {
           </motion.div>
         )}
       </AnimatePresence>
+      {/* --- 開発用スキップボタン (右上に戻す & クリア時は非表示) --- */}
+      {!isCleared && !isLooping && (
         <button
           onClick={handleDebugSkip}
-          // ヘッダー(h-14=56px)のすぐ下に配置します
+          // 元の「右上」の位置に戻しました (fixed top-16 right-4)
           className="fixed top-16 right-4 z-50 font-bold text-xs px-4 py-2 rounded-full shadow-md border border-white/50 backdrop-blur-sm bg-orange-500/90 text-white hover:bg-orange-600 transition-all active:scale-95 pointer-events-auto flex items-center gap-1"
           title="開発用機能: 現在の問題を強制的にスキップして次の問題へ進みます"
         >
           <span>🚧</span>
           <span>開発用: 次へ進む ▶</span>
         </button>
+      )}
     </div>
   );
 }
